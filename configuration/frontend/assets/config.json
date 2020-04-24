@@ -2,7 +2,7 @@
     "@openmrs/esm-login": {
       "logo": {
         "src": "https://images.squarespace-cdn.com/content/559f0e8be4b0deeae8ebe051/1438191067264-WB940TCIZ1DG8HH7YI72/CES_logo_orange+png+med.png",
-        "alt": "CES?"
+        "alt": "CES!"
       },
       "links": {
         "loginSuccess": {
