@@ -18,6 +18,11 @@ in order for the other package to be able to pick it up.
 `mvn clean install` - Will compile and package as above, and install as an available dependency on your system
 
 
+
+
+
+
+
 ### Configuring Concepts for Chiapas
 
 1. On the concepts server (concepts.pih-emr.org), create a "Mexico MoH (Ministry of Health, or equivalent..) concept set", similar to the “[Liberia MoH diagnosis set](https://concepts.pih-emr.org/openmrs/dictionary/concept.htm?conceptId=10595)”. Create child sets, e.g. “Mexico MoH diagnosis”, “Mexico MoH Labs”, etc. Add concepts to these subsets.
