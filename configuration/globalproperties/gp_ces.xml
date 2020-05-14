@@ -25,9 +25,5 @@
             <property>log.level</property>
             <value>org.openmrs.api:warn</value>
         </globalProperty>
-        <globalProperty>
-            <property>spa.frontend.directory</property>
-            <value>configuration/frontend</value>
-        </globalProperty>
     </globalProperties>
 </config>
