@@ -16,6 +16,7 @@
     "hypertensionProgram",
     "malnutritionProgram",
     "mentalHealthProgram",
+    "markPatientDead",
     "myAccount",
     "overviewReports",
     "patientDocuments",
