@@ -1221,7 +1221,7 @@
             <div class="two-columns">
                 <div class="small-text">
 
-                    <obs conceptId="PIH:SYMPTOM PRESENT" labelText="" answerConceptId="PIH:Suspected tuberculosis" answerLabel="Sospecha de Tuberculosis" toggle="OptionsTB"/>
+                    <obs conceptId="PIH:Is TB suspected" labelText="" answerConceptId="PIH:Suspected tuberculosis" answerLabel="Sospecha de Tuberculosis" toggle="OptionsTB"/>
                     
                 </div>
                 <div id="OptionsTB">
@@ -1242,7 +1242,7 @@
             <div class="two-columns">
                 <div class="small-text">
 
-                    <obs conceptId="PIH:SYMPTOM PRESENT" labelText="" answerConceptId="PIH:Suspected HIV infection" answerLabel="Sospecha de VIH" toggle="OptionsVIH"/>
+                    <obs conceptId="PIH:Is HIV suspected" labelText="" answerConceptId="PIH:Suspected HIV infection" answerLabel="Sospecha de VIH" toggle="OptionsVIH"/>
                     
                 </div>
                 <div id="OptionsVIH">
@@ -1263,36 +1263,44 @@
             <div class="tres-columns">
 
                 <div class="small-text">
-                    <obs conceptId="PIH:SYMPTOM PRESENT" labelText="" answerConceptId="CIEL:165612" answerLabel="Sospecha de Covid-19" toggle="TipoPruebaCovid"/>                
+                    <obs conceptId="PIH:Is COVID suspected" labelText="" answerConceptId="CIEL:165612" answerLabel="Sospecha de Covid-19" toggle="TipoPruebaCovid"/>                
                 </div>
 
-                 <div id="TipoPruebaCovid">
+                <div id="TipoPruebaCovid">
+                        
+                            
+                   <obs id="whattype" conceptId="PIH:Type of COVID test" answerConceptIds="CIEL:165840,CIEL:165853,CIEL:165852" answerLabels="PCR,Anticuerpos,Antigeno" style="radio" answerSeparator="">
+                       <controls>
 
-                    <obs conceptId="PIH:Type of COVID test" labelText="" answerConceptId="CIEL:165840" answerLabel="PCR" toggle="OptionsPCR"/>
-                    <obs conceptId="PIH:Type of COVID test" labelText="" answerConceptId="CIEL:165853" answerLabel="Anticuerpos" toggle="OptionsAnticuerpos"/>
-                    <obs conceptId="PIH:Type of COVID test" labelText="" answerConceptId="CIEL:165852" answerLabel="Antigeno" toggle="OptionsAntigeno"/><br/>
-                    <p>Observaciones</p> 
-                    <obs conceptId="PIH:Suspected COVID free-text notes" style="textarea" rows="5"/>
+                           <when value="CIEL:165840" thenDisplay="#OptionsPCR"/>
+                        <when value="CIEL:165853" thenDisplay="#OptionsAnticuerpos"/>
+                        <when value="CIEL:165852" thenDisplay="#OptionsAntigeno"/>
+                                      
+                    </controls>
+                   </obs>
 
-                 </div>
+                   <p>Observaciones</p> 
+                   <obs conceptId="PIH:Suspected TB free-text notes" style="textarea" rows="5"/>
+                            
+                   <div class="tres-columns">
+                       <div id="OptionsPCR">
+                           <p>Resultado PCR:</p>
+                           <obs conceptId="CIEL:165840" labelText="" answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" style="radio" answerSeparator=""/>
+                       </div><br/>   
 
-                 <div class="tres-columns">
-                    <div id="OptionsPCR">
-                        <p>Resultado PCR:</p>
-                        <obs conceptId="CIEL:165840" labelText="" answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" style="radio" answerSeparator=""/>
-                    </div><br/>   
+                       <div id="OptionsAnticuerpos">
+                           <p>Resultado anticuerpos:</p>
+                           <obs conceptId="CIEL:165853" labelText="" answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" style="radio" answerSeparator=""/>
+                       </div><br/>
 
-                    <div id="OptionsAnticuerpos">
-                        <p>Resultado anticuerpos:</p>
-                        <obs conceptId="CIEL:165853" labelText="" answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" style="radio" answerSeparator=""/>
-                    </div><br/>
+                       <div id="OptionsAntigeno">
+                           <p>Resultado antigeno:</p>
+                           <obs conceptId="CIEL:165852" labelText="" answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" style="radio" answerSeparator=""/>
+                       </div> 
+                  </div> 
 
-                    <div id="OptionsAntigeno">
-                        <p>Resultado antigeno:</p>
-                        <obs conceptId="CIEL:165852" labelText="" answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" style="radio" answerSeparator=""/>
-                    </div>
+                </div>
 
-                 </div>
             </div>
          
         </div>
