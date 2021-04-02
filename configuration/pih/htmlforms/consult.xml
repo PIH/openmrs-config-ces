@@ -370,7 +370,7 @@
             </label>
             <obs conceptId="PIH:6189" id="referredBy"
                  answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555"
-                 answerCodes="pihcore.hasAppointment,pihcore.walkIn,pihcore.activeCasefinding,pihcore.chw,pihcore.mentalHealthProgramForAdolescents"
+                 answerCodes="pihcore.hasAppointment,pihcore.walkIn,pihcore.activeCasefinding,pihcore.chw"
                  style="radio" answerSeparator=""/>
         </div>
     </section>
@@ -1227,7 +1227,7 @@
                 <div id="OptionsTB">
                     <p>Resultado de prueba:</p>
 
-                    <obs conceptId="PIH:SYMPTOM PRESENT" labelText="" answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE,PIH:NOT DONE" style="radio" answerSeparator=""/><br/> 
+                    <obs conceptId="PIH:Tuberculosis culture result" answerConceptIds="PIH:NOT DONE,PIH:NEGATIVE,PIH:POSITIVE" style="radio" answerSeparator=""/><br/> 
 
                     <p>Observaciones</p> 
                     <obs conceptId="PIH:Suspected TB free-text notes" style="textarea" rows="5"/>
@@ -1248,7 +1248,7 @@
                 <div id="OptionsVIH">
                     <p>Resultado de prueba:</p>
 
-                    <obs conceptId="PIH:SYMPTOM PRESENT" labelText="" answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE,PIH:NOT DONE" style="radio" answerSeparator=""/><br/>  
+                    <obs conceptId="PIH:RESULT OF HIV TEST" answerConceptIds="PIH:NOT DONE,PIH:NEGATIVE,PIH:POSITIVE" style="radio" answerSeparator=""/><br/>  
 
                     <p>Observaciones</p> 
                     <obs conceptId="PIH:Suspected HIV free-text notes" style="textarea" rows="5"/>             
@@ -1268,9 +1268,9 @@
 
                  <div id="TipoPruebaCovid">
 
-                    <obs conceptId="PIH:SYMPTOM PRESENT" labelText="" answerConceptId="CIEL:165840" answerLabel="PCR" toggle="OptionsPCR"/>
-                    <obs conceptId="PIH:SYMPTOM PRESENT" labelText="" answerConceptId="CIEL:165853" answerLabel="Anticuerpos" toggle="OptionsAnticuerpos"/>
-                    <obs conceptId="PIH:SYMPTOM PRESENT" labelText="" answerConceptId="CIEL:165852" answerLabel="Antigeno" toggle="OptionsAntigeno"/><br/>
+                    <obs conceptId="PIH:Type of COVID test" labelText="" answerConceptId="CIEL:165840" answerLabel="PCR" toggle="OptionsPCR"/>
+                    <obs conceptId="PIH:Type of COVID test" labelText="" answerConceptId="CIEL:165853" answerLabel="Anticuerpos" toggle="OptionsAnticuerpos"/>
+                    <obs conceptId="PIH:Type of COVID test" labelText="" answerConceptId="CIEL:165852" answerLabel="Antigeno" toggle="OptionsAntigeno"/><br/>
                     <p>Observaciones</p> 
                     <obs conceptId="PIH:Suspected COVID free-text notes" style="textarea" rows="5"/>
 
@@ -1279,17 +1279,17 @@
                  <div class="tres-columns">
                     <div id="OptionsPCR">
                         <p>Resultado PCR:</p>
-                        <obs conceptId="PIH:SYMPTOM PRESENT" labelText="" answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" style="radio" answerSeparator=""/>
+                        <obs conceptId="CIEL:165840" labelText="" answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" style="radio" answerSeparator=""/>
                     </div><br/>   
 
                     <div id="OptionsAnticuerpos">
                         <p>Resultado anticuerpos:</p>
-                        <obs conceptId="PIH:SYMPTOM PRESENT" labelText="" answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" style="radio" answerSeparator=""/>
+                        <obs conceptId="CIEL:165853" labelText="" answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" style="radio" answerSeparator=""/>
                     </div><br/>
 
                     <div id="OptionsAntigeno">
                         <p>Resultado antigeno:</p>
-                        <obs conceptId="PIH:SYMPTOM PRESENT" labelText="" answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" style="radio" answerSeparator=""/>
+                        <obs conceptId="CIEL:165852" labelText="" answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" style="radio" answerSeparator=""/>
                     </div>
 
                  </div>

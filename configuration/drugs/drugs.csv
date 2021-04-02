@@ -108,7 +108,7 @@ e1b624b4-d15a-4a5a-818a-2f65e6e5e6c4,,"CES: Ceftriaxona 1g - inyectable","PIH:49
 c4daa04e-71ad-4644-a661-24ee49c486de,,"CES: Clindamicina 1% - gel","CIEL:73546"
 83d38145-9d9a-44d5-9bc0-67dfbaf0d904,,"CES: Clindamicina 300mg - 16 tabletas","CIEL:73546"
 c89af099-66aa-4558-bcc2-2d2051648020,,"CES: Clonazepam 2mg - 30 tabletas **especial**","CIEL:73596"
-9149af62-fa46-47e9-b757-c6f65d98c068,,"CES: Cloruro de sodio 1,7g/10ml - inyectable","PIH:7899"
+9149af62-fa46-47e9-b757-c6f65d98c068,,"CES: Cloruro de sodio 1,7g/10ml - inyectable","CIEL:80804"
 f78897c7-33f6-4d99-aa32-59c9ca2d5758,,"CES: Dicloxacilina suspension 50mg/ml - 60ml","PIH:922"
 f6d1fdf9-5a47-483b-8702-5ca9186c3540,,"CES: Difenhidramina 50mg/ml - inyectable **especial**","CIEL:75015"
 de51aef9-2c03-4d3a-9276-8b94c154f83b,,"CES: Difenhidramina 25mg - 30 tabletas","CIEL:75015"
@@ -591,3 +591,125 @@ e198149f-4507-4f94-a33d-ecc85392d00a,,"SSA: Trimetoprima - sulfametoxazol de 40 
 05357cf0-092f-4757-a6ab-53a16540b8ed,,"SSA: Vitaminas (polivitaminas) y minerales de vitamina b1, b2, b6, b12, niacinamida, e, a, d3, ácido pantoténico, sulfato ferroso, cobre, magnesio, zinc, tableta, cá","PIH:461"
 cc486abb-8e22-47ef-b94c-38b61ede9a47,,"SSA: Vitaminas a, c y d de palmitato de retinol 7000 a 9000 ui, ácido ascórbico 80 a 125 mg, colecalciferol 1400 a 1800 ui/ml., solución, envase con 15 ml. - envase ","PIH:461"
 72e5bc59-6d8a-4022-a8c3-06bc1d9ee430,,"SSA: Zinc y fenilefrina solución oftálmica 2.5 mg/1.2 mg/ ml - envase con gotero integral con 15 ml.","CIEL:105169"
+33b1a87f-90c1-4948-8d18-7554a2bf93b5,TRUE,CES: Acido acetilsalicilico 300mg - 20 tabletas eff,PIH:88
+f44edc7e-b014-494c-b888-7fea887becbb,TRUE,CES: Acido acetilsalicilico 500mg - tabletas,PIH:88
+bfd96a61-3f1f-408a-829e-ba0efa015ed6,TRUE,CES: Acido de fluocinolona crema 0.01g/100g - 30g,CIEL:73636
+ae45d4c8-8880-4af4-af16-ece3616dae4f,TRUE,CES: Acido folico 0.4mcg - 90 tabletas,CIEL:76613
+ed9c41c8-93e9-42b4-bf6d-1e3e79293120,TRUE,CES: Acido retinoico 0.05g - 30g,CIEL:85330
+42fbd4f6-2878-4aa1-b611-ea1c7d47da88,TRUE,CES: Alcaftadina oftalmica **especial**,PIH:12252
+bc76143c-f80e-4167-b120-d68aa38dc38b,TRUE,CES: Alcohol polivinilico oftalmico - 10ml,CIEL:82315
+5b7aa733-c214-437d-82ec-afb1c64a3fec,TRUE,CES: Atenolol / clortalidona - tableta - 50 mg / 12.5 mg,PIH:3186
+e323ea03-4d14-48de-b706-6569dec1a864,TRUE,CES: Atropina inyectable 1 mg/ml - 1 ampolla **especial**,CIEL:71681
+22bd5687-c380-40f2-9cd8-d48c71a536a3,TRUE,CES: Atropina oftalmica **especial**,CIEL:71681
+aa63628e-003c-46ef-85b4-a8203bf0d74e,TRUE,CES: Azatioprina 50mg **especial**,CIEL:71767
+40127aa5-07a0-4701-9aa5-65f612f00148,TRUE,CES: Bencilpenicilina procainica y cristalina inyectable 400 000 ui - 2ml,PIH:4034
+cbabecca-1185-4fe2-8995-d40d24a41099,TRUE,CES: Benzoato de bencilo solucion corporal,PIH:409
+554b2255-f919-4f94-9091-36cd91816dce,TRUE,CES: Betametasona inyectable 4mg/ml - 2ml,CIEL:72120
+2868b9ba-4653-4435-9c44-d94223ceaff0,TRUE,CES: Bicalutamida 50 mg **especial**,CIEL:72164
+46436c20-3fe8-4a08-b1bf-d6f37d10be62,TRUE,CES: Biperideno 1 mg 6 30 tabletas,CIEL:72217
+27345b11-cb97-4ca2-b67e-19491b69dd4b,TRUE,CES: Bisoprolol 2.5mg - tabletas **especial**,CIEL:72247
+5db05e6b-1c82-4ef5-ab0f-20d26d5124d6,TRUE,CES: Bromocriptina - tableta - 2.5mg **especial**,CIEL:72411
+d97e9289-551d-4aaf-b5b1-99bfe49531aa,TRUE,CES: Buproenorfina inyectable 0,3mg/ml,CIEL:72510
+034aa4c2-4593-4f81-87a5-cf4aca08afe8,TRUE,CES: Butilhiocina 20mg/ml - 3 ampollas de 1ml,CIEL:431
+91e68dc4-1db8-4190-b54b-60c15f44827f,TRUE,CES: Carbamazepina suspension 2g/100 ml - 100 o 120ml,PIH:920
+8fde6ca2-e363-41de-8c80-458c91613a00,TRUE,CES: Carbetocina inyectable 100 mcg - 1 ampolla,PIH:12253
+ca4a245e-bec5-4507-ae4e-2dc0fb73131a,TRUE,CES: Carbidopa/levodopa 50/250mg - 100 capsulas **especial**,PIH:4049
+d776a8a0-3b97-469b-9966-ac2fc6c9ffbf,TRUE,CES: Celecoxib 200mg **especial**,CIEL:73048
+60406d46-393b-4d1c-9ef5-62d8b24a0113,TRUE,CES: Ciclosporina emulsion **especial**,CIEL:74125
+2aa8b6af-df9c-4f3e-887c-dc2d076131ed,TRUE,CES: Ciprofloxacina solucion otica - 10ml,PIH:740
+df52f13d-0c2f-46b5-a393-5675dc66c379,TRUE,CES: Citrato de potacio + citrato acido [uroclasio] - 150ml **especial**,PIH:12254
+46413ea5-f5a1-4205-bc28-6d2a1a50eabd,TRUE,CES: Clopidogrel - tableta - 75 mg,CIEL:73602
+48c8986f-68c1-4a70-ace4-3a773dd2af0b,TRUE,CES: Clorfenamina - tableta - 4 mg,CIEL:913
+75460ad6-a538-4504-bdf9-5cf172e4dd1a,TRUE,CES: Clorfenamina jarabe 0.5mg/ml - 120ml,CIEL:913
+0172ff47-c96b-4c28-8b68-ada10c5064fa,TRUE,CES: Clotrimazol - 12 ovulos,PIH:960
+9b4489ba-819b-4a19-a5df-7c8fecc5dc83,TRUE,CES: Complejo b (sin hierro),CIEL:78230
+a56f1d69-199c-4e14-bdb7-052a97da46fc,TRUE,CES: Cromoglicato - solución oftálmica - 20 mg/ml,CIEL:74044
+ec74b1ba-8e47-4ffe-9230-5f123b1d9c48,TRUE,CES: Danazol 100mg - capsulas **especial**,CIEL:74233
+b4f340b3-6230-4399-b49d-2ad689619624,TRUE,CES: Desogestrel y etinilestradiol 0.15mg/0.03mg - 21 tabletas,CIEL:104421
+cd8e33a2-63f8-4bc9-9813-b8c5218d44d8,TRUE,CES: Despensa nutrihuate **especial**,CIEL:165465
+c68f9805-5c86-44ac-94d9-7b7ef77e4e19,TRUE,CES: Despensa para embarazada,PIH:4063
+962ca1b8-bc3d-4ddf-8a5c-df2641f041a2,TRUE,CES: Dexametasona inyectable 4mg/ml - 2ml,CIEL:104425
+9adf8359-64ad-4c83-b9ad-16606aaad1cc,TRUE,CES: Dorzolamida/timolol oftalmica 20mg/5ml,CIEL:104546
+04a48ae6-f558-48e3-b879-75470ffbcfcc,TRUE,CES: Fenitoina suspencion 0.750g/100ml 150 ml,CIEL:82024
+53260564-52b5-4d8a-a811-f94f025d9ccb,TRUE,CES: Fentanil inyectable - 1 ampolla **especial**,CIEL:76272
+a8bac4a8-b099-49cc-a878-6039b72adb25,TRUE,CES: Formula enfamil sin lactosa para 6-12 meses **especial**,CIEL:5254
+492e0645-33e8-4811-9ea2-a8381927b738,TRUE,CES: Formula lactea etapa 3 **especial**,CIEL:5254
+ba5031c8-c78d-4435-956f-ce9b3fc403cb,TRUE,CES: Formula lactea para nino mayor de 6 meses **especial**,CIEL:5254
+5ac8b6d5-277b-41c3-b202-a9e7be943483,TRUE,CES: Formula lactea para nino menor de 6 meses **especial**,CIEL:5254
+b809b984-9360-4b44-b08f-abfc8a243519,TRUE,CES: Formula lactea para prematuro **especial**,CIEL:5254
+b1ee68b1-8075-488c-b288-b3d38d0c77a0,TRUE,CES: Formula magistral **especial** (precisar cual en comentario),PIH:12210
+afb07a22-bac6-4fb2-89f7-a061b70f5803,TRUE,CES: Fumarato ferroso 200mg - 50 tabletas,CIEL:76335
+f8571070-a0d9-48b9-8aad-d6e172f096d0,TRUE,CES: Gluconato de calcio inyectable 10% - 1 ampolla,PIH:4035
+387843b4-3536-4705-af76-34443e5dab6b,TRUE,CES: Hidralazina inyectable 20mg/ml - 5 ampollas,CIEL:77675
+5cadd78d-136d-4e7b-aedd-b33f43e3d89c,TRUE,CES: Hidroxicarbamida 500mg capsulas [hydrea] **especial**,CIEL:77795
+beaa9884-3cf5-47e3-a38f-2dde1d48023d,TRUE,CES: Hidroxicloroquina 200mg tabletas **especial**,CIEL:77784
+b2311114-eed2-4c66-aea7-a3658e8c1dd0,TRUE,CES: Implante anticonceptivo - 1 unidad,CIEL:1873
+3a43808c-c0a0-46df-bbfa-d5e266f3d156,TRUE,CES: Insulina mixta - 1 pluma,CIEL:78064
+0c738efb-fe9a-4baf-9466-d36bac1504ad,TRUE,CES: Insulna glargina - 1 recarga,CIEL:78064
+07f71a04-0a5c-4443-a405-6aca49d5a559,TRUE,CES: Ketoconazol 2% - 100g,PIH:926
+bdf95969-cd6b-41bc-85c3-5b4cd1f57ea1,TRUE,CES: Ketoconazol 2% - 30g,PIH:926
+6800843c-4f49-41a8-b944-697b5049819d,TRUE,CES: Ketorolaco inyectable 30mg/ml - 3 ampollas,CIEL:78482
+6d369dac-8957-4a6c-b5da-a34d04280be9,TRUE,CES: L-ornitina + l-aspartato 3g - granulados [hepa merz] **especial**,PIH:12256
+e9e2c0d3-4a42-4191-82ee-0972d35aa5ed,TRUE,CES: Lacosamida 100mg tabletas **especial**,CIEL:160268
+90fbdbd1-1e2e-46b3-84a9-f827bb83df47,TRUE,CES: Latanoprost solucion 0.05mg/ml 2,5ml,CIEL:78677
+8d24e503-e494-4a22-834a-55cee7a684e2,TRUE,CES: Levetiracetam suspencion [keppra] **especial**,CIEL:78770
+f85c352d-7660-4a95-96a7-c3eafa9e10dd,TRUE,CES: Levetiracetam tabletas 500mg **especial**,CIEL:78770
+829f3c09-9aaf-49f1-87d2-e419b6ab0871,TRUE,CES: Loperamida - tableta - 2 mg,PIH:429
+0c029dba-062b-4808-9746-8e9a75f61d8f,TRUE,CES: Loratadina sol. pediátrica,CIEL:79053
+ff782ef6-6d2a-4af9-be55-291576fa1548,TRUE,CES: Medroxyprogesterona inyectable 150mg - 1 ampolla,CIEL:82624
+cca32aad-e77f-4b17-b242-aa5fe10f4d9f,TRUE,CES: Mesalazina 500mg tabletas **especial**,CIEL:79616
+7d3d46c1-9815-4cda-a288-d3f6a3bbd5fc,TRUE,CES: Mesalazina supositorios 250mg **especial**,CIEL:79616
+cf2de2ff-e958-4d1b-925a-ab24d5f5e86a,TRUE,CES: Mesalazina supositorios 500mg **especial**,CIEL:79616
+b22b4c4e-60ca-42f5-92b0-5a38912cd718,TRUE,CES: Metamizol inyectable 1g - 3 ampollas,CIEL:73008
+9a585e90-da7b-4293-82f7-04bdfae1fa85,TRUE,CES: Metoclopramida - tableta - 10 mg,CIEL:79757
+2c3c5443-404b-4024-8fc3-962e366ed467,TRUE,CES: Mometasona intranasal,CIEL:80049
+eb5c3590-1564-4fd4-9b16-5a856764baaa,TRUE,CES: Montelukast 4mg - tabletas masticables,CIEL:80092
+170bd00c-db7d-49e1-a9a2-c450322b9a2f,TRUE,CES: Morfina 30mg - 100 pastillas **especial**,CIEL:80106
+61a53ff7-0628-4b81-974e-a61955d51a4c,TRUE,CES: Nebivolol 5mg tabletas **especial**,CIEL:80470
+271f1daa-1c1f-43f7-bd4b-f07c13977489,TRUE,CES: Nifedipino 10 mg tabletas,PIH:250
+11c18bfe-1e7c-48ec-b0bc-c2cf47b43a2c,TRUE,CES: Nimesulida jarabe **especial**,CIEL:80665
+39bcbff4-0a05-40bd-a93e-beceb687a0f2,TRUE,CES: Nimesulida tabletas,CIEL:80665
+b6c828d7-3732-4b68-a550-1d1bb81dc981,TRUE,CES: Nitazoxanida suspencion 100mg/5ml - 30ml,CIEL:80675
+cbee9c5d-d530-4a8c-8870-7e95bf05079f,TRUE,CES: Nitazoxanida suspencion 100mg/5ml - 60ml,CIEL:80675
+294f8304-12ac-4e0f-895b-0f0c62211d9f,TRUE,CES: Nitroglicerina 5mg tabletas sublinguas **especial**,CIEL:80704
+a2833aa8-3017-4b72-9d50-c8b9951bad46,TRUE,CES: Olopatadina oftalmica **especial**,CIEL:81031
+f9a8167c-60c8-4b8e-957f-ff4acdaaf63e,TRUE,CES: Paracetamol jarabe 3.2g/100 ml - 120 ml,PIH:89
+7883a4b7-1090-4d2c-b13c-8a17f595e2ae,TRUE,CES: Paracetamol/cafeína 500mg/50mg - tabletas,PIH:89
+898ba74a-f9b1-4b00-8bdc-396fb485dfdf,TRUE,CES: Paracetamol/fenilefrina/clorfenamina 325 mg/5 mg/2 mg - tabletas,CIEL:913
+a88f9c47-2e78-47ed-8440-e04e74216199,TRUE,CES: Paracetamol/metocarbamol 350mg/400mg - tabletas,PIH:89
+53100882-9b1c-463f-9226-4ec059bc2d0d,TRUE,CES: Pentoxifillina 400mg tabletas,CIEL:81765
+38760ac9-e9df-4e72-a5a9-bb2a29b3e446,TRUE,CES: Pravastatina - tableta - 10 mg,CIEL:82411
+8178ba95-f0a4-4689-b782-10f29130ddcb,TRUE,CES: Prednisolona oftalmica **especial**,PIH:765
+c129a69b-ce58-4021-b9fd-e9f46f70461b,TRUE,CES: Prometazina **especial**,CIEL:82670
+064208d5-6dbd-4048-867c-f4ea2e342944,TRUE,CES: Propafenona tabletas **especial**,CIEL:82696
+a1bc1ab4-d0e8-4e15-af77-3a89fee9e0e2,TRUE,CES: Pruebas de tipificacion sanguinea,CIEL:165473
+1a10b298-119f-4d6e-a0c2-fe7804f96bd4,TRUE,CES: Psoriaderm **especial**,CIEL:165472
+78cc5813-183a-4c4a-9f29-887daaaa8b34,TRUE,CES: Ranitidina 150mg 20 tabletas,PIH:923
+7aa095ab-8083-47b9-bd1d-0fe907935e99,TRUE,CES: Rifaximina 200mg tabletas **especial**,CIEL:83362
+b06a3dea-f761-4850-a40d-101f307be922,TRUE,CES: Salbutamol aerosol 100mcg - 200 dosis,PIH:798
+b6f22fee-562a-4d2d-9aa9-ab1c0b7a0152,TRUE,CES: Salbutamol/bromuro de ipratropio solucion para nebulizar,PIH:12257
+e33a7015-5398-4ac8-93e2-b6a5a315ed87,TRUE,CES: Shampoo vin.quassia para piojos,CIEL:82983
+c12ca1aa-5ce0-40f3-ba2c-6398180b0908,TRUE,CES: Sildenafil tabletas **especial**,CIEL:83902
+950a9c0c-0c3e-4c52-ac85-118e0542fdbe,TRUE,CES: Simvastatina 10mg - tabletas,CIEL:83936
+ac3fdeaf-c736-4162-a16c-cc3b78c2ae8d,TRUE,CES: Sulfadiazina de plata crema 1g,PIH:938
+7c46d158-bd95-4644-95c4-920dd227a31b,TRUE,CES: Sulfazalacina 500mg tabletas **especial**,CIEL:84480
+cdf54234-42a7-4616-b915-03d597693c1e,TRUE,CES: Sumatriptán 100 mg tabletas,CIEL:84522
+60c5aed0-b5cb-4dc3-a2fb-bb94ad7f1d66,TRUE,CES: Telmisartan/hidroclorotiazida 80mg/12.5mg - tabletas,CIEL:104843
+83f5e6ac-9eda-4299-aace-a7f854a13923,TRUE,CES: Tolterodina tabletas **especial**,PIH:12259
+7ec0852e-0beb-49cf-b325-7fff31be54f4,TRUE,CES: Tramadol - capsulas - 100 mg,CIEL:85276
+3d735fd4-0c78-4c15-a166-979d366495d5,TRUE,CES: Tramadol inyectable 50mg/ml 5 ampollas de 2ml,CIEL:85276
+14d28196-61db-46ca-bf76-0b2f67448ccb,TRUE,CES: Valproato de magnesio suspension 200mg/ml,CIEL:79251
+76604add-8992-4d8d-a17b-42b1fc36c580,TRUE,CES: Vaselina - 60g,CIEL:81861
+e864bcd1-b735-48d2-a55a-74fc56bf5741,TRUE,CES: Zinc 0.38 g capsulas,PIH:4064
+c85de0c9-c50e-4e0b-b90a-0e440b607e26,"TRUE","CES: Prueba de tipificacion sanguinea - 50 piezas","CIEL:165473",
+47252c2d-5fc7-4373-a2a4-faca366f33d7,"TRUE","CES: Minoxidil topico **especial**","CIEL:79948",
+40663898-8804-4ac3-bc86-91a782462821,"TRUE","CES: Loratadina 1mg/ml - gotas 30ml (pediatrico)","CIEL:79053",
+81d33222-b074-4029-843e-1cd2cb528a48,"TRUE","CES: Tramadol 100mg - 10 tabletas","CIEL:85276",
+ddb3e983-8302-47cd-85a4-7e3854a4c796,"TRUE","CES: Nimesulida 100 mg - 10 tabletas","CIEL:80665",
+69b38aa0-2de6-4892-8778-c8dfb96cacae,"TRUE","CES: Tolterodina 2 mg - 28 tabletas **especial**","PIH:12259",
+3b8e188d-e314-4ce7-a8c6-64749e099070,"TRUE","CES: Dienogestrel 2 mg - 28 tabletas **especial**","CIEL:104421",
+0aeef132-2659-4d33-aff2-a3327ce682df,"TRUE","CES: Leche infantil Etapa 1 sin lactosa","CIEL:5254",
+b716e144-e698-4f49-9d8c-ccc1a057bb9f,"TRUE","CES: Leche infantil Etapa 3 sin lactosa","CIEL:5254",
+27cf910c-184d-4ede-93a5-f35759d8545c,"TRUE","CES: Systane up - oftalmico","CIEL: 105187", 
+320693d5-a5e0-4ad7-8ae6-e662ea8d2296,"TRUE","CES: Entresto® (sacubitril/valsartan) 49 mg/51 mg - 28 tabletas","PIH:ENTRESTO",
+30bc18b4-216c-4857-b3da-c225a6d4de4c,"TRUE","CES: Pediasure - botella **especial**","PIH:PEDIASURE",
