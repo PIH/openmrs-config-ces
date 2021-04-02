@@ -22,6 +22,7 @@
     "hypertensionProgram",
     "malnutritionProgram",
     "managePrinters",
+    "markPatientDead",
     "mentalHealthProgram",
     "myAccount",
     "overviewReports",

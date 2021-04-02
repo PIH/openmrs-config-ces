@@ -16,6 +16,7 @@
     "hypertensionProgram",
     "malnutritionProgram",
     "mentalHealthProgram",
+    "markPatientDead",
     "myAccount",
     "overviewReports",
     "patientDocuments",
@@ -34,6 +35,7 @@
   "visitsPageUrl": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
   "visitsPageWithSpecificUrl": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview",
   "providerIdentifierPrefix": "C",
+  "dossierIdentifierPrefix": "D",
   "addressConfig": {
     "manualFields": ["address1", "address2", "address3"],
     "shortcutField": "cityVillage"
