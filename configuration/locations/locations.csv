@@ -1,0 +1,17 @@
+UUID,Name,Description,Parent,Tag|Identifier Assignment Location,Tag|Archives Location,Tag|Consult Note Location,Tag|Registration Location,Tag|Visit Location,Tag|Program Location,Tag|Vitals Location,Tag|Medical Record Location,Tag|Provider Management Location
+5f638ab8-87f7-48bc-8111-178000380dc9,Chiapas,"The state of Chiapas, where CES operates",,1,,,,,,,,
+6ed84a4b-848d-11e8-9d02-74e5f9828fde,Capitan,Capitan,Chiapas,,,1,1,1,1,1,1,1
+5a49103e-a263-4a83-a29a-490788226787,Honduras,Honduras,Chiapas,,,1,1,1,1,1,1,1
+63133477-8535-11e8-9d02-74e5f9828fde,Laguna del Cofre,Laguna del Cofre,Chiapas,,,1,1,1,1,1,1,1
+928cb518-8535-11e8-9d02-74e5f9828fde,Letrero,Letrero,Chiapas,,,1,1,1,1,1,1,1
+98c940fd-8535-11e8-9d02-74e5f9828fde,Matazano,Matazano,Chiapas,,,1,1,1,1,1,1,1
+a27578cc-8535-11e8-9d02-74e5f9828fde,Monterrey,Monterrey,Chiapas,,,1,1,1,1,1,1,1
+06109e0d-4a83-4f02-be62-8175bf04f8f0,Plan Alta,"Plan de la Libertad, Alta",Chiapas,,,1,1,1,1,1,1,1
+e1ae1851-1611-42c1-8b99-f4b719faedc1,Plan Baja,"Plan de la Libertad, Baja",Chiapas,,,1,1,1,1,1,1,1
+b4c7e4f9-8535-11e8-9d02-74e5f9828fde,Reforma,Reforma,Chiapas,,,1,1,1,1,1,1,1
+bb54f7df-8535-11e8-9d02-74e5f9828fde,Salvador,Salvador,Chiapas,,,1,1,1,1,1,1,1
+c31869d6-8535-11e8-9d02-74e5f9828fde,Soledad,Soledad,Chiapas,,,1,1,1,1,1,1,1
+8bb35919-daff-412f-868c-9db7a0c2bac4,Hospital,Hospital,Chiapas,,,1,1,1,1,1,1,1
+17b5962a-8145-4738-be8d-537dc5c103e7,CES Oficina,CES Oficina,Chiapas,,1,1,1,1,1,1,1,1
+1d7567a9-64d0-4b79-82a5-59d9e930e426,Casa Materna,Birthing center operated by CES in Jaltenango,Chiapas,,,1,1,1,1,1,1,1
+431f3329-3a87-48fa-a60a-255cbc328b0c,CER,"Clínica de Enfermedades Respiratorias, the CES COVID-19 clinic",Chiapas,,,1,1,1,1,1,1,1
