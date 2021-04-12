@@ -1221,10 +1221,17 @@
             <div class="two-columns">
                 <div class="small-text">
 
-                    <obs conceptId="PIH:Is TB suspected" 
-                         answerConceptId="PIH:Suspected tuberculosis" 
-                         answerLabel="Sospecha de Tuberculosis" 
-                         toggle="OptionsTB"/>
+                    <p>Sospecha de tuberculosis:</p>
+                    <obs id="SuspectedTB"
+                        conceptId="PIH:Is TB suspected" 
+                        answerConceptIds="CIEL:1065, CIEL:1066"
+                        style="radio" 
+                        answerSeparator="">
+
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#OptionsTB"/>                          
+                        </controls>
+                   </obs>
                     
                 </div>
                 <div id="OptionsTB">
@@ -1250,10 +1257,17 @@
             <div class="two-columns">
                 <div class="small-text">
 
-                    <obs conceptId="PIH:Is HIV suspected" 
-                         answerConceptId="PIH:Suspected HIV infection" 
-                         answerLabel="Sospecha de VIH" 
-                         toggle="OptionsVIH"/>
+                    <p>Sospecha de VIH:</p>
+                    <obs id="SuspectedVIH"
+                        conceptId="PIH:Is HIV suspected" 
+                        answerConceptIds="CIEL:1065, CIEL:1066"
+                        style="radio" 
+                        answerSeparator="">
+
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#OptionsVIH"/>                          
+                        </controls>
+                   </obs>
                     
                 </div>
                 <div id="OptionsVIH">
@@ -1279,10 +1293,18 @@
             <div class="tres-columns">
                 <div class="small-text">
 
-                    <obs conceptId="PIH:Is COVID suspected" 
-                         answerConceptId="CIEL:165612" 
-                         answerLabel="Sospecha de Covid-19" 
-                         toggle="TipoPruebaCovid"/>                
+                    <p>Sospecha de Covid-19:</p>
+                    <obs id="SuspectedCOVID-19"
+                        conceptId="PIH:Is COVID suspected" 
+                        answerConceptIds="CIEL:1065, CIEL:1066"
+                        style="radio" 
+                        answerSeparator="">
+
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#TipoPruebaCovid"/>                          
+                        </controls>
+                   </obs>
+                                 
                 </div>
 
                 <div id="TipoPruebaCovid">     
