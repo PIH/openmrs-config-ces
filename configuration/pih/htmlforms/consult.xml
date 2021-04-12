@@ -369,28 +369,9 @@
                 <uimessage code="pihcore.referredBy"/>
             </label>
             <obs conceptId="PIH:6189" id="referredBy"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                 answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555,PIH:12614"
-                 answerCodes="pihcore.hasAppointment,pihcore.walkIn,pihcore.activeCasefinding"
-                 style="radio" answerSeparator=""
-            />
-=======
                  answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555"
                  answerCodes="pihcore.hasAppointment,pihcore.walkIn,pihcore.activeCasefinding,pihcore.chw"
                  style="radio" answerSeparator=""/>
->>>>>>> d76f323104540f4bef147c77e17e20c2ae4406b3
-=======
-                 answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555"
-                 answerCodes="pihcore.hasAppointment,pihcore.walkIn,pihcore.activeCasefinding,pihcore.chw"
-                 style="radio" answerSeparator=""/>
->>>>>>> d76f323104540f4bef147c77e17e20c2ae4406b3
-=======
-                 answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555"
-                 answerCodes="pihcore.hasAppointment,pihcore.walkIn,pihcore.activeCasefinding,pihcore.chw"
-                 style="radio" answerSeparator=""/>
->>>>>>> d76f323104540f4bef147c77e17e20c2ae4406b3
         </div>
     </section>
 
