@@ -369,9 +369,34 @@
                 <uimessage code="pihcore.referredBy"/>
             </label>
             <obs conceptId="PIH:6189" id="referredBy"
+<<<<<<< HEAD
                  answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555"
                  answerCodes="pihcore.hasAppointment,pihcore.walkIn,pihcore.activeCasefinding,pihcore.chw"
                  style="radio" answerSeparator=""/>
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+                 answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555,PIH:12614"
+                 answerCodes="pihcore.hasAppointment,pihcore.walkIn,pihcore.activeCasefinding"
+                 style="radio" answerSeparator=""
+            />
+=======
+                 answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555"
+                 answerCodes="pihcore.hasAppointment,pihcore.walkIn,pihcore.activeCasefinding,pihcore.chw"
+                 style="radio" answerSeparator=""/>
+>>>>>>> d76f323104540f4bef147c77e17e20c2ae4406b3
+=======
+                 answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555"
+                 answerCodes="pihcore.hasAppointment,pihcore.walkIn,pihcore.activeCasefinding,pihcore.chw"
+                 style="radio" answerSeparator=""/>
+>>>>>>> d76f323104540f4bef147c77e17e20c2ae4406b3
+=======
+                 answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555"
+                 answerCodes="pihcore.hasAppointment,pihcore.walkIn,pihcore.activeCasefinding,pihcore.chw"
+                 style="radio" answerSeparator=""/>
+>>>>>>> d76f323104540f4bef147c77e17e20c2ae4406b3
+>>>>>>> master
         </div>
     </section>
 
@@ -1221,6 +1246,7 @@
             <div class="two-columns">
                 <div class="small-text">
 
+<<<<<<< HEAD
                     <p>Sospecha de tuberculosis:</p>
                     <obs id="SuspectedTB"
                         conceptId="PIH:Is TB suspected" 
@@ -1232,6 +1258,12 @@
                             <when value="CIEL:1065" thenDisplay="#OptionsTB"/>                          
                         </controls>
                    </obs>
+=======
+                    <obs conceptId="PIH:Is TB suspected" 
+                         answerConceptId="PIH:Suspected tuberculosis" 
+                         answerLabel="Sospecha de Tuberculosis" 
+                         toggle="OptionsTB"/>
+>>>>>>> master
                     
                 </div>
                 <div id="OptionsTB">
@@ -1257,6 +1289,7 @@
             <div class="two-columns">
                 <div class="small-text">
 
+<<<<<<< HEAD
                     <p>Sospecha de VIH:</p>
                     <obs id="SuspectedVIH"
                         conceptId="PIH:Is HIV suspected" 
@@ -1268,6 +1301,12 @@
                             <when value="CIEL:1065" thenDisplay="#OptionsVIH"/>                          
                         </controls>
                    </obs>
+=======
+                    <obs conceptId="PIH:Is HIV suspected" 
+                         answerConceptId="PIH:Suspected HIV infection" 
+                         answerLabel="Sospecha de VIH" 
+                         toggle="OptionsVIH"/>
+>>>>>>> master
                     
                 </div>
                 <div id="OptionsVIH">
@@ -1293,6 +1332,7 @@
             <div class="tres-columns">
                 <div class="small-text">
 
+<<<<<<< HEAD
                     <p>Sospecha de Covid-19:</p>
                     <obs id="SuspectedCOVID-19"
                         conceptId="PIH:Is COVID suspected" 
@@ -1305,6 +1345,12 @@
                         </controls>
                    </obs>
                                  
+=======
+                    <obs conceptId="PIH:Is COVID suspected" 
+                         answerConceptId="CIEL:165612" 
+                         answerLabel="Sospecha de Covid-19" 
+                         toggle="TipoPruebaCovid"/>                
+>>>>>>> master
                 </div>
 
                 <div id="TipoPruebaCovid">     
