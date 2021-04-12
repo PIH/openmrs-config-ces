@@ -1220,7 +1220,6 @@
         <div class="section-container">
             <div class="two-columns">
                 <div class="small-text">
-
                     <p>Sospecha de tuberculosis:</p>
                     <obs id="SuspectedTB"
                         conceptId="PIH:Is TB suspected" 
