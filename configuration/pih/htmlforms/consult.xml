@@ -1560,7 +1560,7 @@
                                         <uimessage code="mirebalais.dispensing.medicationName"/>
                                     </label>
                                     <obs id="name{0}" class="medication-name" conceptId="CIEL:1282"
-                                         answerDrugs="true"/>
+                                         answerDrugs="true" includeRetiredDrugs="false"/>
                                 </p>              
                                 <p class="inline">
                                     <label>
