@@ -1222,7 +1222,6 @@
         <div class="section-container">
             <div class="two-columns">
                 <div class="small-text">
-
                     <p>Sospecha de tuberculosis:</p>
                     <obs id="SuspectedTB"
                         conceptId="PIH:Is TB suspected" 
@@ -1230,6 +1229,16 @@
                         style="radio" 
                         answerSeparator="">
 
+<<<<<<< HEAD
+                    <p>Sospecha de tuberculosis:</p>
+                    <obs id="SuspectedTB"
+                        conceptId="PIH:Is TB suspected" 
+                        answerConceptIds="CIEL:1065, CIEL:1066"
+                        style="radio" 
+                        answerSeparator="">
+
+=======
+>>>>>>> master
                         <controls>
                             <when value="CIEL:1065" thenDisplay="#OptionsTB"/>                          
                         </controls>
@@ -1306,7 +1315,11 @@
                             <when value="CIEL:1065" thenDisplay="#TipoPruebaCovid"/>                          
                         </controls>
                    </obs>
+<<<<<<< HEAD
 
+=======
+                                 
+>>>>>>> master
                 </div>
 
                 <div id="TipoPruebaCovid">     
@@ -1563,7 +1576,7 @@
                                         <uimessage code="mirebalais.dispensing.medicationName"/>
                                     </label>
                                     <obs id="name{0}" class="medication-name" conceptId="CIEL:1282"
-                                         answerDrugs="true"/>
+                                         answerDrugs="true" includeRetiredDrugs="false"/>
                                 </p>              
                                 <p class="inline">
                                     <label>
