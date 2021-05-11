@@ -1,0 +1,25 @@
+key: "mexicoVisits"
+uuid: "b1d80ad0-f9a2-46c6-a89f-0050d7d724cb"
+name: "mirebalaisreports.mexicoVisits.name.xxx"
+description: "mirebalaisreports.mexicoVisits.description"
+parameters:
+  - key: "startDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.startDate"
+  - key: "endDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.endDate"
+datasets:
+  - key: "mexicoVisits"
+    type: "sql"
+    config: "sql/mexicoVisits.sql"
+designs:
+  - type: "excel"
+    template: "templates/mexicoVisits.xls"
+    properties:
+      "repeatingSections": "sheet:1,dataset:mexicoVisits"
+config:
+  category: "dataExport"
+  order: 9
+  components:
+    - "dataExports"

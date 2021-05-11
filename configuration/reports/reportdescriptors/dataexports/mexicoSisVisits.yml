@@ -1,7 +1,7 @@
-key: "mexicoCesMeds"
-uuid: "f03e1621-8801-47c9-a845-3839ba44fa03"
-name: "mirebalaisreports.mexicoCesMeds.name"
-description: "mirebalaisreports.mexicoCesMeds.description"
+key: "mexicoSisVisits"
+uuid: "171fafba-e39e-4054-a1cc-a285683e68f8"
+name: "mirebalaisreports.mexicoSisVisits.name.xxx"
+description: "mirebalaisreports.mexicoSisVisits.description"
 parameters:
   - key: "startDate"
     type: "java.util.Date"
@@ -10,9 +10,9 @@ parameters:
     type: "java.util.Date"
     label: "reporting.parameter.endDate"
 datasets:
-  - key: "mexicoCesMeds"
+  - key: "mexicoSisVisits"
     type: "sql"
-    config: "sql/cesMeds.sql"
+    config: "sql/mexicoSisVisits.sql"
 designs:
   - type: "csv"
     properties:
@@ -21,6 +21,6 @@ designs:
       "dateFormat": "dd-MMM-yyyy HH:mm:ss"
 config:
   category: "dataExport"
-  order: 13
+  order: 11
   components:
     - "dataExports"
