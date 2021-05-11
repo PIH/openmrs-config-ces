@@ -1,6 +1,6 @@
 key: "mexicoSisVisits"
 uuid: "171fafba-e39e-4054-a1cc-a285683e68f8"
-name: "mirebalaisreports.mexicoSisVisits.name.xxx"
+name: "mirebalaisreports.mexicoSisVisits.name"
 description: "mirebalaisreports.mexicoSisVisits.description"
 parameters:
   - key: "startDate"

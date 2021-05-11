@@ -1,6 +1,6 @@
 key: "mexicoSisDiagnoses"
 uuid: "6d271d1c-26c5-4ee5-989d-2316dea1a561"
-name: "mirebalaisreports.mexicoSisDiagnoses.name.xxx"
+name: "mirebalaisreports.mexicoSisDiagnoses.name"
 description: "mirebalaisreports.mexicoSisDiagnoses.description"
 parameters:
   - key: "startDate"

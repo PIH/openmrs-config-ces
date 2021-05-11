@@ -1,6 +1,6 @@
 key: "mexicoSsaMeds"
 uuid: "84ed6470-84f8-4cf6-ba23-bb27c7e4fa76"
-name: "mirebalaisreports.mexicoSsaMeds.name.xxx"
+name: "mirebalaisreports.mexicoSsaMeds.name"
 description: "mirebalaisreports.mexicoSsaMeds.description"
 parameters:
   - key: "startDate"

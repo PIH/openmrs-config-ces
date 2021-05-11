@@ -1,6 +1,6 @@
 key: "mexicoSuiveSimple"
 uuid: "620b25e7-c1f4-43d4-ba8d-944973425597"
-name: "mirebalaisreports.mexicoSuiveSimple.name.xxx"
+name: "mirebalaisreports.mexicoSuiveSimple.name"
 description: "mirebalaisreports.mexicoSuiveSimple.description"
 parameters:
   - key: "startDate"
