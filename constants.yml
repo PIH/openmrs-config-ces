@@ -1,0 +1,8 @@
+# Patient Identifier Types
+patientIdentifierType:
+  chiapasEmrId:
+    uuid: "506add39-794f-11e8-9bcd-74e5f916c5ec"
+  curp:
+    uuid: "c1fe3790-915a-4f03-861f-5e477f36cec0"
+  mexicoDossierNumber:
+    uuid: "9124b296-d14d-4222-862d-44867e728812"

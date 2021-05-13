@@ -1,0 +1,4 @@
+Uuid,Void/Retire,Name,Description,Required,Format,Format description,Validator,Location behavior,Uniqueness behavior
+${patientIdentifierType.chiapasEmrId.uuid},0,Chiapas EMR ID,A unique identifier issued to all patients in the Chiapas EMR.,0,,,,NOT_USED,
+${patientIdentifierType.curp.uuid},0,Mexican National ID,A unique identifier given to every Mexican citizen by the government of Mexico.,0,,,,NOT_USED,
+${patientIdentifierType.mexicoDossierNumber.uuid},0,Expediente,Dossier number for identifying patient documents,0,"\\w{1,4}\\d{6}",A000001,,REQUIRED,
