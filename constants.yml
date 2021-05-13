@@ -6,3 +6,7 @@ patientIdentifierType:
     uuid: "c1fe3790-915a-4f03-861f-5e477f36cec0"
   mexicoDossierNumber:
     uuid: "9124b296-d14d-4222-862d-44867e728812"
+
+encounterType:
+  mexicoConsult:
+    uuid: "aa61d509-6e76-4036-a65d-7813c0c3b752"
