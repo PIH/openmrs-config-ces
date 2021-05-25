@@ -198,7 +198,7 @@
         #encounter-diagnoses-app {
             margin-bottom: 20px;
         }
-        
+
     </style>
 
     <div class="print-form-datestamps" style="display:none">
@@ -212,7 +212,23 @@
             <lookup complexExpression="$formGeneratedDatetime"/>
         </p>
     </div>
-    
+
+    <div class="hidden" id="encounter-details">
+        <encounterDate default="now"/>
+        <encounterProviderAndRole default="currentUser" encounterRole="4f10ad1a-ec49-48df-98c7-1391c6ac7f05"
+                                          required="true"/>
+
+    </div>
+
+    <section id="encounter-location" sectionTag="fieldset" headerTag="legend" headerStyle="title">
+        <div class="section-container">
+            <label>
+                <uimessage code="pihcore.locationRequired"/>
+            </label>
+            <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
+        </div>
+    </section>
+
     <section id="vitals" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.vitals.label">
         <div class="section-container">
             <table>
@@ -336,32 +352,7 @@
         <img src="/openmrs/ms/uiframework/resource/pihcore/files/ssa-logo.png" style="width: 20%; margin: 0 5%;"/>
     </div>
 
-    <div class="hidden" id="encounter-details"
-         sectionTag="section" headerStyle="title" headerLabel="Encounter Details">
-        <fieldset>
-            <legend>When?</legend>
-            <label>When?</label>
 
-            <encounterDate default="now"/>
-        </fieldset>
-
-        <fieldset>
-            <legend>Who?</legend>
-            <label>Who?</label>
-
-            <span id="provider-input">
-            <encounterProviderAndRole default="currentUser" encounterRole="4f10ad1a-ec49-48df-98c7-1391c6ac7f05"
-                                      required="true"/>
-            </span>
-        </fieldset>
-
-        <fieldset>
-            <legend>Where?</legend>
-            <label>Where?</label>
-
-            <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
-        </fieldset>
-    </div>
 
     <section id="context" sectionTag="fieldset" headerTag="legend" headerStyle="title">
         <div class="section-container">
@@ -481,12 +472,12 @@
                 </label>
                 <div class="two-columns">
                     <div>
-                        <lookup expression="fn.latestObs('PIH:Daytime asthma symptoms for more than a few minutes more than once/week').obsDatetime" />
-                        <lookup complexExpression="#if($fn.latestObs('PIH:Daytime asthma symptoms for more than a few minutes more than once/week')) &#8194; &#8227; &#8194; #end" />
-                        <lookup expression="fn.latestObs('PIH:Daytime asthma symptoms for more than a few minutes more than once/week').valueCoded.name" />
+                        <lookup expression="fn.latestObs('PIH:Daytime asthma symptoms for more than a few minutes more than once a week').obsDatetime" />
+                        <lookup complexExpression="#if($fn.latestObs('PIH:Daytime asthma symptoms for more than a few minutes more than once a week')) &#8194; &#8227; &#8194; #end" />
+                        <lookup expression="fn.latestObs('PIH:Daytime asthma symptoms for more than a few minutes more than once a week').valueCoded.name" />
                     </div>
                     <div>
-                        <obs conceptId="PIH:Daytime asthma symptoms for more than a few minutes more than once/week"
+                        <obs conceptId="PIH:Daytime asthma symptoms for more than a few minutes more than once a week"
                              answerConceptIds="PIH:YES,PIH:NO"
                              style="radio" answerSeparator="" />
                     </div>
@@ -1224,12 +1215,11 @@
                 <div class="small-text">
                     <p>Sospecha de tuberculosis:</p>
                     <obs id="SuspectedTB"
-                        conceptId="PIH:Is TB suspected" 
+                        conceptId="PIH:Is TB suspected"
                         answerConceptIds="CIEL:1065, CIEL:1066"
-                        style="radio" 
+                        style="radio"
                         answerSeparator="">
 
-<<<<<<< HEAD
                     <p>Sospecha de tuberculosis:</p>
                     <obs id="SuspectedTB"
                         conceptId="PIH:Is TB suspected" 
@@ -1237,29 +1227,27 @@
                         style="radio" 
                         answerSeparator="">
 
-=======
->>>>>>> master
                         <controls>
-                            <when value="CIEL:1065" thenDisplay="#OptionsTB"/>                          
+                            <when value="CIEL:1065" thenDisplay="#OptionsTB"/>
                         </controls>
                    </obs>
-                    
+
                 </div>
                 <div id="OptionsTB">
 
                     <p>Resultado de prueba:</p>
                     <obs conceptId="PIH:Tuberculosis culture result"
-                         answerConceptIds="PIH:NOT DONE,PIH:NEGATIVE,PIH:POSITIVE" 
+                         answerConceptIds="PIH:NOT DONE,PIH:NEGATIVE,PIH:POSITIVE"
                          style="radio"
                          answerSeparator=""/>
-                    <br/> 
+                    <br/>
 
-                    <obs conceptId="PIH:Suspected TB free-text notes" 
+                    <obs conceptId="PIH:Suspected TB free-text notes"
                          style="textarea"
-                         labelText="Observaciones:" 
+                         labelText="Observaciones:"
                          rows="5"/>
-                                               
-                </div>        
+
+                </div>
             </div>
         </div>
 
@@ -1270,35 +1258,35 @@
 
                     <p>Sospecha de VIH:</p>
                     <obs id="SuspectedVIH"
-                        conceptId="PIH:Is HIV suspected" 
+                        conceptId="PIH:Is HIV suspected"
                         answerConceptIds="CIEL:1065, CIEL:1066"
-                        style="radio" 
+                        style="radio"
                         answerSeparator="">
 
                         <controls>
-                            <when value="CIEL:1065" thenDisplay="#OptionsVIH"/>                          
+                            <when value="CIEL:1065" thenDisplay="#OptionsVIH"/>
                         </controls>
                    </obs>
-                    
+
                 </div>
                 <div id="OptionsVIH">
 
                     <p>Resultado de prueba:</p>
-                    <obs conceptId="PIH:RESULT OF HIV TEST" 
-                         answerConceptIds="PIH:NOT DONE,PIH:NEGATIVE,PIH:POSITIVE" 
+                    <obs conceptId="PIH:RESULT OF HIV TEST"
+                         answerConceptIds="PIH:NOT DONE,PIH:NEGATIVE,PIH:POSITIVE"
                          style="radio"
                          answerSeparator=""/>
-                    <br/>  
+                    <br/>
 
-                    <obs conceptId="PIH:Suspected HIV free-text notes" 
+                    <obs conceptId="PIH:Suspected HIV free-text notes"
                          style="textarea"
-                         labelText="Observaciones:"  
-                         rows="5"/>             
-                    
-                </div> 
+                         labelText="Observaciones:"
+                         rows="5"/>
+
+                </div>
             </div>
         </div>
-   
+
         <!-- COVID -->
         <div class="section-container">
             <div class="tres-columns">
@@ -1306,78 +1294,74 @@
 
                     <p>Sospecha de Covid-19:</p>
                     <obs id="SuspectedCOVID-19"
-                        conceptId="PIH:Is COVID suspected" 
+                        conceptId="PIH:Is COVID suspected"
                         answerConceptIds="CIEL:1065, CIEL:1066"
-                        style="radio" 
+                        style="radio"
                         answerSeparator="">
 
                         <controls>
-                            <when value="CIEL:1065" thenDisplay="#TipoPruebaCovid"/>                          
+                            <when value="CIEL:1065" thenDisplay="#TipoPruebaCovid"/>
                         </controls>
                    </obs>
-<<<<<<< HEAD
 
-=======
-                                 
->>>>>>> master
                 </div>
 
-                <div id="TipoPruebaCovid">     
+                <div id="TipoPruebaCovid">
 
-                   <p>Tipo de prueba:</p>           
+                   <p>Tipo de prueba:</p>
                    <obs id="whattype"
-                        conceptId="PIH:Type of COVID test" 
-                        answerConceptIds="CIEL:165840,CIEL:165853,CIEL:165852" 
-                        answerLabels="PCR,Anticuerpos,Antigeno" 
-                        style="radio" 
+                        conceptId="PIH:Type of COVID test"
+                        answerConceptIds="CIEL:165840,CIEL:165853,CIEL:165852"
+                        answerLabels="PCR,Anticuerpos,Antigeno"
+                        style="radio"
                         answerSeparator="">
 
                         <controls>
                             <when value="CIEL:165840" thenDisplay="#OptionsPCR"/>
                             <when value="CIEL:165853" thenDisplay="#OptionsAnticuerpos"/>
-                            <when value="CIEL:165852" thenDisplay="#OptionsAntigeno"/>                          
+                            <when value="CIEL:165852" thenDisplay="#OptionsAntigeno"/>
                         </controls>
                    </obs>
                    <br/>
 
-                   <obs conceptId="PIH:Suspected TB free-text notes" 
+                   <obs conceptId="PIH:Suspected TB free-text notes"
                         style="textarea"
-                        labelText="Observaciones:" 
+                        labelText="Observaciones:"
                         rows="5"/>
                    <br/>
-                  
+
                 </div>
 
                 <div id="OptionsPCR">
 
-                    <p>Resultado PCR:</p>  
-                    <obs conceptId="CIEL:165840" 
-                         answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" 
+                    <p>Resultado PCR:</p>
+                    <obs conceptId="CIEL:165840"
+                         answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE"
                          style="radio"
                          answerSeparator=""/>
-                </div> 
+                </div>
 
                 <div id="OptionsAnticuerpos">
-                           
-                    <p>Resultado anticuerpos:</p> 
-                    <obs conceptId="CIEL:165853" 
-                         answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" 
-                         style="radio" 
+
+                    <p>Resultado anticuerpos:</p>
+                    <obs conceptId="CIEL:165853"
+                         answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE"
+                         style="radio"
                          answerSeparator=""/>
                 </div>
 
                 <div id="OptionsAntigeno">
 
-                    <p>Resultado antigeno:</p> 
-                    <obs conceptId="CIEL:165852" 
-                         answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE" 
-                         style="radio" 
+                    <p>Resultado antigeno:</p>
+                    <obs conceptId="CIEL:165852"
+                         answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE"
+                         style="radio"
                          answerSeparator=""/>
-                </div> 
+                </div>
             </div>
         </div>
     </section>
-    
+
 
     <!-- Analysis -->
     <ifMode mode="VIEW" include="false">
@@ -1577,7 +1561,7 @@
                                     </label>
                                     <obs id="name{0}" class="medication-name" conceptId="CIEL:1282"
                                          answerDrugs="true" includeRetiredDrugs="false"/>
-                                </p>              
+                                </p>
                                 <p class="inline">
                                     <label>
                                         <uimessage code="mirebalais.dispensing.medicationAmount"/>
