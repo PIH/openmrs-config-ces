@@ -360,11 +360,9 @@
                 <uimessage code="pihcore.referredBy"/>
             </label>
             <obs conceptId="PIH:6189" id="referredBy"
-
                  answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555"
                  answerCodes="pihcore.hasAppointment,pihcore.walkIn,pihcore.activeCasefinding,pihcore.chw"
                  style="radio" answerSeparator=""/>
-
         </div>
     </section>
 
@@ -1218,13 +1216,6 @@
                         conceptId="PIH:Is TB suspected"
                         answerConceptIds="CIEL:1065, CIEL:1066"
                         style="radio"
-                        answerSeparator="">
-
-                    <p>Sospecha de tuberculosis:</p>
-                    <obs id="SuspectedTB"
-                        conceptId="PIH:Is TB suspected" 
-                        answerConceptIds="CIEL:1065, CIEL:1066"
-                        style="radio" 
                         answerSeparator="">
 
                         <controls>
