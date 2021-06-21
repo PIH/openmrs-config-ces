@@ -207,7 +207,7 @@
             width: 90%;
         }
 
-        #w134{
+        .medication-instructions input { 
             width: 85%;
         }
 
