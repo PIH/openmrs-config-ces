@@ -504,25 +504,10 @@
                 <div class="checkboxRadio">
                     <obsgroup groupingConceptId="PIH:FUNCTIONAL REVIEW OF SYMPTOMS CONSTRUCT">
                         <span class="two-columns">
-                            <obs conceptId="PIH:SYMPTOM PRESENT" answerConceptId="CIEL:148273"
-                                 answerCode="yes" answerSeparator=""/>
-                            <obs conceptId="PIH:SYMPTOM ABSENT" answerConceptId="CIEL:148273"
-                                 answerCode="no" answerSeparator="" />
+                            <obs conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT" answerConceptId="CIEL:148273"
+                                labelText="" conceptLabels="Sí,No" style="radio" answerSeparator="" />
                         </span>
                     </obsgroup>
-                    <br/>
-
-                    <script type="text/javascript">
-                        /* Configure divs with class checkboxRadio to toggle the checkboxes as if they're radio buttons */
-                        jQuery(document).on('click', ".checkboxRadio input[type$='checkbox']", function() {
-                            var that = this;
-                            jQuery(this).closest('.checkboxRadio').find("input[type$='checkbox']").each(function () {
-                                if (jQuery(this).attr('id') != jQuery(that).attr('id')) {
-                                    jQuery(this).prop("checked", false);
-                                }
-                            });
-                        });
-                    </script>
                 </div>
             </div>
         </div>
