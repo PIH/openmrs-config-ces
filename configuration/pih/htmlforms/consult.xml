@@ -199,6 +199,18 @@
             margin-bottom: 20px;
         }
 
+        .ui-helper-hidden-accessible{
+            display: none;
+        }
+
+        .ui-autocomplete-input{
+            width: 90%;
+        }
+
+        .medication-instructions input { 
+            width: 85%;
+        }
+
     </style>
 
     <div class="print-form-datestamps" style="display:none">
@@ -492,25 +504,10 @@
                 <div class="checkboxRadio">
                     <obsgroup groupingConceptId="PIH:FUNCTIONAL REVIEW OF SYMPTOMS CONSTRUCT">
                         <span class="two-columns">
-                            <obs conceptId="PIH:SYMPTOM PRESENT" answerConceptId="CIEL:148273"
-                                 answerCode="yes" answerSeparator=""/>
-                            <obs conceptId="PIH:SYMPTOM ABSENT" answerConceptId="CIEL:148273"
-                                 answerCode="no" answerSeparator="" />
+                            <obs conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT" answerConceptId="CIEL:148273"
+                                labelText="" conceptLabels="Sí,No" style="radio" answerSeparator="" />
                         </span>
                     </obsgroup>
-                    <br/>
-
-                    <script type="text/javascript">
-                        /* Configure divs with class checkboxRadio to toggle the checkboxes as if they're radio buttons */
-                        jQuery(document).on('click', ".checkboxRadio input[type$='checkbox']", function() {
-                            var that = this;
-                            jQuery(this).closest('.checkboxRadio').find("input[type$='checkbox']").each(function () {
-                                if (jQuery(this).attr('id') != jQuery(that).attr('id')) {
-                                    jQuery(this).prop("checked", false);
-                                }
-                            });
-                        });
-                    </script>
                 </div>
             </div>
         </div>
@@ -1648,30 +1645,9 @@
                 jq(document.getElementById('clinical-management-plan')).clone().appendTo(w.document.body);
                 jq(document.getElementById('contact-info-inline')).clone().appendTo(w.document.body);
                 w.document.write("<p>");
-                    const nameLastFirst = jq("#provider-input").find("select option:selected").text();
-                    const nameFirst = nameLastFirst.match(/, (.*)$/)[1];
-                    const nameLast = nameLastFirst.match(/^(.*),/)[1];
-                    const doctorNameLine = "Doctor: " + nameFirst + " " + nameLast;
-                    w.document.write(doctorNameLine);
-                    w.document.write("</p>");
-                w.document.write("<p>");
                     w.document.write("Próxima cita: ");
                     w.document.write(jq("#apptDate").find(".hasDatepicker").val());
                     w.document.write("</p>");
-                w.document.write(
-                    "&lt;style&gt;" +
-                    "h3 { display: none; }" +
-                    ".date { position: absolute; top: 5px; right: 5px; }" +
-                    ".inline { display: inline; }" +
-                    ".med-details { display: none; }" +
-                    ".zl-givenName { font-size: large; }" +
-                    ".zl-familyName { font-size: large; }" +
-                    "span[role=status] { display: none; }" +
-                    "button { display: none; }" +
-                    ".medication-name input { width: 60%; }" +
-                    ".medication-instructions input { width: 80%; }" +
-                    "&lt;/style&gt;"
-                );
                 w.document.write("</body>");
                 w.document.close();
                 w.setTimeout(() => {
