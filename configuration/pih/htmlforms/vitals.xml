@@ -255,8 +255,8 @@
             <h3><uimessage code="pihcore.lab.isFastingGlucose"/></h3>
             <p>
                 <obs id="fasting-for-glucose" conceptId="PIH:Fasting for blood glucose test"
-                     answerConceptIds="PIH:YES,PIH:NO" answerLabels="Si,No"
-                     style="radio" answerSeparator="" />
+                     answerConceptIds="PIH:YES,PIH:NO"
+                     style="radio" answerSeparator=""/>
             </p>
         </fieldset>
 

@@ -373,7 +373,7 @@
             </label>
             <obs conceptId="PIH:6189" id="referredBy"
                  answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555"
-                 answerLabels="Cita,Paciente ambulatorio,Búsqueda activa de casos,Trabajador(a) comunitario"
+                 answerLabels="Cita,Paciente ambulatorio,Búsqueda activa de casos,Acompañante"
                  style="radio" answerSeparator=""/>
         </div>
     </section>
@@ -1051,8 +1051,7 @@
                 <div>
                     <div class="inline-radio" >
                         <obs conceptId="PIH:BLOOD TYPING"
-                             answerConceptIds="CIEL:690,CIEL:692,CIEL:694,CIEL:696,CIEL:699,CIEL:701,CIEL:1230,CIEL:1231,PIH:unknown"
-                             answerCodes="A+,A-,B+,B-,O+,O-,AB+,AB-,Desconocido"/>
+                             answerConceptIds="CIEL:690,CIEL:692,CIEL:694,CIEL:696,CIEL:699,CIEL:701,CIEL:1230,CIEL:1231,PIH:unknown"/>
                     </div>
                 </div>
             </div>
