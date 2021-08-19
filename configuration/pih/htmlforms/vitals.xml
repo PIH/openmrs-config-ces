@@ -290,10 +290,34 @@
 
         <fieldset>
             <legend><uimessage code="mirebalais.vitals.respiratoryRate.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.respiratoryRate.title"/></h3>
+            
 
             <p>
                 <obs conceptId="PIH:RESPIRATORY RATE" id="respiratory_rate" showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Tamizaje salud mental</legend>
+
+            <h2>Tamizaje salud mental</h2><br/>
+
+            <a href="/openmrs/ms/uiframework/resource/pihcore/files/PHQ2yGAD2-CES.pdf"
+               target="_blank" 
+               rel="noopener noreferrer">
+               Calcular PHQ-2 y GAD-2
+            </a><br/><br/>
+            
+            <h3>PHQ-2</h3>
+
+            <p>
+                <obs conceptId="PIH:PHQ-2"/>
+            </p><br/>
+
+            <h3>GAD-2</h3>
+
+            <p>
+                <obs conceptId="PIH:GAD-2"/>
             </p>
         </fieldset>
 
