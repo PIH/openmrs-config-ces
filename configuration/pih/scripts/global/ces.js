@@ -182,9 +182,6 @@ function setUpMaternalSection(currentEncounterDate, msgWeeks) {
  *     - duration-unit
  *     - medication-instructions
  *   - An element with class 'field-error'
- *   - 30 elements with IDs 'medication-X' where 'X' is a number 1-30
- *   - A button with ID 'show-more-medications-button'
- *   - A button with ID 'show-less-medications-button'
  */
 function setUpPlanSection(
   noMedicationMsg,
@@ -244,52 +241,8 @@ function setUpPlanSection(
 
     return valid;
   });
-
-  var MAX_MEDS = 30; // this should match the number of items in the "repeat with=..." tag
-  var numMeds = 1;
-  var meds = [];
-
-  var hasValue = function (element) {
-    return jq(element).find(".medication-name input").val();
-  };
-
-  var initMeds = function () {
-    for (var i = 1; i <= MAX_MEDS; i++) {
-      meds.push(jq("#medication-" + i));
-    }
-    for (var i = 1; i < MAX_MEDS; i++) {
-      if (hasValue(meds[i])) {
-        numMeds = i + 1;
-      }
-    }
-    updateShownMeds();
-  };
-
-  var updateShownMeds = function () {
-    for (var i = 0; i < MAX_MEDS; i++) {
-      if (i < numMeds) {
-        meds[i].show();
-      } else {
-        meds[i].hide();
-      }
-    }
-  };
-
-  var incrementShownMeds = function () {
-    numMeds += 1;
-    updateShownMeds();
-  };
-
-  var decrementShownMeds = function () {
-    numMeds -= 1;
-    updateShownMeds();
-  };
-
-  jq("#show-more-medications-button").click(incrementShownMeds);
-  jq("#show-less-medications-button").click(decrementShownMeds);
-
-  initMeds();
 }
+
 
 /**
  * This is a very ugly hack. It creates a new document in a new window,
