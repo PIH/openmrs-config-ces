@@ -10,3 +10,6 @@ patientIdentifierType:
 encounterType:
   mexicoConsult:
     uuid: "aa61d509-6e76-4036-a65d-7813c0c3b752"
+  clinicalHistory:
+    uuid: "0d16a7c9-07fb-43f6-8984-dd7787f26a5a"
+  
