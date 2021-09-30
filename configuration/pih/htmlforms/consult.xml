@@ -720,11 +720,11 @@
                         <div class="small-text">
                             <p>Riesgo cardiovascular:</p>
 
-                                <lookup expression="fn.latestObs('PIH:13703').valueNumeric"/>
-                                <obs id="ldl" 
-                                     conceptId="PIH:13703" 
-                                     showUnits="false" 
-                                     class="small"/>
+                            <lookup expression="fn.latestObs('PIH:13703').valueNumeric"/>
+                            <obs id="ldl" 
+                                 conceptId="PIH:13703" 
+                                 showUnits="false" 
+                                 class="small"/>
 
                         </div>
                   
