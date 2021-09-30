@@ -694,61 +694,35 @@
     <!-- Program HEARTS -->
     <section id="ProgramHEARTS" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerLabel="Programa HEARTS">
         <div class="question-container">
-            <div class="tres-columns">
-                <div class="small-text">
-                    <p>HEARTS:</p>
-                    <obs
-                        conceptId="PIH: 13704"
-                        answerConceptIds="CIEL:1065, CIEL:1066"
-                        style="radio"
-                        answerSeparator="">
-                   </obs>
-
-                </div>
-
-                <div class="small-text">
-                    <p>Cambio de tratamiento por algoritmo:</p>
-                    <obs
-                        conceptId="PIH: 13705"
-                        answerConceptIds="CIEL:1065, CIEL:1066"
-                        style="radio"
-                        answerSeparator="">
-                   </obs>
-
-                </div>
-
-                <div class="small-text">
-                    <p>Riesgo cardiovascular:</p>
-                    <obs
-                        conceptId="PIH: 13703">
-                   </obs>
-
-                </div>
-            </div>
-        </div>
-        <div class="question-container">
             <div class="two-columns">
-                <div>
-                    <label><uimessage code="pihcore.ncd.mental.gad7Score"/></label>
-                    <br />
-                    <div class="small-text">
-                        <p>
-                            <lookup expression="fn.latestObs('CIEL:165185').obsDatetime" />
-                            <lookup complexExpression="#if($fn.latestObs('CIEL:165185')) &#8194; &#8227; &#8194; #end" />
-                            <lookup expression="fn.latestObs('CIEL:165185').valueNumeric" />
-                        </p>
-                    </div>
+                <div class="small-text">
+                   
+                    <p>HEARTS:</p>
+                    <enrollInProgram programId="HEARTS" showCheckbox="true" toggle="FieldsHEARTS"/>               
+
                 </div>
-                <div>
-                    <div>
-                        <a href="/openmrs/ms/uiframework/resource/file/configuration/pih/images/GAD7-CESPDF.pdf"
-                           target="_blank" rel="noopener noreferrer">
-                            <uimessage code="pihcore.ncd.mental.gad7FormLink" />
-                        </a>
-                    </div>
-                    <div class="small">
-                        <obs conceptId="CIEL:165185"/>
-                    </div>
+
+                <div class="FieldsHEARTS">
+                    
+                        <div class="small-text">
+                            <p>Cambio de tratamiento por algoritmo:</p>
+                            <obs
+                                conceptId="PIH: 13705"
+                                answerConceptIds="CIEL:1065, CIEL:1066"
+                                style="radio"
+                                answerSeparator="">
+                        </obs>
+
+                        </div>
+
+                        <div class="small-text">
+                            <p>Riesgo cardiovascular:</p>
+
+                                <lookup expression="fn.latestObs('PIH:13703').valueNumeric"/>
+                                <obs id="ldl" conceptId="PIH:13703" showUnits="false" class="small"/>
+
+                        </div>
+                  
                 </div>
             </div>
         </div>
