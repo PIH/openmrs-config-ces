@@ -698,7 +698,9 @@
                 <div class="small-text">
                    
                     <p>HEARTS:</p>
-                    <enrollInProgram programId="HEARTS" showCheckbox="true" toggle="FieldsHEARTS"/>               
+                    <enrollInProgram programId="HEARTS" 
+                                     showCheckbox="true" 
+                                     toggle="FieldsHEARTS"/>               
 
                 </div>
 
@@ -719,7 +721,10 @@
                             <p>Riesgo cardiovascular:</p>
 
                                 <lookup expression="fn.latestObs('PIH:13703').valueNumeric"/>
-                                <obs id="ldl" conceptId="PIH:13703" showUnits="false" class="small"/>
+                                <obs id="ldl" 
+                                     conceptId="PIH:13703" 
+                                     showUnits="false" 
+                                     class="small"/>
 
                         </div>
                   
