@@ -698,7 +698,7 @@
                 <div class="small-text">
                    
                     <p>HEARTS:</p>
-                    <enrollInProgram programId="HEARTS" 
+                    <enrollInProgram programId="PIH:HEARTS Program" 
                                      showCheckbox="true" 
                                      toggle="FieldsHEARTS"/>               
 
