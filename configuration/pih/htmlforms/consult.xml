@@ -450,7 +450,7 @@
             <uimessage code="pihcore.ncd.epilepsy"/>
             <br />
             <span id="htn-enroll" >
-                <enrollInProgram programId="Hypertension" showCheckbox="true"/>
+                <enrollInProgram programId="Hypertension" showCheckbox="true" toggle="ProgramHEARTS"/>
             </span>
             <uimessage code="pihcore.ncd.htn"/>
             <br />
@@ -686,6 +686,48 @@
                 </div>
                 <div>
                     <obs id="hdl" conceptId="PIH:LOW-DENSITY LIPOPROTEIN CHOLESTEROL" showUnits="true" class="small"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program HEARTS -->
+    <section id="ProgramHEARTS" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerLabel="Programa HEARTS">
+        <div class="question-container">
+            <div class="two-columns">
+                <div class="small-text">
+                   
+                    <p>HEARTS:</p>
+                    <enrollInProgram programId="HEARTS" 
+                                     showCheckbox="true" 
+                                     toggle="FieldsHEARTS"/>               
+
+                </div>
+
+                <div class="FieldsHEARTS">
+                    
+                        <div class="small-text">
+                            <p>Cambio de tratamiento por algoritmo:</p>
+                            <obs
+                                conceptId="PIH: 13705"
+                                answerConceptIds="CIEL:1065, CIEL:1066"
+                                style="radio"
+                                answerSeparator="">
+                            </obs>
+
+                        </div>
+
+                        <div class="small-text">
+                            <p>Riesgo cardiovascular:</p>
+
+                            <lookup expression="fn.latestObs('PIH:13703').valueNumeric"/>
+                            <obs id="ldl" 
+                                 conceptId="PIH:13703" 
+                                 showUnits="false" 
+                                 class="small"/>
+
+                        </div>
+                  
                 </div>
             </div>
         </div>

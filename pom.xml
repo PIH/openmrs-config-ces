@@ -6,7 +6,7 @@
     <name>CES OpenMRS Configuration</name>
     <description>Top-Level configuration for CES OpenMRS distro</description>
     <url>https://github.com/PIH/openmrs-config-ces</url>
-    <version>1.12.0-SNAPSHOT</version>
+    <version>1.13.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <organization>
