@@ -64,7 +64,10 @@
 
         .tres-columns > div {
             display: table-cell;
-            width: 35%;
+        }
+
+        .styleText{
+            font-size: 16px;
         }
 
         .three-columns {
@@ -794,73 +797,142 @@
             </script>
         </ifMode>
 
+        <div class="question-container">
+         
+                <div class="tres-columns">
+                    <div class="small-text">
+                        <p class="styleText">Embarazo planeado:</p>
+                        
+                            <obs id="pregnancyPlanned"
+                                conceptId="CIEL:1426"
+                                answerConceptIds="CIEL:1065, CIEL:1066"
+                                style="radio"
+                                answerSeparator="">
+
+                                <controls>
+                                    <when value="CIEL:1066" thenDisplay="#OptionsPregnancyPlanned"/>
+                                </controls>
+                            </obs>
+                   
+                    
+
+                    </div>
+                    <div class="small-text" id="OptionsPregnancyPlanned">
+
+                            <p class="styleText">Causa de embarazo no planeado:</p>
+                            <obs conceptId="CIEL:160693" 
+                                 answerConceptId="CIEL:1065" 
+                                 answerLabel="Fallo del metodo anticonceptivo" 
+                                 style="checkbox"/>
+
+                            <obs conceptId="CIEL:123160" 
+                                 answerConceptId="CIEL:1065" 
+                                 answerLabel="Violencia sexual" 
+                                 style="checkbox"/>
+
+                    </div>
+                    
+                    <div class="small-text">
+                        <p class="styleText">Embarazo deseado:</p>
+                    
+                        <obs conceptId="CIEL: 122933"
+                            answerConceptIds="CIEL:1065, CIEL:1066"
+                            style="radio"
+                            answerSeparator="">
+                        </obs>
+                    </div>
+                </div>
+        </div>      
+
         <!-- Last menstrual period (LMP or DDR) -->
         <div class="question-container">
-            <label>
-                <uimessage code="pihcore.pregnancy.lastPeriod"/>
-            </label>
-            <div class="two-columns">
-                <div id="lmp-existing" class="small-text">
+
+            <div id="lmp-existing" class="small-text">
                     <lookup expression="fn.latestObs('CIEL:1427').valueDate"/>
-                </div>
+            </div>
+            <div class="tres-columns">
+                
                 <div class="medium">
-                    <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
+                    <label>
+                        <uimessage code="pihcore.pregnancy.lastPeriod"/>
+                    </label>
+                        <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
+                </div>
+
+                 <div id="calculated-edd-and-gestational" class="hidden">
+                    <div id="calculated-gestational-age-wrapper">
+                        <span id="calculated-gestational-age-label">
+                            <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
+                        </span>
+                        <span id='calculated-gestational-age-value' class="value"></span>
+                    </div>
+                    <div id="calculated-edd-wrapper">
+                        <span id="calculated-edd-label">
+                            <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
+                        </span>
+                        <span id='calculated-edd' class="value"></span>
+                    </div>
                 </div>
             </div>
         </div>
         <!-- G, P, C, A -->
-        <div class="question-container">
-            <label>
-                <uimessage code="pihcore.mch.grava"/>
-            </label>
-            <div class="two-columns">
-                <div class="small-text">
-                    <lookup expression="fn.latestObs('CIEL:5624').valueNumeric"/>
-                </div>
+        <div class="question-container">                  
+            
+            <div class="tres-columns">
+                
                 <div class="small">
+                    <lookup class="small-text" expression="fn.latestObs('CIEL:5624').valueNumeric"/>
+                    <label class="styleText">
+                        <uimessage code="pihcore.mch.grava"/>
+                    </label>
                     <obs conceptId="CIEL:5624" id="gravidaInput"/>
                 </div>
-            </div>
-        </div>
-        <div class="question-container">
-            <label>
-                <uimessage code="pihcore.mch.para"/>
-            </label>
-            <div class="two-columns">
-                <div class="small-text">
-                    <lookup expression="fn.latestObs('CIEL:1053').valueNumeric"/>
-                </div>
-                <div class="small">
+
+                 <div class="small">
+                    <lookup class="small-text" expression="fn.latestObs('CIEL:1053').valueNumeric"/>
+                     <label class="styleText">
+                        <uimessage code="pihcore.mch.para"/>
+                    </label>
                     <obs conceptId="CIEL:1053" />
                 </div>
-            </div>
-        </div>
-        <div class="question-container">
-            <label>
-                <uimessage code="pihcore.mch.cesarian"/>
-            </label>
-            <div class="two-columns">
-                <div class="small-text">
-                    <lookup expression="fn.latestObs('CIEL:160081').valueNumeric"/>
-                </div>
+
                 <div class="small">
+                    <lookup class="small-text" expression="fn.latestObs('CIEL:160081').valueNumeric"/>
+                     <label class="styleText">
+                        <uimessage code="pihcore.mch.cesarian"/>
+                    </label>
                     <obs conceptId="CIEL:160081" />
                 </div>
+
             </div>
         </div>
+
         <div class="question-container">
-            <label>
-                <uimessage code="pihcore.mch.abortus"/>
-            </label>
-            <div class="two-columns">
-                <div class="small-text">
-                    <lookup expression="fn.latestObs('CIEL:1823').valueNumeric"/>
+         
+                <div class="two-columns"> 
+
+                    <div class="small-text">
+                            <p class="styleText">Abortos menores de 20 SDG: </p>
+                            <lookup expression="fn.latestObs('PIH:13733').valueNumeric"/>
+                            <obs id="ldl" 
+                                 conceptId="PIH:13733" 
+                                 showUnits="false" 
+                                 class="small"/>
+
+                    </div>
+
+                    <div class="small-text">
+                            <p class="styleText">Abortos mayores de 20 SDG: </p>
+                            <lookup expression="fn.latestObs('PIH:13734').valueNumeric"/>
+                            <obs id="ldl" 
+                                 conceptId="PIH:13734" 
+                                 showUnits="false" 
+                                 class="small"/>
+
+                    </div>
+                   
                 </div>
-                <div class="small">
-                    <obs conceptId="CIEL:1823" />
-                </div>
-            </div>
-        </div>
+        </div>  
 
         <div class="question-container">
             <label><uimessage code="pihcore.mch.ultrasoundResultText"/></label>
@@ -991,21 +1063,6 @@
                          answerCodes="pihcore.reactive,pihcore.nonreactive"
                          style="radio" answerSeparator="" />
                 </div>
-            </div>
-        </div>
-
-        <div id="calculated-edd-and-gestational" class="question-container hidden">
-            <div id="calculated-gestational-age-wrapper">
-                <span id="calculated-gestational-age-label">
-                    <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
-                </span>
-                <span id='calculated-gestational-age-value' class="value"></span>
-            </div>
-            <div id="calculated-edd-wrapper">
-                <span id="calculated-edd-label">
-                    <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
-                </span>
-                <span id='calculated-edd' class="value"></span>
             </div>
         </div>
 
