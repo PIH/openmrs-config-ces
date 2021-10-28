@@ -66,7 +66,7 @@
             display: table-cell;
         }
 
-        .styleText{
+        .font-size-16{
             font-size: 16px;
         }
 
@@ -801,7 +801,7 @@
          
                 <div class="tres-columns">
                     <div class="small-text">
-                        <p class="styleText">Embarazo planeado:</p>
+                        <p class="font-size-16">Embarazo planeado:</p>
                         
                             <obs id="pregnancyPlanned"
                                 conceptId="CIEL:1426"
@@ -819,7 +819,7 @@
                     </div>
                     <div class="small-text" id="OptionsPregnancyPlanned">
 
-                            <p class="styleText">Causa de embarazo no planeado:</p>
+                            <p class="font-size-16">Causa de embarazo no planeado:</p>
                             <obs conceptId="CIEL:160693" 
                                  answerConceptId="CIEL:1065" 
                                  answerLabel="Fallo del metodo anticonceptivo" 
@@ -833,7 +833,7 @@
                     </div>
                     
                     <div class="small-text">
-                        <p class="styleText">Embarazo deseado:</p>
+                        <p class="font-size-16">Embarazo deseado:</p>
                     
                         <obs conceptId="CIEL: 122933"
                             answerConceptIds="CIEL:1065, CIEL:1066"
@@ -882,7 +882,7 @@
                 
                 <div class="small">
                     <lookup class="small-text" expression="fn.latestObs('CIEL:5624').valueNumeric"/>
-                    <label class="styleText">
+                    <label class="font-size-16">
                         <uimessage code="pihcore.mch.grava"/>
                     </label>
                     <obs conceptId="CIEL:5624" id="gravidaInput"/>
@@ -890,7 +890,7 @@
 
                  <div class="small">
                     <lookup class="small-text" expression="fn.latestObs('CIEL:1053').valueNumeric"/>
-                     <label class="styleText">
+                     <label class="font-size-16">
                         <uimessage code="pihcore.mch.para"/>
                     </label>
                     <obs conceptId="CIEL:1053" />
@@ -898,7 +898,7 @@
 
                 <div class="small">
                     <lookup class="small-text" expression="fn.latestObs('CIEL:160081').valueNumeric"/>
-                     <label class="styleText">
+                     <label class="font-size-16">
                         <uimessage code="pihcore.mch.cesarian"/>
                     </label>
                     <obs conceptId="CIEL:160081" />
@@ -912,7 +912,7 @@
                 <div class="two-columns"> 
 
                     <div class="small-text">
-                            <p class="styleText">Abortos menores de 20 SDG: </p>
+                            <p class="font-size-16">Abortos menores de 20 SDG: </p>
                             <lookup expression="fn.latestObs('PIH:13733').valueNumeric"/>
                             <obs id="ldl" 
                                  conceptId="PIH:13733" 
@@ -922,7 +922,7 @@
                     </div>
 
                     <div class="small-text">
-                            <p class="styleText">Abortos mayores de 20 SDG: </p>
+                            <p class="font-size-16">Abortos mayores de 20 SDG: </p>
                             <lookup expression="fn.latestObs('PIH:13734').valueNumeric"/>
                             <obs id="ldl" 
                                  conceptId="PIH:13734" 
