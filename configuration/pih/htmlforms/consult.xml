@@ -813,9 +813,6 @@
                                     <when value="CIEL:1066" thenDisplay="#OptionsPregnancyPlanned"/>
                                 </controls>
                             </obs>
-                   
-                    
-
                     </div>
                     <div class="small-text" id="OptionsPregnancyPlanned">
 
