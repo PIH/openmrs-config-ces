@@ -229,12 +229,11 @@
 
     <div class="hidden" id="encounter-details">
         <encounterDate default="now"/>
-        <encounterProviderAndRole default="currentUser" encounterRole="4f10ad1a-ec49-48df-98c7-1391c6ac7f05"
-                                          required="true"/>
+        <encounterProviderAndRole default="currentUser" 
+                                  encounterRole="4f10ad1a-ec49-48df-98c7-1391c6ac7f05"
+                                  required="true"/>
 
     </div>
-
-    hello wordl
 
     <section id="encounter-location" sectionTag="fieldset" headerTag="legend" headerStyle="title">
         <div class="section-container">
@@ -245,7 +244,26 @@
         </div>
     </section>
 
+    <ifMode mode="VIEW" include="false">
+        <h1>Antecedentes</h1>
+    </ifMode>
+
+    <section id="objective" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Hereditarios">
     
+    </section><br /><br />
+
+    <section id="objective" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Personales no patologicos">
+    
+    </section><br /><br />
+
+    <section id="objective" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Personales patologicos">
+    
+    </section><br /><br />
+
+    <ifMode mode="VIEW" include="false">
+        <h1>Padecimientos actuales</h1>
+    </ifMode><br /><br />
+
     <ifMode mode="VIEW" include="false">
         <div id="buttons">
             <submit submitClass="confirm right" submitCode="mirebalais.save"/>
