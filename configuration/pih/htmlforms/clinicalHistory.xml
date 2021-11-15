@@ -84,7 +84,7 @@
             margin-bottom: 30px;
         }
 
-        .margin-botton{
+        .margin-bottom {
             margin-bottom: 45px;
         }
 
@@ -273,13 +273,13 @@
 
         <p class="font-size-16 centered-header">Diagnósticos de antecedentes familiares:</p>
 
-        <div class="four-columns margin-botton">
+        <div class="four-columns margin-bottom">
              <familyHistoryRelativeCheckboxes concept="CIEL:121375" label="Asma" relatives="PIH:FATHER,PIH:MOTHER"/>
              <familyHistoryRelativeCheckboxes concept="CIEL:119481" label="Diabetes" relatives="PIH:FATHER,PIH:MOTHER"/>
              <familyHistoryRelativeCheckboxes concept="CIEL:155" label="Epilepsia" relatives="PIH:FATHER,PIH:MOTHER"/>
         </div>
 
-        <div class="four-columns margin-botton">
+        <div class="four-columns margin-bottom">
              <familyHistoryRelativeCheckboxes concept="CIEL:139071" label="Enfermedad del corazón" relatives="PIH:FATHER,PIH:MOTHER"/>
              <familyHistoryRelativeCheckboxes concept="CIEL:117399" label="Hipertesion, HTA" relatives="PIH:FATHER,PIH:MOTHER"/>
              <familyHistoryRelativeCheckboxes concept="CIEL:112141" label="Tuberculosis" relatives="PIH:FATHER,PIH:MOTHER"/>
@@ -292,7 +292,7 @@
  
         <p class="font-size-16 centered-header">Transfuciones:</p>
 
-        <div class="tres-columns margin-botton">
+        <div class="tres-columns margin-bottom">
             <div>
                 <lookup expression="fn.latestObs('PIH:13748').valueNumeric"/>
                 <obs id="ldl" 
@@ -326,7 +326,7 @@
   
         <p class="font-size-16 centered-header">Tabaco y alcohol:</p>
 
-        <div class="four-columns margin-botton">
+        <div class="four-columns margin-bottom">
             <div>
                 <lookup expression="fn.latestObs('PIH:12586').valueNumeric"/>
                 <obs id="ldl" 
