@@ -60,22 +60,30 @@
             display: table;
             height: 100%;
             width: 100%;
+            margin-bottom: 4%;
         }
 
         .tres-columns > div {
             display: table-cell;
-            width: 35%;
+            width: 33%;
         }
 
         .four-columns {
             display: table;
             height: 100%;
             width: 100%;
+            margin-bottom: 4%;
         }
 
         .four-columns > div {
             display: table-cell;
-            width: 30%;
+            width: 20%;
+        }
+
+        .centered-header{
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 4%;
         }
 
         .three-columns {
@@ -261,50 +269,27 @@
 
     <section id="objective" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Hereditarios">
 
-        <div class="small-text" id="OptionsPregnancyPlanned">
-            
-            <div class="tres-columns">
-                <div>
-            
-                </div>
-                <div>
-                    <p class="font-size-16" style="font-weight: bold">Diagnósticos de antecedentes familiares:</p>
-                </div>
-                <div>
-                
-                </div>
-            </div><br /><br />
-            <obsgroup groupingConceptId="CIEL:160593">
-                <div class="four-columns">
-                    <familyHistoryRelativeCheckboxes concept="CIEL:121375" label="Asma" relatives="PIH: 2174,PIH: 2175"/>
-                    <familyHistoryRelativeCheckboxes concept="CIEL:119481" label="Diabetes" relatives="PIH: 2174,PIH: 2175"/>
-                    <familyHistoryRelativeCheckboxes concept="CIEL:155" label="Epilepsia" relatives="PIH: 2174,PIH: 2175"/>
-                </div><br /><br />
+        <p class="font-size-16 centered-header">Diagnósticos de antecedentes familiares:</p>
 
-                <div class="four-columns">
-                    <familyHistoryRelativeCheckboxes concept="CIEL:139071" label="Enfermedad del corazón" relatives="PIH: 2174,PIH: 2175"/>
-                    <familyHistoryRelativeCheckboxes concept="CIEL:117399" label="Hipertesion, HTA" relatives="PIH: 2174,PIH: 2175"/>
-                    <familyHistoryRelativeCheckboxes concept="CIEL:112141" label="Tuberculosis" relatives="PIH: 2174,PIH: 2175"/>
-                    <familyHistoryRelativeCheckboxes concept="PIH:7416" label="Otro" specify="true" relatives="PIH: 2174,PIH: 2175"/>
+        <div class="four-columns">
+             <familyHistoryRelativeCheckboxes concept="CIEL:121375" label="Asma" relatives="PIH:FATHER,PIH:MOTHER"/>
+             <familyHistoryRelativeCheckboxes concept="CIEL:119481" label="Diabetes" relatives="PIH:FATHER,PIH:MOTHER"/>
+             <familyHistoryRelativeCheckboxes concept="CIEL:155" label="Epilepsia" relatives="PIH:FATHER,PIH:MOTHER"/>
+        </div>
 
-                </div>
-            </obsgroup>  
+        <div class="four-columns">
+             <familyHistoryRelativeCheckboxes concept="CIEL:139071" label="Enfermedad del corazón" relatives="PIH:FATHER,PIH:MOTHER"/>
+             <familyHistoryRelativeCheckboxes concept="CIEL:117399" label="Hipertesion, HTA" relatives="PIH:FATHER,PIH:MOTHER"/>
+             <familyHistoryRelativeCheckboxes concept="CIEL:112141" label="Tuberculosis" relatives="PIH:FATHER,PIH:MOTHER"/>
+             <familyHistoryRelativeCheckboxes concept="PIH:7416" label="Otro" specify="true" relatives="PIH:FATHER,PIH:MOTHER"/>
         </div>
     
-    </section><br /><br />
+    </section>
 
     <section id="objective" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Personales no patologicos">
-        <div class="tres-columns">
-            <div>
-        
-            </div>
-            <div>
-                <p class="font-size-16" style="margin-left: 50px; font-weight: bold">Transfuciones:</p>
-            </div>
-            <div>
-               
-            </div>
-        </div><br /><br />
+ 
+        <p class="font-size-16 centered-header">Transfuciones:</p>
+
         <div class="tres-columns">
             <div>
                 <lookup expression="fn.latestObs('PIH:13748').valueNumeric"/>
@@ -326,27 +311,18 @@
                      labelText="Tipo de tranfución:"
                      class="font-size-16"/>
             </div>
-        </div><br /><br />
+        </div>
 
         <p class="font-size-16">Otros antecedentes no patologicos:</p>
         <obs conceptId="PIH:13749" 
              style="textarea" 
              rows="3"/>
 
-    </section><br /><br />
+    </section>
 
     <section id="objective" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Personales patologicos">
-        <div class="tres-columns">
-            <div>
-        
-            </div>
-            <div>
-                <p class="font-size-16" style="margin-left: 50px; font-weight: bold">Tabaco y alcohol:</p>
-            </div>
-            <div>
-               
-            </div>
-        </div><br /><br />
+  
+        <p class="font-size-16 centered-header">Tabaco y alcohol:</p>
 
         <div class="tres-columns">
             <div>
@@ -373,13 +349,13 @@
                      answerSeparator="">
                 </obs>
             </div>
-        </div><br /><br />
+        </div>
     
-    </section><br /><br />
+    </section>
 
     <ifMode mode="VIEW" include="false">
         <h1>Padecimientos actuales</h1>
-    </ifMode><br /><br />
+    </ifMode>
 
     <ifMode mode="VIEW" include="false">
         <div id="buttons">
