@@ -27,11 +27,11 @@ function setUpCholesterolSection() {
       dmSection.hide();
     }
   };
-  $(dmCheckbox).change(function () {
+  jq(dmCheckbox).change(function () {
     updateDmSectionVisibility();
     updateCholSectionVisibility();
   });
-  $(htnCheckbox).change(function () {
+  jq(htnCheckbox).change(function () {
     updateCholSectionVisibility();
   });
   updateDmSectionVisibility();
@@ -247,7 +247,7 @@ function setUpPlanSection(
 /**
  * This is a very ugly hack. It creates a new document in a new window,
  * populates that document with things from the current form, and prints it.
- * 
+ *
  * It is very fragile, both with respect to the form and to browser standards.
  */
 function printPrescription() {
