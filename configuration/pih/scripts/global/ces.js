@@ -304,3 +304,65 @@ function printPrescription() {
       w.close();
   }, 1000);
 }
+
+
+function calcRiesgoRespiratorio(CigarrosxDia, CigarrosxAno){
+
+  if(parseInt(CigarrosxDia) !== 0 && parseInt(CigarrosxAno) !== 0){
+
+    var CigarrosxDia = jq("#NumeroCigarros input[type='text']").val();
+    var CigarrosxAno = jq("#AnosFumando input[type='text']").val();
+
+        var result = parseInt((CigarrosxDia * CigarrosxAno)/20);
+
+        if(10>=result>=0){
+          jq("#calc-riesgo-tabatico").text("Riesgo EPOC nulo");
+        }
+
+        if(20>=result && result>9){
+          jq("#calc-riesgo-tabatico").text("Riesgo EPOC moderado");
+        }
+
+        if(40>=result && result>20){
+          jq("#calc-riesgo-tabatico").text("Riesgo EPOC intenso");
+        }
+
+        if(result>40){
+          jq("#calc-riesgo-tabatico").text("Riesgo EPOC alto");
+        }
+
+  }
+
+    jq("#AnosFumando input[type='text']").change(function() {
+      ResultEPOC();
+    });
+
+    jq("#NumeroCigarros input[type='text']").change(function() {
+      ResultEPOC();
+    });
+
+}
+
+function ResultEPOC(){
+
+  var CigarrosxDia = jq("#NumeroCigarros input[type='text']").val();
+  var CigarrosxAno = jq("#AnosFumando input[type='text']").val();
+
+        var result = parseInt((CigarrosxDia * CigarrosxAno)/20);
+
+        if(10>=result>=0){
+          jq("#calc-riesgo-tabatico").text("Riesgo EPOC nulo");
+        }
+
+        if(20>=result && result>9){
+          jq("#calc-riesgo-tabatico").text("Riesgo EPOC moderado");
+        }
+
+        if(40>=result && result>20){
+          jq("#calc-riesgo-tabatico").text("Riesgo EPOC intenso");
+        }
+
+        if(result>40){
+          jq("#calc-riesgo-tabatico").text("Riesgo EPOC alto");
+        }
+}

@@ -21,28 +21,10 @@
 
     <style type="text/css">
 
-        #who-when-where {
-            margin-bottom: 6px;
-            border-bottom: 1px solid #ccc;
-        }
-
-        #who-when-where p {
-            display: inline-block;
-            padding-right: 20px;
-        }
-
-        #where > input[type=text] {
-            display: inline-block;
-        }
-
         .field-error {
             color: #ffc0b5;
             font-size: 1.1em;
             display: block;
-        }
-
-        .legalValue {
-            background-color: white !important;
         }
 
         .two-columns {
@@ -56,13 +38,13 @@
             width: 50%;
         }
 
-        .tres-columns {
+        .three-columns {
             display: table;
             height: 100%;
             width: 100%;
         }
 
-        .tres-columns > div {
+        .three-columns > div {
             display: table-cell;
             width: 33%;
         }
@@ -84,32 +66,14 @@
             margin-bottom: 30px;
         }
 
-        .margin-botton{
+        .margin-bottom{
             margin-bottom: 45px;
-        }
-
-        .three-columns {
-            column-count: 3;
-            -webkit-column-count: 3;
-            -moz-column-count: 3;
-        }
-
-        .simple-form-ui input {
-            min-width: 80%
         }
 
         form fieldset {
             min-width: 90%;
             display: block;
-        }
-
-        .encounter-summary-container #calculated-ratio {
-            font-size: 1em;
-            font-weight: normal;
-        }
-
-        #encounterDate input {
-            min-width: 15%
+            border: 1px solid rgba(52, 58, 64, 0.5);
         }
 
         div.inline-radio > * {
@@ -122,45 +86,6 @@
             font-family: "OpenSansLight",sans-serif;
         }
 
-        .small {
-            max-width: 10em;
-            display: block;
-            margin-bottom: 1em;
-        }
-
-        .small input {
-            min-width: 4em;
-            width: 4em;
-            display: inline;
-            margin-right: 0.5em;
-        }
-
-        .medium {
-            max-width: 16em;
-            display: block;
-            margin-bottom: 1em;
-        }
-
-        .medium input {
-            min-width: 8em;
-            width: 8em;
-            display: inline;
-            margin-right: 0.5em;
-        }
-
-        .small-text {
-            color: #555555;
-            font-size: 90%;
-            display: block;
-        }
-
-        .section-container {
-            background: #F2F2F2;
-            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
-            padding: 10px 5px 10px 15px;
-            line-height: 1.5em; /*add this for vertical spacing between elements*/
-        }
-
         .section-container input[type="checkbox"] {
             margin: 0px 5px; /*changed values to vertical, horizontal*/
             top:5px; /*added to offset the checkbox position to line up*/
@@ -170,20 +95,9 @@
             margin: 0px;
         }
 
-        .question-container {
-            background: #F2F2F2;
-            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
-            padding: 5px 5px 10px 15px;
-            margin: 5px 0;
-            line-height: 1.5em; /*add this for vertical spacing between elements*/
-        }
-
-        .question-container label {
-            margin-top: 5px;
-        }
-
        .section {
          width: 95%;
+         margin-bottom: 30px;
         }
 
         legend {
@@ -200,10 +114,6 @@
             filter: invert(15%);
         }
 
-        .section-button {
-            margin: 10px 0 0 24px;
-        }
-
         #diagnosis-lookup {
             display: inline-block;
             width: 50%;
@@ -216,20 +126,8 @@
             vertical-align: top;
         }
 
-        #encounter-diagnoses-app {
-            margin-bottom: 20px;
-        }
-
-        .ui-helper-hidden-accessible{
-            display: none;
-        }
-
-        .ui-autocomplete-input{
-            width: 90%;
-        }
-
-        .medication-instructions input { 
-            width: 85%;
+        .hidden{
+            display:none;
         }
 
     </style>
@@ -256,8 +154,8 @@
 
     </div>
 
-    <section id="encounter-location" sectionTag="fieldset" headerTag="legend" headerStyle="title">
-        <div class="section-container">
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title">
+        <div>
             <label>
                 <uimessage code="pihcore.locationRequired"/>
             </label>
@@ -267,34 +165,46 @@
 
     <ifMode mode="VIEW" include="false">
         <h1>Antecedentes</h1>
-    </ifMode>
+    </ifMode>       
 
-    <section id="objective" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Hereditarios">
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Hereditarios">
+
+        <ifMode mode="VIEW" include="false" >
+                <script type="text/javascript">
+                    jq(function () {
+                        calcRiesgoRespiratorio('<lookup expression="fn.latestObs('PIH:12586').valueNumeric"/>',
+                                               '<lookup expression="fn.latestObs('PIH:12998').valueNumeric"/>'
+                        );
+                    });
+                </script>
+        </ifMode> 
 
         <p class="font-size-16 centered-header">Diagnósticos de antecedentes familiares:</p>
-
-        <div class="four-columns margin-botton">
-             <familyHistoryRelativeCheckboxes concept="CIEL:121375" label="Asma" relatives="PIH:FATHER,PIH:MOTHER"/>
-             <familyHistoryRelativeCheckboxes concept="CIEL:119481" label="Diabetes" relatives="PIH:FATHER,PIH:MOTHER"/>
-             <familyHistoryRelativeCheckboxes concept="CIEL:155" label="Epilepsia" relatives="PIH:FATHER,PIH:MOTHER"/>
+        <div class="four-columns margin-bottom">
+             <familyHistoryRelativeCheckboxes concept="CIEL:121375" label="Asma" relatives="PIH:FATHER,PIH:MOTHER,PIH:OTHER"/>
+             <familyHistoryRelativeCheckboxes concept="CIEL:119481" label="Diabetes" relatives="PIH:FATHER,PIH:MOTHER,PIH:OTHER"/>
+             <familyHistoryRelativeCheckboxes concept="CIEL:155" label="Epilepsia" relatives="PIH:FATHER,PIH:MOTHER,PIH:OTHER"/>
+             <familyHistoryRelativeCheckboxes concept="CIEL:139071" label="Enfermedad del corazón" relatives="PIH:FATHER,PIH:MOTHER,PIH:OTHER"/>
         </div>
 
-        <div class="four-columns margin-botton">
-             <familyHistoryRelativeCheckboxes concept="CIEL:139071" label="Enfermedad del corazón" relatives="PIH:FATHER,PIH:MOTHER"/>
-             <familyHistoryRelativeCheckboxes concept="CIEL:117399" label="Hipertesion, HTA" relatives="PIH:FATHER,PIH:MOTHER"/>
-             <familyHistoryRelativeCheckboxes concept="CIEL:112141" label="Tuberculosis" relatives="PIH:FATHER,PIH:MOTHER"/>
-             <familyHistoryRelativeCheckboxes concept="PIH:7416" label="Otro" specify="true" relatives="PIH:FATHER,PIH:MOTHER"/>
+        
+
+        <div class="four-columns margin-bottom">    
+             <familyHistoryRelativeCheckboxes concept="CIEL:117399" label="Hipertesion, HTA" relatives="PIH:FATHER,PIH:MOTHER,PIH:OTHER"/>
+             <familyHistoryRelativeCheckboxes concept="CIEL:112141" label="Tuberculosis" relatives="PIH:FATHER,PIH:MOTHER,PIH:OTHER"/>
+             <familyHistoryRelativeCheckboxes concept="CIEL:116031" label="Cancer" relatives="PIH:FATHER,PIH:MOTHER,PIH:OTHER" specify="true"/>
+             <familyHistoryRelativeCheckboxes concept="PIH:7416" label="Otro" specify="true" relatives="PIH:FATHER,PIH:MOTHER,PIH:OTHER"/>    
         </div>
     
     </section>
 
-    <section id="objective" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Personales no patologicos">
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Personales no patologicos">
  
         <p class="font-size-16 centered-header">Transfuciones:</p>
 
-        <div class="tres-columns margin-botton">
+        <div class="three-columns margin-bottom">
             <div>
-                <lookup expression="fn.latestObs('PIH:13748').valueNumeric"/>
+                <lookup class="hidden" expression="fn.latestObs('PIH:13748').valueNumeric"/>
                 <obs id="ldl" 
                      conceptId="PIH:13748" 
                      showUnits="false"
@@ -302,10 +212,10 @@
                      class="font-size-16"/>
             </div>
             <div>
-                <lookup expression="fn.latestObs('CIEL:163268').valueDate"/>
+                <lookup class="hidden" expression="fn.latestObs('CIEL:163268').valueDate"/>
                 <obs conceptId="CIEL:163268" 
                      allowFutureDates="false"
-                     labelText="Fecha de ultima tranfución:"
+                     labelText="Fecha de última tranfución:"
                      class="font-size-16"/>
             </div>
             <div>
@@ -315,33 +225,103 @@
             </div>
         </div>
 
-        <p class="font-size-16">Otros antecedentes no patologicos:</p>
+        <p class="font-size-16 centered-header">Cirugías:</p>
+
+        <div class="three-columns margin-bottom">
+            <div>
+                <lookup class="hidden" expression="fn.latestObs('PIH:13768').valueNumeric"/>
+                <obs id="ldl" 
+                     conceptId="PIH:13768" 
+                     showUnits="false"
+                     labelText="Número de cirugías"
+                     class="font-size-16"/>
+            </div>
+            <div>
+                <lookup class="hidden" expression="fn.latestObs('PIH:13769').valueDate"/>
+                <obs conceptId="PIH:13769" 
+                     allowFutureDates="false"
+                     labelText="Fecha de última cirugía:"
+                     class="font-size-16"/>
+            </div>
+            <div>
+                <obs conceptId="PIH:13770"
+                     labelText="Tipo de cirugía:"
+                     class="font-size-16"/>
+            </div>
+        </div>
+        
+        <div class="margin-bottom">
         <obs conceptId="PIH:13749" 
-             style="textarea" 
+             style="textarea"
+             labelText="Motivo de cirugía"
              rows="3"/>
+        </div>
+
+        <p class="font-size-16 centered-header">Hospitalizaciones:</p>
+
+        <div class="two-columns margin-bottom">
+            <div>
+                <lookup class="hidden" expression="fn.latestObs('PIH:12594').valueNumeric"/>
+                <obs id="ldl" 
+                     conceptId="PIH:12594" 
+                     showUnits="false"
+                     labelText="Número de hospitalizaciones"
+                     class="font-size-16"/>
+            </div>
+            <div>
+                <lookup class="hidden" expression="fn.latestObs('PIH:12602').valueDate"/>
+                <obs conceptId="PIH:12602" 
+                     allowFutureDates="false"
+                     labelText="Fecha de última hospitalización:"
+                     class="font-size-16"/>
+            </div>
+
+        </div>
+
+        <div class="margin-bottom">
+            <obs conceptId="PIH:13770"
+                 labelText="Motivo de hospitalización:"
+                 style="textarea"
+                 rows="3"/>
+        </div>
+
+        <div class="margin-bottom">
+            <p class="font-size-16 centered-header">Otros antecedentes no patologicos:</p>
+            <obs conceptId="PIH:13749"
+                 style="textarea" 
+                 rows="3"/>
+        </div>
 
     </section>
 
-    <section id="objective" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Personales patologicos">
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Personales patologicos">
   
         <p class="font-size-16 centered-header">Tabaco y alcohol:</p>
 
-        <div class="four-columns margin-botton">
+        <div class="three-columns margin-bottom">
             <div>
-                <lookup expression="fn.latestObs('PIH:12586').valueNumeric"/>
-                <obs id="ldl" 
+                <lookup class="hidden" expression="fn.latestObs('PIH:12586').valueNumeric"/>
+                <obs id="NumeroCigarros"
                      conceptId="PIH:12586" 
                      showUnits="false"
                      labelText="Número de cigarros por día"
                      class="font-size-16"/>
             </div>
             <div>
-                <lookup expression="fn.latestObs('PIH:12998').valueNumeric"/>
-                <obs conceptId="PIH:12998" 
+                <lookup class="hidden" expression="fn.latestObs('PIH:12998').valueNumeric"/>
+                <obs id="AnosFumando"
+                     conceptId="PIH:12998" 
                      allowFutureDates="false"
                      labelText="Tiempo fumando en años:"
                      class="font-size-16"/>
             </div>
+            <div>
+                <span id='calc-riesgo-tabatico' class="value"></span>
+            </div>
+
+        </div>
+
+        <div class="two-columns margin-bottom">
             <div>
                 <p class="font-size-16">Ingiere bebidas alcoholicas:</p>
                 <obs
@@ -352,12 +332,84 @@
                 </obs>
             </div>
             <div>
-                <lookup expression="fn.latestObs('PIH:2241').valueNumeric"/>
+                <lookup class="hidden" expression="fn.latestObs('PIH:2241').valueNumeric"/>
                 <obs conceptId="PIH:2241" 
                      allowFutureDates="false"
                      labelText="Tiempo tomando bebidas alcoholicas en años:"
                      class="font-size-16"/>
             </div>
+
+        </div>
+
+        <p class="font-size-16 centered-header">Otros antecedentes patologicos:</p>
+        <obs conceptId="PIH:Other pathological history comment" 
+             style="textarea"
+             rows="3"/>
+    
+    </section>
+
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Ginecopstetricos">
+
+        <ifMode mode="VIEW" include="false" >
+            <script type="text/javascript">
+                jq(function () {
+                    setUpMaternalSection(
+                        '<lookup expression="encounter.getEncounterDatetime().getTime()"/>',
+                        '<uimessage code="pihcore.weeks"/>'
+                    );
+                });
+            </script>
+        </ifMode>
+
+        <div class="two-columns margin-bottom">
+                
+            <div>
+                <label>
+                    <uimessage code="pihcore.pregnancy.lastPeriod"/>
+                </label>
+                <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
+            </div>
+
+            <div id="calculated-edd-and-gestational" class="hidden">
+                <div id="calculated-gestational-age-wrapper">
+                    <span id="calculated-gestational-age-label">
+                        <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
+                    </span>
+                    <span id='calculated-gestational-age-value' class="value"></span>
+                </div>
+                <div id="calculated-edd-wrapper">
+                    <span id="calculated-edd-label">
+                        <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
+                    </span>
+                    <span id='calculated-edd' class="value"></span>
+                </div>
+            </div>
+
+        </div>                   
+            
+        <div class="three-columns">
+                
+            <div>
+                <label class="font-size-16">
+                    <uimessage code="pihcore.mch.grava"/>
+                </label>
+                <obs conceptId="CIEL:5624" id="gravidaInput"/>
+            </div>
+
+            <div>
+                <label class="font-size-16">
+                    <uimessage code="pihcore.mch.para"/>
+                </label>
+                <obs conceptId="CIEL:1053" />
+            </div>
+
+            <div>
+                <label class="font-size-16">
+                    <uimessage code="pihcore.mch.cesarian"/>
+                </label>
+                <obs conceptId="CIEL:160081" />
+            </div>
+
         </div>
     
     </section>
@@ -365,6 +417,313 @@
     <ifMode mode="VIEW" include="false">
         <h1>Padecimientos actuales</h1>
     </ifMode>
+
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Padecimientos">
+        <div class="two-colums margin-bottom">
+
+            <div class="margin-bottom">
+
+                <p class="font-size-16">Sintoma principal:</p>
+                <obs conceptId="CIEL:160531"/>
+
+            </div>
+
+            <div>
+                <obs conceptId="PIH:6760" 
+                     labelText="Sintomas adicionales"
+                     class="font-size-16"
+                     style="textarea" 
+                     rows="3"/>         
+            </div>   
+        </div>
+
+        <div class="two-columns margin-bottom">
+            <div>
+                <obs conceptId="CIEL:162676" 
+                     labelText="Evolución de los síntomas"
+                     class="font-size-16"/>
+            </div>
+
+            <div>
+                <obs conceptId="PIH:13751" 
+                     labelText="Especificación de evolución de los síntomas"
+                     class="font-size-16"
+                     style="textarea" 
+                     rows="3"/>         
+            </div>    
+        </div>
+
+        <p class="font-size-16">Tratamiento usado anteriormente:</p>
+        <obs conceptId="PIH:Previous treatment with other medications, non-coded" 
+             style="textarea" 
+             rows="3"/>
+
+    </section>
+
+    <ifMode mode="VIEW" include="false">
+        <h1>Exploración física</h1>
+    </ifMode>
+
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Signos vitales">
+
+        <div class="margin-bottom">
+            <table>
+                <thead>
+                    <tr>
+                        <td style="font-weight:bold">
+                            Tipo de signo vital
+                        </td>
+                        <td style="font-weight:bold">
+                            <uimessage code="zl.date"/>
+                        </td>
+                        <td style="font-weight:bold">
+                            Resultado
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <uimessage code="mirebalais.vitals.bloodPressure.title" />
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:SYSTOLIC BLOOD PRESSURE').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:SYSTOLIC BLOOD PRESSURE').valueNumeric.intValue()"/>
+                            <lookup complexExpression="#if($fn.latestObs('PIH:SYSTOLIC BLOOD PRESSURE')) / #end" />
+                            <lookup expression="fn.latestObs('PIH:DIASTOLIC BLOOD PRESSURE').valueNumeric.intValue()"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mirebalais.vitals.o2sat.title"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:BLOOD OXYGEN SATURATION').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:BLOOD OXYGEN SATURATION').valueNumeric.intValue()"/>
+                            <span class="light-font">
+                                <lookup complexExpression="#if($fn.latestObs('PIH:BLOOD OXYGEN SATURATION')) % #end" />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="pihcore.lab.glucose"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:SERUM GLUCOSE').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:SERUM GLUCOSE').valueNumeric.intValue()"/>
+                            <span class="light-font">
+                                <lookup complexExpression="#if($fn.latestObs('PIH:Fasting for blood glucose test')) #if($fn.latestObs('PIH:Fasting for blood glucose test').valueCoded.name != 'No') (en ayuno) #else (sin ayuno) #end #end" />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mirebalais.vitals.temperature.title"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:TEMPERATURE (C)').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:TEMPERATURE (C)').valueNumeric"/>
+                            <span class="light-font">
+                                <lookup complexExpression="#if($fn.latestObs('PIH:TEMPERATURE (C)')) °C #end" />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mirebalais.vitals.heartRate.title"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:PULSE').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('CIEL:5624').valueNumeric.intValue()"/>
+                            <span class="light-font">
+                                <lookup complexExpression="#if($fn.latestObs('CIEL:5624')) ppm #end" />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mirebalais.vitals.respiratoryRate.title"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:RESPIRATORY RATE').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('CIEL:5624').valueNumeric.intValue()"/>
+                            <span class="light-font">
+                                <lookup complexExpression="#if($fn.latestObs('CIEL:5624')) rpm #end" />
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="two-columns margin-bottom">
+            <div>
+                <obs conceptId="CIEL:165983" 
+                     labelText="Exploración del cuello"
+                     class="font-size-16"
+                     style="textarea" 
+                     rows="3"/>
+            </div>
+
+            <div>
+                <obs conceptId="CIEL:163045" 
+                     labelText="Exploración de cabeza"
+                     class="font-size-16"
+                     style="textarea" 
+                     rows="3"/>
+               
+            </div>    
+        </div>
+
+        <div class="two-columns margin-bottom">
+            <div>
+                <obs conceptId="CIEL:160689" 
+                     labelText="Exploración de torax"
+                     class="font-size-16"
+                     style="textarea" 
+                     rows="3"/>
+            </div>
+
+            <div>
+                <obs conceptId="CIEL:160947" 
+                     labelText="Exploración de abdomen"
+                     class="font-size-16"
+                     style="textarea" 
+                     rows="3"/>
+               
+            </div>  
+        </div>
+
+        <div class="two-columns margin-bottom">
+            <div>
+                <obs conceptId="PIH:13754" 
+                     labelText="Exploración de extremidades"
+                     class="font-size-16"
+                     style="textarea" 
+                     rows="3"/>
+                
+            </div>  
+
+            <div>
+                <obs conceptId="CIEL:163042" 
+                     labelText="Otros comentarios de exploración física:"
+                     style="textarea" 
+                     rows="3"/>
+            </div> 
+        </div> 
+
+    </section>
+
+    <ifMode mode="VIEW" include="false">
+        <h1>Interrogatorio por aparatos</h1>
+    </ifMode>
+
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="">
+
+        <div class="two-columns margin-bottom">
+            <div>
+                <obs conceptId="PIH:ROS GI COMMENT" 
+                     labelText="Aparato digestivo"
+                     class="font-size-16"
+                     style="textarea" 
+                     rows="3"/>
+            </div>
+
+            <div>
+                <obs conceptId="PIH:ROS Resp comment " 
+                     labelText="Aparato respiratorio"
+                     class="font-size-16"
+                     style="textarea" 
+                     rows="3"/>
+               
+            </div>    
+        </div>
+
+        <div class="two-columns margin-bottom">
+            <div>
+                <obs conceptId="PIH:ROS Urinary comment" 
+                     labelText="Aparato urinario"
+                     class="font-size-16"
+                     style="textarea" 
+                     rows="3"/>
+            </div>
+
+            <div>
+                <obs conceptId="PIH:ROS Reproductive comment" 
+                     labelText="Aparato genital"
+                     class="font-size-16"
+                     style="textarea" 
+                     rows="3"/>
+               
+            </div>  
+        </div>
+
+        <div class="two-columns margin-bottom">
+            <div>
+                <obs conceptId="PIH:ROS CV comment" 
+                     labelText="Sistema cardiovascular"
+                     class="font-size-16"
+                     style="textarea" 
+                     rows="3"/>
+                
+            </div>  
+
+            <div>
+                <obs conceptId="PIH:ROS Nervous comment" 
+                     labelText="Sistema nervioso"
+                     style="textarea" 
+                     rows="3"/>
+            </div> 
+        </div> 
+
+        <div class="two-columns margin-bottom">
+            <div>
+                <obs conceptId="PIH:ROS Endocrine comment" 
+                     labelText="Sistema endocrino"
+                     class="font-size-16"
+                     style="textarea" 
+                     rows="3"/>
+                
+            </div>  
+
+            <div>
+                <obs conceptId="PIH:ROS MS COMMENT" 
+                     labelText="Sistema locomotor"
+                     style="textarea" 
+                     rows="3"/>
+            </div> 
+        </div> 
+
+    </section>
+
+    <ifMode mode="VIEW" include="false">
+        <h1>Diagnósticos</h1>
+    </ifMode>
+
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="">
+
+        <div class="two-columns">
+                <div id="diagnosis-lookup">
+                    <encounterDiagnosesByObs selectedDiagnosesTarget="#encounter-diagnoses-target"/>
+                </div>
+                <div id="encounter-diagnoses-target">
+                </div>
+        </div>
+
+    </section>
 
     <ifMode mode="VIEW" include="false">
         <div id="buttons">

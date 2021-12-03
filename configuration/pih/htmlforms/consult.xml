@@ -214,6 +214,14 @@
             width: 85%;
         }
 
+        #lastPeriodDate{
+            display:none;
+        }
+
+        .margin-bottom{
+            margin-bottom: 45px;
+        }
+
     </style>
 
     <script>
@@ -787,14 +795,14 @@
     <section id="anc" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.mch.anc">
 
         <ifMode mode="VIEW" include="false" >
-            <script type="text/javascript">
-                jq(function () {
-                    setUpMaternalSection(
-                        '<lookup expression="encounter.getEncounterDatetime().getTime()"/>',
-                        '<uimessage code="pihcore.weeks"/>'
-                    );
-                });
-            </script>
+                <script type="text/javascript">
+                    jq(function () {
+                        setUpMaternalSection(
+                            '<lookup expression="encounter.getEncounterDatetime().getTime()"/>',
+                            '<uimessage code="pihcore.weeks"/>'
+                        );
+                    });
+                </script>
         </ifMode>
 
         <div class="question-container">
@@ -843,26 +851,23 @@
 
         <!-- Last menstrual period (LMP or DDR) -->
         <div class="question-container">
-
-            <div id="lmp-existing" class="small-text">
-                    <lookup expression="fn.latestObs('CIEL:1427').valueDate"/>
-            </div>
-            <div class="tres-columns">
-                
-                <div class="medium">
-                    <label>
-                        <uimessage code="pihcore.pregnancy.lastPeriod"/>
-                    </label>
-                        <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
+            <div class="two-columns margin-bottom">
+                <div>
+                    <label class="font-size-16">FUM:</label>
+                    <div id="lmp-existing">
+                        <lookup expression="fn.latestObs('CIEL:1427').valueDate"/>
+                    </div>
+                    <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
                 </div>
 
-                 <div id="calculated-edd-and-gestational" class="hidden">
+                <div id="calculated-edd-and-gestational" class="hidden">
                     <div id="calculated-gestational-age-wrapper">
                         <span id="calculated-gestational-age-label">
                             <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
                         </span>
                         <span id='calculated-gestational-age-value' class="value"></span>
                     </div>
+
                     <div id="calculated-edd-wrapper">
                         <span id="calculated-edd-label">
                             <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
@@ -870,35 +875,29 @@
                         <span id='calculated-edd' class="value"></span>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- G, P, C, A -->
-        <div class="question-container">                  
-            
-            <div class="tres-columns">
-                
-                <div class="small">
-                    <lookup class="small-text" expression="fn.latestObs('CIEL:5624').valueNumeric"/>
+            </div> 
+
+            <div class="three-columns">
+                    
+                <div>         
                     <label class="font-size-16">
-                        <uimessage code="pihcore.mch.grava"/>
-                    </label>
-                    <obs conceptId="CIEL:5624" id="gravidaInput"/>
+                        <uimessage code="pihcore.mch.grava"/>: 
+                        <lookup class="font-size-16" expression="fn.latestObs('CIEL:5624').valueNumeric"/>
+                    </label>             
                 </div>
 
-                 <div class="small">
-                    <lookup class="small-text" expression="fn.latestObs('CIEL:1053').valueNumeric"/>
-                     <label class="font-size-16">
-                        <uimessage code="pihcore.mch.para"/>
-                    </label>
-                    <obs conceptId="CIEL:1053" />
+                <div>
+                    <label class="font-size-16">
+                        <uimessage code="pihcore.mch.para"/>: 
+                        <lookup class="font-size-16" expression="fn.latestObs('CIEL:1053').valueNumeric"/>
+                    </label>               
                 </div>
 
-                <div class="small">
-                    <lookup class="small-text" expression="fn.latestObs('CIEL:160081').valueNumeric"/>
-                     <label class="font-size-16">
-                        <uimessage code="pihcore.mch.cesarian"/>
+                <div>                
+                    <label class="font-size-16">
+                        <uimessage code="pihcore.mch.cesarian"/>: 
+                        <lookup class="font-size-16" expression="fn.latestObs('CIEL:160081').valueNumeric"/>
                     </label>
-                    <obs conceptId="CIEL:160081" />
                 </div>
 
             </div>
