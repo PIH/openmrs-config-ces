@@ -210,7 +210,7 @@
             width: 90%;
         }
 
-        .medication-instructions input { 
+        .medication-instructions input {
             width: 85%;
         }
 
@@ -223,13 +223,6 @@
         }
 
     </style>
-
-    <script>
-        // I don't really understand why this assignment `$j = jq` is required, but for some
-        // reason a bunch of Javascript gets included in the page that expects `$j` to exist,
-        // but doesn't define `$j` itself. *shrug emoji*
-        var $j = jQuery;
-    </script>
 
     <div class="print-form-datestamps" style="display:none">
         <p><uimessage code="created_on"/>:
@@ -707,16 +700,16 @@
         <div class="question-container">
             <div class="two-columns">
                 <div class="small-text">
-                   
+
                     <p>HEARTS:</p>
-                    <enrollInProgram programId="HEARTS" 
-                                     showCheckbox="true" 
-                                     toggle="FieldsHEARTS"/>               
+                    <enrollInProgram programId="HEARTS"
+                                     showCheckbox="true"
+                                     toggle="FieldsHEARTS"/>
 
                 </div>
 
                 <div class="FieldsHEARTS">
-                    
+
                         <div class="small-text">
                             <p>Cambio de tratamiento por algoritmo:</p>
                             <obs
@@ -732,13 +725,13 @@
                             <p>Riesgo cardiovascular:</p>
 
                             <lookup expression="fn.latestObs('PIH:13703').valueNumeric"/>
-                            <obs id="ldl" 
-                                 conceptId="PIH:13703" 
-                                 showUnits="false" 
+                            <obs id="ldl"
+                                 conceptId="PIH:13703"
+                                 showUnits="false"
                                  class="small"/>
 
                         </div>
-                  
+
                 </div>
             </div>
         </div>
@@ -795,14 +788,14 @@
     <section id="anc" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.mch.anc">
 
         <ifMode mode="VIEW" include="false" >
-                <script type="text/javascript">
-                    jq(function () {
-                        setUpMaternalSection(
-                            '<lookup expression="encounter.getEncounterDatetime().getTime()"/>',
-                            '<uimessage code="pihcore.weeks"/>'
-                        );
-                    });
-                </script>
+            <script type="text/javascript">
+                jq(function () {
+                    setUpMaternalSection(
+                        '<lookup expression="encounter.getEncounterDatetime().getTime()"/>',
+                        '<uimessage code="pihcore.weeks"/>'
+                    );
+                });
+            </script>
         </ifMode>
 
         <div class="question-container">
@@ -877,7 +870,7 @@
                 </div>
             </div> 
 
-            <div class="three-columns">
+            <div class="tres-columns">
                     
                 <div>         
                     <label class="font-size-16">
