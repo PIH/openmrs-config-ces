@@ -66,7 +66,7 @@
             display: table-cell;
         }
 
-        .font-size-16{
+        .font-size-16 {
             font-size: 16px;
         }
 
@@ -202,11 +202,11 @@
             margin-bottom: 20px;
         }
 
-        .ui-helper-hidden-accessible{
+        .ui-helper-hidden-accessible {
             display: none;
         }
 
-        .ui-autocomplete-input{
+        .ui-autocomplete-input {
             width: 90%;
         }
 

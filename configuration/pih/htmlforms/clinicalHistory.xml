@@ -173,7 +173,7 @@
                 <script type="text/javascript">
                     jq(function () {
                         setupRespiratoryRisk('<lookup expression="fn.latestObs('PIH:12586').valueNumeric"/>',
-                                               '<lookup expression="fn.latestObs('PIH:12998').valueNumeric"/>'
+                                             '<lookup expression="fn.latestObs('PIH:12998').valueNumeric"/>'
                         );
                     });
                 </script>
