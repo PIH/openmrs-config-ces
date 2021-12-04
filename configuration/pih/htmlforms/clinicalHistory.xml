@@ -126,7 +126,7 @@
             vertical-align: top;
         }
 
-        .hidden{
+        .hidden {
             display:none;
         }
 
@@ -172,7 +172,7 @@
         <ifMode mode="VIEW" include="false" >
                 <script type="text/javascript">
                     jq(function () {
-                        calcRiesgoRespiratorio('<lookup expression="fn.latestObs('PIH:12586').valueNumeric"/>',
+                        setupRespiratoryRisk('<lookup expression="fn.latestObs('PIH:12586').valueNumeric"/>',
                                                '<lookup expression="fn.latestObs('PIH:12998').valueNumeric"/>'
                         );
                     });
@@ -316,7 +316,7 @@
                      class="font-size-16"/>
             </div>
             <div>
-                <span id='calc-riesgo-tabatico' class="value"></span>
+                <span id='calc-riesgo-tabaquico' class="value"></span>
             </div>
 
         </div>
