@@ -223,7 +223,7 @@
         }
 
     </style>
-
+  
     <div class="print-form-datestamps" style="display:none">
         <p><uimessage code="created_on"/>:
             <lookup complexExpression="$form.dateCreated"/>
