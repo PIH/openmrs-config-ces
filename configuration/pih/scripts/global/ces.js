@@ -334,6 +334,7 @@ function calculateEPOC(cigarrosxDia, anosFumando){
 
       let paquetesPorAno = (cigarrosxDia * anosFumando)/20;
 
+<<<<<<< HEAD
       if(10 >= paquetesPorAno){
           jq("#calc-riesgo-tabaquico").text("Riesgo EPOC nulo");
       }
@@ -347,6 +348,21 @@ function calculateEPOC(cigarrosxDia, anosFumando){
       }
 
       if(paquetesPorAno > 40){
+=======
+      if (10 >= paquetesPorAno){
+          jq("#calc-riesgo-tabaquico").text("Riesgo EPOC nulo");
+      }
+
+      if (20 >= paquetesPorAno && paquetesPorAno > 9){
+            jq("#calc-riesgo-tabaquico").text("Riesgo EPOC moderado");
+      }
+
+      if (40 >= paquetesPorAno && paquetesPorAno > 20){
+            jq("#calc-riesgo-tabaquico").text("Riesgo EPOC intenso");
+      }
+
+      if (paquetesPorAno > 40){
+>>>>>>> 804661d65e3535ca8f1a0db3434d623f36b5ac88
             jq("#calc-riesgo-tabaquico").text("Riesgo EPOC alto");
       }
 }
