@@ -901,23 +901,13 @@
                 <div class="two-columns"> 
 
                     <div class="small-text">
-                            <p class="font-size-16">Abortos menores de 20 SDG: </p>
+                            <p class="font-size-16">Perdidas menores de 20 SDG: </p>
                             <lookup expression="fn.latestObs('PIH:13733').valueNumeric"/>
-                            <obs id="ldl" 
-                                 conceptId="PIH:13733" 
-                                 showUnits="false" 
-                                 class="small"/>
-
                     </div>
 
                     <div class="small-text">
-                            <p class="font-size-16">Abortos mayores de 20 SDG: </p>
+                            <p class="font-size-16">Perdidas mayores de 20 SDG: </p>
                             <lookup expression="fn.latestObs('PIH:13734').valueNumeric"/>
-                            <obs id="ldl" 
-                                 conceptId="PIH:13734" 
-                                 showUnits="false" 
-                                 class="small"/>
-
                     </div>
                    
                 </div>

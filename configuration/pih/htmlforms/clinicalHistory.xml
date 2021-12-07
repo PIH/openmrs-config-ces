@@ -198,7 +198,7 @@
     
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Personales no patologicos">
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Personales no patológicos">
  
         <p class="font-size-16 centered-header">Transfuciones:</p>
 
@@ -286,7 +286,7 @@
         </div>
 
         <div class="margin-bottom">
-            <p class="font-size-16 centered-header">Otros antecedentes no patologicos:</p>
+            <p class="font-size-16 centered-header">Otros antecedentes no patológicos:</p>
             <obs conceptId="PIH:13749"
                  style="textarea" 
                  rows="3"/>
@@ -294,7 +294,7 @@
 
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Personales patologicos">
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Personales patológicos">
   
         <p class="font-size-16 centered-header">Tabaco y alcohol:</p>
 
@@ -341,14 +341,14 @@
 
         </div>
 
-        <p class="font-size-16 centered-header">Otros antecedentes patologicos:</p>
+        <p class="font-size-16 centered-header">Otros antecedentes patológicos:</p>
         <obs conceptId="PIH:Other pathological history comment" 
              style="textarea"
              rows="3"/>
     
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Ginecopstetricos">
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Ginecoobstetricos">
 
         <ifMode mode="VIEW" include="false" >
             <script type="text/javascript">
@@ -387,7 +387,7 @@
 
         </div>                   
             
-        <div class="three-columns">
+        <div class="three-columns margin-bottom">
                 
             <div>
                 <label class="font-size-16">
@@ -411,6 +411,26 @@
             </div>
 
         </div>
+
+        <div class="two-columns"> 
+
+            <div>
+
+                <p class="font-size-16">Perdidas menores de 20 SDG: </p>        
+                <obs conceptId="PIH:13733" 
+                     showUnits="false"/>
+
+            </div>
+
+            <div>
+
+                <p class="font-size-16">Perdidas mayores de 20 SDG: </p>                   
+                <obs conceptId="PIH:13734" 
+                     showUnits="false"/>
+
+            </div>
+                   
+        </div>
     
     </section>
 
@@ -423,14 +443,14 @@
 
             <div class="margin-bottom">
 
-                <p class="font-size-16">Sintoma principal:</p>
+                <p class="font-size-16">Síntoma principal:</p>
                 <obs conceptId="CIEL:160531"/>
 
             </div>
 
             <div>
                 <obs conceptId="PIH:6760" 
-                     labelText="Sintomas adicionales"
+                     labelText="Síntomas adicionales"
                      class="font-size-16"
                      style="textarea" 
                      rows="3"/>         

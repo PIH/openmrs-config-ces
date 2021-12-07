@@ -7,7 +7,7 @@
  *   - Element with ID 'diabetes'
  *   - Element with ID 'cholesterol'
  */
- function setUpCholesterolSection() {
+function setUpCholesterolSection() {
   var dmCheckbox = jq("#diabetes-enroll > input[type='checkbox']")[0];
   var htnCheckbox = jq("#htn-enroll > input[type='checkbox']")[0];
   var dmSection = jq("#diabetes");
@@ -308,17 +308,15 @@ function printPrescription() {
 function setupRespiratoryRisk(cigarrosxDia, anosFumando){
 
     if(parseInt(cigarrosxDia) !== 0 && parseInt(anosFumando) !== 0){
-
-        let result = parseInt((cigarrosxDia * anosFumando)/20);
-        calculateEPOC(result);
+        
+        calculateEPOC(cigarrosxDia, anosFumando);
     }
 
     jq("#AnosFumando input[type='text']").change(function() {
 
         let cigarrosxDia = jq("#NumeroCigarros input[type='text']").val();
         let anosFumando = jq("#AnosFumando input[type='text']").val();
-        let result = parseInt((cigarrosxDia * anosFumando)/20);
-        calculateEPOC(result);
+        calculateEPOC(cigarrosxDia, anosFumando);
 
     });
 
@@ -326,28 +324,29 @@ function setupRespiratoryRisk(cigarrosxDia, anosFumando){
 
         let cigarrosxDia = jq("#NumeroCigarros input[type='text']").val();
         let anosFumando = jq("#AnosFumando input[type='text']").val();
-        let result = parseInt((cigarrosxDia * anosFumando)/20);
-        calculateEPOC(result);
+        calculateEPOC(cigarrosxDia, anosFumando);
 
     });
 
 }
 
-function calculateEPOC(result){
+function calculateEPOC(cigarrosxDia, anosFumando){
 
-    if(10>=result>=0){
-        jq("#calc-riesgo-tabaquico").text("Riesgo EPOC nulo");
-    }
+      let result = parseInt((cigarrosxDia * anosFumando)/20);
 
-    if(20>=result && result>9){
-          jq("#calc-riesgo-tabaquico").text("Riesgo EPOC moderado");
-    }
+      if(10>=result>=0){
+          jq("#calc-riesgo-tabaquico").text("Riesgo EPOC nulo");
+      }
 
-    if(40>=result && result>20){
-          jq("#calc-riesgo-tabaquico").text("Riesgo EPOC intenso");
-    }
+      if(20>=result && result>9){
+            jq("#calc-riesgo-tabaquico").text("Riesgo EPOC moderado");
+      }
 
-    if(result>40){
-          jq("#calc-riesgo-tabaquico").text("Riesgo EPOC alto");
-    }
+      if(40>=result && result>20){
+            jq("#calc-riesgo-tabaquico").text("Riesgo EPOC intenso");
+      }
+
+      if(result>40){
+            jq("#calc-riesgo-tabaquico").text("Riesgo EPOC alto");
+      }
 }
