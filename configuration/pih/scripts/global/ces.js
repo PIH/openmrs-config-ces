@@ -7,7 +7,7 @@
  *   - Element with ID 'diabetes'
  *   - Element with ID 'cholesterol'
  */
- function setUpCholesterolSection() {
+function setUpCholesterolSection() {
   var dmCheckbox = jq("#diabetes-enroll > input[type='checkbox']")[0];
   var htnCheckbox = jq("#htn-enroll > input[type='checkbox']")[0];
   var dmSection = jq("#diabetes");
