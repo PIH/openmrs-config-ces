@@ -334,19 +334,19 @@ function calculateEPOC(cigarrosxDia, anosFumando){
 
       let paquetesPorAno = parseInt((cigarrosxDia * anosFumando)/20);
 
-      if(10>=paquetesPorAno>=0){
+      if (10 >= paquetesPorAno){
           jq("#calc-riesgo-tabaquico").text("Riesgo EPOC nulo");
       }
 
-      if(20>=paquetesPorAno && paquetesPorAno>9){
+      if (20 >= paquetesPorAno && paquetesPorAno > 9){
             jq("#calc-riesgo-tabaquico").text("Riesgo EPOC moderado");
       }
 
-      if(40>=paquetesPorAno && paquetesPorAno>20){
+      if (40 >= paquetesPorAno && paquetesPorAno > 20){
             jq("#calc-riesgo-tabaquico").text("Riesgo EPOC intenso");
       }
 
-      if(paquetesPorAno>40){
+      if (paquetesPorAno > 40){
             jq("#calc-riesgo-tabaquico").text("Riesgo EPOC alto");
       }
 }
