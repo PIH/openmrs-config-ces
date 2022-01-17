@@ -245,6 +245,88 @@
         </div>
     </section>
 
+    <ifMode mode="VIEW" include="false">
+        <h1>
+            Ultrasonido
+        </h1>
+    </ifMode>
+    
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="">
+        <div class="section-container">
+            <div class="two-columns">
+                <div>
+                    <label>Tipo de ultrasonido</label>
+                    <obs id="TypeUltrasound"
+                         conceptId="PIH:14068"
+                         answerConceptIds="PIH:12561,PIH:14071,CIEL:161283,PIH:Musculoskeletal ultrasound,CIEL:166201,CIEL:159618,CIEL:164386,PIH:Thyroid,PIH:Renal ultrasound,PIH:PULMONARY SYSTEM,PIH:Vascular system,PIH:12562">
+
+                         <controls>
+                            <when value="CIEL:159618" thenDisplay="#ObstetricSection"/>
+                        </controls>
+
+                        <controls>
+                            <when value="PIH:12562" thenDisplay="#FastType"/>
+                        </controls>
+                   </obs>
+                </div>
+
+                <div id="FastType">
+                    <p>Tipo de E-FAST:</p>
+                    <obs conceptId="PIH:Type of FAST ultrasound"
+                         answerConceptIds="PIH:12561,PIH:14071,CIEL:161283,PIH:Musculoskeletal ultrasound,CIEL:166201,CIEL:159618,CIEL:164386,PIH:Thyroid,PIH:Renal ultrasound,PIH:PULMONARY SYSTEM,PIH:Vascular system,PIH:12562"/>
+
+                </div>
+
+                <div id="ObstetricSection">
+                    <ifMode mode="VIEW" include="false" >
+                        <script type="text/javascript">
+                            jq(function () {
+                                setUpMaternalSection(
+                                    '<lookup expression="encounter.getEncounterDatetime().getTime()"/>',
+                                    '<uimessage code="pihcore.weeks"/>'
+                                );
+                            });
+                        </script>
+                    </ifMode>
+
+                    <div class="question-container">
+
+                        <div id="lmp-existing" class="small-text">
+                                <lookup expression="fn.latestObs('CIEL:1427').valueDate"/>
+                        </div>
+                        <div class="tres-columns">
+                            
+                            <div class="medium">
+                                <label>
+                                    <uimessage code="pihcore.pregnancy.lastPeriod"/>
+                                </label>
+                                    <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
+                            </div>
+
+                            <div id="calculated-edd-and-gestational" class="hidden">
+                                <div id="calculated-gestational-age-wrapper">
+                                    <span id="calculated-gestational-age-label">
+                                        <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
+                                    </span>
+                                    <span id='calculated-gestational-age-value' class="value"></span>
+                                </div>
+                                <div id="calculated-edd-wrapper">
+                                    <span id="calculated-edd-label">
+                                        <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
+                                    </span>
+                                    <span id='calculated-edd' class="value"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+
+    </section>
+
     
     <ifMode mode="VIEW" include="false">
         <div id="buttons">
