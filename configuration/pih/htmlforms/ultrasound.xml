@@ -292,9 +292,9 @@
                     <div class="question-container">
 
                         <div id="lmp-existing" class="small-text">
-                                <lookup expression="fn.latestObs('CIEL:1427').valueDate"/>
+                               
                         </div>
-                        <div class="tres-columns">
+                        <div class="two-columns">
                             
                             <div class="medium">
                                 <label>
@@ -324,6 +324,13 @@
                 
             </div>
         </div>
+        <br/>
+
+        <div class="section-container">
+            <label>Comentario utrasonido(Reporte)</label>
+            <obs conceptId="PIH:Ultrasound result (text)" style="textarea" rows="6"/>      
+        </div>
+
 
     </section>
 
