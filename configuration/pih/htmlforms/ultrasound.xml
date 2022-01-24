@@ -21,19 +21,6 @@
 
     <style type="text/css">
 
-        #who-when-where {
-            margin-bottom: 6px;
-            border-bottom: 1px solid #ccc;
-        }
-
-        #who-when-where p {
-            display: inline-block;
-            padding-right: 20px;
-        }
-
-        #where > input[type=text] {
-            display: inline-block;
-        }
 
         .field-error {
             color: #ffc0b5;
@@ -67,27 +54,6 @@
             width: 35%;
         }
 
-        .four-columns {
-            display: table;
-            height: 100%;
-            width: 100%;
-        }
-
-        .four-columns > div {
-            display: table-cell;
-            width: 20%;
-        }
-
-        .three-columns {
-            column-count: 3;
-            -webkit-column-count: 3;
-            -moz-column-count: 3;
-        }
-
-        .simple-form-ui input {
-            min-width: 80%
-        }
-
         form fieldset {
             min-width: 90%;
             display: block;
@@ -96,52 +62,6 @@
         .encounter-summary-container #calculated-ratio {
             font-size: 1em;
             font-weight: normal;
-        }
-
-        #encounterDate input {
-            min-width: 15%
-        }
-
-        div.inline-radio > * {
-            display: inline;
-            float: none !important;
-            min-width: initial;
-        }
-
-        .light-font {
-            font-family: "OpenSansLight",sans-serif;
-        }
-
-        .small {
-            max-width: 10em;
-            display: block;
-            margin-bottom: 1em;
-        }
-
-        .small input {
-            min-width: 4em;
-            width: 4em;
-            display: inline;
-            margin-right: 0.5em;
-        }
-
-        .medium {
-            max-width: 16em;
-            display: block;
-            margin-bottom: 1em;
-        }
-
-        .medium input {
-            min-width: 8em;
-            width: 8em;
-            display: inline;
-            margin-right: 0.5em;
-        }
-
-        .small-text {
-            color: #555555;
-            font-size: 90%;
-            display: block;
         }
 
         .section-container {
@@ -210,18 +130,6 @@
             margin-bottom: 20px;
         }
 
-        .ui-helper-hidden-accessible{
-            display: none;
-        }
-
-        .ui-autocomplete-input{
-            width: 90%;
-        }
-
-        .medication-instructions input { 
-            width: 85%;
-        }
-
     </style>
 
   
@@ -267,32 +175,19 @@
                     <label>Tipo de ultrasonido</label>
                     <obs id="TypeUltrasound"
                          conceptId="PIH:14068"
-                         answerConceptIds="PIH:12561,PIH:14071,CIEL:161283,PIH:Musculoskeletal ultrasound,CIEL:166201,CIEL:159618,CIEL:164386,PIH:Thyroid,PIH:Renal ultrasound,PIH:PULMONARY SYSTEM,PIH:Vascular system,PIH:12562">
+                         answerConceptIds="PIH:12561,PIH:Musculoskeletal ultrasound,CIEL:164386,PIH:Thyroid,PIH:Vascular system,CIEL:166201,PIH:Scrotum and Testicle (US),PIH:12562,PIH:HEART,PIH:PULMONARY SYSTEM,PIH:Abdomen (US),PIH:Renal ultrasound,PIH:Pelvis (US),CIEL:159618,PIH:US Gyno"
+                         answerLabels="Tejido blando, Musculoesquelético, Ojo, TIroides, Vascular, Mama, Testicular, E-FAST, Corazón, Pulmón, Abdomen, Renal, Pelvis, Obstétrico, Ginecológico">
 
                          <controls>
                             <when value="CIEL:159618" thenDisplay="#ObstetricSection"/>
                         </controls>
-
-                        <controls>
-                            <when value="PIH:12562" thenDisplay="#FastType"/>
-                        </controls>
                    </obs>
                 </div>
 
-                <div id="FastType">
-                    <p>Tipo de E-FAST:</p>
-                    <obs conceptId="PIH:Type of FAST ultrasound"
-                         answerConceptIds="CIEL:845,PIH:12561,PIH:14071,CIEL:161283,PIH:Musculoskeletal ultrasound,CIEL:166201,CIEL:164386,PIH:Thyroid,PIH:Renal ultrasound,PIH:PULMONARY SYSTEM,PIH:Vascular system"/>
-
-                </div>
-
                 <div id="ObstetricSection">
-                    <label>Medida utilizada</label>
-                    
-                        <div class="two-columns">
-
+                    <label>Medida utilizada</label>                   
+                    <div class="two-columns">
                             <div>
-
                                 <obs id="StagePregnancy"
                                      conceptId="CIEL:160665"
                                      answerConceptIds="CIEL:164939, CIEL:164940"
@@ -308,12 +203,9 @@
                                         <when value="CIEL:164940" thenDisplay="#OptionsSecondTrimester"/>
                                     </controls>
                                 </obs>
-
                             </div>
-                        </div>
-
-                </div>
-                
+                    </div>
+                </div>                
             </div>
         </div>
         <br/>
@@ -330,8 +222,25 @@
                         <obs conceptId="PIH:Gestational sac diameter"/>
                     </div>
                 </div>
+                <br/>
+
+                <div class="tres-columns">
+                    <div>
+                        <obs conceptId="CIEL:165220"
+                            labelText="Semanas de gestación por USG"/>                         
+                    </div>
+                    <div>
+                        <obs conceptId="PIH:ESTIMATED DATE OF CONFINEMENT"
+                            labelText="Fecha probable de parto por USG"/>
+                    </div>
+                    <div>
+                        <label>Peso fetal estimado en gramos</label>
+                        <obs conceptId="PIH:Estimated fetal weight"/>
+                    </div>
+                </div>
 
             </div>
+            <br/>           
         </div>
 
         <div id="OptionsSecondTrimester">
@@ -346,44 +255,48 @@
                         <obs conceptId="PIH:HEAD CIRCUMFERENCE"/>
                     </div>
                     <div>
-                        <label>Promedio según ultrasonido</label>
-                        <obs conceptId="PIH:CES US fetal size index"/>
+                        <label>Circunferencia abdominal</label>
+                        <obs conceptId="PIH:WAIST CIRCUMFERENCE CM"/>
                     </div>
                 </div>
                 <br/>
                 
                 <div class="two-columns">
                     <div>
+                        <label>Longitud de femur</label>
+                        <obs conceptId="PIH:Femur length"/>
+                    </div>
+                    <div>
                         <label>ILA</label>
                         <obs conceptId="PIH:AFI"/>
                     </div>
                 </div>
+                <br/>
+
+                <div class="tres-columns">
+                    <div>
+                        <obs conceptId="CIEL:165220"
+                            labelText="Semanas de gestación por USG"/>                         
+                    </div>
+                    <div>
+                        <obs conceptId="PIH:ESTIMATED DATE OF CONFINEMENT"
+                            labelText="Fecha probable de parto por USG"/>
+                    </div>
+                    <div>
+                        <label>Peso fetal estimado en gramos</label>
+                        <obs conceptId="PIH:Estimated fetal weight"/>
+                    </div>
+                </div>
+                <br/>
+
             </div>
         </div>
         <br/>
 
         <div class="section-container">
-            <div class="four-columns">
-                <div>
-                    <obs conceptId="CIEL:165220"
-                         labelText="Semanas de gestación por Ultrasonido"/>                         
-                </div>
-                <div>
-                    <obs conceptId="PIH:ESTIMATED DATE OF CONFINEMENT"
-                         labelText="Fecha probable de parto por Ultrasonido"/>
-                </div>
-                <div>
-                    <label>Peso fetal estimado en gramos por ultrasonido</label>
-                    <obs conceptId="PIH:Estimated fetal weight"/>
-                </div>
-            </div>
-        </div>
-
-        <div class="section-container">
             <label>Comentario ultrasonido(Reporte)</label>
             <obs conceptId="PIH:Ultrasound result (text)" style="textarea" rows="6"/>      
         </div>
-
 
     </section>
 
@@ -400,7 +313,6 @@
             </div>
     </div>
 
-    
     <ifMode mode="VIEW" include="false">
         <div id="buttons">
             <submit submitClass="confirm right" submitCode="mirebalais.save"/>
