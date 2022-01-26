@@ -297,21 +297,39 @@
             <label>Comentario ultrasonido(Reporte)</label>
             <obs conceptId="PIH:Ultrasound result (text)" style="textarea" rows="6"/>      
         </div>
+        <br/>
+
+        <div class="section-container">
+            <label>Cambio de diagnóstico</label>
+            <obs id="DxCahnge"
+                 conceptId="PIH:Change Dx"
+                 answerConceptIds="PIH:YES,PIH:NO"
+                 style="radio" 
+                 answerSeparator="">    
+                                  
+                 <controls>
+                    <when value="PIH:YES" thenDisplay="#OptionChangeDx"/>
+                </controls>
+
+            </obs>
+        </div>
+
+        <div id="OptionChangeDx">
+            <ifMode mode="VIEW" include="false">
+                <h1>
+                    Diagnóstico
+                </h1>
+            </ifMode>
+            <div class="question-container">
+                <div id="diagnosis-lookup">
+                    <encounterDiagnosesByObs selectedDiagnosesTarget="#encounter-diagnoses-target"/>
+                </div>
+                <div id="encounter-diagnoses-target">
+                </div>
+            </div>
+        </div>
 
     </section>
-
-    <ifMode mode="VIEW" include="false">
-        <h1>
-            Diagnóstico
-        </h1>
-    </ifMode>
-    <div class="question-container">
-            <div id="diagnosis-lookup">
-                <encounterDiagnosesByObs selectedDiagnosesTarget="#encounter-diagnoses-target"/>
-            </div>
-            <div id="encounter-diagnoses-target">
-            </div>
-    </div>
 
     <ifMode mode="VIEW" include="false">
         <div id="buttons">
