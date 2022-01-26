@@ -301,7 +301,7 @@
 
         <div class="section-container">
             <label>Cambio de diagnóstico</label>
-            <obs id="DxCahnge"
+            <obs id="DxChange"
                  conceptId="PIH:Change Dx"
                  answerConceptIds="PIH:YES,PIH:NO"
                  style="radio" 
