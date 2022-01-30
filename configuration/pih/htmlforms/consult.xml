@@ -214,10 +214,6 @@
             width: 85%;
         }
 
-        #lastPeriodDate {
-            display:none;
-        }
-
         .margin-bottom {
             margin-bottom: 45px;
         }
@@ -844,12 +840,13 @@
 
         <!-- Last menstrual period (LMP or DDR) -->
         <div class="question-container">
+
             <div class="two-columns margin-bottom">
+                
                 <div>
-                    <label class="font-size-16">FUM:</label>
-                    <div id="lmp-existing">
-                        <lookup expression="fn.latestObs('CIEL:1427').valueDate"/>
-                    </div>
+                    <label>
+                        <uimessage code="pihcore.pregnancy.lastPeriod"/>
+                    </label>
                     <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
                 </div>
 
@@ -860,7 +857,6 @@
                         </span>
                         <span id='calculated-gestational-age-value' class="value"></span>
                     </div>
-
                     <div id="calculated-edd-wrapper">
                         <span id="calculated-edd-label">
                             <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
@@ -868,32 +864,8 @@
                         <span id='calculated-edd' class="value"></span>
                     </div>
                 </div>
+
             </div> 
-
-            <div class="tres-columns">
-                    
-                <div>         
-                    <label class="font-size-16">
-                        <uimessage code="pihcore.mch.grava"/>: 
-                        <lookup class="font-size-16" expression="fn.latestObs('CIEL:5624').valueNumeric"/>
-                    </label>             
-                </div>
-
-                <div>
-                    <label class="font-size-16">
-                        <uimessage code="pihcore.mch.para"/>: 
-                        <lookup class="font-size-16" expression="fn.latestObs('CIEL:1053').valueNumeric"/>
-                    </label>               
-                </div>
-
-                <div>                
-                    <label class="font-size-16">
-                        <uimessage code="pihcore.mch.cesarian"/>: 
-                        <lookup class="font-size-16" expression="fn.latestObs('CIEL:160081').valueNumeric"/>
-                    </label>
-                </div>
-
-            </div>
         </div>
 
         <div class="question-container">

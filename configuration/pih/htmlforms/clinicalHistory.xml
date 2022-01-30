@@ -298,7 +298,7 @@
   
         <p class="font-size-16 centered-header">Tabaco y alcohol:</p>
 
-        <div class="three-columns margin-bottom">
+        <div class="two-columns margin-bottom">
             <div>
                 <lookup class="hidden" expression="fn.latestObs('PIH:12586').valueNumeric"/>
                 <obs id="NumeroCigarros"
@@ -314,9 +314,6 @@
                      allowFutureDates="false"
                      labelText="Tiempo fumando en años:"
                      class="font-size-16"/>
-            </div>
-            <div>
-                <span id='calc-riesgo-tabaquico' class="value"></span>
             </div>
 
         </div>
@@ -348,44 +345,7 @@
     
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Ginecoobstetricos">
-
-        <ifMode mode="VIEW" include="false" >
-            <script type="text/javascript">
-                jq(function () {
-                    setUpMaternalSection(
-                        '<lookup expression="encounter.getEncounterDatetime().getTime()"/>',
-                        '<uimessage code="pihcore.weeks"/>'
-                    );
-                });
-            </script>
-        </ifMode>
-
-        <div class="two-columns margin-bottom">
-                
-            <div>
-                <label>
-                    <uimessage code="pihcore.pregnancy.lastPeriod"/>
-                </label>
-                <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
-            </div>
-
-            <div id="calculated-edd-and-gestational" class="hidden">
-                <div id="calculated-gestational-age-wrapper">
-                    <span id="calculated-gestational-age-label">
-                        <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
-                    </span>
-                    <span id='calculated-gestational-age-value' class="value"></span>
-                </div>
-                <div id="calculated-edd-wrapper">
-                    <span id="calculated-edd-label">
-                        <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
-                    </span>
-                    <span id='calculated-edd' class="value"></span>
-                </div>
-            </div>
-
-        </div>                   
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Ginecoobstetricos">              
             
         <div class="three-columns margin-bottom">
                 
@@ -412,7 +372,7 @@
 
         </div>
 
-        <div class="two-columns"> 
+        <div class="two-columns margin-bottom"> 
 
             <div>
 
@@ -431,6 +391,12 @@
             </div>
                    
         </div>
+
+        <obs conceptId="PIH:6760" 
+             labelText="Comentarios de antecedentes ginecoobstétricos"
+             class="font-size-16"
+             style="textarea" 
+             rows="3"/>  
     
     </section>
 
