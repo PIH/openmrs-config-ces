@@ -130,6 +130,10 @@
             margin-bottom: 20px;
         }
 
+        #OptionChangeDx {
+            display: none;
+        }
+
     </style>
 
   
@@ -167,6 +171,12 @@
             Ultrasonido
         </h1>
     </ifMode>
+
+    <script>
+        jq(function() {
+            sectionDisplayDx();
+        });
+    </script>
     
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="">
         <div class="section-container">
@@ -306,11 +316,6 @@
                  answerConceptIds="PIH:YES,PIH:NO"
                  style="radio" 
                  answerSeparator="">    
-                                  
-                 <controls>
-                    <when value="PIH:YES" thenDisplay="#OptionChangeDx"/>
-                </controls>
-
             </obs>
         </div>
 
