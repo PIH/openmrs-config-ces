@@ -237,11 +237,12 @@
                 <div class="tres-columns">
                     <div>
                         <obs conceptId="CIEL:165220"
-                            labelText="Semanas de gestación por USG"/>                         
+                             labelText="Semanas de gestación por USG"/>                         
                     </div>
                     <div>
                         <obs conceptId="PIH:ESTIMATED DATE OF CONFINEMENT"
-                            labelText="Fecha probable de parto por USG"/>
+                             labelText="Fecha probable de parto por USG"
+                             allowFutureDates="true"/>
                     </div>
                     <div>
                         <label>Peso fetal estimado en gramos</label>
@@ -286,11 +287,12 @@
                 <div class="tres-columns">
                     <div>
                         <obs conceptId="CIEL:165220"
-                            labelText="Semanas de gestación por USG"/>                         
+                             labelText="Semanas de gestación por USG"/>                         
                     </div>
                     <div>
                         <obs conceptId="PIH:ESTIMATED DATE OF CONFINEMENT"
-                            labelText="Fecha probable de parto por USG"/>
+                             labelText="Fecha probable de parto por USG"
+                             allowFutureDates="true"/>
                     </div>
                     <div>
                         <label>Peso fetal estimado en gramos</label>
@@ -305,7 +307,9 @@
 
         <div class="section-container">
             <label>Comentario ultrasonido(Reporte)</label>
-            <obs conceptId="PIH:Ultrasound result (text)" style="textarea" rows="6"/>      
+            <obs conceptId="PIH:Ultrasound result (text)" 
+                 style="textarea" 
+                 rows="6"/>      
         </div>
         <br/>
 
