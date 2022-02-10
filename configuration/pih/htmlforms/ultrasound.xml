@@ -241,7 +241,8 @@
                     </div>
                     <div>
                         <obs conceptId="PIH:ESTIMATED DATE OF CONFINEMENT"
-                             labelText="Fecha probable de parto por USG"/>
+                             labelText="Fecha probable de parto por USG"
+                             allowFutureDates="true"/>
                     </div>
                     <div>
                         <label>Peso fetal estimado en gramos</label>
