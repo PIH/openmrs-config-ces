@@ -64,7 +64,10 @@
 
         .tres-columns > div {
             display: table-cell;
-            width: 35%;
+        }
+
+        .font-size-16{
+            font-size: 16px;
         }
 
         .three-columns {
@@ -207,7 +210,7 @@
             width: 90%;
         }
 
-        .medication-instructions input { 
+        .medication-instructions input {
             width: 85%;
         }
 
@@ -359,9 +362,9 @@
 
     <div class="hidden" id="logos" style="width=100%">
         <!-- These should appear in printed notes and prescriptions -->
-        <img src="/openmrs/ms/uiframework/resource/pihcore/files/ces-logo.png" style="width: 20%; margin: 3% 5%;"/>
-        <img src="/openmrs/ms/uiframework/resource/pihcore/files/ssa-fed-logo.jpg" style="width: 20%; margin: 0 5%;" />
-        <img src="/openmrs/ms/uiframework/resource/pihcore/files/ssa-logo.png" style="width: 20%; margin: 0 5%;"/>
+        <img src="/openmrs/ms/uiframework/resource/file/configuration/pih/images/ces-logo.png" style="width: 20%; margin: 3% 5%;"/>
+        <img src="/openmrs/ms/uiframework/resource/file/configuration/pih/images/ssa-fed-logo.jpg" style="width: 20%; margin: 0 5%;" />
+        <img src="/openmrs/ms/uiframework/resource/file/configuration/pih/images/ssa-logo.png" style="width: 20%; margin: 0 5%;"/>
     </div>
 
 
@@ -369,11 +372,11 @@
     <section id="context" sectionTag="fieldset" headerTag="legend" headerStyle="title">
         <div class="section-container">
             <label>
-                <uimessage code="pihcore.referredBy"/>
+                Referido por:
             </label>
             <obs conceptId="PIH:6189" id="referredBy"
                  answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555"
-                 answerCodes="pihcore.hasAppointment,pihcore.walkIn,pihcore.activeCasefinding,pihcore.chw"
+                 answerLabels="Cita,Paciente ambulatorio,Búsqueda activa de casos,Acompañante"
                  style="radio" answerSeparator=""/>
         </div>
     </section>
@@ -443,7 +446,7 @@
             <uimessage code="pihcore.ncd.epilepsy"/>
             <br />
             <span id="htn-enroll" >
-                <enrollInProgram programId="Hypertension" showCheckbox="true"/>
+                <enrollInProgram programId="Hypertension" showCheckbox="true" toggle="ProgramHEARTS"/>
             </span>
             <uimessage code="pihcore.ncd.htn"/>
             <br />
@@ -504,25 +507,10 @@
                 <div class="checkboxRadio">
                     <obsgroup groupingConceptId="PIH:FUNCTIONAL REVIEW OF SYMPTOMS CONSTRUCT">
                         <span class="two-columns">
-                            <obs conceptId="PIH:SYMPTOM PRESENT" answerConceptId="CIEL:148273"
-                                 answerCode="yes" answerSeparator=""/>
-                            <obs conceptId="PIH:SYMPTOM ABSENT" answerConceptId="CIEL:148273"
-                                 answerCode="no" answerSeparator="" />
+                            <obs conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT" answerConceptId="CIEL:148273"
+                                labelText="" conceptLabels="Sí,No" style="radio" answerSeparator="" />
                         </span>
                     </obsgroup>
-                    <br/>
-
-                    <script type="text/javascript">
-                        /* Configure divs with class checkboxRadio to toggle the checkboxes as if they're radio buttons */
-                        jQuery(document).on('click', ".checkboxRadio input[type$='checkbox']", function() {
-                            var that = this;
-                            jQuery(this).closest('.checkboxRadio').find("input[type$='checkbox']").each(function () {
-                                if (jQuery(this).attr('id') != jQuery(that).attr('id')) {
-                                    jQuery(this).prop("checked", false);
-                                }
-                            });
-                        });
-                    </script>
                 </div>
             </div>
         </div>
@@ -653,37 +641,8 @@
     </section>
 
     <script>
-        /* Make the Cholesterol section show when Diabetes or Hypertension is checked */
-
         jq(function() {
-            var dmCheckbox = jq("#diabetes-enroll > input[type='checkbox']")[0];
-            var htnCheckbox = jq("#htn-enroll > input[type='checkbox']")[0];
-            var dmSection = jq("#diabetes");
-            var cholSection = jq("#cholesterol");
-
-            var updateCholSectionVisibility = function() {
-                if (dmCheckbox.checked | htnCheckbox.checked) {
-                    cholSection.show();
-                } else {
-                    cholSection.hide();
-                }
-            };
-            var updateDmSectionVisibility = function() {
-                if (dmCheckbox.checked) {
-                    dmSection.show();
-                } else {
-                    dmSection.hide();
-                }
-            };
-            $(dmCheckbox).change(function() {
-                updateDmSectionVisibility();
-                updateCholSectionVisibility();
-            });
-            $(htnCheckbox).change(function() {
-                updateCholSectionVisibility();
-            });
-            updateDmSectionVisibility();
-            updateCholSectionVisibility();
+            setUpCholesterolSection();
         });
     </script>
     <section id="cholesterol" headerCode="pihcore.lab.cholesterol" sectionTag="fieldset" headerTag="legend" headerStyle="title">
@@ -728,55 +687,55 @@
         </div>
     </section>
 
+    <!-- Program HEARTS -->
+    <section id="ProgramHEARTS" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerLabel="Programa HEARTS">
+        <div class="question-container">
+            <div class="two-columns">
+                <div class="small-text">
+
+                    <p>HEARTS:</p>
+                    <enrollInProgram programId="HEARTS"
+                                     showCheckbox="true"
+                                     toggle="FieldsHEARTS"/>
+
+                </div>
+
+                <div class="FieldsHEARTS">
+
+                        <div class="small-text">
+                            <p>Cambio de tratamiento por algoritmo:</p>
+                            <obs
+                                conceptId="PIH: 13705"
+                                answerConceptIds="CIEL:1065, CIEL:1066"
+                                style="radio"
+                                answerSeparator="">
+                            </obs>
+
+                        </div>
+
+                        <div class="small-text">
+                            <p>Riesgo cardiovascular:</p>
+
+                            <lookup expression="fn.latestObs('PIH:13703').valueNumeric"/>
+                            <obs id="ldl"
+                                 conceptId="PIH:13703"
+                                 showUnits="false"
+                                 class="small"/>
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Epilepsy -->
     <section id="epilepsy" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.epilepsy">
         <script>
             jq(function() {
-                getField('epi-baseline.value').change(updatePercentReduction);
-                getField('seizure-num.value').change(updatePercentReduction);
-                updatePercentReduction();
-
-                initializeBaseline();
+                setUpEpilepsySection();
             });
-
-            function updatePercentReduction() {
-                var baseline = parseInt(htmlForm.getValueIfLegal('epi-baseline.value'));
-                if (isNaN(baseline)) {
-                    baseline = parseInt(document.getElementById('epi-baseline-last-obs').innerHTML.trim());
-                }
-                var current = parseInt(htmlForm.getValueIfLegal('seizure-num.value'));
-                var container = jq('#seizure-percent-reduction-container');
-                if (!(isNaN(current) || isNaN(baseline))) {
-                    var result = calculatePercentReduction(baseline, current).toString();
-                    document.getElementById('seizure-percent-reduction').innerHTML = result;
-                    container.show();
-                } else {
-                    container.hide();
-                }
-            }
-
-            function calculatePercentReduction(baseline, current) {
-                return Math.round(((baseline - current)/baseline) * 100);
-            }
-
-            function initializeBaseline() {
-                var baseline = parseInt(document.getElementById('epi-baseline-last-obs').innerHTML.trim());
-                var baselineInput = jq('#epi-baseline-input').hide();
-                var baselineButton = jq('#change-epi-baseline-button').show();
-                if (isNaN(baseline)) {
-                    baselineButton.hide();
-                    baselineInput.show();
-                } else {
-                    baselineInput.hide();
-                    baselineButton.show();
-                }
-                jq('#change-epi-baseline-button').click(showChangeBaseline);
-            }
-
-            function showChangeBaseline() {
-                jq('#epi-baseline-input').show();
-            }
         </script>
 
         <div class="question-container">
@@ -823,156 +782,147 @@
         <ifMode mode="VIEW" include="false" >
             <script type="text/javascript">
                 jq(function () {
-
-                    var updateEdd = function () {
-                        return updateEddFromData(getCurrentDate(), getLastPeriodDate());
-                    };
-
-                    var getCurrentDate = function () {
-                        var currentEncounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
-                        if (typeof currentEncounterDate !== "undefined" &amp;&amp; (currentEncounterDate.length > 0)) {
-                            // calculate the gestational age at the time of the encounter
-                            return new Date(+currentEncounterDate);
-                        } else {
-                            return new Date();
-                        }
-                    };
-
-                    var getLastPeriodDate = function () {
-                        var datepickerValue = getField('lastPeriodDate.value').datepicker('getDate');
-                        if (datepickerValue !== null) {
-                            return datepickerValue;
-                        }
-                        var dateText = jq('#lmp-existing').text().trim();
-                        if (dateText !== null &amp;&amp; dateText !== '') {
-                            // We're going to use an absolutely evil hack to try and get a date object
-                            // from the LMP string we have, without access to Moment.js or anything
-                            // nice like that. We'll coerce the string into the input box, get the
-                            // date object out, and reset the box.
-                            // replace the slashes with spaces
-                            var dateTextFormatted = dateText.replace(/\//g, " ");
-                            // get the date object
-                            var widgetDate = getField('lastPeriodDate.value').datepicker('setDate', dateTextFormatted).val();
-                            var dateValue = new Date(getField('lastPeriodDate.value').datepicker('getDate'));
-                            // reset the input box
-                            getField('lastPeriodDate.value').datepicker('setDate', datepickerValue);
-                            return dateValue;
-                        }
-                        return null;
-                    };
-
-                    var updateEddFromData = function (today, lastPeriodDate) {
-
-                        if (typeof lastPeriodDate !== "undefined" &amp;&amp; lastPeriodDate !== null) {
-
-                            // In order to get the date object to print in a nice, locale-specific way, we
-                            // - store the current lastPeriodDate input value
-                            // - calculate the EDD
-                            // - use the lastPeriodDate box to coerce the EDD into the right format
-                            // - set the EDD text with that formatted object
-                            // - restore the lastPeriodDate to its actual value
-                            var lmpInputValue = getField('lastPeriodDate.value').datepicker('getDate');
-                            var newDate = new Date(lastPeriodDate);
-                            var timeDiff = Math.abs(today.getTime() - newDate.getTime());
-                            // weeks difference = gestational age
-                            var diffWeeks = Math.ceil(timeDiff / (1000 * 3600 * 24 * 7));
-
-                            // Estimated Delivery Date = (LMP - 3 months) + 12 months + 7 days
-                            newDate.setMonth(newDate.getMonth() - 3);
-                            newDate.setFullYear(newDate.getFullYear() + 1);
-                            newDate.setDate(newDate.getDate() + 7);
-
-                            var widgetDate = getField('lastPeriodDate.value').datepicker('setDate', newDate).val();
-                            getField('lastPeriodDate.value').datepicker('setDate', lmpInputValue);
-
-                            jq('#calculated-edd-and-gestational').show();
-                            jq('#calculated-edd').text(widgetDate);
-                            jq('#calculated-gestational-age-value').text(diffWeeks + " <uimessage code="pihcore.weeks"/>");
-
-                        } else {
-                            jq('#calculated-edd-and-gestational').hide();
-                        }
-                    };
-
-                    jq('#calculated-edd-and-gestational').hide();
-
-                    jq("#lastPeriodDate input[type='hidden']").change(function () {
-                        updateEdd();
-                    });
-
-                    updateEdd();
+                    setUpMaternalSection(
+                        '<lookup expression="encounter.getEncounterDatetime().getTime()"/>',
+                        '<uimessage code="pihcore.weeks"/>'
+                    );
                 });
             </script>
         </ifMode>
 
+        <div class="question-container">
+         
+                <div class="tres-columns">
+                    <div class="small-text">
+                        <p class="font-size-16">Embarazo planeado:</p>
+                        
+                            <obs id="pregnancyPlanned"
+                                conceptId="CIEL:1426"
+                                answerConceptIds="CIEL:1065, CIEL:1066"
+                                style="radio"
+                                answerSeparator="">
+
+                                <controls>
+                                    <when value="CIEL:1066" thenDisplay="#OptionsPregnancyPlanned"/>
+                                </controls>
+                            </obs>
+                    </div>
+                    <div class="small-text" id="OptionsPregnancyPlanned">
+
+                            <p class="font-size-16">Causa de embarazo no planeado:</p>
+                            <obs conceptId="CIEL:160693" 
+                                 answerConceptId="CIEL:1065" 
+                                 answerLabel="Fallo del metodo anticonceptivo" 
+                                 style="checkbox"/>
+
+                            <obs conceptId="CIEL:123160" 
+                                 answerConceptId="CIEL:1065" 
+                                 answerLabel="Violencia sexual" 
+                                 style="checkbox"/>
+
+                    </div>
+                    
+                    <div class="small-text">
+                        <p class="font-size-16">Embarazo deseado:</p>
+                    
+                        <obs conceptId="CIEL: 122933"
+                            answerConceptIds="CIEL:1065, CIEL:1066"
+                            style="radio"
+                            answerSeparator="">
+                        </obs>
+                    </div>
+                </div>
+        </div>      
 
         <!-- Last menstrual period (LMP or DDR) -->
         <div class="question-container">
-            <label>
-                <uimessage code="pihcore.pregnancy.lastPeriod"/>
-            </label>
-            <div class="two-columns">
-                <div id="lmp-existing" class="small-text">
+
+            <div id="lmp-existing" class="small-text">
                     <lookup expression="fn.latestObs('CIEL:1427').valueDate"/>
-                </div>
+            </div>
+            <div class="tres-columns">
+                
                 <div class="medium">
-                    <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
+                    <label>
+                        <uimessage code="pihcore.pregnancy.lastPeriod"/>
+                    </label>
+                        <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
+                </div>
+
+                 <div id="calculated-edd-and-gestational" class="hidden">
+                    <div id="calculated-gestational-age-wrapper">
+                        <span id="calculated-gestational-age-label">
+                            <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
+                        </span>
+                        <span id='calculated-gestational-age-value' class="value"></span>
+                    </div>
+                    <div id="calculated-edd-wrapper">
+                        <span id="calculated-edd-label">
+                            <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
+                        </span>
+                        <span id='calculated-edd' class="value"></span>
+                    </div>
                 </div>
             </div>
         </div>
         <!-- G, P, C, A -->
-        <div class="question-container">
-            <label>
-                <uimessage code="pihcore.mch.grava"/>
-            </label>
-            <div class="two-columns">
-                <div class="small-text">
-                    <lookup expression="fn.latestObs('CIEL:5624').valueNumeric"/>
-                </div>
+        <div class="question-container">                  
+            
+            <div class="tres-columns">
+                
                 <div class="small">
+                    <lookup class="small-text" expression="fn.latestObs('CIEL:5624').valueNumeric"/>
+                    <label class="font-size-16">
+                        <uimessage code="pihcore.mch.grava"/>
+                    </label>
                     <obs conceptId="CIEL:5624" id="gravidaInput"/>
                 </div>
-            </div>
-        </div>
-        <div class="question-container">
-            <label>
-                <uimessage code="pihcore.mch.para"/>
-            </label>
-            <div class="two-columns">
-                <div class="small-text">
-                    <lookup expression="fn.latestObs('CIEL:1053').valueNumeric"/>
-                </div>
-                <div class="small">
+
+                 <div class="small">
+                    <lookup class="small-text" expression="fn.latestObs('CIEL:1053').valueNumeric"/>
+                     <label class="font-size-16">
+                        <uimessage code="pihcore.mch.para"/>
+                    </label>
                     <obs conceptId="CIEL:1053" />
                 </div>
-            </div>
-        </div>
-        <div class="question-container">
-            <label>
-                <uimessage code="pihcore.mch.cesarian"/>
-            </label>
-            <div class="two-columns">
-                <div class="small-text">
-                    <lookup expression="fn.latestObs('CIEL:160081').valueNumeric"/>
-                </div>
+
                 <div class="small">
+                    <lookup class="small-text" expression="fn.latestObs('CIEL:160081').valueNumeric"/>
+                     <label class="font-size-16">
+                        <uimessage code="pihcore.mch.cesarian"/>
+                    </label>
                     <obs conceptId="CIEL:160081" />
                 </div>
+
             </div>
         </div>
+
         <div class="question-container">
-            <label>
-                <uimessage code="pihcore.mch.abortus"/>
-            </label>
-            <div class="two-columns">
-                <div class="small-text">
-                    <lookup expression="fn.latestObs('CIEL:1823').valueNumeric"/>
+         
+                <div class="two-columns"> 
+
+                    <div class="small-text">
+                            <p class="font-size-16">Abortos menores de 20 SDG: </p>
+                            <lookup expression="fn.latestObs('PIH:13733').valueNumeric"/>
+                            <obs id="ldl" 
+                                 conceptId="PIH:13733" 
+                                 showUnits="false" 
+                                 class="small"/>
+
+                    </div>
+
+                    <div class="small-text">
+                            <p class="font-size-16">Abortos mayores de 20 SDG: </p>
+                            <lookup expression="fn.latestObs('PIH:13734').valueNumeric"/>
+                            <obs id="ldl" 
+                                 conceptId="PIH:13734" 
+                                 showUnits="false" 
+                                 class="small"/>
+
+                    </div>
+                   
                 </div>
-                <div class="small">
-                    <obs conceptId="CIEL:1823" />
-                </div>
-            </div>
-        </div>
+        </div>  
 
         <div class="question-container">
             <label><uimessage code="pihcore.mch.ultrasoundResultText"/></label>
@@ -1066,8 +1016,7 @@
                 <div>
                     <div class="inline-radio" >
                         <obs conceptId="PIH:BLOOD TYPING"
-                             answerConceptIds="CIEL:690,CIEL:692,CIEL:694,CIEL:696,CIEL:699,CIEL:701,CIEL:1230,CIEL:1231,PIH:unknown"
-                             answerCodes="A+,A-,B+,B-,O+,O-,AB+,AB-,PIH:unknown"/>
+                             answerConceptIds="CIEL:690,CIEL:692,CIEL:694,CIEL:696,CIEL:699,CIEL:701,CIEL:1230,CIEL:1231,PIH:unknown"/>
                     </div>
                 </div>
             </div>
@@ -1107,26 +1056,6 @@
             </div>
         </div>
 
-        <div id="calculated-edd-and-gestational" class="question-container hidden">
-            <p>
-                <span id="calculated-gestational-age-wrapper">
-                    <span id="calculated-gestational-age-label">
-                        <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
-                    </span>
-                    <span id='calculated-gestational-age-value' class="value"></span>
-                </span>
-            </p>
-            <p>
-                <span id="calculated-edd-wrapper">
-                    <span id="calculated-edd-label">
-                        <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
-                    </span>
-                    <span id='calculated-edd' class="value"></span>
-                </span>
-            </p>
-
-        </div>
-
         <div class="question-container">
             <label><uimessage code="pihcore.mch.birthPlan"/></label>
             <div class="two-columns">
@@ -1160,7 +1089,7 @@
                 </div>
                 <div>
                     <div>
-                        <a href="/openmrs/ms/uiframework/resource/pihcore/files/PHQ9-2018.pdf"
+                        <a href="/openmrs/ms/uiframework/resource/file/configuration/pih/images/PHQ9-2018.pdf"
                            target="_blank" rel="noopener noreferrer">
                             <uimessage code="pihcore.ncd.mental.phq9FormLink" />
                         </a>
@@ -1186,7 +1115,7 @@
                 </div>
                 <div>
                     <div>
-                        <a href="/openmrs/ms/uiframework/resource/pihcore/files/GAD7-CESPDF.pdf"
+                        <a href="/openmrs/ms/uiframework/resource/file/configuration/pih/images/GAD7-CESPDF.pdf"
                            target="_blank" rel="noopener noreferrer">
                             <uimessage code="pihcore.ncd.mental.gad7FormLink" />
                         </a>
@@ -1402,113 +1331,16 @@
     <div id="section-plan">
         <ifMode mode="VIEW" include="false">
             <script type="text/javascript">
-
-                // I don't really understand why this assignment `$j = jq` is required, but for some
-                // reason a bunch of Javascript gets included in the page that expects `$j` to exist,
-                // but doesn't define `$j` itself. *shrug emoji*
-                var $j = jQuery;
-
-                htmlForm.getBeforeValidation().push(function() {
-
-                    var valid = true;
-
-                    jq('fieldset.medication').each(function() {
-
-                        // clear out any existing error messages
-                        jq(this).find('.field-error').first().html('');
-
-                        var medication = jq(this).find('.medication-name input').val();
-                        var dose = jq(this).find('.dose input').val();
-                        var doseUnits = jq(this).find('.dose-unit select').val();
-                        var frequency = jq(this).find('.frequency select').val();
-                        var duration = jq(this).find('.duration input').val();
-                        var durationUnits = jq(this).find('.duration-unit select').val();
-                        var instructions = jq(this).find('.medication-instructions input').val();
-
-                        if (!medication &amp;&amp; (dose || doseUnits || frequency || duration || durationUnits || instructions)) {
-                            valid = false;
-                            jq(this).find('.field-error').first().append("<uimessage
-                                code="pihcore.visitNote.plan.medications.error.noMedication"/>. ").show();
-                        }
-
-                        if (dose &amp;&amp; !doseUnits) {
-                            valid = false;
-                            jq(this).find('.field-error').first().append("<uimessage
-                                code="pihcore.visitNote.plan.medications.error.noDoseUnits"/>. ").show();
-                        }
-
-                        if (!dose &amp;&amp; doseUnits) {
-                            valid = false;
-                            jq(this).find('.field-error').first().append("<uimessage
-                                code="pihcore.visitNote.plan.medications.error.noDose"/>. ").show();
-                        }
-
-                        if (duration &amp;&amp; !durationUnits) {
-                            valid = false;
-                            jq(this).find('.field-error').first().append("<uimessage
-                                code="pihcore.visitNote.plan.medications.error.noDurationUnits"/>. ").show();
-                        }
-
-                        if (!duration &amp;&amp; durationUnits) {
-                            valid = false;
-                            jq(this).find('.field-error').first().append("<uimessage
-                                code="pihcore.visitNote.plan.medications.error.noDuration"/>. ").show();
-                        }
-
-                    });
-
-                    return valid;
-
-                });
-
-                var MAX_MEDS = 30;  // this should match the number of items in the "repeat with=..." tag
-                var numMeds = 1;
-                var meds = [];
                 jq(function() {
-
-                    var hasValue = function (element) {
-                        return jq(element).find('.medication-name input').val();
-                    };
-
-                    var initMeds = function () {
-                        for (var i = 1; i &lt;= MAX_MEDS; i++) {
-                            meds.push(jq('#medication-' + i));
-                        }
-                        for (var i = 1; i &lt; MAX_MEDS; i++) {
-                            if (hasValue(meds[i])) {
-                                numMeds = i + 1;
-                            }
-                        }
-                        updateShownMeds();
-                    };
-
-                    var updateShownMeds = function () {
-                        for (var i = 0; i &lt; MAX_MEDS; i++) {
-                            if (i &lt; numMeds) {
-                                meds[i].show();
-                            } else {
-                                meds[i].hide();
-                            }
-                        }
-                    };
-
-                    var incrementShownMeds = function () {
-                        numMeds += 1;
-                        updateShownMeds();
-                    };
-
-                    var decrementShownMeds = function () {
-                        numMeds -= 1;
-                        updateShownMeds();
-                    };
-
-                    jq('#show-more-medications-button').click(incrementShownMeds);
-                    jq('#show-less-medications-button').click(decrementShownMeds);
-
-                    initMeds();
-
+                    setUpPlanSection(
+                        '<uimessage code="pihcore.visitNote.plan.medications.error.noMedication"/>',
+                        '<uimessage code="pihcore.visitNote.plan.medications.error.noDoseUnits"/>',
+                        '<uimessage code="pihcore.visitNote.plan.medications.error.noDose"/>',
+                        '<uimessage code="pihcore.visitNote.plan.medications.error.noDurationUnits"/>',
+                        '<uimessage code="pihcore.visitNote.plan.medications.error.noDuration"/>'
+                    );
+                    setUpExpandableSection('medication');
                 });
-
             </script>
         </ifMode>
 
@@ -1549,7 +1381,7 @@
         <section id="drug-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="pihcore.ncd.meds">
             <div class="section-container">
-                <repeat with="['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8']">
+                <repeat with="['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10'],['11'],['12']">
                     <span id="medication-{0}" class="medication">
                         <obsgroup groupingConceptId="PIH:9070" showIfEmpty="false">
                             <h3>
@@ -1582,10 +1414,10 @@
                     </span>
                 </repeat>
 
-                <button id="show-less-medications-button" type="button">
+                <button id="show-less-medication" type="button">
                     -
                 </button>
-                <button id="show-more-medications-button" type="button">
+                <button id="show-more-medication" type="button">
                     +
                 </button>
             </div>
@@ -1614,66 +1446,7 @@
 
     <!-- Print prescription -->
     <div class="section-button">
-        <script type="text/javascript">
-            // @bistenes: forgive me
-            function print_prescription() {
-                const w = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
-                const styleNodes = document.getElementsByTagName("style");
-                for (var i = 0; i &lt; styleNodes.length; i++) {
-                    const styleNode = styleNodes[i];
-                    w.document.write("<style>" + styleNode.innerHTML + "</style>");
-                }
-                // w.document.write("<body></body>");
-                w.document.write("<body>");
-                const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
-                const dateString = new Date().toLocaleDateString("es", dateOptions);
-                w.document.write('&lt;div class="date"&gt;' + dateString + '&lt;/div&gt;');
-                const logos = jq(document.getElementById('logos')).clone();
-                logos.removeClass("hidden");
-                logos.appendTo(w.document.body);
-                w.document.write("<p>");
-                    const givenName = jq(document.getElementsByClassName('zl-givenName')[0]).clone();
-                    givenName.text(givenName.text() + " ");
-                    w.document.write(givenName.html());
-                    const familyName = jq(document.getElementsByClassName('zl-familyName')[0]).clone();
-                    familyName.text(familyName.text().match(/[^,]*/));
-                    w.document.write(familyName.html());
-                    w.document.write("</p>");
-                w.document.write("<p>");
-                    const gender = jq(document.getElementsByClassName('gender-age')[0].children[0]).clone();
-                    gender.text(gender.text().match(/^\w+/) + ", ");
-                    w.document.write(gender.html());
-                    const age = jq(document.getElementsByClassName('gender-age')[0].children[1]).clone();
-                    age.text(age.text().match(/\d+/));
-                    w.document.write(age.html());
-                    w.document.write("</p>");
-                w.document.write("<p>");
-                    w.document.write("Diagnosticos: ");
-                    w.document.write(jq.map(jq(".diagnosis .matched-name"), d => d.textContent).join(", "));
-                    w.document.write("</p>");
-                jq(document.getElementById('drug-orders')).clone().appendTo(w.document.body);
-                const medNames = jq(w.document).find(".medication-name");
-                for (let i = 0; i &lt; medNames.length; i++) {
-                    const medP = jq(medNames[i]).parent();
-                    medP.css("display", "inline");
-                }
-                jq(document.getElementById('clinical-management-plan')).clone().appendTo(w.document.body);
-                jq(document.getElementById('contact-info-inline')).clone().appendTo(w.document.body);
-                w.document.write("<p>");
-                    w.document.write("Próxima cita: ");
-                    w.document.write(jq("#apptDate").find(".hasDatepicker").val());
-                    w.document.write("</p>");
-                w.document.write("</body>");
-                w.document.close();
-                w.setTimeout(() => {
-                    w.focus();
-                    w.print();
-                    w.close();
-                }, 1000);
-            }
-        </script>
-
-        <button onclick="print_prescription()" type="button">
+        <button onclick="printPrescription()" type="button">
             <uimessage code="pihcore.visitNote.printPrescriptions" />
         </button>
     </div>

@@ -1,7 +1,7 @@
 openmrs-config-ces
 ==============================
 
-### Prequistes
+### Prerequistes
 
 Some utility scripts, "install.sh" and "watch.sh", have been written to ease having to manually run mvn install
 and watch commands on both this project and the "openmrs-config-pihemr" project.

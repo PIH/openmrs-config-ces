@@ -220,7 +220,7 @@
 
                 <p id="calculated-bmi-continue">
                     <input type="hidden" name="focus-in-bmi-question" id="hidden-calculated-bmi" />
-                    <uimessage code="mirebalais.vitals.calculatedField.continue"/>
+                    Pulsar tecla Tab o Enter para continuar
                 </p>
             </fieldset>
 
@@ -255,8 +255,8 @@
             <h3><uimessage code="pihcore.lab.isFastingGlucose"/></h3>
             <p>
                 <obs id="fasting-for-glucose" conceptId="PIH:Fasting for blood glucose test"
-                     answerConceptIds="PIH:YES,PIH:NO" answerCodes="yes,no"
-                     style="radio" answerSeparator="" />
+                     answerConceptIds="PIH:YES,PIH:NO"
+                     style="radio" answerSeparator=""/>
             </p>
         </fieldset>
 
@@ -290,10 +290,34 @@
 
         <fieldset>
             <legend><uimessage code="mirebalais.vitals.respiratoryRate.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.respiratoryRate.title"/></h3>
+            
 
             <p>
                 <obs conceptId="PIH:RESPIRATORY RATE" id="respiratory_rate" showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Tamizaje salud mental</legend>
+
+            <h2>Tamizaje salud mental</h2><br/>
+
+            <a href="/openmrs/ms/uiframework/resource/file/configuration/pih/images/PHQ2yGAD2-CES.pdf"
+               target="_blank" 
+               rel="noopener noreferrer">
+               Calcular PHQ-2 y GAD-2
+            </a><br/><br/>
+            
+            <h3>PHQ-2</h3>
+
+            <p>
+                <obs conceptId="PIH:PHQ-2"/>
+            </p><br/>
+
+            <h3>GAD-2</h3>
+
+            <p>
+                <obs conceptId="PIH:GAD-2"/>
             </p>
         </fieldset>
 

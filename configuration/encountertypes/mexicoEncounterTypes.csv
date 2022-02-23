@@ -1,2 +1,4 @@
 Uuid,Void/Retire,Name,Description
 ${encounterType.mexicoConsult.uuid},0,Consult,A doctor consult at one of our primary care clinics
+${encounterType.clinicalHistory.uuid},0,Clinical History,form clinical history for patient
+${encounterType.ultrasound.uuid},0,Ultrasound Form,form Ultrasound for patient

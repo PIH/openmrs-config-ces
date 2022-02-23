@@ -6,7 +6,7 @@
     <name>CES OpenMRS Configuration</name>
     <description>Top-Level configuration for CES OpenMRS distro</description>
     <url>https://github.com/PIH/openmrs-config-ces</url>
-    <version>1.7.0-SNAPSHOT</version>
+    <version>1.19.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <organization>
@@ -36,18 +36,18 @@
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
             <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
 
     <repositories>
         <repository>
             <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/public</url>
+            <url>https://s01.oss.sonatype.org/content/repositories/public</url>
         </repository>
     </repositories>
 
@@ -63,14 +63,14 @@
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.openmrs.maven.plugins</groupId>
                 <artifactId>openmrs-packager-maven-plugin</artifactId>
-                <version>1.4.0</version>
+                <version>1.6.0</version>
                 <executions>
                     <execution>
                         <id>generate-resource-filters</id>
@@ -92,6 +92,30 @@
                         <goals>
                             <goal>package-configurations</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-liquibase-sql-to-petl</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/openmrs-packager-config/configuration/pih/petl/jobs/sql/utils/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/openmrs-packager-config/configuration/pih/liquibase/sql/</directory>
+                                    <includes>
+                                        <include>*.sql</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
