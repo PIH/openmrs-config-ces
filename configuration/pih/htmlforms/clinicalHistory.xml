@@ -169,22 +169,100 @@
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Hereditarios">
 
-        <ifMode mode="VIEW" include="false" >
-                <script type="text/javascript">
-                    jq(function () {
-                        setupRespiratoryRisk('<lookup expression="fn.latestObs('PIH:12586').valueNumeric"/>',
-                                             '<lookup expression="fn.latestObs('PIH:12998').valueNumeric"/>'
-                        );
-                    });
-                </script>
-        </ifMode> 
-
         <p class="font-size-16 centered-header">Diagnósticos de antecedentes familiares:</p>
         <div class="four-columns margin-bottom">
-             <familyHistoryRelativeCheckboxes concept="CIEL:121375" label="Asma" relatives="PIH:FATHER,PIH:MOTHER,PIH:OTHER"/>
-             <familyHistoryRelativeCheckboxes concept="CIEL:119481" label="Diabetes" relatives="PIH:FATHER,PIH:MOTHER,PIH:OTHER"/>
-             <familyHistoryRelativeCheckboxes concept="CIEL:155" label="Epilepsia" relatives="PIH:FATHER,PIH:MOTHER,PIH:OTHER"/>
-             <familyHistoryRelativeCheckboxes concept="CIEL:139071" label="Enfermedad del corazón" relatives="PIH:FATHER,PIH:MOTHER,PIH:OTHER"/>
+            
+
+                <obsgroup groupingConceptId="CIEL:160593">
+                    <obs    id="familyhistoryasma"
+                            conceptId="CIEL:160592" 
+                            answerConceptIds="PIH:ASTHMA" 
+                            style="radio"
+                            answerSeparator="">
+                        <controls>
+                            <when value="PIH:ASTHMA" thenDisplay="#asma"/>
+                        </controls>
+                    </obs>
+
+                    <div id="asma">
+
+                            <p>Parentesco(s)</p>
+                            <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
+                            <br/>
+                            <p>Descripcion de enferdedad(s)</p>
+                            <obs conceptId="CIEL:160618"/>
+
+                    </div>
+
+                    <obs    id="familyhistorydiabetes"
+                            conceptId="CIEL:160592" 
+                            answerConceptIds="CIEL:119481" 
+                            style="radio"
+                            answerSeparator="">
+                        <controls>
+                            <when value="CIEL:119481" thenDisplay="#diabetes"/>
+                        </controls>
+                    </obs>
+
+                    <div id="diabetes">
+
+                            <p>Parentesco(s)</p>
+                            <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
+                            <br/>
+                            <p>Descripcion de enferdedad(s)</p>
+                            <obs conceptId="CIEL:160618"/>
+
+                    </div>
+
+                </obsgroup>
+            
+        </div>
+
+        <div class="four-columns margin-bottom">
+            
+
+                <obsgroup groupingConceptId="CIEL:160593">
+                    <obs    id="familyhistoryepilep"
+                            conceptId="CIEL:160592" 
+                            answerConceptIds="CIEL:155" 
+                            style="radio"
+                            answerSeparator="">
+                        <controls>
+                            <when value="CIEL:155" thenDisplay="#epilep"/>
+                        </controls>
+                    </obs>
+
+                    <div id="epilep">
+                            <p>Parentesco(s)</p>
+                            <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
+                            <br/>
+                            <p>Descripcion de enferdedad(s)</p>
+                            <obs conceptId="CIEL:160618"/>
+
+                    </div>
+
+                    <obs    id="familyhistorycardiovasculares"
+                            conceptId="CIEL:160592" 
+                            answerConceptIds="CIEL:139071" 
+                            style="radio"
+                            answerSeparator="">
+                        <controls>
+                            <when value="CIEL:139071" thenDisplay="#cardiovasculares"/>
+                        </controls>
+                    </obs>
+
+                    <div id="cardiovasculares">
+
+                            <p>Parentesco(s)</p>
+                            <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
+                            <br/>
+                            <p>Descripcion de enferdedad(s)</p>
+                            <obs conceptId="CIEL:160618"/>
+
+                    </div>
+
+                </obsgroup>
+            
         </div>
 
         
