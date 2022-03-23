@@ -671,8 +671,7 @@
             <div>
                 <lookup class="hidden" expression="fn.latestObs('PIH:12998').valueNumeric"/>
                 <obs id="AnosFumando"
-                     conceptId="PIH:12998" 
-                     allowFutureDates="false"
+                     conceptId="PIH:12998"
                      labelText="Tiempo fumando en años"/>
             </div>
 
