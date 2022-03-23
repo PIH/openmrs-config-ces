@@ -330,21 +330,3 @@ function sectionDisplayDx() {
     });
 
 }
-
-function sectionVisibilityForGender(generopatient){
-
-  if(generopatient=='M'){
-
-    jq("#SectionGinecoobstetrico").hide();
-    jq("#SectionAndrologico").show();
-
-  }
-
-  if(generopatient=='F'){
-
-    jq("#SectionGinecoobstetrico").show();
-    jq("#SectionAndrologico").hide();
-
-  }
-
-}

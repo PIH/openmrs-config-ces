@@ -61,7 +61,7 @@
 
         .four-columns > div {
             display: table-cell;
-            width: 20%;
+            width: 25%;
         }
 
         .centered-header{
@@ -936,541 +936,543 @@
     
     </section>
 
-    <script type="text/javascript">
-                jq(function() {
-                    sectionVisibilityForGender('<lookup expression="patient.gender"/>');
-                });
-    </script>
+    <includeIf velocityTest="$patient.gender == 'F'">
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Gineco-obstétricos" id="SectionGinecoobstetrico">
+        <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Gineco-obstétricos" id="SectionGinecoobstetrico">
 
-        <div class="three-columns margin-bottom"> 
+            <div class="three-columns margin-bottom"> 
 
-            <div>
+                <div>
 
-                <p>Edad de menarca </p>        
-                <obs conceptId="CIEL:160598" 
-                     showUnits="false"/>
+                    <p>Edad de menarca </p>        
+                    <obs conceptId="CIEL:160598" 
+                        showUnits="false"/>
 
-            </div>
+                </div>
 
-            <div>
+                <div>
 
-                <p>Edad que inicio su vida sexual activa </p>                   
-                <obs conceptId="CIEL:163587" 
-                     showUnits="false"/>
+                    <p>Edad que inicio su vida sexual activa </p>                   
+                    <obs conceptId="CIEL:163587" 
+                        showUnits="false"/>
 
-            </div>
+                </div>
 
-            <div>
+                <div>
 
-                <p>Tipo de sangre </p>
-                <obs conceptId="PIH:BLOOD TYPING"
-                     answerConceptIds="CIEL:690,CIEL:692,CIEL:694,CIEL:696,CIEL:699,CIEL:701,CIEL:1230,CIEL:1231,PIH:unknown"/>
-            </div>
-                   
-        </div> 
+                    <p>Tipo de sangre </p>
+                    <obs conceptId="PIH:BLOOD TYPING"
+                        answerConceptIds="CIEL:690,CIEL:692,CIEL:694,CIEL:696,CIEL:699,CIEL:701,CIEL:1230,CIEL:1231,PIH:unknown"/>
+                </div>
+                    
+            </div> 
 
-        <div class="margin-bottom"> 
-            <h2 style="display: inline">Ciclo menstrual</h2>
-            <label style="display: inline">(Frecuencia, duración, cantidad, dismenorrea, etc)</label>
-            <obs conceptId="PIH:Menstrual cycle description" 
-                style="textarea"
-                rows="3"/>
-        </div>             
-            
-        <div class="three-columns margin-bottom">
+            <div class="margin-bottom"> 
+                <h2 style="display: inline">Ciclo menstrual</h2>
+                <label style="display: inline">(Frecuencia, duración, cantidad, dismenorrea, etc)</label>
+                <obs conceptId="PIH:Menstrual cycle description" 
+                    style="textarea"
+                    rows="3"/>
+            </div>             
                 
-            <div>
-                <label>
-                    <uimessage code="pihcore.mch.grava"/>
-                </label>
-                <obs conceptId="CIEL:5624"/>
-            </div>
+            <div class="three-columns margin-bottom">
+                    
+                <div>
+                    <label>
+                        <uimessage code="pihcore.mch.grava"/>
+                    </label>
+                    <obs conceptId="CIEL:5624"/>
+                </div>
 
-            <div>
-                <label>
-                    <uimessage code="pihcore.mch.para"/>
-                </label>
-                <obs conceptId="CIEL:1053"/>
-            </div>
+                <div>
+                    <label>
+                        <uimessage code="pihcore.mch.para"/>
+                    </label>
+                    <obs conceptId="CIEL:1053"/>
+                </div>
 
-            <div>
-                <label>
-                    <uimessage code="pihcore.mch.cesarian"/>
-                </label>
-                <obs conceptId="CIEL:160081"/>
-            </div>
-
-        </div>
-
-        <div class="three-columns margin-bottom"> 
-
-            <div>
-
-                <p>Perdidas menores de 20 SDG </p>        
-                <obs conceptId="PIH:13733" 
-                     showUnits="false"/>
+                <div>
+                    <label>
+                        <uimessage code="pihcore.mch.cesarian"/>
+                    </label>
+                    <obs conceptId="CIEL:160081"/>
+                </div>
 
             </div>
 
-            <div>
+            <div class="three-columns margin-bottom"> 
 
-                <p>Perdidas mayores de 20 SDG </p>                   
-                <obs conceptId="PIH:13734" 
-                     showUnits="false"/>
+                <div>
+
+                    <p>Perdidas menores de 20 SDG </p>        
+                    <obs conceptId="PIH:13733" 
+                        showUnits="false"/>
+
+                </div>
+
+                <div>
+
+                    <p>Perdidas mayores de 20 SDG </p>                   
+                    <obs conceptId="PIH:13734" 
+                        showUnits="false"/>
+
+                </div>
+
+                <div>
+
+                    <p>Fecha de último evento obstétrico </p>        
+                    <obs conceptId="CIEL:160602"/>
+
+                </div>
+                    
+            </div>
+
+            <div class="margin-bottom"> 
+
+                <h2 style="display: inline">Notas</h2>
+                <label style="display: inline">(Descripción de cada evento obstétrico – semanas de nacimiento, peso al nacer-, fechas de los mismos y complicaciones -hemorragias, infecciones, hospitalizaciones prologadas, trastornos hipertensivos del embarazo, diabetes gestacional, RPM)</label>
+                <obs conceptId="PIH:6760" 
+                    style="textarea" 
+                    rows="3"/> 
+                    
+            </div>
+
+            <div class="four-columns margin-bottom"> 
+
+                <div>      
+
+                    <obs conceptId="PIH:11117"
+                        labelText="Número de hijos"/>
+
+                </div>
+
+                <div>
+                
+                    <obs conceptId="CIEL:1427" 
+                        allowFutureDates="false"
+                        labelText="FUM"/>
+
+                </div>
+
+                <div>
+                
+                    <obs conceptId="PIH:Menopause has occurred"
+                        labelText="Ha pasado por la menopausia"/>
+
+                </div>
+
+                <div>
+                
+                    <obs conceptId="CIEL:160599"
+                        labelText="Edad que tuvo menopasia"/>
+
+                </div>
+                    
+            </div>
+
+            <div class="margin-bottom">
+                <h2 style="display: inline">Enfermedades de transmisión sexual</h2>
+                <label style="display: inline">(Diagnóstico, tratamiento)</label>
+                <obs conceptId="PIH:SEXUALLY TRANSMITTED DISEASE OTHER"
+                    style="textarea" 
+                    rows="3"/>
 
             </div>
 
-            <div>
+            <div class="two-columns margin-bottom"> 
 
-                <p>Fecha de último evento obstétrico </p>        
-                <obs conceptId="CIEL:160602"/>
+                <div>      
+                    <obs conceptId="CIEL:5281"
+                        labelText="Método de planificación familiar usados"
+                        style="textarea" 
+                        rows="3"/>
 
-            </div>
-                   
-        </div>
+                </div>
 
-        <div class="margin-bottom"> 
+                <div>      
+                    <obs conceptId="PIH:METHOD OF FAMILY PLANNING"
+                        labelText="Método de planificación familiar usado actualmente"/>
 
-            <h2 style="display: inline">Notas</h2>
-            <label style="display: inline">(Descripción de cada evento obstétrico – semanas de nacimiento, peso al nacer-, fechas de los mismos y complicaciones -hemorragias, infecciones, hospitalizaciones prologadas, trastornos hipertensivos del embarazo, diabetes gestacional, RPM)</label>
-            <obs conceptId="PIH:6760" 
-                 style="textarea" 
-                 rows="3"/> 
-                   
-        </div>
-
-        <div class="four-columns margin-bottom"> 
-
-            <div>      
-
-                <obs conceptId="PIH:11117"
-                     labelText="Número de hijos"/>
-
+                </div>
+                    
             </div>
 
-            <div>
+            <div class="margin-bottom"> 
+
+                <obs id="TestExampapanicolaou"
+                    conceptId="CIEL:163952"
+                    answerConceptIds="PIH:YES,PIH:NO"
+                    labelText="Se ha hecho examen de papanicolaou"> 
+
+                    <controls>
+                        <when value="PIH:YES" thenDisplay="#DataofTestpapanicolaou"/>
+                    </controls>
+                </obs>
+
+            </div>
+
+            <div class="section-container margin-bottom" id="DataofTestpapanicolaou">
+
+                <table class="section-container">
+                    <tr>
+                        <th>
+                            <label>
+                                Fecha de examen
+                            </label>
+                        </th>
+
+                        <th>
+                            <label>
+                                Resultado
+                            </label>
+                        </th>
+
+                        <th>
+                            <label>
+                                Comentario
+                            </label>
+                        </th>
+                    </tr> 
+
+                    <tr>
+                        <obsgroup groupingConceptId="CIEL:160714">
+                            <td>
+                                <obs conceptId="CIEL:160715"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:885"
+                                    answerConceptIds="PIH:HPV negative without cervical lesion,PIH:Positive HPV without cervical lesion,CIEL:158242,CIEL:158243,CIEL:145808,CIEL:145805,CIEL:155209,CIEL:141291"
+                                    answerLabels="VPH Negativo, sin lesión cervical, VPH Positivo, sin lesión cervical, Células escamosas atípicas de significado indeterminado, Células escamosas atípicas que no pueden excluir una lesión intraepitelial escamosa de alto grado, Lesiones intraepiteliales escamosas de bajo grado, Lesiones intraepiteliales escamosas de alto grado, Células glandulares atípicas, Adenocarcinoma endocervical in situ"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160716"
+                                    style="textarea" 
+                                    rows="3"/> 
+                            </td>
+                        </obsgroup>
+                    </tr>
+
+                    <tr>
+                        <obsgroup groupingConceptId="CIEL:160714">
+                            <td>
+                                <obs conceptId="CIEL:160715"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:885"
+                                    answerConceptIds="PIH:HPV negative without cervical lesion,PIH:Positive HPV without cervical lesion,CIEL:158242,CIEL:158243,CIEL:145808,CIEL:145805,CIEL:155209,CIEL:141291"
+                                    answerLabels="VPH Negativo, sin lesión cervical, VPH Positivo, sin lesión cervical, Células escamosas atípicas de significado indeterminado, Células escamosas atípicas que no pueden excluir una lesión intraepitelial escamosa de alto grado, Lesiones intraepiteliales escamosas de bajo grado, Lesiones intraepiteliales escamosas de alto grado, Células glandulares atípicas, Adenocarcinoma endocervical in situ"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160716"
+                                    style="textarea" 
+                                    rows="3"/> 
+                            </td>
+                        </obsgroup>
+                    </tr> 
+
+                    <tr>
+                        <obsgroup groupingConceptId="CIEL:160714">
+                            <td>
+                                <obs conceptId="CIEL:160715"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:885"
+                                    answerConceptIds="PIH:HPV negative without cervical lesion,PIH:Positive HPV without cervical lesion,CIEL:158242,CIEL:158243,CIEL:145808,CIEL:145805,CIEL:155209,CIEL:141291"
+                                    answerLabels="VPH Negativo, sin lesión cervical, VPH Positivo, sin lesión cervical, Células escamosas atípicas de significado indeterminado, Células escamosas atípicas que no pueden excluir una lesión intraepitelial escamosa de alto grado, Lesiones intraepiteliales escamosas de bajo grado, Lesiones intraepiteliales escamosas de alto grado, Células glandulares atípicas, Adenocarcinoma endocervical in situ"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160716"
+                                    style="textarea" 
+                                    rows="3"/> 
+                            </td>
+                        </obsgroup>
+                    </tr>   
+
+                </table>
             
-                <obs conceptId="CIEL:1427" 
-                     allowFutureDates="false"
-                     labelText="FUM"/>
+            </div>
 
+            <!-- mama-->
+
+            <div class="margin-bottom">
+
+                <obs id="TestExamMama"
+                    conceptId="PIH:Breast exam status"
+                    answerConceptIds="PIH:YES,PIH:NO"
+                    labelText="Se ha hecho exploración de mama"> 
+
+                    <controls>
+                        <when value="PIH:YES" thenDisplay="#DataofTestmama"/>
+                    </controls>
+                </obs>
+
+            </div>
+
+            <div class="section-container margin-bottom" id="DataofTestmama">
+
+                <table>
+                    <tr>
+                        <th>
+                            <label>
+                                Fecha de examen
+                            </label>
+                        </th>
+
+                        <th>
+                            <label>
+                                Comentario
+                            </label>
+                        </th>
+                    </tr> 
+
+                    <tr>
+                        <obsgroup groupingConceptId="CIEL:160714">
+                            <td>
+                                <obs conceptId="CIEL:160715"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160716"
+                                    style="textarea" 
+                                    rows="3"/> 
+                            </td>
+                        </obsgroup>
+                    </tr>
+
+                    <tr>
+                        <obsgroup groupingConceptId="CIEL:160714">
+                            <td>
+                                <obs conceptId="CIEL:160715"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160716"
+                                    style="textarea" 
+                                    rows="3"/> 
+                            </td>
+                        </obsgroup>
+                    </tr> 
+
+                    <tr>
+                        <obsgroup groupingConceptId="CIEL:160714">
+                            <td>
+                                <obs conceptId="CIEL:160715"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160716"
+                                    style="textarea" 
+                                    rows="3"/> 
+                            </td>
+                        </obsgroup>
+                    </tr>   
+
+                </table>
+            
+            </div>
+
+        </section>
+
+    </includeIf>
+
+    <includeIf velocityTest="$patient.gender == 'M'">
+
+        <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Andrológicos" id="SectionAndrologico">
+            
+            <div class="margin-bottom"> 
+
+                <obs id="TestExamProstata"
+                    conceptId="PIH:Prostate exam status"
+                    answerConceptIds="PIH:YES,PIH:NO"
+                    labelText="Se ha hecho exploración de próstata"> 
+
+                    <controls>
+                        <when value="PIH:YES" thenDisplay="#DataofTestProstata"/>
+                    </controls>
+                </obs>
+
+            </div>
+
+            <div class="section-container margin-bottom" id="DataofTestProstata">
+
+                <table>
+                    <tr>
+                        <th>
+                            <label>
+                                Fecha de examen
+                            </label>
+                        </th>
+
+                        <th>
+                            <label>
+                                Comentario
+                            </label>
+                        </th>
+                    </tr> 
+
+                    <tr>
+                        <obsgroup groupingConceptId="CIEL:160714">
+                            <td>
+                                <obs conceptId="CIEL:160715"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160716"
+                                    style="textarea" 
+                                    rows="3"/> 
+                            </td>
+                        </obsgroup>
+                    </tr>
+
+                    <tr>
+                        <obsgroup groupingConceptId="CIEL:160714">
+                            <td>
+                                <obs conceptId="CIEL:160715"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160716"
+                                    style="textarea" 
+                                    rows="3"/> 
+                            </td>
+                        </obsgroup>
+                    </tr> 
+
+                    <tr>
+                        <obsgroup groupingConceptId="CIEL:160714">
+                            <td>
+                                <obs conceptId="CIEL:160715"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160716"
+                                    style="textarea" 
+                                    rows="3"/> 
+                            </td>
+                        </obsgroup>
+                    </tr>   
+
+                </table>
+            
+            </div>
+
+            <div class="margin-bottom"> 
+
+                <obs id="TestAntigenoProstata"
+                    conceptId="PIH:PSA test status"
+                    answerConceptIds="PIH:YES,PIH:NO"
+                    labelText="Se ha hecho antígeno prostático"> 
+
+                    <controls>
+                        <when value="PIH:YES" thenDisplay="#DataofAntigenoProstata"/>
+                    </controls>
+                </obs>
+
+            </div>
+
+            <div class="section-container margin-bottom" id="DataofAntigenoProstata">
+
+                <table>
+                    <tr>
+                        <th>
+                            <label>
+                                Fecha de examen
+                            </label>
+                        </th>
+
+                        <th>
+                            <label>
+                                Resultado
+                            </label>
+                        </th>
+
+                        <th>
+                            <label>
+                                Resultado (ng/mL)
+                            </label>
+                        </th>
+
+                        <th>
+                            <label>
+                                Comentario
+                            </label>
+                        </th>
+                    </tr> 
+
+                    <tr>
+                        <obsgroup groupingConceptId="CIEL:160714">
+                            <td>
+                                <obs conceptId="CIEL:160715"/>
+                            </td>
+                            <td>
+                                <obs id="ResultTestAntigenoProstata"
+                                    conceptId="CIEL:166423"
+                                    answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160913"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160716"
+                                    style="textarea" 
+                                    rows="3"/> 
+                            </td>
+                        </obsgroup>
+                    </tr>
+
+                    <tr>
+                        <obsgroup groupingConceptId="CIEL:160714">
+                            <td>
+                                <obs conceptId="CIEL:160715"/>
+                            </td>
+                            <td>
+                                <obs id="ResultTestAntigenoProstata"
+                                    conceptId="CIEL:166423"
+                                    answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160913"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160716"
+                                    style="textarea" 
+                                    rows="3"/> 
+                            </td>
+                        </obsgroup>
+                    </tr> 
+
+                    <tr>
+                        <obsgroup groupingConceptId="CIEL:160714">
+                            <td>
+                                <obs conceptId="CIEL:160715"/>
+                            </td>
+                            <td>
+                                <obs id="ResultTestAntigenoProstata"
+                                    conceptId="CIEL:166423"
+                                    answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160913"/>
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:160716"
+                                    style="textarea" 
+                                    rows="3"/> 
+                            </td>
+                        </obsgroup>
+                    </tr>   
+
+                </table>
+            
             </div>
 
             <div>
-            
-                <obs conceptId="PIH:Menopause has occurred"
-                     labelText="Ha pasado por la menopausia"/>
+
+                <h2 style="display: inline">Otros antecedentes andrológicos</h2>
+                <label style="display: inline">(Circuncisión, criptorquidia, inicio de VSA, antecedentes de ITS, uso de protección en relaciones sexuales, trastornos de la erección, andropausia)</label>
+                <obs conceptId="PIH:Male health comment" 
+                    style="textarea" 
+                    rows="3"/> 
 
             </div>
 
-            <div>
-            
-                <obs conceptId="CIEL:160599"
-                     labelText="Edad que tuvo menopasia"/>
+        </section>
 
-            </div>
-                   
-        </div>
-
-        <div class="margin-bottom">
-            <h2 style="display: inline">Enfermedades de transmisión sexual</h2>
-            <label style="display: inline">(Diagnóstico, tratamiento)</label>
-            <obs conceptId="PIH:SEXUALLY TRANSMITTED DISEASE OTHER"
-                 style="textarea" 
-                 rows="3"/>
-
-        </div>
-
-        <div class="two-columns margin-bottom"> 
-
-            <div>      
-                <obs conceptId="CIEL:5281"
-                     labelText="Método de planificación familiar usados"
-                     style="textarea" 
-                     rows="3"/>
-
-            </div>
-
-            <div>      
-                <obs conceptId="PIH:METHOD OF FAMILY PLANNING"
-                     labelText="Método de planificación familiar usado actualmente"/>
-
-            </div>
-                   
-        </div>
-
-        <div class="margin-bottom"> 
-
-            <obs id="TestExampapanicolaou"
-                 conceptId="CIEL:163952"
-                 answerConceptIds="PIH:YES,PIH:NO"
-                 labelText="Se ha hecho examen de papanicolaou"> 
-
-                 <controls>
-                    <when value="PIH:YES" thenDisplay="#DataofTestpapanicolaou"/>
-                 </controls>
-            </obs>
-
-        </div>
-
-        <div class="section-container margin-bottom" id="DataofTestpapanicolaou">
-
-            <table class="section-container">
-                <tr>
-                    <th>
-                        <label>
-                            Fecha de examen
-                        </label>
-                    </th>
-
-                    <th>
-                        <label>
-                            Resultado
-                        </label>
-                    </th>
-
-                    <th>
-                        <label>
-                            Comentario
-                        </label>
-                    </th>
-                </tr> 
-
-                <tr>
-                    <obsgroup groupingConceptId="CIEL:160714">
-                        <td>
-                            <obs conceptId="CIEL:160715"/>
-                        </td>
-                        <td>
-                             <obs conceptId="CIEL:885"
-                                  answerConceptIds="PIH:HPV negative without cervical lesion,PIH:Positive HPV without cervical lesion,CIEL:158242,CIEL:158243,CIEL:145808,CIEL:145805,CIEL:155209,CIEL:141291"
-                                  answerLabels="VPH Negativo, sin lesión cervical, VPH Positivo, sin lesión cervical, Células escamosas atípicas de significado indeterminado, Células escamosas atípicas que no pueden excluir una lesión intraepitelial escamosa de alto grado, Lesiones intraepiteliales escamosas de bajo grado, Lesiones intraepiteliales escamosas de alto grado, Células glandulares atípicas, Adenocarcinoma endocervical in situ"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160716"
-                                 style="textarea" 
-                                 rows="3"/> 
-                        </td>
-                    </obsgroup>
-                </tr>
-
-                <tr>
-                    <obsgroup groupingConceptId="CIEL:160714">
-                        <td>
-                            <obs conceptId="CIEL:160715"/>
-                        </td>
-                        <td>
-                             <obs conceptId="CIEL:885"
-                                  answerConceptIds="PIH:HPV negative without cervical lesion,PIH:Positive HPV without cervical lesion,CIEL:158242,CIEL:158243,CIEL:145808,CIEL:145805,CIEL:155209,CIEL:141291"
-                                  answerLabels="VPH Negativo, sin lesión cervical, VPH Positivo, sin lesión cervical, Células escamosas atípicas de significado indeterminado, Células escamosas atípicas que no pueden excluir una lesión intraepitelial escamosa de alto grado, Lesiones intraepiteliales escamosas de bajo grado, Lesiones intraepiteliales escamosas de alto grado, Células glandulares atípicas, Adenocarcinoma endocervical in situ"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160716"
-                                 style="textarea" 
-                                 rows="3"/> 
-                        </td>
-                    </obsgroup>
-                </tr> 
-
-                <tr>
-                    <obsgroup groupingConceptId="CIEL:160714">
-                        <td>
-                            <obs conceptId="CIEL:160715"/>
-                        </td>
-                        <td>
-                             <obs conceptId="CIEL:885"
-                                  answerConceptIds="PIH:HPV negative without cervical lesion,PIH:Positive HPV without cervical lesion,CIEL:158242,CIEL:158243,CIEL:145808,CIEL:145805,CIEL:155209,CIEL:141291"
-                                  answerLabels="VPH Negativo, sin lesión cervical, VPH Positivo, sin lesión cervical, Células escamosas atípicas de significado indeterminado, Células escamosas atípicas que no pueden excluir una lesión intraepitelial escamosa de alto grado, Lesiones intraepiteliales escamosas de bajo grado, Lesiones intraepiteliales escamosas de alto grado, Células glandulares atípicas, Adenocarcinoma endocervical in situ"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160716"
-                                 style="textarea" 
-                                 rows="3"/> 
-                        </td>
-                    </obsgroup>
-                </tr>   
-
-            </table>
-        
-        </div>
-
-        <!-- mama-->
-
-        <div class="margin-bottom">
-
-            <obs id="TestExamMama"
-                 conceptId="PIH:Breast exam status"
-                 answerConceptIds="PIH:YES,PIH:NO"
-                 labelText="Se ha hecho exploración de mama"> 
-
-                 <controls>
-                    <when value="PIH:YES" thenDisplay="#DataofTestmama"/>
-                 </controls>
-            </obs>
-
-        </div>
-
-        <div class="section-container margin-bottom" id="DataofTestmama">
-
-            <table>
-                <tr>
-                    <th>
-                        <label>
-                            Fecha de examen
-                        </label>
-                    </th>
-
-                    <th>
-                        <label>
-                            Comentario
-                        </label>
-                    </th>
-                </tr> 
-
-                <tr>
-                    <obsgroup groupingConceptId="CIEL:160714">
-                        <td>
-                            <obs conceptId="CIEL:160715"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160716"
-                                 style="textarea" 
-                                 rows="3"/> 
-                        </td>
-                    </obsgroup>
-                </tr>
-
-                <tr>
-                    <obsgroup groupingConceptId="CIEL:160714">
-                        <td>
-                            <obs conceptId="CIEL:160715"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160716"
-                                 style="textarea" 
-                                 rows="3"/> 
-                        </td>
-                    </obsgroup>
-                </tr> 
-
-                <tr>
-                    <obsgroup groupingConceptId="CIEL:160714">
-                        <td>
-                            <obs conceptId="CIEL:160715"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160716"
-                                 style="textarea" 
-                                 rows="3"/> 
-                        </td>
-                    </obsgroup>
-                </tr>   
-
-            </table>
-        
-        </div>
-
-    </section>
-
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Andrológicos" id="SectionAndrologico">
-        
-        <div class="margin-bottom"> 
-
-            <obs id="TestExamProstata"
-                 conceptId="PIH:Prostate exam status"
-                 answerConceptIds="PIH:YES,PIH:NO"
-                 labelText="Se ha hecho exploración de próstata"> 
-
-                 <controls>
-                    <when value="PIH:YES" thenDisplay="#DataofTestProstata"/>
-                 </controls>
-            </obs>
-
-        </div>
-
-        <div class="section-container margin-bottom" id="DataofTestProstata">
-
-            <table>
-                <tr>
-                    <th>
-                        <label>
-                            Fecha de examen
-                        </label>
-                    </th>
-
-                    <th>
-                        <label>
-                            Comentario
-                        </label>
-                    </th>
-                </tr> 
-
-                <tr>
-                    <obsgroup groupingConceptId="CIEL:160714">
-                        <td>
-                            <obs conceptId="CIEL:160715"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160716"
-                                 style="textarea" 
-                                 rows="3"/> 
-                        </td>
-                    </obsgroup>
-                </tr>
-
-                <tr>
-                    <obsgroup groupingConceptId="CIEL:160714">
-                        <td>
-                            <obs conceptId="CIEL:160715"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160716"
-                                 style="textarea" 
-                                 rows="3"/> 
-                        </td>
-                    </obsgroup>
-                </tr> 
-
-                <tr>
-                    <obsgroup groupingConceptId="CIEL:160714">
-                        <td>
-                            <obs conceptId="CIEL:160715"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160716"
-                                 style="textarea" 
-                                 rows="3"/> 
-                        </td>
-                    </obsgroup>
-                </tr>   
-
-            </table>
-        
-        </div>
-
-        <div class="margin-bottom"> 
-
-            <obs id="TestAntigenoProstata"
-                 conceptId="PIH:PSA test status"
-                 answerConceptIds="PIH:YES,PIH:NO"
-                 labelText="Se ha hecho antígeno prostático"> 
-
-                 <controls>
-                    <when value="PIH:YES" thenDisplay="#DataofAntigenoProstata"/>
-                 </controls>
-            </obs>
-
-        </div>
-
-        <div class="section-container margin-bottom" id="DataofAntigenoProstata">
-
-            <table>
-                <tr>
-                    <th>
-                        <label>
-                            Fecha de examen
-                        </label>
-                    </th>
-
-                    <th>
-                        <label>
-                            Resultado
-                        </label>
-                    </th>
-
-                    <th>
-                        <label>
-                            Resultado (ng/mL)
-                        </label>
-                    </th>
-
-                    <th>
-                        <label>
-                            Comentario
-                        </label>
-                    </th>
-                </tr> 
-
-                <tr>
-                    <obsgroup groupingConceptId="CIEL:160714">
-                        <td>
-                            <obs conceptId="CIEL:160715"/>
-                        </td>
-                        <td>
-                            <obs id="ResultTestAntigenoProstata"
-                                 conceptId="CIEL:166423"
-                                 answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160913"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160716"
-                                 style="textarea" 
-                                 rows="3"/> 
-                        </td>
-                    </obsgroup>
-                </tr>
-
-                <tr>
-                    <obsgroup groupingConceptId="CIEL:160714">
-                        <td>
-                            <obs conceptId="CIEL:160715"/>
-                        </td>
-                        <td>
-                            <obs id="ResultTestAntigenoProstata"
-                                 conceptId="CIEL:166423"
-                                 answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160913"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160716"
-                                 style="textarea" 
-                                 rows="3"/> 
-                        </td>
-                    </obsgroup>
-                </tr> 
-
-                <tr>
-                    <obsgroup groupingConceptId="CIEL:160714">
-                        <td>
-                            <obs conceptId="CIEL:160715"/>
-                        </td>
-                        <td>
-                            <obs id="ResultTestAntigenoProstata"
-                                 conceptId="CIEL:166423"
-                                 answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160913"/>
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:160716"
-                                 style="textarea" 
-                                 rows="3"/> 
-                        </td>
-                    </obsgroup>
-                </tr>   
-
-            </table>
-        
-        </div>
-
-        <div>
-
-            <h2 style="display: inline">Otros antecedentes andrológicos</h2>
-            <label style="display: inline">(Circuncisión, criptorquidia, inicio de VSA, antecedentes de ITS, uso de protección en relaciones sexuales, trastornos de la erección, andropausia)</label>
-            <obs conceptId="PIH:Male health comment" 
-                 style="textarea" 
-                 rows="3"/> 
-
-        </div>
-
-    </section>
+    </includeIf>
 
     <ifMode mode="VIEW" include="false">
         <h1>Padecimientos actuales</h1>
