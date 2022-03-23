@@ -44,6 +44,10 @@
             width: 100%;
         }
 
+        .font-size-10 {
+            font-size: 10px;
+        }
+
         .three-columns > div {
             display: table-cell;
             width: 33%;
@@ -129,10 +133,12 @@
         .hidden {
             display:none;
         }
+        
+        form select{
+            width: 30px;
+        }
 
     </style>
-
-  
 
     <div class="print-form-datestamps" style="display:none">
         <p><uimessage code="created_on"/>:
@@ -169,7 +175,7 @@
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Hereditarios">
 
-        <p class="font-size-16 centered-header">Diagnósticos de antecedentes familiares:</p>
+        <p class="centered-header">Diagnósticos de antecedentes familiares:</p>
             
             <obsgroup groupingConceptId="CIEL:160593">
 
@@ -192,7 +198,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
 
@@ -221,7 +227,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
 
@@ -251,7 +257,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
 
@@ -279,7 +285,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
                 </div>
@@ -306,7 +312,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
                 </div>
@@ -333,7 +339,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
                 </div>
@@ -361,7 +367,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
                 </div>
@@ -389,7 +395,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
                 </div>
@@ -401,7 +407,7 @@
                 <obs id="familyEdocrinological"
                      conceptId="CIEL:160592" 
                      answerConceptIds="CIEL:119235" 
-                     answerLabels="Edocrinológicas"
+                     answerLabels="Endocrinológicas"
                      style="radio"
                      answerSeparator="">
 
@@ -417,7 +423,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
                 </div>
@@ -445,7 +451,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
                 </div>
@@ -473,7 +479,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
                 </div>
@@ -501,7 +507,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
                 </div>
@@ -529,7 +535,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
                 </div>
@@ -557,7 +563,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
                 </div>
@@ -585,7 +591,7 @@
                         <obs conceptId="PIH:RELATIONSHIPS OF CONTACT"/>
                     </div>
                     <div>   
-                        <p>Descripcion de enferdedad(s)</p>
+                        <p>Descripción de enfermedades(s)</p>
                         <obs conceptId="CIEL:160618"/>
                     </div>
                 </div>
@@ -601,7 +607,6 @@
             <h2 style="display: inline">Alimentación</h2>
             <label style="display: inline">(Cantidad y frecuencia de consumo o ejemplo de dieta, si hay ocasiones en las que pasan hambre)</label>
                 <obs conceptId="PIH:Description of diet" 
-                     class="font-size-16"
                      style="textarea" 
                      rows="3"/>
             </div>
@@ -610,7 +615,6 @@
             <h2 style="display: inline">Vivienda</h2>
             <label style="display: inline">(Tipo de vivienda, número de cuartos, servicios, tipo de baño, convivencia con animales, cercanía a la clínica)</label>
                 <obs conceptId="PIH:Description of housing"
-                     class="font-size-16"
                      style="textarea"  
                      rows="3"/>
                     
@@ -622,7 +626,6 @@
             <h2 style="display: inline">Ocupación</h2>
             <label style="display: inline">(Actual y previa, factores de riesgo laboral, etc)</label>
                 <obs conceptId="PIH:Occupation history and risk factors" 
-                     class="font-size-16"
                      style="textarea" 
                      rows="3"/>
             </div>
@@ -631,7 +634,6 @@
                 <h2 style="display: inline">Higiene</h2>
                 <label style="display: inline">(Baño, cambio de ropa, aseo dental)</label>
                 <obs conceptId="PIH:Description of personal hygiene"
-                     class="font-size-16"
                      style="textarea"  
                      rows="4"/>
                     
@@ -641,13 +643,12 @@
         <div class="margin-bottom">
             <h2 style="display: inline">Vacunas</h2>
                 <obs conceptId="PIH:Description of vaccine history" 
-                     class="font-size-16"
                      style="textarea" 
                      rows="3"/>
         </div>
 
         <div class="margin-bottom">
-            <p class="font-size-16 centered-header">Otros antecedentes no patológicos</p>
+            <p class="centered-header">Otros antecedentes no patológicos</p>
             <obs conceptId="PIH:13749"
                  style="textarea" 
                  rows="3"/>
@@ -657,7 +658,7 @@
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Personales patológicos">
   
-        <p class="font-size-16 centered-header">Tabaco y alcohol</p>
+        <p class="centered-header">Tabaco y alcohol</p>
 
         <div class="two-columns margin-bottom">
             <div>
@@ -665,23 +666,21 @@
                 <obs id="NumeroCigarros"
                      conceptId="PIH:12586" 
                      showUnits="false"
-                     labelText="Número de cigarros por día"
-                     class="font-size-16"/>
+                     labelText="Número de cigarros por día"/>
             </div>
             <div>
                 <lookup class="hidden" expression="fn.latestObs('PIH:12998').valueNumeric"/>
                 <obs id="AnosFumando"
                      conceptId="PIH:12998" 
                      allowFutureDates="false"
-                     labelText="Tiempo fumando en años:"
-                     class="font-size-16"/>
+                     labelText="Tiempo fumando en años"/>
             </div>
 
         </div>
 
         <div class="two-columns margin-bottom">
             <div>
-                <p class="font-size-16">Ingiere bebidas alcoholicas</p>
+                <p>Ingiere bebidas alcohólicas</p>
                 <obs
                      conceptId="CIEL: 159449"
                      answerConceptIds="CIEL:1065, CIEL:1066"
@@ -693,8 +692,7 @@
                 <lookup class="hidden" expression="fn.latestObs('PIH:2241').valueNumeric"/>
                 <obs conceptId="PIH:2241" 
                      allowFutureDates="false"
-                     labelText="Tiempo tomando bebidas alcoholicas en años"
-                     class="font-size-16"/>
+                     labelText="Tiempo tomando bebidas alcoholicas en años"/>
             </div>
 
         </div>
@@ -725,7 +723,7 @@
 
                     <th>
                         <label>
-                            Tipo de tranfusión
+                            Tipo de transfusión
                         </label>
                     </th>
                 </tr> 
@@ -736,8 +734,7 @@
                             <obs conceptId="PIH:11064" allowTime="false"/> <!-- Admit date -->
                         </td>
                         <td>
-                            <obs conceptId="PIH:7864"
-                                 class="font-size-16"/>
+                            <obs conceptId="PIH:7864"/>
                         </td>
                     </obsgroup>
                 </tr>
@@ -748,8 +745,7 @@
                             <obs conceptId="PIH:11064" allowTime="false"/> <!-- Admit date -->
                         </td>
                         <td>
-                            <obs conceptId="PIH:7864"
-                                 class="font-size-16"/>
+                            <obs conceptId="PIH:7864"/>
                         </td>
                     </obsgroup>
                 </tr>
@@ -760,8 +756,7 @@
                             <obs conceptId="PIH:11064" allowTime="false"/> <!-- Admit date -->
                         </td>
                         <td>
-                            <obs conceptId="PIH:7864"
-                                 class="font-size-16"/>
+                            <obs conceptId="PIH:7864"/>
                         </td>
                     </obsgroup>
                 </tr>
@@ -777,7 +772,7 @@
             <table>
                 <tr>
                     <th>
-                        <label>Número de cirugias hasta el día de hoy</label>
+                        <label>Número de cirugías hasta el día de hoy</label>
                         <obsgroup groupingConceptId="PIH:13767">
                             <td>
                                 <obs id="ldl" 
@@ -817,7 +812,6 @@
                         </td>
                         <td>
                             <obs conceptId="PIH:Reason for procedure"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -834,7 +828,6 @@
                         </td>
                         <td>
                             <obs conceptId="PIH:Reason for procedure"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -851,7 +844,6 @@
                         </td>
                         <td>
                             <obs conceptId="PIH:Reason for procedure"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -900,7 +892,6 @@
                         </td>
                         <td>
                             <obs conceptId="PIH:11065"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -914,7 +905,6 @@
                         </td>
                         <td>
                             <obs conceptId="PIH:11065"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -928,7 +918,6 @@
                         </td>
                         <td>
                             <obs conceptId="PIH:11065"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -955,11 +944,11 @@
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Gineco-obstétricos" id="SectionGinecoobstetrico">
 
-        <div class="two-columns margin-bottom"> 
+        <div class="three-columns margin-bottom"> 
 
             <div>
 
-                <p class="font-size-16">Edad de menarca </p>        
+                <p>Edad de menarca </p>        
                 <obs conceptId="CIEL:160598" 
                      showUnits="false"/>
 
@@ -967,17 +956,24 @@
 
             <div>
 
-                <p class="font-size-16">Edad que inicio su vida sexual activa </p>                   
+                <p>Edad que inicio su vida sexual activa </p>                   
                 <obs conceptId="CIEL:163587" 
                      showUnits="false"/>
 
+            </div>
+
+            <div>
+
+                <p>Tipo de sangre </p>
+                <obs conceptId="PIH:BLOOD TYPING"
+                     answerConceptIds="CIEL:690,CIEL:692,CIEL:694,CIEL:696,CIEL:699,CIEL:701,CIEL:1230,CIEL:1231,PIH:unknown"/>
             </div>
                    
         </div> 
 
         <div class="margin-bottom"> 
             <h2 style="display: inline">Ciclo menstrual</h2>
-            <label style="display: inline">(Frecuencia, duración, cantidad, dismenorrea)</label>
+            <label style="display: inline">(Frecuencia, duración, cantidad, dismenorrea, etc)</label>
             <obs conceptId="PIH:Menstrual cycle description" 
                 style="textarea"
                 rows="3"/>
@@ -986,21 +982,21 @@
         <div class="three-columns margin-bottom">
                 
             <div>
-                <label class="font-size-16">
+                <label>
                     <uimessage code="pihcore.mch.grava"/>
                 </label>
                 <obs conceptId="CIEL:5624"/>
             </div>
 
             <div>
-                <label class="font-size-16">
+                <label>
                     <uimessage code="pihcore.mch.para"/>
                 </label>
                 <obs conceptId="CIEL:1053"/>
             </div>
 
             <div>
-                <label class="font-size-16">
+                <label>
                     <uimessage code="pihcore.mch.cesarian"/>
                 </label>
                 <obs conceptId="CIEL:160081"/>
@@ -1012,7 +1008,7 @@
 
             <div>
 
-                <p class="font-size-16">Perdidas menores de 20 SDG </p>        
+                <p>Perdidas menores de 20 SDG </p>        
                 <obs conceptId="PIH:13733" 
                      showUnits="false"/>
 
@@ -1020,7 +1016,7 @@
 
             <div>
 
-                <p class="font-size-16">Perdidas mayores de 20 SDG </p>                   
+                <p>Perdidas mayores de 20 SDG </p>                   
                 <obs conceptId="PIH:13734" 
                      showUnits="false"/>
 
@@ -1028,7 +1024,7 @@
 
             <div>
 
-                <p class="font-size-16">Fecha de último evento obstétrico </p>        
+                <p>Fecha de último evento obstétrico </p>        
                 <obs conceptId="CIEL:160602"/>
 
             </div>
@@ -1040,7 +1036,6 @@
             <h2 style="display: inline">Notas</h2>
             <label style="display: inline">(Descripción de cada evento obstétrico – semanas de nacimiento, peso al nacer-, fechas de los mismos y complicaciones -hemorragias, infecciones, hospitalizaciones prologadas, trastornos hipertensivos del embarazo, diabetes gestacional, RPM)</label>
             <obs conceptId="PIH:6760" 
-                 class="font-size-16"
                  style="textarea" 
                  rows="3"/> 
                    
@@ -1051,7 +1046,7 @@
             <div>      
 
                 <obs conceptId="PIH:11117"
-                     labelText="Numero de hijos"/>
+                     labelText="Número de hijos"/>
 
             </div>
 
@@ -1091,6 +1086,14 @@
         <div class="two-columns margin-bottom"> 
 
             <div>      
+                <obs conceptId="CIEL:5281"
+                     labelText="Método de planificación familiar usados"
+                     style="textarea" 
+                     rows="3"/>
+
+            </div>
+
+            <div>      
                 <obs conceptId="PIH:METHOD OF FAMILY PLANNING"
                      labelText="Método de planificación familiar usado actualmente"/>
 
@@ -1114,11 +1117,17 @@
 
         <div class="section-container margin-bottom" id="DataofTestpapanicolaou">
 
-            <table>
+            <table class="section-container">
                 <tr>
                     <th>
                         <label>
                             Fecha de examen
+                        </label>
+                    </th>
+
+                    <th>
+                        <label>
+                            Resultado
                         </label>
                     </th>
 
@@ -1135,8 +1144,12 @@
                             <obs conceptId="CIEL:160715"/>
                         </td>
                         <td>
+                             <obs conceptId="CIEL:885"
+                                  answerConceptIds="PIH:HPV negative without cervical lesion,PIH:Positive HPV without cervical lesion,CIEL:158242,CIEL:158243,CIEL:145808,CIEL:145805,CIEL:155209,CIEL:141291"
+                                  answerLabels="VPH Negativo, sin lesión cervical, VPH Positivo, sin lesión cervical, Células escamosas atípicas de significado indeterminado, Células escamosas atípicas que no pueden excluir una lesión intraepitelial escamosa de alto grado, Lesiones intraepiteliales escamosas de bajo grado, Lesiones intraepiteliales escamosas de alto grado, Células glandulares atípicas, Adenocarcinoma endocervical in situ"/>
+                        </td>
+                        <td>
                             <obs conceptId="CIEL:160716"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -1149,8 +1162,12 @@
                             <obs conceptId="CIEL:160715"/>
                         </td>
                         <td>
+                             <obs conceptId="CIEL:885"
+                                  answerConceptIds="PIH:HPV negative without cervical lesion,PIH:Positive HPV without cervical lesion,CIEL:158242,CIEL:158243,CIEL:145808,CIEL:145805,CIEL:155209,CIEL:141291"
+                                  answerLabels="VPH Negativo, sin lesión cervical, VPH Positivo, sin lesión cervical, Células escamosas atípicas de significado indeterminado, Células escamosas atípicas que no pueden excluir una lesión intraepitelial escamosa de alto grado, Lesiones intraepiteliales escamosas de bajo grado, Lesiones intraepiteliales escamosas de alto grado, Células glandulares atípicas, Adenocarcinoma endocervical in situ"/>
+                        </td>
+                        <td>
                             <obs conceptId="CIEL:160716"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -1163,8 +1180,12 @@
                             <obs conceptId="CIEL:160715"/>
                         </td>
                         <td>
+                             <obs conceptId="CIEL:885"
+                                  answerConceptIds="PIH:HPV negative without cervical lesion,PIH:Positive HPV without cervical lesion,CIEL:158242,CIEL:158243,CIEL:145808,CIEL:145805,CIEL:155209,CIEL:141291"
+                                  answerLabels="VPH Negativo, sin lesión cervical, VPH Positivo, sin lesión cervical, Células escamosas atípicas de significado indeterminado, Células escamosas atípicas que no pueden excluir una lesión intraepitelial escamosa de alto grado, Lesiones intraepiteliales escamosas de bajo grado, Lesiones intraepiteliales escamosas de alto grado, Células glandulares atípicas, Adenocarcinoma endocervical in situ"/>
+                        </td>
+                        <td>
                             <obs conceptId="CIEL:160716"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -1215,7 +1236,6 @@
                         </td>
                         <td>
                             <obs conceptId="CIEL:160716"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -1229,7 +1249,6 @@
                         </td>
                         <td>
                             <obs conceptId="CIEL:160716"
-                                vclass="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -1243,7 +1262,6 @@
                         </td>
                         <td>
                             <obs conceptId="CIEL:160716"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -1296,7 +1314,6 @@
                         </td>
                         <td>
                             <obs conceptId="CIEL:160716"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -1310,7 +1327,6 @@
                         </td>
                         <td>
                             <obs conceptId="CIEL:160716"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -1324,7 +1340,6 @@
                         </td>
                         <td>
                             <obs conceptId="CIEL:160716"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -1385,7 +1400,7 @@
                         </td>
                         <td>
                             <obs id="ResultTestAntigenoProstata"
-                                 conceptId="CIEL:10490"
+                                 conceptId="CIEL:166423"
                                  answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE"/>
                         </td>
                         <td>
@@ -1393,7 +1408,6 @@
                         </td>
                         <td>
                             <obs conceptId="CIEL:160716"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -1415,7 +1429,6 @@
                         </td>
                         <td>
                             <obs conceptId="CIEL:160716"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -1437,7 +1450,6 @@
                         </td>
                         <td>
                             <obs conceptId="CIEL:160716"
-                                 class="font-size-16"
                                  style="textarea" 
                                  rows="3"/> 
                         </td>
@@ -1453,7 +1465,6 @@
             <h2 style="display: inline">Otros antecedentes andrológicos</h2>
             <label style="display: inline">(Circuncisión, criptorquidia, inicio de VSA, antecedentes de ITS, uso de protección en relaciones sexuales, trastornos de la erección, andropausia)</label>
             <obs conceptId="PIH:Male health comment" 
-                 class="font-size-16"
                  style="textarea" 
                  rows="3"/> 
 
@@ -1465,12 +1476,12 @@
         <h1>Padecimientos actuales</h1>
     </ifMode>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Padecimientos">
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title">
         <div class="two-colums margin-bottom">
 
             <div class="margin-bottom">
 
-                <p class="font-size-16">Síntoma principal</p>
+                <p>Síntoma principal</p>
                 <obs conceptId="CIEL:160531"/>
 
             </div>
@@ -1478,7 +1489,6 @@
             <div>
                 <obs conceptId="PIH:6760" 
                      labelText="Síntomas adicionales"
-                     class="font-size-16"
                      style="textarea" 
                      rows="3"/>         
             </div>   
@@ -1487,20 +1497,18 @@
         <div class="two-columns margin-bottom">
             <div>
                 <obs conceptId="CIEL:162676" 
-                     labelText="Evolución de los síntomas"
-                     class="font-size-16"/>
+                     labelText="Evolución de los síntomas"/>
             </div>
 
             <div>
                 <obs conceptId="PIH:13751" 
                      labelText="Especificación de evolución de los síntomas"
-                     class="font-size-16"
                      style="textarea" 
                      rows="3"/>         
             </div>    
         </div>
 
-        <p class="font-size-16">Tratamiento usado anteriormente</p>
+        <p>Tratamiento usado anteriormente</p>
         <obs conceptId="PIH:Previous treatment with other medications, non-coded" 
              style="textarea" 
              rows="3"/>
@@ -1620,7 +1628,6 @@
             <div>
                 <obs conceptId="CIEL:165983" 
                      labelText="Exploración del cuello"
-                     class="font-size-16"
                      style="textarea" 
                      rows="3"/>
             </div>
@@ -1628,7 +1635,6 @@
             <div>
                 <obs conceptId="CIEL:163045" 
                      labelText="Exploración de cabeza"
-                     class="font-size-16"
                      style="textarea" 
                      rows="3"/>
                
@@ -1639,7 +1645,6 @@
             <div>
                 <obs conceptId="CIEL:160689" 
                      labelText="Exploración de torax"
-                     class="font-size-16"
                      style="textarea" 
                      rows="3"/>
             </div>
@@ -1647,7 +1652,6 @@
             <div>
                 <obs conceptId="CIEL:160947" 
                      labelText="Exploración de abdomen"
-                     class="font-size-16"
                      style="textarea" 
                      rows="3"/>
                
@@ -1658,7 +1662,6 @@
             <div>
                 <obs conceptId="PIH:13754" 
                      labelText="Exploración de extremidades"
-                     class="font-size-16"
                      style="textarea" 
                      rows="3"/>
                 
@@ -1682,17 +1685,24 @@
 
         <div class="two-columns margin-bottom">
             <div>
+            
+                <h2 style="display: inline">Aparato digestivo</h2>
+                <label class="font-size-10" style="display: inline">(Hambre, apetito, alteraciones de la masticación y salivación, disfagia, halitosis, náusea, vómito,
+                    rumiación, regurgitación, pirosis, aerofagia, eructos, meteorismo, distensión abdominal, flatulencia, hematemesis,
+                    ictericia, características de la heces fecales, diarrea, constipación, acolia, hipocolia, melena, rectorragia, parásitos,
+                    lienteria, esteatorrea, pujo, tenesmo y prurito anal.)
+                </label>
                 <obs conceptId="PIH:ROS GI COMMENT" 
-                     labelText="Aparato digestivo"
-                     class="font-size-16"
                      style="textarea" 
                      rows="3"/>
             </div>
 
             <div>
-                <obs conceptId="PIH:ROS Resp comment " 
-                     labelText="Aparato respiratorio"
-                     class="font-size-16"
+                <h2 style="display: inline">Aparato respiratorio</h2>
+                <label class="font-size-10" style="display: inline">(Rinorrea, rinolalia, epistaxis, tos, expectoración, disfonía, hemoptisis, vómica, cianosis, dolor
+                    torácico, disnea y sibilancias audibles a distancia.)
+                </label>
+                <obs conceptId="PIH:ROS Resp comment"
                      style="textarea" 
                      rows="3"/>
                
@@ -1701,17 +1711,27 @@
 
         <div class="two-columns margin-bottom">
             <div>
+                <h2 style="display: inline">Aparato urinario</h2>
+                <label class="font-size-10" style="display: inline">(Dolor renoureteral, disuria, anuria, oliguria, poliuria, polaquiuria, hematuria, piuria, coluria,
+                    urgencia, incontinencia, características del chorro, nictámero, goteo terminal y edema.)
+                </label>
                 <obs conceptId="PIH:ROS Urinary comment" 
-                     labelText="Aparato urinario"
-                     class="font-size-16"
                      style="textarea" 
                      rows="3"/>
             </div>
 
             <div>
-                <obs conceptId="PIH:ROS Reproductive comment" 
-                     labelText="Aparato genital"
-                     class="font-size-16"
+                <h2 style="display: inline">Aparato genital</h2>
+                <label class="font-size-10">(Masculino: alteraciones de la libido, práctica sexual (homo, hetero o bisexual), número de parejas
+                    sexuales, priapismo, alteraciones de la erección y de la eyaculación, secreción uretral, dolor testicular, alteraciones
+                    escrotales, sensación de cuerpo extraño en el periné y enfermedades (infecciones) de transmisión sexual.)
+                </label>
+                <label class="font-size-10">(Femenino: leucorrea, hemorragias transvaginales, alteraciones menstruales, alteraciones de la libido,
+                    práctica sexual (homo, hetero o bisexual), número de parejas, método de protección contra enfermedades (infecciones)
+                    de transmisión sexual, alteraciones del sangrado menstrual, dispareunia, perturbaciones y alteraciones sexuales,
+                    amenorrea y Papanicolaou.)
+                </label>
+                <obs conceptId="PIH:ROS Reproductive comment"
                      style="textarea" 
                      rows="3"/>
                
@@ -1720,17 +1740,22 @@
 
         <div class="two-columns margin-bottom">
             <div>
+                <h2 style="display: inline">Sistema cardiovascular</h2>
+                <label class="font-size-10">(Palpitaciones, dolor precordial, disnea de esfuerzo, disnea paroxística, apnea, cianosis,
+                    acúfenos, fosfenos, tinnitus, síncope, lipotimias y edema.)
+                </label>
                 <obs conceptId="PIH:ROS CV comment" 
-                     labelText="Sistema cardiovascular"
-                     class="font-size-16"
                      style="textarea" 
                      rows="3"/>
                 
             </div>  
 
             <div>
+                <h2 style="display: inline">Sistema nervioso</h2>
+                <label class="font-size-10">(Cefalea, paresias, plegias, parálisis, parestesias, movimientos anormales (temblores, tics, corea),
+                    alteraciones de la marcha, vértigo y mareos.)
+                </label>
                 <obs conceptId="PIH:ROS Nervous comment" 
-                     labelText="Sistema nervioso"
                      style="textarea" 
                      rows="3"/>
             </div> 
@@ -1738,17 +1763,19 @@
 
         <div class="two-columns margin-bottom">
             <div>
-                <obs conceptId="PIH:ROS Endocrine comment" 
-                     labelText="Sistema endocrino"
-                     class="font-size-16"
+                <h2 style="display: inline">Sistema endocrino</h2>
+                <label class="font-size-10" style="display: inline">(Intolerancia al frío y al calor, hipo o hiperactividad, aumento de volumen del cuello, polidipsia,
+                    polifagia, poliuria, cambios en los caracteres sexuales secundarios y aumento o pérdida de peso.)
+                </label>
+                <obs conceptId="PIH:ROS Endocrine comment"
                      style="textarea" 
                      rows="3"/>
                 
             </div>  
 
             <div>
-                <obs conceptId="PIH:ROS MS COMMENT" 
-                     labelText="Sistema locomotor"
+                <h2 style="display: inline">Sistema locomotor</h2>
+                <obs conceptId="PIH:ROS MS COMMENT"
                      style="textarea" 
                      rows="3"/>
             </div> 
