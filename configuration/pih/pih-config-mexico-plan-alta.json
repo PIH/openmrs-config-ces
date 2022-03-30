@@ -2,10 +2,10 @@
   "welcomeMessage": "EMR de Compañeros en Salud - Plan de la Libertad",
   "browserWarning": "Por favor utiliza <b>Google Chrome</b> como navagador",
 
-  "site": "PLAN_DE_LA_LIBERTAD_ALTA",
+  "site": "PLAN_DE_LA_LIBERTAD",
 
-  "primaryIdentifierPrefix": "PLAA",
-  "providerIdentifierPrefix": "PLAA",
+  "primaryIdentifierPrefix": "PLA",
+  "providerIdentifierPrefix": "PLA",
 
   "locationTags": {
     "Login Location": [
