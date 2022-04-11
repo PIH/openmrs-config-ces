@@ -337,41 +337,64 @@ function resultPHQ(){
 
   jq("#mental").find("select").change(function() {
 
-    var value = this.value;
+      let value = this.value;
 
-        if(value==5815){
+      if(value==5815){
 
-         valueCuestion = 0;
-    
-         result+= valueCuestion;
+        result += 0;
+            
+      }
+      if(value==5814){
+      
+        result += 1;
+      
+      }
+      
+      if(value==1019){
+      
+        result += 2;
+            
+      }
+      
+      if(value==5816){
+      
+        result += 3;
+
+      }
           
-        }
-        if(value==5814){
-
-          valueCuestion = 1;
-    
-          result+= valueCuestion;
-    
-        }
-    
-        if(value==1019){
-
-          valueCuestion = 2;
-    
-          result+= valueCuestion;
-          
-        }
-    
-        if(value==5816){
-
-          valueCuestion = 3;
-    
-          result+= valueCuestion;
-
-        }
-        
-        jq("#ResultPHQ9 input").val(result);
+      jq("#ResultPHQ9 input").val(result);
 
   });
 
+}
+
+function alertCuestion9PHQ(){
+
+  let selectCuestion9 = jq("#cuestion9 select");
+
+  jq(selectCuestion9).change(function() {
+
+      if(jq(this).val()==5815){
+
+        jq(".Alert").text("");
+        
+      }
+      if(jq(this).val()==5814){
+
+        jq(".Alert").text("No olvides hacer el plan de seguridad con este paciente. Además, en caso de que tenga factores de riesgo (intentos previos, poca red de apoyo, uso de sustancias, etc) y que tenga un plan más desarrollado y/o acceso al método no olvides que deberá romperse la confidencialidad y pedir a un familiar que no deje solo (a) al/la paciente por las siguientes 24 hrs.");
+
+      }
+
+      if(jq(this).val()==1019){
+
+        jq(".Alert").text("No olvides hacer el plan de seguridad con este paciente. Además, en caso de que tenga factores de riesgo (intentos previos, poca red de apoyo, uso de sustancias, etc) y que tenga un plan más desarrollado y/o acceso al método no olvides que deberá romperse la confidencialidad y pedir a un familiar que no deje solo (a) al/la paciente por las siguientes 24 hrs.");
+        
+      }
+
+      if(jq(this).val()==5816){
+
+        jq(".Alert").text("No olvides hacer el plan de seguridad con este paciente. Además, en caso de que tenga factores de riesgo (intentos previos, poca red de apoyo, uso de sustancias, etc) y que tenga un plan más desarrollado y/o acceso al método no olvides que deberá romperse la confidencialidad y pedir a un familiar que no deje solo (a) al/la paciente por las siguientes 24 hrs.");
+        
+      }
+  });
 }
