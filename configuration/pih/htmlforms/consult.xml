@@ -214,6 +214,10 @@
             width: 85%;
         }
 
+        .Alert{
+            color: red;
+        }
+
     </style>
 
     <div class="print-form-datestamps" style="display:none">
@@ -1071,34 +1075,108 @@
     </section>
 
     <!-- Mental -->
+    <script>
+        jq(function() {
+            resultPHQ();
+        });
+    </script>
     <section id="mental" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.mental">
         <div class="question-container">
             <div class="two-columns">
                 <div>
-                    <label>
-                        <uimessage code="pihcore.ncd.mental.phq9Score"/>
-                    </label>
-                    <br />
-                    <div class="small-text">
-                        <p>
-                            <lookup expression="fn.latestObs('CIEL:165137').obsDatetime" />
-                            <lookup complexExpression="#if($fn.latestObs('CIEL:165137')) &#8194; &#8227; &#8194; #end" />
-                            <lookup expression="fn.latestObs('CIEL:165137').valueNumeric" />
-                        </p>
-                    </div>
+                    <obs id="cuestion1"
+                         conceptId="PIH:Little interest or pleasure in doing things"
+                         labelText="¿Ha sentido poco interés en hacer las cosas (hacer su oficio, ir al cafetal)?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
                 </div>
+
                 <div>
-                    <div>
-                        <a href="/openmrs/ms/uiframework/resource/file/configuration/pih/images/PHQ9-2018.pdf"
-                           target="_blank" rel="noopener noreferrer">
-                            <uimessage code="pihcore.ncd.mental.phq9FormLink" />
-                        </a>
-                    </div>
-                    <div class="small">
-                        <obs conceptId="CIEL:165137"/>
-                    </div>
+                    <obs id="cuestion2"
+                         conceptId="PIH:Feeling down depressed or hopeless"
+                         labelText="¿Se ha sentido triste, desesperado(a) o decaído(a)?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
                 </div>
             </div>
+            <br/>
+
+            <div class="two-columns">
+                <div>
+                    <obs id="cuestion3"
+                         conceptId="PIH:Trouble falling or staying asleep or sleeping too much"
+                         labelText="¿Le ha costado trabajo dormirse(que le agarre sueño)? ¿o que duerma demasiado?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
+                </div>
+
+                <div>
+                    <obs id="cuestion4"
+                         conceptId="PIH:Feeling tired or having little energy"
+                         labelText="¿Se ha sentido cansado(a) o con poca energía?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
+                </div>
+            </div>
+            <br/>
+
+            <div class="two-columns">
+
+                <div>
+                    <obs id="cuestion5"
+                         conceptId="PIH:Little appetite or eating less"
+                         labelText="¿Ha tenido menos hambre o ha sentido que come menos? ¿o ha sentido que le dé más hambre o que come más de lo normal?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
+                </div>
+                <div>
+                    <obs id="cuestion6" 
+                         conceptId="PIH:Feels like they have failed someone"
+                         labelText="¿Ha sentido que le ha fallado a alguien o que le haya quedado mal a alguien o que se haya sentido culpable?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
+                </div>
+            </div>
+            <br/>
+
+            <div class="two-columns">
+
+                <div>
+                    <obs id="cuestion7"
+                         conceptId="PIH:Distracted easily"
+                         labelText="¿Se distrae fácilmente al ver la televisión/platicar con alguien/hacer el oficio/estar en cafetal por estar pensando mucho?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
+                </div>
+
+                <div>
+                    <obs id="cuestion8"
+                         conceptId="PIH:Feels slower than normal"
+                         labelText="¿Se ha sentido más lento(a) de lo normal o que se tarda más en hacer su oficio? ¿o que esté tan intranquilo(a) que no se pueda dejar de mover?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
+                </div>
+            </div>
+            <br/>
+
+            <div class="tres-columns">
+
+                <div>
+                    <obs id="cuestion9"
+                         conceptId="PIH:Has thought about ending their life"
+                         labelText="Muchas veces, cuando hay muchos problemas y la vida es difícil es común llegar a pensar que sería mejor estar muerto(a). En las últimas dos semanas, ¿ha llegado a pensar en quitarse la vida o en desaparecer?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
+                </div>
+
+                <div>
+
+                    <obs id="ResultPHQ9"   
+                         conceptId="PIH:11586"
+                         labelText="Puntuaje PHQ-9"/>
+
+                </div>
+
+            </div>
+            <br/>
+
+            <div>
+
+                <label class="Alert"></label>
+
+            </div>
+
         </div>
         <div class="question-container">
             <div class="two-columns">

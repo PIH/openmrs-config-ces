@@ -330,3 +330,292 @@ function sectionDisplayDx() {
     });
 
 }
+
+function resultPHQ(){
+
+  let selectCuestion1 = jq("#cuestion1 select");
+  let selectCuestion2 = jq("#cuestion2 select");
+  let selectCuestion3 = jq("#cuestion3 select");
+  let selectCuestion4 = jq("#cuestion4 select");
+  let selectCuestion5 = jq("#cuestion5 select");
+  let selectCuestion6 = jq("#cuestion6 select");
+  let selectCuestion7 = jq("#cuestion7 select");
+  let selectCuestion8 = jq("#cuestion8 select");
+  let selectCuestion9 = jq("#cuestion9 select");
+
+  let valueCuestion1 = "";
+  let valueCuestion2 = "";
+  let valueCuestion3 = "";
+  let valueCuestion4 = "";
+  let valueCuestion5 = "";
+  let valueCuestion6 = "";
+  let valueCuestion7 = "";
+  let valueCuestion8 = "";
+  let valueCuestion9 = "";
+
+  jq(selectCuestion1).change(function() {
+
+    if(jq(this).val()==5815){
+
+      valueCuestion1 = 0;
+      
+    }
+    if(jq(this).val()==5814){
+
+      valueCuestion1 = 1;
+
+    }
+
+    if(jq(this).val()==1019){
+
+      valueCuestion1 = 2;
+      
+    }
+
+    if(jq(this).val()==5816){
+
+      valueCuestion1 = 3;
+      
+    }
+
+    jq("#ResultPHQ9 input").val(valueCuestion1+valueCuestion2+valueCuestion3+valueCuestion4+valueCuestion5+valueCuestion6+valueCuestion7+valueCuestion8+valueCuestion9);
+
+  });
+
+  jq(selectCuestion2).change(function() {
+
+    if(jq(this).val()==5815){
+
+      valueCuestion2 = 0;
+      
+    }
+    if(jq(this).val()==5814){
+
+      valueCuestion2 = 1;
+
+    }
+
+    if(jq(this).val()==1019){
+
+      valueCuestion2 = 2;
+      
+    }
+
+    if(jq(this).val()==5816){
+
+      valueCuestion2 = 3;
+      
+    }
+
+    jq("#ResultPHQ9 input").val(valueCuestion1+valueCuestion2+valueCuestion3+valueCuestion4+valueCuestion5+valueCuestion6+valueCuestion7+valueCuestion8+valueCuestion9);
+
+  });
+
+  jq(selectCuestion3).change(function() {
+
+    if(jq(this).val()==5815){
+
+      valueCuestion3 = 0;
+      
+    }
+    if(jq(this).val()==5814){
+
+      valueCuestion3 = 1;
+
+    }
+
+    if(jq(this).val()==1019){
+
+      valueCuestion3 = 2;
+      
+    }
+
+    if(jq(this).val()==5816){
+
+      valueCuestion3 = 3;
+      
+    }
+
+    jq("#ResultPHQ9 input").val(valueCuestion1+valueCuestion2+valueCuestion3+valueCuestion4+valueCuestion5+valueCuestion6+valueCuestion7+valueCuestion8+valueCuestion9);
+
+  });
+
+  jq(selectCuestion4).change(function() {
+
+    if(jq(this).val()==5815){
+
+      valueCuestion4 = 0;
+      
+    }
+    if(jq(this).val()==5814){
+
+      valueCuestion4 = 1;
+
+    }
+
+    if(jq(this).val()==1019){
+
+      valueCuestion4 = 2;
+      
+    }
+
+    if(jq(this).val()==5816){
+
+      valueCuestion4 = 3;
+      
+    }
+
+    jq("#ResultPHQ9 input").val(valueCuestion1+valueCuestion2+valueCuestion3+valueCuestion4+valueCuestion5+valueCuestion6+valueCuestion7+valueCuestion8+valueCuestion9);
+
+  });
+
+  jq(selectCuestion5).change(function() {
+
+    if(jq(this).val()==5815){
+
+      valueCuestion5 = 0;
+      
+    }
+    if(jq(this).val()==5814){
+
+      valueCuestion5 = 1;
+
+    }
+
+    if(jq(this).val()==1019){
+
+      valueCuestion5 = 2;
+      
+    }
+
+    if(jq(this).val()==5816){
+
+      valueCuestion5 = 3;
+      
+    }
+
+    jq("#ResultPHQ9 input").val(valueCuestion1+valueCuestion2+valueCuestion3+valueCuestion4+valueCuestion5+valueCuestion6+valueCuestion7+valueCuestion8+valueCuestion9);
+
+  });
+
+  jq(selectCuestion6).change(function() {
+
+    if(jq(this).val()==5815){
+
+      valueCuestion6 = 0;
+      
+    }
+    if(jq(this).val()==5814){
+
+      valueCuestion6 = 1;
+
+    }
+
+    if(jq(this).val()==1019){
+
+      valueCuestion6 = 2;
+      
+    }
+
+    if(jq(this).val()==5816){
+
+      valueCuestion6 = 3;
+      
+    }
+
+    jq("#ResultPHQ9 input").val(valueCuestion1+valueCuestion2+valueCuestion3+valueCuestion4+valueCuestion5+valueCuestion6+valueCuestion7+valueCuestion8+valueCuestion9);
+
+  });
+
+  jq(selectCuestion7).change(function() {
+
+    if(jq(this).val()==5815){
+
+      valueCuestion7 = 0;
+      
+    }
+    if(jq(this).val()==5814){
+
+      valueCuestion7 = 1;
+
+    }
+
+    if(jq(this).val()==1019){
+
+      valueCuestion7 = 2;
+      
+    }
+
+    if(jq(this).val()==5816){
+
+      valueCuestion7 = 3;
+      
+    }
+
+    jq("#ResultPHQ9 input").val(valueCuestion1+valueCuestion2+valueCuestion3+valueCuestion4+valueCuestion5+valueCuestion6+valueCuestion7+valueCuestion8+valueCuestion9);
+
+  });
+
+  jq(selectCuestion8).change(function() {
+
+    if(jq(this).val()==5815){
+
+      valueCuestion8 = 0;
+      
+    }
+    if(jq(this).val()==5814){
+
+      valueCuestion8 = 1;
+
+    }
+
+    if(jq(this).val()==1019){
+
+      valueCuestion8 = 2;
+      
+    }
+
+    if(jq(this).val()==5816){
+
+      valueCuestion8 = 3;
+      
+    }
+
+    jq("#ResultPHQ9 input").val(valueCuestion1+valueCuestion2+valueCuestion3+valueCuestion4+valueCuestion5+valueCuestion6+valueCuestion7+valueCuestion8+valueCuestion9);
+
+  });
+
+  jq(selectCuestion9).change(function() {
+
+    if(jq(this).val()==5815){
+
+      valueCuestion9 = 0;
+      jq(".Alert").text("");
+      
+    }
+    if(jq(this).val()==5814){
+
+      valueCuestion9 = 1;
+      jq(".Alert").text("No olvides hacer el plan de seguridad con este paciente. Además, en caso de que tenga factores de riesgo (intentos previos, poca red de apoyo, uso de sustancias, etc) y que tenga un plan más desarrollado y/o acceso al método no olvides que deberá romperse la confidencialidad y pedir a un familiar que no deje solo (a) al/la paciente por las siguientes 24 hrs.");
+
+    }
+
+    if(jq(this).val()==1019){
+
+      valueCuestion9 = 2;
+      jq(".Alert").text("No olvides hacer el plan de seguridad con este paciente. Además, en caso de que tenga factores de riesgo (intentos previos, poca red de apoyo, uso de sustancias, etc) y que tenga un plan más desarrollado y/o acceso al método no olvides que deberá romperse la confidencialidad y pedir a un familiar que no deje solo (a) al/la paciente por las siguientes 24 hrs.");
+      
+    }
+
+    if(jq(this).val()==5816){
+
+      valueCuestion9 = 3;
+      jq(".Alert").text("No olvides hacer el plan de seguridad con este paciente. Además, en caso de que tenga factores de riesgo (intentos previos, poca red de apoyo, uso de sustancias, etc) y que tenga un plan más desarrollado y/o acceso al método no olvides que deberá romperse la confidencialidad y pedir a un familiar que no deje solo (a) al/la paciente por las siguientes 24 hrs.");
+      
+    }
+
+    jq("#ResultPHQ9 input").val(valueCuestion1+valueCuestion2+valueCuestion3+valueCuestion4+valueCuestion5+valueCuestion6+valueCuestion7+valueCuestion8+valueCuestion9);
+
+  });
+
+}
