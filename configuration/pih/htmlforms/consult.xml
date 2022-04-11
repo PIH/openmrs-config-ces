@@ -1077,14 +1077,14 @@
     <!-- Mental -->
     <script>
         jq(function() {
-            resultPHQ();
+            setupPHQ9();
         });
     </script>
     <section id="mental" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.mental">
         <div class="question-container">
             <div class="two-columns">
                 <div>
-                    <obs id="cuestion1"
+                    <obs="cuestion1"
                          conceptId="PIH:Little interest or pleasure in doing things"
                          labelText="¿Ha sentido poco interés en hacer las cosas (hacer su oficio, ir al cafetal)?"
                          answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
@@ -1125,7 +1125,7 @@
                          answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
                 </div>
                 <div>
-                    <obs id="cuestion6" 
+                    <obs id="cuestion6"
                          conceptId="PIH:Feels like they have failed someone"
                          labelText="¿Ha sentido que le ha fallado a alguien o que le haya quedado mal a alguien o que se haya sentido culpable?"
                          answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
