@@ -1,11 +1,39 @@
 {
-    "@openmrs/esm-login-app": {
-      "logo": {
-        "src": "https://images.squarespace-cdn.com/content/559f0e8be4b0deeae8ebe051/1438191067264-WB940TCIZ1DG8HH7YI72/CES_logo_orange+png+med.png",
-        "alt": "CES"
-      },
-      "links": {
-        "loginSuccess": "${openmrsBase}/pihcore/home.page"
-      }
+  "@openmrs/esm-login-app": {
+    "logo": {
+      "src": "https://images.squarespace-cdn.com/content/559f0e8be4b0deeae8ebe051/1438191067264-WB940TCIZ1DG8HH7YI72/CES_logo_orange+png+med.png",
+      "alt": "CES"
+    },
+    "links": {
+      "loginSuccess": "${openmrsBase}/pihcore/home.page"
     }
+  },
+  "@openmrs/esm-patient-forms-app": {
+    "htmlFormEntryForms": [
+      {
+        "formUuid": "08ab34d0-0209-434d-8995-3923a76af70c",
+        "formName": "Vitals Form",
+        "formUiResource": "file:configuration/pih/htmlforms/vitals.xml",
+        "formUiPage": "enterHtmlFormWithSimpleUi"
+      },
+      {
+        "formUuid": "b5a50e02-bc3b-4bc9-8d6f-a4decad17a97",
+        "formName": "Consult Form",
+        "formUiResource": "file:configuration/pih/htmlforms/consult.xml",
+        "formUiPage": "enterHtmlFormWithStandardUi"
+      },
+      {
+        "formUuid": "02af1035-41d6-478e-9501-1ca6d38a4d03",
+        "formName": "Historia clinica",
+        "formUiResource": "file:configuration/pih/htmlforms/clinicalHistory.xml",
+        "formUiPage": "enterHtmlFormWithStandardUi"
+      },
+      {
+        "formUuid": "65b7eea9-c8d8-404e-a0ff-e874b5ee54c4",
+        "formName": "Ultrasonido",
+        "formUiResource": "file:configuration/pih/htmlforms/ultrasound.xml",
+        "formUiPage": "enterHtmlFormWithStandardUi"
+      }
+    ]
   }
+}
