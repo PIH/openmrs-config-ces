@@ -214,8 +214,14 @@
             width: 85%;
         }
 
-        .Alert{
+        #Alert{
             color: red;
+        }
+
+        .centered-header{
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 30px;
         }
 
     </style>
@@ -455,7 +461,7 @@
             <uimessage code="pihcore.ncd.htn"/>
             <br />
             <enrollInProgram programId="ANC" showCheckbox="true" toggle="anc"/>
-            <uimessage code="pihcore.mch.anc"/>
+            Cuidado prenatal
             <br />
             <enrollInProgram programId="Mental Health" showCheckbox="true" toggle="mental"/>
             <uimessage code="pihcore.ncd.mental"/>
@@ -781,14 +787,14 @@
     </section>
 
     <!-- Maternal -->
-    <section id="anc" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.mch.anc">
+    <section id="anc" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Cuidado prenatal">
 
         <ifMode mode="VIEW" include="false" >
             <script type="text/javascript">
                 jq(function () {
                     setUpMaternalSection(
                         '<lookup expression="encounter.getEncounterDatetime().getTime()"/>',
-                        '<uimessage code="pihcore.weeks"/>'
+                        'Semanas'
                     );
                 });
             </script>
@@ -856,13 +862,13 @@
                  <div id="calculated-edd-and-gestational" class="hidden">
                     <div id="calculated-gestational-age-wrapper">
                         <span id="calculated-gestational-age-label">
-                            <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
+                            Calculo de edad gestacional:
                         </span>
                         <span id='calculated-gestational-age-value' class="value"></span>
                     </div>
                     <div id="calculated-edd-wrapper">
                         <span id="calculated-edd-label">
-                            <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
+                            Calculo de fecha estimada:
                         </span>
                         <span id='calculated-edd' class="value"></span>
                     </div>
@@ -906,7 +912,7 @@
                 <div class="two-columns"> 
 
                     <div class="small-text">
-                            <p class="font-size-16">Abortos menores de 20 SDG: </p>
+                            <p class="font-size-16">Perdida menores de 20 SDG: </p>
                             <lookup expression="fn.latestObs('PIH:13733').valueNumeric"/>
                             <obs id="ldl" 
                                  conceptId="PIH:13733" 
@@ -916,7 +922,7 @@
                     </div>
 
                     <div class="small-text">
-                            <p class="font-size-16">Abortos mayores de 20 SDG: </p>
+                            <p class="font-size-16">Perdida mayores de 20 SDG: </p>
                             <lookup expression="fn.latestObs('PIH:13734').valueNumeric"/>
                             <obs id="ldl" 
                                  conceptId="PIH:13734" 
@@ -1079,10 +1085,12 @@
         jq(function() {
             resultPHQ();
             alertCuestion9PHQ();
+            resultGAD();
         });
     </script>
     <section id="mental" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.mental">
-        <div class="question-container">
+        <div class="question-container" id="CuestionsPHQ9">
+            <h2 class="centered-header">Cuestionario PHQ-9</h2>
             <div class="two-columns">
                 <div>
                     <obs id="cuestion1"
@@ -1173,35 +1181,70 @@
             <br/>
 
             <div>
-
-                <label class="Alert"></label>
-
+                <label id="Alert"></label>
             </div>
 
         </div>
-        <div class="question-container">
+
+        <div class="question-container" id="CuestionsGAD7">
+            <h2 class="centered-header">Cuestionario GAD-7</h2>
             <div class="two-columns">
                 <div>
-                    <label><uimessage code="pihcore.ncd.mental.gad7Score"/></label>
-                    <br />
-                    <div class="small-text">
-                        <p>
-                            <lookup expression="fn.latestObs('CIEL:165185').obsDatetime" />
-                            <lookup complexExpression="#if($fn.latestObs('CIEL:165185')) &#8194; &#8227; &#8194; #end" />
-                            <lookup expression="fn.latestObs('CIEL:165185').valueNumeric" />
-                        </p>
-                    </div>
+                    <obs conceptId="PIH:Feeling nervous"
+                         labelText="¿Se siente nervioso, intranquilo/a o con los nervios de punta?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
+                </div>
+
+                <div>
+                    <obs conceptId="PIH:Not able to stop worrying"
+                         labelText="No poder dejar de preocuparse o no poder controlar la preocupación"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
+                </div>
+            </div>
+            <br/>
+
+            <div class="two-columns">
+                <div>
+                    <obs conceptId="PIH:Worrying too much about different things"
+                         labelText="¿Se preocupa demasiado por diferentes cosas?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
+                </div>
+
+                <div>
+                    <obs conceptId="PIH:Difficulty relaxing"
+                         labelText="¿Tiene dificultad para relajarse?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
+                </div>
+            </div>
+            <br/>
+
+            <div class="two-columns">
+                <div>
+                    <obs conceptId="PIH:Being so restless that it is difficult to sit quietly"
+                         labelText="¿Se siente tan inquieto/a que es difcil permanecer sentado/a tranquilamente?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
+                </div>
+
+                <div>
+                    <obs conceptId="PIH:Getting upset or irritable easily"
+                         labelText="¿Se molesta o se pone irritable fácilmente?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
+                </div>
+            </div>
+            <br/>
+
+            <div class="two-columns">
+                <div>
+                    <obs conceptId="PIH:Feeling scared as if something terrible could happen"
+                         labelText="¿Siente miedo como si algo terrible pudiera pasar?"
+                         answerLabels="Nunca, Pocos días, Más de la mitad de los días, Casi todos los días"/>
                 </div>
                 <div>
-                    <div>
-                        <a href="/openmrs/ms/uiframework/resource/file/configuration/pih/images/GAD7-CESPDF.pdf"
-                           target="_blank" rel="noopener noreferrer">
-                            <uimessage code="pihcore.ncd.mental.gad7FormLink" />
-                        </a>
-                    </div>
-                    <div class="small">
-                        <obs conceptId="CIEL:165185"/>
-                    </div>
+
+                    <obs id="ResultGAD7"   
+                         conceptId="PIH:11733"
+                         labelText="Puntuaje GAD-7"/>
+                    
                 </div>
             </div>
         </div>
