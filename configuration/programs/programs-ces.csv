@@ -1,2 +1,9 @@
 Uuid,Name,Description,Void/Retire,Program concept,Outcomes concept
+${program.asthma.uuid},Asthma,Asthma Program,,PIH:Asthma Program,PIH:Generic outcome
+${program.malnutrition.uuid},Malnutrition,Malnutrition Program,,PIH:MALNUTRITION PROGRAM,PIH:Generic outcome
+${program.diabetes.uuid},Diabetes,Diabetes Program,,PIH:Diabetes Program,PIH:Generic outcome
+${program.epilepsy.uuid},Epilepsy,Epilepsy Program,,PIH:Epilepsy program,PIH:Generic outcome
+${program.hypertension.uuid},Hypertension,Hypertension Program,,PIH:Hypertension program,PIH:Generic outcome
+${program.anc.uuid},ANC,Antenatal Care Program,,CIEL:165475,PIH:MCH outcome
+${program.mentalHealth.uuid},Mental Health,Mental Health Program,,PIH:Mental Health Program,PIH:Mental Health outcome
 ${program.hearts.uuid},HEARTS,Programa HEARTS,,PIH:HEARTS Program,PIH:Generic outcome
