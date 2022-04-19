@@ -181,9 +181,7 @@
 
                 <obs id="familyhistoryasma"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="PIH:ASTHMA" 
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="PIH:ASTHMA">
 
                     <controls>
                         <when value="PIH:ASTHMA" thenDisplay="#asma"/>
@@ -210,9 +208,7 @@
 
                 <obs id="familyhistorydiabetes"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="CIEL:119481" 
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="CIEL:119481">
 
                     <controls>
                         <when value="CIEL:119481" thenDisplay="#diabetes"/>
@@ -239,10 +235,8 @@
 
                 <obs id="familyhistorycardiovasculares"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="CIEL:139071" 
-                     answerLabels="Enfermedad cardiovascular"
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="CIEL:139071" 
+                     answerLabel="Enfermedad cardiovascular">
 
                     <controls>
                         <when value="CIEL:139071" thenDisplay="#cardiovasculares"/>
@@ -269,9 +263,7 @@
 
                 <obs id="familyhistoryepilep"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="CIEL:155" 
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="CIEL:155">
 
                     <controls>
                         <when value="CIEL:155" thenDisplay="#epilep"/>
@@ -296,9 +288,7 @@
 
                 <obs id="familyhistoryhiper"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="CIEL:117399" 
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="CIEL:117399">
 
                     <controls>
                         <when value="CIEL:117399" thenDisplay="#hipertension"/>
@@ -323,9 +313,7 @@
 
                 <obs id="familyhistorytuber"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="CIEL:112141" 
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="CIEL:112141">
 
                     <controls>
                         <when value="CIEL:112141" thenDisplay="#tuberculosis"/>
@@ -350,10 +338,8 @@
 
                 <obs id="familyMentalDisorder"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="PIH:Mental Disorder" 
-                     answerLabels="Salud Mental"
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="PIH:Mental Disorder" 
+                     answerLabel="Salud Mental">
 
                     <controls>
                         <when value="PIH:Mental Disorder" thenDisplay="#Mentalhealth"/>
@@ -378,10 +364,8 @@
 
                 <obs id="familyNEPHROPATHY"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="PIH:NEPHROPATHY"
-                     answerLabels="Nefropatías"
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="PIH:NEPHROPATHY"
+                     answerLabel="Nefropatías">
 
                     <controls>
                         <when value="PIH:NEPHROPATHY" thenDisplay="#NEPHROPATHY"/>
@@ -406,10 +390,8 @@
 
                 <obs id="familyEdocrinological"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="CIEL:119235" 
-                     answerLabels="Endocrinológicas"
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="CIEL:119235" 
+                     answerLabel="Endocrinológicas">
 
                     <controls>
                         <when value="CIEL:119235" thenDisplay="#Edocrinological"/>
@@ -434,10 +416,8 @@
 
                 <obs id="familyNeurologico"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="PIH:Disorder of Nervous System"
-                     answerLabels="Neurológicas" 
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="PIH:Disorder of Nervous System"
+                     answerLabel="Neurológicas">
 
                     <controls>
                         <when value="PIH:Disorder of Nervous System" thenDisplay="#Neurologico"/>
@@ -462,10 +442,8 @@
 
                 <obs id="familybronchopulmonary"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="PIH:Other non-coded pulmonary disease"
-                     answerLabels="Broncopulmonares"  
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="PIH:Other non-coded pulmonary disease"
+                     answerLabel="Broncopulmonares">
 
                     <controls>
                         <when value="PIH:Other non-coded pulmonary disease" thenDisplay="#bronchopulmonary"/>
@@ -490,10 +468,8 @@
 
                 <obs id="familyHIV"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="PIH:HUMAN IMMUNODEFICIENCY VIRUS"
-                     answerLabels="VIH"  
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="PIH:HUMAN IMMUNODEFICIENCY VIRUS"
+                     answerLabel="VIH">
 
                     <controls>
                         <when value="PIH:HUMAN IMMUNODEFICIENCY VIRUS" thenDisplay="#HIV"/>
@@ -518,10 +494,8 @@
 
                 <obs id="familyrheumatologic"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="PIH:JOINT PAIN"
-                     answerLabels="Reumatológicas" 
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="PIH:JOINT PAIN"
+                     answerLabel="Reumatológicas">
 
                     <controls>
                         <when value="PIH:JOINT PAIN" thenDisplay="#rheumatologic"/>
@@ -546,10 +520,8 @@
 
                 <obs id="familyNEOPLASM"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="CIEL:116030"
-                     answerLabels="Neoplásicas" 
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="CIEL:116030"
+                     answerLabel="Neoplásicas">
 
                     <controls>
                         <when value="CIEL:116030" thenDisplay="#NEOPLASM"/>
@@ -574,10 +546,8 @@
 
                 <obs id="familyOther"
                      conceptId="CIEL:160592" 
-                     answerConceptIds="PIH:7416"
-                     answerLabels="Otro" 
-                     style="radio"
-                     answerSeparator="">
+                     answerConceptId="PIH:7416"
+                     answerLabel="Otro">
 
                     <controls>
                         <when value="PIH:7416" thenDisplay="#Other"/>
