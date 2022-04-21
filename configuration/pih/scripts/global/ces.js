@@ -7,7 +7,7 @@
  *   - Element with ID 'diabetes'
  *   - Element with ID 'cholesterol'
  */
-function setUpCholesterolSection() {
+ function setUpCholesterolSection() {
   var dmCheckbox = jq("#diabetes-enroll > input[type='checkbox']")[0];
   var htnCheckbox = jq("#htn-enroll > input[type='checkbox']")[0];
   var dmSection = jq("#diabetes");
@@ -328,5 +328,79 @@ function sectionDisplayDx() {
     jq(changeRadioNo).change(function () {
         sectionVisibilityDx();
     });
+
+}
+
+function resultPHQ(){
+
+  let result = 0;
+
+  jq("#CuestionsPHQ9").find("select").change(function() {
+
+      let value = this.value;
+
+      if(value==5815){
+
+        result += 0;
+            
+      }
+      if(value==5814){
+      
+        result += 1;
+      
+      }
+      
+      if(value==1019){
+      
+        result += 2;
+            
+      }
+      
+      if(value==5816){
+      
+        result += 3;
+
+      }
+          
+      jq("#ResultPHQ9 input").val(result);
+
+  });
+
+}
+
+function alertCuestion9PHQ(){
+
+  let selectCuestion9 = jq("#cuestion9 select");
+  jq(selectCuestion9).change(function() {
+
+      if(jq(this).val()==5815 || jq(this).val()==""){
+
+        jq("#Alert").text("");
+        
+      }else{
+
+        jq("#Alert").text("No olvides hacer el plan de seguridad con este paciente. Además, en caso de que tenga factores de riesgo (intentos previos, poca red de apoyo, uso de sustancias, etc) y que tenga un plan más desarrollado y/o acceso al método no olvides que deberá romperse la confidencialidad y pedir a un familiar que no deje solo (a) al/la paciente por las siguientes 24 hrs.");
+
+      }
+
+  });
+}
+
+function resultGAD(){
+
+  let scoreGad = 0;
+  const valueByAnswerConcept = {
+    5815: 0,
+    5814: 1,
+    1019: 2,
+    5816: 3
+  }
+  
+  jq("#CuestionsGAD7").find("select").change(function() {
+
+      scoreGad += valueByAnswerConcept[this.value];         
+      jq("#ResultGAD7 input").val(scoreGad);
+
+  });
 
 }
