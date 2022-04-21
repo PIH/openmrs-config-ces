@@ -385,8 +385,8 @@
                 Referido por:
             </label>
             <obs conceptId="PIH:6189" id="referredBy"
-                 answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555"
-                 answerLabels="Cita,Paciente ambulatorio,Búsqueda activa de casos,Acompañante"
+                 answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555,PIH:NURSE,PIH:Nurse aide"
+                 answerLabels="Cita,Paciente ambulatorio,Búsqueda activa de casos,Acompañante,Enfermería,Auxiliar"
                  style="radio" answerSeparator=""/>
         </div>
     </section>
@@ -655,7 +655,7 @@
             setUpCholesterolSection();
         });
     </script>
-    <section id="cholesterol" headerCode="pihcore.lab.cholesterol" sectionTag="fieldset" headerTag="legend" headerStyle="title">
+    <section id="cholesterol" headerCode="Hipertensión" sectionTag="fieldset" headerTag="legend" headerStyle="title">
         <div class="question-container">
             <label><uimessage code="pihcore.lab.total_chol"/></label>
             <div class="two-columns">
