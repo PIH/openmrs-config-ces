@@ -333,36 +333,36 @@ function sectionDisplayDx() {
 
 function resultPHQ(){
 
-  let result = 0;
+  let scorePHQ = 0;
 
   jq("#CuestionsPHQ9").find("select").change(function() {
 
-      let value = this.value;
+      let valueText = jq(this).find('option:selected').text();
 
-      if(value==5815){
+      if(valueText == "Nunca"){
 
-        result += 0;
+        scorePHQ += 0;
             
       }
-      if(value==5814){
+      if(valueText == "Pocos días"){
       
-        result += 1;
+        scorePHQ += 1;
       
       }
       
-      if(value==1019){
+      if(valueText == "Más de la mitad de los días"){
       
-        result += 2;
+        scorePHQ += 2;
             
       }
       
-      if(value==5816){
+      if(valueText == "Casi todos los días"){
       
-        result += 3;
+        scorePHQ += 3;
 
       }
           
-      jq("#ResultPHQ9 input").val(result);
+      jq("#ResultPHQ9 input").val(scorePHQ);
 
   });
 
@@ -373,7 +373,7 @@ function alertCuestion9PHQ(){
   let selectCuestion9 = jq("#cuestion9 select");
   jq(selectCuestion9).change(function() {
 
-      if(jq(this).val()==5815 || jq(this).val()==""){
+      if(jq(this).find('option:selected').text() == "Nunca" || jq(this).val() == ""){
 
         jq("#Alert").text("");
         
@@ -390,15 +390,15 @@ function resultGAD(){
 
   let scoreGad = 0;
   const valueByAnswerConcept = {
-    5815: 0,
-    5814: 1,
-    1019: 2,
-    5816: 3
+    "Nunca": 0,
+    "Pocos días": 1,
+    "Más de la mitad de los días": 2,
+    "Casi todos los días": 3
   }
   
   jq("#CuestionsGAD7").find("select").change(function() {
 
-      scoreGad += valueByAnswerConcept[this.value];         
+      scoreGad += valueByAnswerConcept[jq(this).find('option:selected').text()];         
       jq("#ResultGAD7 input").val(scoreGad);
 
   });
