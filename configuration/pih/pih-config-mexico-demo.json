@@ -1,5 +1,5 @@
 {
-  
+
   "welcomeMessage": "EMR de Compañeros en Salud - Demo",
   "browserWarning": "Por favor utiliza <b>Google Chrome</b> como navagador",
 
@@ -36,9 +36,10 @@
     "systemAdministration",
     "todaysVisits",
     "visitManagement",
-    "vitals"
+    "vitals",
+    "vitalsHomepageApp"
   ],
-  
+
   "locationTags": {
     "Login Location": [
       "Hospital",
@@ -48,3 +49,7 @@
     ]
   }
 }
+[
+
+
+]

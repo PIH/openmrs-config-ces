@@ -28,7 +28,8 @@
     "systemAdministration",
     "todaysVisits",
     "visitManagement",
-    "vitals"
+    "vitals",
+    "vitalsHomepageApp"
   ],
   "scheduleBackupReports": "false",
   "dashboardUrl": "/coreapps/clinicianfacing/patient.page?patientId={{patientId}}&app=pih.app.clinicianDashboard",
