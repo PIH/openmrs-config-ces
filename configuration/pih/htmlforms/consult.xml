@@ -19,6 +19,8 @@
           formEncounterType="aa61d509-6e76-4036-a65d-7813c0c3b752"
           formVersion="1.0">
 
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ExitPatientFromSelectedProgramsAction"/>
+
     <style type="text/css">
 
         #who-when-where {
@@ -444,7 +446,7 @@
             <enrollInProgram programId="Asthma" showCheckbox="true" toggle="asthma"/>
             <uimessage code="pihcore.ncd.asthma"/>
             <br />
-            <enrollInProgram programId="Malnutrition" showCheckbox="true"/>
+            <enrollInProgram programId="Malnutrition" showCheckbox="true" toggle="malnutrition"/>
             <uimessage code="pihcore.ncd.malnutrition"/>
             <br />
             <span id="diabetes-enroll">
@@ -468,6 +470,14 @@
         </div>
 
     </section>
+
+    <script>
+        jq(function() {
+            setUpProgramExitStatusValidation(
+                "<uimessage code="coreapps.formValidation.messages.requiredField"/>"
+            );
+        });
+    </script>
 
     <!-- Asthma -->
     <section id="asthma" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.asthma">
@@ -553,6 +563,38 @@
                          style="radio" answerSeparator=""/>
                 </div>
             </div>
+        </div>
+        <hr/>
+        <div class="question-container">
+            <obsgroup groupingConceptId="PIH:Exit from program construct">
+                <obs id="asthma-exit-checkbox"
+                     conceptId="PIH:Service or program"
+                     answerConceptId="PIH:Asthma Program"
+                     labelText="Dar de baja de la programa Asma"
+                     answerLabel=""
+                     toggle="asthma-exit-status-div"/>
+                <div id="asthma-exit-status-div">
+                    <obs id="asthma-exit-status" conceptId="PIH:Program outcome" labelText="Estatus (requerido)"/>
+                </div>
+            </obsgroup>
+        </div>
+    </section>
+
+    <!-- Malnutrition -->
+    <section id="malnutrition" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.ncd.malnutrition">
+        <div class="question-container">
+            <obsgroup groupingConceptId="PIH:Exit from program construct">
+                <obs id="malnutrition-exit-checkbox"
+                     conceptId="PIH:Service or program"
+                     answerConceptId="PIH:MALNUTRITION PROGRAM"
+                     labelText="Dar de baja de la programa Desnutrición"
+                     answerLabel=""
+                     toggle="malnutrition-exit-status-div"/>
+                <div id="malnutrition-exit-status-div">
+                    <obs id="malnutrition-exit-status" conceptId="PIH:Program outcome" labelText="Estatus (requerido)"/>
+                </div>
+            </obsgroup>
         </div>
     </section>
 
@@ -648,6 +690,20 @@
                     obsDivClass="" answerSeparator=""
             />
         </repeat>
+        <hr/>
+        <div class="question-container">
+            <obsgroup groupingConceptId="PIH:Exit from program construct">
+                <obs id="diabetes-exit-checkbox"
+                     conceptId="PIH:Service or program"
+                     answerConceptId="PIH:Diabetes Program"
+                     labelText="Dar de baja de la programa Diabetes"
+                     answerLabel=""
+                     toggle="diabetes-exit-status-div"/>
+                <div id="diabetes-exit-status-div">
+                    <obs id="diabetes-exit-status" conceptId="PIH:Program outcome" labelText="Estatus (requerido)"/>
+                </div>
+            </obsgroup>
+        </div>
     </section>
 
     <script>
@@ -737,6 +793,22 @@
                 </div>
             </div>
         </div>
+
+        <hr/>
+        <div class="question-container">
+            <obsgroup groupingConceptId="PIH:Exit from program construct">
+                <obs id="hypertension-exit-checkbox"
+                     conceptId="PIH:Service or program"
+                     answerConceptId="PIH:Hypertension Program"
+                     labelText="Dar de baja de la programa Hipertensión"
+                     answerLabel=""
+                     toggle="hypertension-exit-status-div"/>
+                <div id="hypertension-exit-status-div">
+                    <obs id="hypertension-exit-status" conceptId="PIH:Program outcome" labelText="Estatus (requerido)"/>
+                </div>
+            </obsgroup>
+        </div>
+
     </section>
 
 
@@ -783,6 +855,20 @@
                 <span id="seizure-percent-reduction" class="value" />
                 <uimessage code="pihcore.ncd.epilepsy.percent_reduction"/>
             </p>
+        </div>
+        <hr/>
+        <div class="question-container">
+            <obsgroup groupingConceptId="PIH:Exit from program construct">
+                <obs id="epilepsy-exit-checkbox"
+                     conceptId="PIH:Service or program"
+                     answerConceptId="PIH:Epilepsy program"
+                     labelText="Dar de baja de la programa Epilepsy"
+                     answerLabel=""
+                     toggle="epilepsy-exit-status-div"/>
+                <div id="epilepsy-exit-status-div">
+                    <obs id="epilepsy-exit-status" conceptId="PIH:Program outcome" labelText="Estatus (requerido)"/>
+                </div>
+            </obsgroup>
         </div>
     </section>
 
@@ -1078,6 +1164,21 @@
             </div>
         </div>
 
+        <hr/>
+        <div class="question-container">
+            <obsgroup groupingConceptId="PIH:Exit from program construct">
+                <obs id="maternal-exit-checkbox"
+                     conceptId="PIH:Service or program"
+                     answerConceptId="CIEL:159937"
+                     labelText="Dar de baja de la programa Salud Materna"
+                     answerLabel=""
+                     toggle="maternal-exit-status-div"/>
+                <div id="maternal-exit-status-div">
+                    <obs id="maternal-exit-status" conceptId="PIH:Program outcome" labelText="Estatus (requerido)"/>
+                </div>
+            </obsgroup>
+        </div>
+
     </section>
 
     <!-- Mental -->
@@ -1248,6 +1349,22 @@
                 </div>
             </div>
         </div>
+
+        <hr/>
+        <div class="question-container">
+            <obsgroup groupingConceptId="PIH:Exit from program construct">
+                <obs id="mental-exit-checkbox"
+                     conceptId="PIH:Service or program"
+                     answerConceptId="PIH:Mental Health Program"
+                     labelText="Dar de baja de la programa Salud Mental"
+                     answerLabel=""
+                     toggle="mental-exit-status-div"/>
+                <div id="mental-exit-status-div">
+                    <obs id="mental-exit-status" conceptId="PIH:Program outcome" labelText="Estatus (requerido)"/>
+                </div>
+            </obsgroup>
+        </div>
+
     </section>
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.exam.title" >
