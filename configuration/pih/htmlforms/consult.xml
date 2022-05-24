@@ -390,7 +390,7 @@
 
     <script>
         jq(function() {
-            sectionDisplayExitProgram();
+            setupProgramExit();
         });
     </script>
 
@@ -590,8 +590,8 @@
 
             <div id="Exit-program-asthma">
                 <obsgroup groupingConceptId="PIH:Exit from program construct"
-                          conceptId="PIH:Service or program"
-                          answerConceptId="PIH:Asthma Program">
+                          hiddenConceptId="PIH:Service or program"
+                          hiddenAnswerConceptId="PIH:Asthma Program">
 
                     <div id="asthma-exit-status">
                         <obs id="asthma-exit" 
@@ -728,8 +728,8 @@
 
             <div id="Exit-program-diabetes">
                 <obsgroup groupingConceptId="PIH:Exit from program construct"
-                          conceptId="PIH:Service or program"
-                          answerConceptId="PIH:Diabetes Program">
+                          hiddenConceptId="PIH:Service or program"
+                          hiddenAnswerConceptId="PIH:Diabetes Program">
                           
                     <div id="diabetes-exit-status">
                         <obs id="diabetes-exit" 
@@ -1454,8 +1454,8 @@
 
             <div id="Exit-program-mental">
                 <obsgroup groupingConceptId="PIH:Exit from program construct"
-                          conceptId="PIH:Service or program"
-                          answerConceptId="PIH:Mental Health Program">
+                          hiddenConceptId="PIH:Service or program"
+                          hiddenAnswerConceptId="PIH:Mental Health Program">
 
                     <div id="mental-exit-status">
                         <obs id="mental-exit" 

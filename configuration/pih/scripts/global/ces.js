@@ -456,7 +456,7 @@ function sum(arr) {
   return arr.reduce((partialSum, a) => partialSum + a, 0);
 }
 
-function sectionDisplayExitProgram() {
+function setupProgramExit() {
   let selectExitProgram = jq(".StatusPatient");
   jq(selectExitProgram).change(function () {
     let nameSelect = jq(this).attr("name");
