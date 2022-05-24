@@ -2,7 +2,7 @@
  * Ensures that if the box is ticked to remove a patient from a program,
  * then the user must have also provided an outcome.
  */
-function setUpProgramExitStatusValidation(requiredMsg) {
+ function setUpProgramExitStatusValidation(requiredMsg) {
   const programs = [
     "asthma",
     "diabetes",
@@ -454,4 +454,12 @@ function actualizarGAD7() {
 
 function sum(arr) {
   return arr.reduce((partialSum, a) => partialSum + a, 0);
+}
+
+function sectionDisplayExitProgram() {
+  let selectExitProgram = jq(".StatusPatient");
+  jq(selectExitProgram).change(function () {
+    let nameSelect = jq(this).attr("name");
+    jq("#Exit-program-" + nameSelect).show();
+  });
 }

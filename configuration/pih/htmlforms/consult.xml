@@ -226,6 +226,15 @@
             margin-bottom: 30px;
         }
 
+        #Exit-program-asthma, 
+        #Exit-program-diabetes, 
+        #Exit-program-hypertension, 
+        #Exit-program-epilepsy, 
+        #Exit-program-maternal,
+        #Exit-program-mental{
+            display:none;
+        }
+
     </style>
 
     <div class="print-form-datestamps" style="display:none">
@@ -379,7 +388,11 @@
         <img src="/openmrs/ms/uiframework/resource/file/configuration/pih/images/ssa-logo.png" style="width: 20%; margin: 0 5%;"/>
     </div>
 
-
+    <script>
+        jq(function() {
+            sectionDisplayExitProgram();
+        });
+    </script>
 
     <section id="context" sectionTag="fieldset" headerTag="legend" headerStyle="title">
         <div class="section-container">
@@ -565,18 +578,30 @@
             </div>
         </div>
         <hr/>
-        <div class="question-container">
-            <obsgroup groupingConceptId="PIH:Exit from program construct">
-                <obs id="asthma-exit-checkbox"
-                     conceptId="PIH:Service or program"
-                     answerConceptId="PIH:Asthma Program"
-                     labelText="Dar de baja de la programa Asma"
-                     answerLabel=""
-                     toggle="asthma-exit-status-div"/>
-                <div id="asthma-exit-status-div">
-                    <obs id="asthma-exit-status" conceptId="PIH:Program outcome" labelText="Estatus (requerido)"/>
-                </div>
-            </obsgroup>
+        <div class="question-container two-columns">
+
+            <div>
+                <label>Estatus del paciente</label>
+                <select name="asthma" class="StatusPatient">
+                    <option value="">Continuar con tratamiento</option>
+                    <option value="ExitProgramAsthma">Salir del programa</option>
+                </select>
+            </div>
+
+            <div id="Exit-program-asthma">
+                <obsgroup groupingConceptId="PIH:Exit from program construct"
+                          conceptId="PIH:Service or program"
+                          answerConceptId="PIH:Asthma Program">
+
+                    <div id="asthma-exit-status">
+                        <obs id="asthma-exit" 
+                             conceptId="PIH:Program outcome"
+                             answerConceptIds="PIH:TREATMENT COMPLETE, PIH:PATIENT TRANSFERRED OUT, PIH: TREATMENT NEVER STARTED - PATIENT REFUSED"
+                             answerLabels="Tratamiento completado, Paciente tranferido, Tratamiento rechazado por el paciente"
+                             labelText="Estatus (requerido)"/>
+                    </div>
+                </obsgroup>
+            </div>
         </div>
     </section>
 
@@ -691,19 +716,32 @@
             />
         </repeat>
         <hr/>
-        <div class="question-container">
-            <obsgroup groupingConceptId="PIH:Exit from program construct">
-                <obs id="diabetes-exit-checkbox"
-                     conceptId="PIH:Service or program"
-                     answerConceptId="PIH:Diabetes Program"
-                     labelText="Dar de baja de la programa Diabetes"
-                     answerLabel=""
-                     toggle="diabetes-exit-status-div"/>
-                <div id="diabetes-exit-status-div">
-                    <obs id="diabetes-exit-status" conceptId="PIH:Program outcome" labelText="Estatus (requerido)"/>
-                </div>
-            </obsgroup>
+        <div class="question-container two-columns">
+
+            <div>
+                <label>Estatus del paciente</label>
+                <select name="diabetes" class="StatusPatient">
+                    <option value="">Continuar con tratamiento</option>
+                    <option value="ExitProgramDiabetes">Salir del programa</option>
+                </select>
+            </div>
+
+            <div id="Exit-program-diabetes">
+                <obsgroup groupingConceptId="PIH:Exit from program construct"
+                          conceptId="PIH:Service or program"
+                          answerConceptId="PIH:Diabetes Program">
+                          
+                    <div id="diabetes-exit-status">
+                        <obs id="diabetes-exit" 
+                             conceptId="PIH:Program outcome"
+                             answerConceptIds="PIH:TREATMENT COMPLETE, PIH:PATIENT TRANSFERRED OUT, PIH: TREATMENT NEVER STARTED - PATIENT REFUSED"
+                             answerLabels="Tratamiento completado, Paciente tranferido, Tratamiento rechazado por el paciente"
+                             labelText="Estatus (requerido)"/>
+                    </div>
+                </obsgroup>
+            </div>
         </div>
+        
     </section>
 
     <script>
@@ -795,18 +833,30 @@
         </div>
 
         <hr/>
-        <div class="question-container">
-            <obsgroup groupingConceptId="PIH:Exit from program construct">
-                <obs id="hypertension-exit-checkbox"
-                     conceptId="PIH:Service or program"
-                     answerConceptId="PIH:Hypertension Program"
-                     labelText="Dar de baja de la programa Hipertensión"
-                     answerLabel=""
-                     toggle="hypertension-exit-status-div"/>
-                <div id="hypertension-exit-status-div">
-                    <obs id="hypertension-exit-status" conceptId="PIH:Program outcome" labelText="Estatus (requerido)"/>
-                </div>
-            </obsgroup>
+        <div class="question-container two-columns">
+
+            <div>
+                <label>Estatus del paciente</label>
+                <select name="hypertension" class="StatusPatient">
+                    <option value="">Continuar con tratamiento</option>
+                    <option value="ExitProgramHypertension">Salir del programa</option>
+                </select>
+            </div>
+
+            <div id="Exit-program-hypertension">
+                <obsgroup groupingConceptId="PIH:Exit from program construct"
+                          hiddenConceptId="PIH:Service or program"
+                          hiddenAnswerConceptId="PIH:Hypertension Program">
+                    
+                    <div id="hypertension-exit-status">
+                        <obs id="hypertension-exit" 
+                             conceptId="PIH:Program outcome"
+                             answerConceptIds="PIH:TREATMENT COMPLETE, PIH:PATIENT TRANSFERRED OUT, PIH: TREATMENT NEVER STARTED - PATIENT REFUSED"
+                             answerLabels="Tratamiento completado, Paciente tranferido, Tratamiento rechazado por el paciente"
+                             labelText="Estatus (requerido)"/>
+                    </div>
+                </obsgroup>
+            </div>
         </div>
 
     </section>
@@ -857,19 +907,32 @@
             </p>
         </div>
         <hr/>
-        <div class="question-container">
-            <obsgroup groupingConceptId="PIH:Exit from program construct">
-                <obs id="epilepsy-exit-checkbox"
-                     conceptId="PIH:Service or program"
-                     answerConceptId="PIH:Epilepsy program"
-                     labelText="Dar de baja de la programa Epilepsy"
-                     answerLabel=""
-                     toggle="epilepsy-exit-status-div"/>
-                <div id="epilepsy-exit-status-div">
-                    <obs id="epilepsy-exit-status" conceptId="PIH:Program outcome" labelText="Estatus (requerido)"/>
-                </div>
-            </obsgroup>
+        <div class="question-container two-columns">
+
+            <div>
+                <label>Estatus del paciente</label>
+                <select name="epilepsy" class="StatusPatient">
+                    <option value="">Continuar con tratamiento</option>
+                    <option value="ExitProgramEpilepsy">Salir del programa</option>
+                </select>
+            </div>
+
+            <div id="Exit-program-epilepsy">
+                <obsgroup groupingConceptId="PIH:Exit from program construct"
+                          hiddenConceptId="PIH:Service or program"
+                          hiddenAnswerConceptId="PIH:Epilepsy program">
+
+                    <div id="epilepsy-exit-status">
+                        <obs id="epilepsy-exit" 
+                             conceptId="PIH:Program outcome"
+                             answerConceptIds="PIH:TREATMENT COMPLETE, PIH:PATIENT TRANSFERRED OUT, PIH: TREATMENT NEVER STARTED - PATIENT REFUSED"
+                             answerLabels="Tratamiento completado, Paciente tranferido, Tratamiento rechazado por el paciente"
+                             labelText="Estatus (requerido)"/>
+                    </div>
+                </obsgroup>
+            </div>
         </div>
+
     </section>
 
     <!-- Maternal -->
@@ -1165,18 +1228,30 @@
         </div>
 
         <hr/>
-        <div class="question-container">
-            <obsgroup groupingConceptId="PIH:Exit from program construct">
-                <obs id="maternal-exit-checkbox"
-                     conceptId="PIH:Service or program"
-                     answerConceptId="CIEL:159937"
-                     labelText="Dar de baja de la programa Salud Materna"
-                     answerLabel=""
-                     toggle="maternal-exit-status-div"/>
-                <div id="maternal-exit-status-div">
-                    <obs id="maternal-exit-status" conceptId="PIH:Program outcome" labelText="Estatus (requerido)"/>
-                </div>
-            </obsgroup>
+        <div class="question-container two-columns">
+
+            <div>
+                <label>Estatus del paciente</label>
+                <select name="maternal" class="StatusPatient">
+                    <option value="">Continuar con tratamiento</option>
+                    <option value="ExitProgramMaternal">Salir del programa</option>
+                </select>
+            </div>
+
+            <div id="Exit-program-maternal">
+                <obsgroup groupingConceptId="PIH:Exit from program construct"
+                          hiddenConceptId="PIH:Service or program"
+                          hiddenAnswerConceptId="CIEL:159937">
+
+                    <div id="maternal-exit-status">
+                        <obs id="maternal-exit" 
+                             conceptId="PIH:Program outcome"
+                             answerConceptIds="PIH:TREATMENT COMPLETE, PIH:PATIENT TRANSFERRED OUT, PIH: TREATMENT NEVER STARTED - PATIENT REFUSED"
+                             answerLabels="Tratamiento completado, Paciente tranferido, Tratamiento rechazado por el paciente"
+                             labelText="Estatus (requerido)"/>
+                    </div>
+                </obsgroup>
+            </div>
         </div>
 
     </section>
@@ -1367,18 +1442,30 @@
         </div>
 
         <hr/>
-        <div class="question-container">
-            <obsgroup groupingConceptId="PIH:Exit from program construct">
-                <obs id="mental-exit-checkbox"
-                     conceptId="PIH:Service or program"
-                     answerConceptId="PIH:Mental Health Program"
-                     labelText="Dar de baja de la programa Salud Mental"
-                     answerLabel=""
-                     toggle="mental-exit-status-div"/>
-                <div id="mental-exit-status-div">
-                    <obs id="mental-exit-status" conceptId="PIH:Program outcome" labelText="Estatus (requerido)"/>
-                </div>
-            </obsgroup>
+        <div class="question-container two-columns">
+
+            <div>
+                <label>Estatus del paciente</label>
+                <select name="mental" class="StatusPatient">
+                    <option value="">Continuar con tratamiento</option>
+                    <option value="ExitProgramMental">Salir del programa</option>
+                </select>
+            </div>
+
+            <div id="Exit-program-mental">
+                <obsgroup groupingConceptId="PIH:Exit from program construct"
+                          conceptId="PIH:Service or program"
+                          answerConceptId="PIH:Mental Health Program">
+
+                    <div id="mental-exit-status">
+                        <obs id="mental-exit" 
+                             conceptId="PIH:Program outcome"
+                             answerConceptIds="PIH:TREATMENT COMPLETE, PIH:PATIENT TRANSFERRED OUT, PIH: TREATMENT NEVER STARTED - PATIENT REFUSED"
+                             answerLabels="Tratamiento completado, Paciente tranferido, Tratamiento rechazado por el paciente"
+                             labelText="Estatus (requerido)"/>
+                    </div>
+                </obsgroup>
+            </div>
         </div>
 
     </section>
