@@ -3,12 +3,24 @@
  * then the user must have also provided an outcome.
  */
 function setUpProgramExitStatusValidation(requiredMsg) {
-  const programs = ['asthma', 'diabetes', 'epilepsy', 'maternal', "mental", "hypertension"];
-  beforeSubmit.push(function() {
+  const programs = [
+    "asthma",
+    "diabetes",
+    "epilepsy",
+    "maternal",
+    "mental",
+    "hypertension",
+  ];
+  beforeSubmit.push(function () {
     let noErrors = true;
     for (let program of programs) {
-      if (getValue(program + '-exit-checkbox.value') && !getValue(program + "-exit-status.value")) {
-        getField(program + "-exit-status.error").html(requiredMsg).show();
+      if (
+        getValue(program + "-exit-checkbox.value") &&
+        !getValue(program + "-exit-status.value")
+      ) {
+        getField(program + "-exit-status.error")
+          .html(requiredMsg)
+          .show();
         noErrors = false;
       }
     }
@@ -25,7 +37,7 @@ function setUpProgramExitStatusValidation(requiredMsg) {
  *   - Element with ID 'diabetes'
  *   - Element with ID 'cholesterol'
  */
- function setUpCholesterolSection() {
+function setUpCholesterolSection() {
   var dmCheckbox = jq("#diabetes-enroll > input[type='checkbox']")[0];
   var htnCheckbox = jq("#htn-enroll > input[type='checkbox']")[0];
   var dmSection = jq("#diabetes");
@@ -261,7 +273,6 @@ function setUpPlanSection(
   });
 }
 
-
 /**
  * This is a very ugly hack. It creates a new document in a new window,
  * populates that document with things from the current form, and prints it.
@@ -269,156 +280,178 @@ function setUpPlanSection(
  * It is very fragile, both with respect to the form and to browser standards.
  */
 function printPrescription() {
-  const w = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+  const w = window.open(
+    "",
+    "",
+    "left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0"
+  );
   const styleNodes = document.getElementsByTagName("style");
   for (var i = 0; i < styleNodes.length; i++) {
-      const styleNode = styleNodes[i];
-      w.document.write("<style>" + styleNode.innerHTML + "</style>");
+    const styleNode = styleNodes[i];
+    w.document.write("<style>" + styleNode.innerHTML + "</style>");
   }
   w.document.write("<body>");
-  const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+  const dateOptions = { year: "numeric", month: "short", day: "numeric" };
   const dateString = new Date().toLocaleDateString("es", dateOptions);
-  w.document.write('<div class="date">' + dateString + '</div>');
-  const logos = jq(document.getElementById('logos')).clone();
+  w.document.write('<div class="date">' + dateString + "</div>");
+  const logos = jq(document.getElementById("logos")).clone();
   logos.removeClass("hidden");
   logos.appendTo(w.document.body);
   w.document.write("<p>");
-      const givenName = jq(document.getElementsByClassName('zl-givenName')[0]).clone();
-      givenName.text(givenName.text() + " ");
-      w.document.write(givenName.html());
-      const familyName = jq(document.getElementsByClassName('zl-familyName')[0]).clone();
-      familyName.text(familyName.text().match(/[^,]*/));
-      w.document.write(familyName.html());
-      w.document.write("</p>");
+  const givenName = jq(
+    document.getElementsByClassName("zl-givenName")[0]
+  ).clone();
+  givenName.text(givenName.text() + " ");
+  w.document.write(givenName.html());
+  const familyName = jq(
+    document.getElementsByClassName("zl-familyName")[0]
+  ).clone();
+  familyName.text(familyName.text().match(/[^,]*/));
+  w.document.write(familyName.html());
+  w.document.write("</p>");
   w.document.write("<p>");
-      const gender = jq(document.getElementsByClassName('gender-age')[0].children[0]).clone();
-      gender.text(gender.text().match(/^\w+/) + ", ");
-      w.document.write(gender.html());
-      const age = jq(document.getElementsByClassName('gender-age')[0].children[1]).clone();
-      age.text(age.text().match(/\d+/));
-      w.document.write(age.html());
-      w.document.write("</p>");
+  const gender = jq(
+    document.getElementsByClassName("gender-age")[0].children[0]
+  ).clone();
+  gender.text(gender.text().match(/^\w+/) + ", ");
+  w.document.write(gender.html());
+  const age = jq(
+    document.getElementsByClassName("gender-age")[0].children[1]
+  ).clone();
+  age.text(age.text().match(/\d+/));
+  w.document.write(age.html());
+  w.document.write("</p>");
   w.document.write("<p>");
-      w.document.write("Diagnosticos: ");
-      w.document.write(jq.map(jq(".diagnosis .matched-name"), d => d.textContent).join(", "));
-      w.document.write("</p>");
-  jq(document.getElementById('drug-orders')).clone().appendTo(w.document.body);
+  w.document.write("Diagnosticos: ");
+  w.document.write(
+    jq.map(jq(".diagnosis .matched-name"), (d) => d.textContent).join(", ")
+  );
+  w.document.write("</p>");
+  jq(document.getElementById("drug-orders")).clone().appendTo(w.document.body);
   const medNames = jq(w.document).find(".medication-name");
   for (let i = 0; i < medNames.length; i++) {
-      const medP = jq(medNames[i]).parent();
-      medP.css("display", "inline");
+    const medP = jq(medNames[i]).parent();
+    medP.css("display", "inline");
   }
-  jq(document.getElementById('clinical-management-plan')).clone().appendTo(w.document.body);
-  jq(document.getElementById('contact-info-inline')).clone().appendTo(w.document.body);
+  jq(document.getElementById("clinical-management-plan"))
+    .clone()
+    .appendTo(w.document.body);
+  jq(document.getElementById("contact-info-inline"))
+    .clone()
+    .appendTo(w.document.body);
   w.document.write("<p>");
-      w.document.write("Próxima cita: ");
-      w.document.write(jq("#apptDate").find(".hasDatepicker").val());
-      w.document.write("</p>");
+  w.document.write("Próxima cita: ");
+  w.document.write(jq("#apptDate").find(".hasDatepicker").val());
+  w.document.write("</p>");
   w.document.write("</body>");
   w.document.close();
   w.setTimeout(() => {
-      w.focus();
-      w.print();
-      w.close();
+    w.focus();
+    w.print();
+    w.close();
   }, 1000);
 }
 
 function sectionDisplayDx() {
+  var changeRadioYes = jq("#DxChange > input[type='radio']")[0];
+  var changeRadioNo = jq("#DxChange > input[type='radio']")[1];
+  var sectionDx = jq("#OptionChangeDx");
 
-    var changeRadioYes = jq("#DxChange > input[type='radio']")[0];
-    var changeRadioNo = jq("#DxChange > input[type='radio']")[1];
-    var sectionDx = jq("#OptionChangeDx");
+  var sectionVisibilityDx = function () {
+    if (changeRadioYes.checked) {
+      sectionDx.show();
+    }
 
-    var sectionVisibilityDx = function () {
-        if (changeRadioYes.checked) {
-          sectionDx.show();
-        }
+    if (changeRadioNo.checked) {
+      sectionDx.hide();
+    }
+  };
 
-        if (changeRadioNo.checked) {
-          sectionDx.hide();
-        }
-    };
-
-    jq(changeRadioYes).change(function () {
-        sectionVisibilityDx();
-    });
-
-    jq(changeRadioNo).change(function () {
-        sectionVisibilityDx();
-    });
-
-}
-
-function resultPHQ(){
-
-  let scorePHQ = 0;
-
-  jq("#CuestionsPHQ9").find("select").change(function() {
-
-      let valueText = jq(this).find('option:selected').text();
-
-      if(valueText == "Nunca"){
-
-        scorePHQ += 0;
-            
-      }
-      if(valueText == "Pocos días"){
-      
-        scorePHQ += 1;
-      
-      }
-      
-      if(valueText == "Más de la mitad de los días"){
-      
-        scorePHQ += 2;
-            
-      }
-      
-      if(valueText == "Casi todos los días"){
-      
-        scorePHQ += 3;
-
-      }
-          
-      jq("#ResultPHQ9 input").val(scorePHQ);
-
+  jq(changeRadioYes).change(function () {
+    sectionVisibilityDx();
   });
 
+  jq(changeRadioNo).change(function () {
+    sectionVisibilityDx();
+  });
 }
 
-function alertCuestion9PHQ(){
-
+function alertCuestion9PHQ() {
   let selectCuestion9 = jq("#cuestion9 select");
-  jq(selectCuestion9).change(function() {
-
-      if(jq(this).find('option:selected').text() == "Nunca" || jq(this).val() == ""){
-
-        jq("#Alert").text("");
-        
-      }else{
-
-        jq("#Alert").text("No olvides hacer el plan de seguridad con este paciente. Además, en caso de que tenga factores de riesgo (intentos previos, poca red de apoyo, uso de sustancias, etc) y que tenga un plan más desarrollado y/o acceso al método no olvides que deberá romperse la confidencialidad y pedir a un familiar que no deje solo (a) al/la paciente por las siguientes 24 hrs.");
-
-      }
-
+  jq(selectCuestion9).change(function () {
+    if (
+      jq(this).find("option:selected").text() == "Nunca" ||
+      jq(this).val() == ""
+    ) {
+      jq("#Alert").text("");
+    } else {
+      jq("#Alert").text(
+        "No olvides hacer el plan de seguridad con este paciente. Además, en caso de que tenga factores de riesgo (intentos previos, poca red de apoyo, uso de sustancias, etc) y que tenga un plan más desarrollado y/o acceso al método no olvides que deberá romperse la confidencialidad y pedir a un familiar que no deje solo (a) al/la paciente por las siguientes 24 hrs."
+      );
+    }
   });
 }
 
-function resultGAD(){
+function setupPHQ() {
+  jq("#CuestionsPHQ9")
+    .find("select")
+    .change(function () {
+      actualizarPHQ9();
+    });
+}
 
-  let scoreGad = 0;
+function actualizarPHQ9() {
   const valueByAnswerConcept = {
-    "Nunca": 0,
+    Nunca: 0,
     "Pocos días": 1,
     "Más de la mitad de los días": 2,
-    "Casi todos los días": 3
-  }
-  
-  jq("#CuestionsGAD7").find("select").change(function() {
+    "Casi todos los días": 3,
+  };
 
-      scoreGad += valueByAnswerConcept[jq(this).find('option:selected').text()];         
-      jq("#ResultGAD7 input").val(scoreGad);
+  const total = sum(
+    jq("#CuestionsPHQ9")
+      .find("select")
+      .toArray()
+      .map(
+        (select) =>
+          valueByAnswerConcept[jq(select).find("option:selected").text()]
+      )
+      .filter((valor) => valor != undefined)
+  );
 
-  });
+  jq("#ResultPHQ9 input").val(total);
+}
 
+function setupGAD() {
+  jq("#CuestionsGAD7")
+    .find("select")
+    .change(function () {
+      actualizarGAD7();
+    });
+}
+
+function actualizarGAD7() {
+  const valueByAnswerConcept = {
+    Nunca: 0,
+    "Pocos días": 1,
+    "Más de la mitad de los días": 2,
+    "Casi todos los días": 3,
+  };
+
+  const total = sum(
+    jq("#CuestionsGAD7")
+      .find("select")
+      .toArray()
+      .map(
+        (select) =>
+          valueByAnswerConcept[jq(select).find("option:selected").text()]
+      )
+      .filter((valor) => valor != undefined)
+  );
+
+  jq("#ResultGAD7 input").val(total);
+}
+
+function sum(arr) {
+  return arr.reduce((partialSum, a) => partialSum + a, 0);
 }

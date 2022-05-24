@@ -1184,9 +1184,9 @@
     <!-- Mental -->
     <script>
         jq(function() {
-            resultPHQ();
             alertCuestion9PHQ();
-            resultGAD();
+            setupGAD();
+            setupPHQ();
         });
     </script>
     <section id="mental" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.mental">
@@ -1197,6 +1197,7 @@
                     <obs id="cuestion1"
                          conceptId="PIH:Little interest or pleasure in doing things"
                          labelText="¿Ha sentido poco interés en hacer las cosas (hacer su oficio, ir al cafetal)?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
 
@@ -1204,6 +1205,7 @@
                     <obs id="cuestion2"
                          conceptId="PIH:Feeling down depressed or hopeless"
                          labelText="¿Se ha sentido triste, desesperado(a) o decaído(a)?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
             </div>
@@ -1214,6 +1216,7 @@
                     <obs id="cuestion3"
                          conceptId="PIH:Trouble falling or staying asleep or sleeping too much"
                          labelText="¿Le ha costado trabajo dormirse(que le agarre sueño)? ¿o que duerma demasiado?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
 
@@ -1221,6 +1224,7 @@
                     <obs id="cuestion4"
                          conceptId="PIH:Feeling tired or having little energy"
                          labelText="¿Se ha sentido cansado(a) o con poca energía?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
             </div>
@@ -1232,12 +1236,14 @@
                     <obs id="cuestion5"
                          conceptId="PIH:Little appetite or eating less"
                          labelText="¿Ha tenido menos hambre o ha sentido que come menos? ¿o ha sentido que le dé más hambre o que come más de lo normal?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
                 <div>
                     <obs id="cuestion6"
                          conceptId="PIH:Feels like they have failed someone"
                          labelText="¿Ha sentido que le ha fallado a alguien o que le haya quedado mal a alguien o que se haya sentido culpable?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
             </div>
@@ -1249,6 +1255,7 @@
                     <obs id="cuestion7"
                          conceptId="PIH:Distracted easily"
                          labelText="¿Se distrae fácilmente al ver la televisión/platicar con alguien/hacer el oficio/estar en cafetal por estar pensando mucho?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
 
@@ -1256,6 +1263,7 @@
                     <obs id="cuestion8"
                          conceptId="PIH:Feels slower than normal"
                          labelText="¿Se ha sentido más lento(a) de lo normal o que se tarda más en hacer su oficio? ¿o que esté tan intranquilo(a) que no se pueda dejar de mover?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
             </div>
@@ -1267,6 +1275,7 @@
                     <obs id="cuestion9"
                          conceptId="PIH:Has thought about ending their life"
                          labelText="Muchas veces, cuando hay muchos problemas y la vida es difícil es común llegar a pensar que sería mejor estar muerto(a). En las últimas dos semanas, ¿ha llegado a pensar en quitarse la vida o en desaparecer?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
 
@@ -1293,12 +1302,14 @@
                 <div>
                     <obs conceptId="PIH:Feeling nervous"
                          labelText="¿Se siente nervioso, intranquilo/a o con los nervios de punta?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
 
                 <div>
                     <obs conceptId="PIH:Not able to stop worrying"
                          labelText="No poder dejar de preocuparse o no poder controlar la preocupación"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
             </div>
@@ -1308,12 +1319,14 @@
                 <div>
                     <obs conceptId="PIH:Worrying too much about different things"
                          labelText="¿Se preocupa demasiado por diferentes cosas?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
 
                 <div>
                     <obs conceptId="PIH:Difficulty relaxing"
                          labelText="¿Tiene dificultad para relajarse?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
             </div>
@@ -1323,12 +1336,14 @@
                 <div>
                     <obs conceptId="PIH:Being so restless that it is difficult to sit quietly"
                          labelText="¿Se siente tan inquieto/a que es difcil permanecer sentado/a tranquilamente?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
 
                 <div>
                     <obs conceptId="PIH:Getting upset or irritable easily"
                          labelText="¿Se molesta o se pone irritable fácilmente?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
             </div>
@@ -1338,6 +1353,7 @@
                 <div>
                     <obs conceptId="PIH:Feeling scared as if something terrible could happen"
                          labelText="¿Siente miedo como si algo terrible pudiera pasar?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
                          answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
                 </div>
                 <div>
