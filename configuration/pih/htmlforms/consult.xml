@@ -388,12 +388,6 @@
         <img src="/openmrs/ms/uiframework/resource/file/configuration/pih/images/ssa-logo.png" style="width: 20%; margin: 0 5%;"/>
     </div>
 
-    <script>
-        jq(function() {
-            setupProgramExit();
-        });
-    </script>
-
     <section id="context" sectionTag="fieldset" headerTag="legend" headerStyle="title">
         <div class="section-container">
             <label>
