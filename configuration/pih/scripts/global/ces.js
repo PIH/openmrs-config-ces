@@ -331,76 +331,66 @@ function sectionDisplayDx() {
 
 }
 
-function resultPHQ(){
-
-  let scorePHQ = 0;
-
-  jq("#CuestionsPHQ9").find("select").change(function() {
-
-      let valueText = jq(this).find('option:selected').text();
-
-      if(valueText == "Nunca"){
-
-        scorePHQ += 0;
-            
-      }
-      if(valueText == "Pocos días"){
-      
-        scorePHQ += 1;
-      
-      }
-      
-      if(valueText == "Más de la mitad de los días"){
-      
-        scorePHQ += 2;
-            
-      }
-      
-      if(valueText == "Casi todos los días"){
-      
-        scorePHQ += 3;
-
-      }
-          
-      jq("#ResultPHQ9 input").val(scorePHQ);
-
-  });
-
+function setupPHQ() {
+  jq("#CuestionsPHQ9")
+    .find("select")
+    .change(function () {
+      actualizarPHQ9();
+    });
 }
 
-function alertCuestion9PHQ(){
-
-  let selectCuestion9 = jq("#cuestion9 select");
-  jq(selectCuestion9).change(function() {
-
-      if(jq(this).find('option:selected').text() == "Nunca" || jq(this).val() == ""){
-
-        jq("#Alert").text("");
-        
-      }else{
-
-        jq("#Alert").text("No olvides hacer el plan de seguridad con este paciente. Además, en caso de que tenga factores de riesgo (intentos previos, poca red de apoyo, uso de sustancias, etc) y que tenga un plan más desarrollado y/o acceso al método no olvides que deberá romperse la confidencialidad y pedir a un familiar que no deje solo (a) al/la paciente por las siguientes 24 hrs.");
-
-      }
-
-  });
-}
-
-function resultGAD(){
-
-  let scoreGad = 0;
+function actualizarPHQ9() {
   const valueByAnswerConcept = {
-    "Nunca": 0,
+    Nunca: 0,
     "Pocos días": 1,
     "Más de la mitad de los días": 2,
-    "Casi todos los días": 3
-  }
-  
-  jq("#CuestionsGAD7").find("select").change(function() {
+    "Casi todos los días": 3,
+  };
 
-      scoreGad += valueByAnswerConcept[jq(this).find('option:selected').text()];         
-      jq("#ResultGAD7 input").val(scoreGad);
+  const total = sum(
+    jq("#CuestionsPHQ9")
+      .find("select")
+      .toArray()
+      .map(
+        (select) =>
+          valueByAnswerConcept[jq(select).find("option:selected").text()]
+      )
+      .filter((valor) => valor != undefined)
+  );
 
-  });
+  jq("#ResultPHQ9 input").val(total);
+}
 
+function setupGAD() {
+  jq("#CuestionsGAD7")
+    .find("select")
+    .change(function () {
+      actualizarGAD7();
+    });
+}
+
+function actualizarGAD7() {
+  const valueByAnswerConcept = {
+    Nunca: 0,
+    "Pocos días": 1,
+    "Más de la mitad de los días": 2,
+    "Casi todos los días": 3,
+  };
+
+  const total = sum(
+    jq("#CuestionsGAD7")
+      .find("select")
+      .toArray()
+      .map(
+        (select) =>
+          valueByAnswerConcept[jq(select).find("option:selected").text()]
+      )
+      .filter((valor) => valor != undefined)
+  );
+
+  jq("#ResultGAD7 input").val(total);
+}
+
+function sum(arr) {
+  return arr.reduce((partialSum, a) => partialSum + a, 0);
 }
