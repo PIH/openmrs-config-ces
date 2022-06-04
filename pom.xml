@@ -6,7 +6,7 @@
     <name>CES OpenMRS Configuration</name>
     <description>Top-Level configuration for CES OpenMRS distro</description>
     <url>https://github.com/PIH/openmrs-config-ces</url>
-    <version>1.24.0-SNAPSHOT</version>
+    <version>1.22.0</version>
     <packaging>pom</packaging>
 
     <organization>
@@ -157,7 +157,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.0.1</version>
+                        <version>1.5</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
