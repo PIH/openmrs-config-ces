@@ -1,3 +1,42 @@
+/**
+ * Ensures that if the box is ticked to remove a patient from a program,
+ * then the user must have also provided an outcome.
+ */
+ function setUpProgramExitStatusValidation(requiredMsg) {
+  const programs = [
+    "asthma",
+    "diabetes",
+    "epilepsy",
+    "maternal",
+    "mental",
+    "hypertension",
+  ];
+  beforeSubmit.push(function () {
+    let noErrors = true;
+    for (let program of programs) {
+      if (
+        getValue(program + "-exit-checkbox.value") &&
+        !getValue(program + "-exit-status.value")
+      ) {
+        getField(program + "-exit-status.error")
+          .html(requiredMsg)
+          .show();
+        noErrors = false;
+      }
+    }
+    return noErrors;
+  });
+}
+
+/**
+ * Make the Cholesterol section show when Diabetes or Hypertension is checked
+ *
+ * Requires:
+ *   - Element with ID 'diabetes-enroll' containing a checkbox input
+ *   - Element with ID 'htn-enroll' containing a checkbox input
+ *   - Element with ID 'diabetes'
+ *   - Element with ID 'cholesterol'
+ */
 function setUpCholesterolSection() {
   var dmCheckbox = jq("#diabetes-enroll > input[type='checkbox']")[0];
   var htnCheckbox = jq("#htn-enroll > input[type='checkbox']")[0];
@@ -415,4 +454,12 @@ function actualizarGAD7() {
 
 function sum(arr) {
   return arr.reduce((partialSum, a) => partialSum + a, 0);
+}
+
+function setupProgramExit() {
+  let selectExitProgram = jq(".StatusPatient");
+  jq(selectExitProgram).change(function () {
+    let nameSelect = jq(this).attr("name");
+    jq("#Exit-program-" + nameSelect).show();
+  });
 }
