@@ -352,30 +352,6 @@ function printPrescription() {
   }, 1000);
 }
 
-function sectionDisplayDx() {
-  var changeRadioYes = jq("#DxChange > input[type='radio']")[0];
-  var changeRadioNo = jq("#DxChange > input[type='radio']")[1];
-  var sectionDx = jq("#OptionChangeDx");
-
-  var sectionVisibilityDx = function () {
-    if (changeRadioYes.checked) {
-      sectionDx.show();
-    }
-
-    if (changeRadioNo.checked) {
-      sectionDx.hide();
-    }
-  };
-
-  jq(changeRadioYes).change(function () {
-    sectionVisibilityDx();
-  });
-
-  jq(changeRadioNo).change(function () {
-    sectionVisibilityDx();
-  });
-}
-
 function alertCuestion9PHQ() {
   let selectCuestion9 = jq("#cuestion9 select");
   jq(selectCuestion9).change(function () {
