@@ -19,7 +19,7 @@
           formEncounterType="aa61d509-6e76-4036-a65d-7813c0c3b752"
           formVersion="1.0">
 
-    <!--<postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ExitPatientFromSelectedProgramsAction"/>-->
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ExitPatientFromSelectedProgramsAction"/>
 
     <style type="text/css">
 
@@ -388,11 +388,11 @@
         <img src="/openmrs/ms/uiframework/resource/file/configuration/pih/images/ssa-logo.png" style="width: 20%; margin: 0 5%;"/>
     </div>
 
-    <!--<script>
+    <script>
         jq(function() {
             setupProgramExit();
         });
-    </script>-->
+    </script>
 
     <section id="context" sectionTag="fieldset" headerTag="legend" headerStyle="title">
         <div class="section-container">
@@ -477,13 +477,13 @@
 
     </section>
 
-    <!--<script>
+    <script>
         jq(function() {
             setUpProgramExitStatusValidation(
                 "<uimessage code="coreapps.formValidation.messages.requiredField"/>"
             );
         });
-    </script>-->
+    </script>
 
     <!-- Asthma -->
     <section id="asthma" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.asthma">
