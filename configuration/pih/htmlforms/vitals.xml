@@ -226,6 +226,16 @@
 
         </includeIf>
 
+        <fieldset field-separator=" ">
+            <legend>Perímetro cefálico</legend>
+            <h3>Perímetro cefálico</h3>
+
+            <p class="left">
+                <obs conceptId="PIH:HEAD CIRCUMFERENCE"/>
+            </p>
+
+        </fieldset>
+
         <fieldset field-separator=" / ">
             <legend><uimessage code="mirebalais.vitals.bloodPressure.title"/></legend>
             <h3><uimessage code="mirebalais.vitals.bloodPressure.title"/></h3>
