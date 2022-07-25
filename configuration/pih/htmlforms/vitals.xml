@@ -226,15 +226,17 @@
 
         </includeIf>
 
-        <fieldset field-separator=" ">
-            <legend>Perímetro cefálico</legend>
-            <h3>Perímetro cefálico</h3>
+        <!-- only show Head circumference if patient is less than 3 years old (on the encounterDate) -->
+        <includeIf velocityTest="6 > $patient.getAge($encounter.getEncounterDatetime())">
+            <fieldset>
+                <legend>Perímetro cefálico</legend>
+                <h3>Perímetro cefálico</h3>
 
-            <p class="left">
-                <obs conceptId="PIH:HEAD CIRCUMFERENCE"/>
-            </p>
-
-        </fieldset>
+                <p>
+                    <obs conceptId="PIH:HEAD CIRCUMFERENCE" id="head_cm" showUnits="emr.units.centimeters" unitsCssClass="append-to-value"/>
+                </p>
+            </fieldset>
+        </includeIf>
 
         <fieldset field-separator=" / ">
             <legend><uimessage code="mirebalais.vitals.bloodPressure.title"/></legend>
@@ -330,18 +332,6 @@
                 <obs conceptId="PIH:GAD-2"/>
             </p>
         </fieldset>
-
-        <!-- only show Head circumference if patient is less than 3 years old (on the encounterDate) -->
-        <includeIf velocityTest="3 > $patient.getAge($encounter.getEncounterDatetime())">
-            <fieldset>
-                <legend><uimessage code="mirebalais.vitals.head.navigation.title"/></legend>
-                <h3><uimessage code="mirebalais.vitals.head.title"/></h3>
-
-                <p>
-                    <obs conceptId="PIH:HEAD CIRCUMFERENCE" id="head_cm" showUnits="emr.units.centimeters" unitsCssClass="append-to-value"/>
-                </p>
-            </fieldset>
-        </includeIf>
 
         <fieldset>
             <legend><uimessage code="mirebalais.vitals.complaint.title"/></legend>
