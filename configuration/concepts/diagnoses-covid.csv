@@ -10,7 +10,7 @@ bf96c5a3-7031-41de-b245-1a6637a61292,,COVID-19 diagnósticos,COVID-19 diagnosis 
 165610AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Exposición a COVID-19,Exposure to COVID-19,,,Finding,N/A,,,12774,165610,,,Z20.8,,,,,,840546002,,
 165631AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Exposición cercana a COVID-19,Close exposure to severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2),,,Finding,N/A,,,12810,165631,,,Z20.8,,,,,,840546002,1240441000000108,
 141600AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Falta de aliento,Shortness of breath,,,Diagnosis,N/A,,,12882,141600,,R06.0,,,,,,267036007,,,
-3cf1898e-26fe-102b-80cb-0017a47871b2,,Fiebre,Fever,,Abnormally high body temperature.,Symptom/Finding,N/A,,FEVER,5945,140238,,R50.9,,,,,,386661006,,,
+3cf1898e-26fe-102b-80cb-0017a47871b2,,Fever,Fever,,Abnormally high body temperature.,Symptom/Finding,N/A,,FEVER,5945,140238,,R50.9,,,,,,386661006,,,
 3cd4c100-26fe-102b-80cb-0017a47871b2,,Fiebre con escalofríos,Fever with chills,,"A sensation of feeling cold in the body often associated with an abnormal elevation of body temperature, usually as a result of a pathologic process.",Symptom,N/A,,CHILLS,871,140237,,,R50.8,,,,,274640006,,,
 165913AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Gastroenteritis debido a COVID-19,Gastroenteritis due to severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2),,,Diagnosis,N/A,,,12873,165913,,,U07.1,A08.3,,,,,111843007;840539006,,
 165866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Historia de COVID-19,History of severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) disease,History of disease due to SARS-CoV-2,,Diagnosis,Coded,No;Yes;Unknown,,13772,,,,U08.9,,QC42/RA01.1,,,,2.92508471000119E+017,,
