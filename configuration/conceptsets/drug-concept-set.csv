@@ -1,0 +1,200 @@
+Concept,Member,Member Type,Sort Weight
+CES medication set,ABO blood typing kit,CONCEPT-SET,1
+CES medication set,Acenocoumarol,CONCEPT-SET,2
+CES medication set,Acetaminophen / tramadol,CONCEPT-SET,3
+CES medication set,Alcaftadine,CONCEPT-SET,4
+CES medication set,Alcohols,CONCEPT-SET,5
+CES medication set,Alendronate,CONCEPT-SET,6
+CES medication set,Allantoin / Coal tar,CONCEPT-SET,7
+CES medication set,Allopurinol,CONCEPT-SET,8
+CES medication set,Aluminum magnesium silicate,CONCEPT-SET,9
+CES medication set,Ambroxol,CONCEPT-SET,10
+CES medication set,Aminophylline,CONCEPT-SET,11
+CES medication set,Aripiprazole,CONCEPT-SET,12
+CES medication set,Atenolol,CONCEPT-SET,13
+CES medication set,Atorvastatin,CONCEPT-SET,14
+CES medication set,Atropine,CONCEPT-SET,15
+CES medication set,Azathioprine,CONCEPT-SET,16
+CES medication set,Baby clothing kit,CONCEPT-SET,17
+CES medication set,Beclomethasone dipropionate,CONCEPT-SET,18
+CES medication set,Benzonatate,CONCEPT-SET,19
+CES medication set,Betamethasone,CONCEPT-SET,20
+CES medication set,Bicalutamide,CONCEPT-SET,21
+CES medication set,Biperiden,CONCEPT-SET,22
+CES medication set,Bismuth subsalicylate,CONCEPT-SET,23
+CES medication set,Bisoprolol,CONCEPT-SET,24
+CES medication set,Bromocriptine,CONCEPT-SET,25
+CES medication set,Buprenorphine,CONCEPT-SET,26
+CES medication set,Cabergoline,CONCEPT-SET,27
+CES medication set,Calcium carbonate,CONCEPT-SET,28
+CES medication set,Calcium hydroxide,CONCEPT-SET,29
+CES medication set,Capreomycin,CONCEPT-SET,30
+CES medication set,Carbetocin,CONCEPT-SET,31
+CES medication set,Cefmetazole,CONCEPT-SET,32
+CES medication set,Celecoxib,CONCEPT-SET,33
+CES medication set,Chlorphenamine,CONCEPT-SET,34
+CES medication set,Chlorthalidone,CONCEPT-SET,35
+CES medication set,Cinitapride,CONCEPT-SET,36
+CES medication set,Ciprofloxacin / Dexamethasone,CONCEPT-SET,37
+CES medication set,Cisapride,CONCEPT-SET,38
+CES medication set,Citalopram,CONCEPT-SET,39
+CES medication set,Clindamycin,CONCEPT-SET,40
+CES medication set,Clioquinol,CONCEPT-SET,41
+CES medication set,Clonazepam,CONCEPT-SET,42
+CES medication set,Coal tar,CONCEPT-SET,43
+CES medication set,Colchicine,CONCEPT-SET,44
+CES medication set,Copper IUD,CONCEPT-SET,45
+CES medication set,Cromoglicic acid,CONCEPT-SET,46
+CES medication set,Cyclosporine,CONCEPT-SET,47
+CES medication set,Danazol,CONCEPT-SET,48
+CES medication set,DEFLAZACORT,CONCEPT-SET,49
+CES medication set,Desogestrel / Ethinyl estradiol,CONCEPT-SET,50
+CES medication set,Dexlansoprazole,CONCEPT-SET,51
+CES medication set,Dextromethorphan,CONCEPT-SET,52
+CES medication set,Dicloxacillin sodium,CONCEPT-SET,53
+CES medication set,Dimenhydrinate,CONCEPT-SET,54
+CES medication set,DIMETHICONE,CONCEPT-SET,55
+CES medication set,Diosmin,CONCEPT-SET,56
+CES medication set,Diphenidol,CONCEPT-SET,57
+CES medication set,Dipyrone,CONCEPT-SET,58
+CES medication set,Disposable menstrual product,CONCEPT-SET,59
+CES medication set,Dorzolamide / Timolol,CONCEPT-SET,60
+CES medication set,Doxycycline hyclate,CONCEPT-SET,61
+CES medication set,Epinephrine,CONCEPT-SET,62
+CES medication set,Erythromycin,CONCEPT-SET,63
+CES medication set,Estrogens,CONCEPT-SET,64
+CES medication set,"Estrogens, conjugated (usp)",CONCEPT-SET,65
+CES medication set,"Estrogens, conjugated (usp) / Estrone",CONCEPT-SET,66
+CES medication set,Ethinyl estradiol / Norelgestromin,CONCEPT-SET,67
+CES medication set,Etonogestrel,CONCEPT-SET,68
+CES medication set,Ezetimibe / Simvastatin,CONCEPT-SET,69
+CES medication set,Felodipine,CONCEPT-SET,70
+CES medication set,Finasteride,CONCEPT-SET,71
+CES medication set,FLUDROCORTISONE,CONCEPT-SET,72
+CES medication set,Fluocinolone acetonide,CONCEPT-SET,73
+CES medication set,FLUOROMETHOLONE,CONCEPT-SET,74
+CES medication set,Fluticasone,CONCEPT-SET,75
+CES medication set,Fluticasone / Salmeterol,CONCEPT-SET,76
+CES medication set,Generic skin cream,CONCEPT-SET,77
+CES medication set,Ginkgo biloba leaf,CONCEPT-SET,78
+CES medication set,Glibenclamide and Metformin,CONCEPT-SET,79
+CES medication set,Glipizide,CONCEPT-SET,80
+CES medication set,Glucose,CONCEPT-SET,81
+CES medication set,Glucose / Lidocaine,CONCEPT-SET,82
+CES medication set,Human immunoglobulin,CONCEPT-SET,83
+CES medication set,Hydralazine,CONCEPT-SET,84
+CES medication set,Hydrochlorothiazide / Irbesartan,CONCEPT-SET,85
+CES medication set,Hydrochlorothiazide / Telmisartan,CONCEPT-SET,86
+CES medication set,Hydrocortisone,CONCEPT-SET,87
+CES medication set,Hydroxychloroquine,CONCEPT-SET,88
+CES medication set,Hydroxyzine,CONCEPT-SET,89
+CES medication set,Hypromellose,CONCEPT-SET,90
+CES medication set,"Insulin, glargine, human",CONCEPT-SET,91
+CES medication set,"Insulin, zinc, human",CONCEPT-SET,92
+CES medication set,Isoconazole,CONCEPT-SET,93
+CES medication set,Itraconazole,CONCEPT-SET,94
+CES medication set,Ivermectin,CONCEPT-SET,95
+CES medication set,Jadelle (implantable contraceptive),CONCEPT-SET,96
+CES medication set,Ketoprofen,CONCEPT-SET,97
+CES medication set,Ketorolac tromethamine,CONCEPT-SET,98
+CES medication set,Ketotifen,CONCEPT-SET,99
+CES medication set,L-ornithine-L-aspartate,CONCEPT-SET,100
+CES medication set,Lacosamide,CONCEPT-SET,101
+CES medication set,Lamotrigine,CONCEPT-SET,102
+CES medication set,Latanoprost,CONCEPT-SET,103
+CES medication set,Leflunomide,CONCEPT-SET,104
+CES medication set,Levetiracetam,CONCEPT-SET,105
+CES medication set,Levofloxacin,CONCEPT-SET,106
+CES medication set,Lidocaine,CONCEPT-SET,107
+CES medication set,Lidocaine and Hydrocortisone,CONCEPT-SET,108
+CES medication set,Loperamide,CONCEPT-SET,109
+CES medication set,Loratadine,CONCEPT-SET,110
+CES medication set,Lorazepam,CONCEPT-SET,111
+CES medication set,Losartan,CONCEPT-SET,112
+CES medication set,LOTEPREDNOL,CONCEPT-SET,113
+CES medication set,Magaldrate / Dimethicone,CONCEPT-SET,114
+CES medication set,Magnesium,CONCEPT-SET,115
+CES medication set,Magnesium valproate,CONCEPT-SET,116
+CES medication set,Medroxyprogesterone,CONCEPT-SET,117
+CES medication set,Melatonin,CONCEPT-SET,118
+CES medication set,Meloxicam,CONCEPT-SET,119
+CES medication set,Mercury,CONCEPT-SET,120
+CES medication set,Methimazole,CONCEPT-SET,121
+CES medication set,Methocarbamol,CONCEPT-SET,122
+CES medication set,Methylphenidate,CONCEPT-SET,123
+CES medication set,Methylprednisolone,CONCEPT-SET,124
+CES medication set,Metronidazole benzoate,CONCEPT-SET,125
+CES medication set,"Mineral oil, light",CONCEPT-SET,126
+CES medication set,Minoxidil,CONCEPT-SET,127
+CES medication set,Mometasone,CONCEPT-SET,128
+CES medication set,Mupirocin,CONCEPT-SET,129
+CES medication set,Mycophenolic acid,CONCEPT-SET,130
+CES medication set,Naltrexone,CONCEPT-SET,131
+CES medication set,Naphazoline,CONCEPT-SET,132
+CES medication set,Naproxen,CONCEPT-SET,133
+CES medication set,Nebivolol,CONCEPT-SET,134
+CES medication set,Neomycin,CONCEPT-SET,135
+CES medication set,Nimesulide,CONCEPT-SET,136
+CES medication set,Nitazoxanide,CONCEPT-SET,137
+CES medication set,Nitrofurantoin,CONCEPT-SET,138
+CES medication set,Nitrofurazone,CONCEPT-SET,139
+CES medication set,Olanzapine,CONCEPT-SET,140
+CES medication set,Olopatadine,CONCEPT-SET,141
+CES medication set,Oxcarbazepine,CONCEPT-SET,142
+CES medication set,PANTOPRAZOLE,CONCEPT-SET,143
+CES medication set,Paroxetine,CONCEPT-SET,144
+CES medication set,Pediatric nutrition drink,CONCEPT-SET,145
+CES medication set,Pentoxifylline,CONCEPT-SET,146
+CES medication set,Perindopril,CONCEPT-SET,147
+CES medication set,Petrolatum,CONCEPT-SET,148
+CES medication set,Phenazopyridine,CONCEPT-SET,149
+CES medication set,Phenindione,CONCEPT-SET,150
+CES medication set,Phenylephrine / Zinc sulfate,CONCEPT-SET,151
+CES medication set,Pinaverium bromide and dimethicone,CONCEPT-SET,152
+CES medication set,Piroxicam,CONCEPT-SET,153
+CES medication set,Podophyllin,CONCEPT-SET,154
+CES medication set,Polyethylene glycols / propylene glycol,CONCEPT-SET,155
+CES medication set,Polyvinyl alcohol,CONCEPT-SET,156
+CES medication set,Potassium citrate and citric acid monohydrate,CONCEPT-SET,157
+CES medication set,Pravastatin,CONCEPT-SET,158
+CES medication set,Praziquantel,CONCEPT-SET,159
+CES medication set,Progesterone,CONCEPT-SET,160
+CES medication set,Propafenone,CONCEPT-SET,161
+CES medication set,Psyllium,CONCEPT-SET,162
+CES medication set,Pyrantel,CONCEPT-SET,163
+CES medication set,Pyridoxine,CONCEPT-SET,164
+CES medication set,Quassia preparation,CONCEPT-SET,165
+CES medication set,Quetiapine,CONCEPT-SET,166
+CES medication set,Quinfamide,CONCEPT-SET,167
+CES medication set,Rifaximin,CONCEPT-SET,168
+CES medication set,Rivaroxaban,CONCEPT-SET,169
+CES medication set,Sacubitril / Valsartan,CONCEPT-SET,170
+CES medication set,Salbutamol and ipratropium bromide nebulizer solution,CONCEPT-SET,171
+CES medication set,Sennosides,CONCEPT-SET,172
+CES medication set,Sertraline,CONCEPT-SET,173
+CES medication set,Sildenafil,CONCEPT-SET,174
+CES medication set,SILYMARIN,CONCEPT-SET,175
+CES medication set,Sodium valproate,CONCEPT-SET,176
+CES medication set,SUCRALFATE,CONCEPT-SET,177
+CES medication set,Sulfacetamide sodium,CONCEPT-SET,178
+CES medication set,Sulfasalazine,CONCEPT-SET,179
+CES medication set,Sumatriptan,CONCEPT-SET,180
+CES medication set,Tacrolimus,CONCEPT-SET,181
+CES medication set,Tamsulosin,CONCEPT-SET,182
+CES medication set,Terazosine,CONCEPT-SET,183
+CES medication set,Terbutaline,CONCEPT-SET,184
+CES medication set,Tetracycline,CONCEPT-SET,185
+CES medication set,Thalidomide,CONCEPT-SET,186
+CES medication set,Theophylline anhydrous,CONCEPT-SET,187
+CES medication set,Tiotropium,CONCEPT-SET,188
+CES medication set,TIZANIDINE,CONCEPT-SET,189
+CES medication set,TOBRAMYCIN,CONCEPT-SET,190
+CES medication set,Tobramycin and dexamethasone,CONCEPT-SET,191
+CES medication set,Tolperisone,CONCEPT-SET,192
+CES medication set,Tolterodine,CONCEPT-SET,193
+CES medication set,Topiramate,CONCEPT-SET,194
+CES medication set,Ursodeoxycholic acid,CONCEPT-SET,195
+CES medication set,Valproic acid,CONCEPT-SET,196
+CES medication set,Venlafaxine,CONCEPT-SET,197
+CES medication set,VIGABATRIN,CONCEPT-SET,198
+CES medication set,Vitamin E,CONCEPT-SET,199
