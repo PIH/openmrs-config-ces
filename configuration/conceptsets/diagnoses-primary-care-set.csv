@@ -205,7 +205,7 @@ México conjunto de diagnósticos de atención primaria,Faringitis estreptocóci
 México conjunto de diagnósticos de atención primaria,Faringoamigdalitis,CONCEPT-SET,204,
 México conjunto de diagnósticos de atención primaria,faringolaringitis,CONCEPT-SET,205,
 México conjunto de diagnósticos de atención primaria,Fascitis necrotizante,CONCEPT-SET,206,
-México conjunto de diagnósticos de atención primaria,Fiebre,CONCEPT-SET,207,
+México conjunto de diagnósticos de atención primaria,PIH:Fever of unknown origin,CONCEPT-SET,207,"Referenced by PIH code because of overlapping concepts, see: https://pihemr.atlassian.net/browse/UHM-6678"
 México conjunto de diagnósticos de atención primaria,fiebre de Chikungunya,CONCEPT-SET,208,
 México conjunto de diagnósticos de atención primaria,fiebre hemorrágica dengue,CONCEPT-SET,209,
 México conjunto de diagnósticos de atención primaria,fiebre hemorrágica viral,CONCEPT-SET,210,

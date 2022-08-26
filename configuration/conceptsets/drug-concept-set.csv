@@ -79,7 +79,7 @@ CES medication set,Generic skin cream,CONCEPT-SET,77,
 CES medication set,Ginkgo biloba leaf,CONCEPT-SET,78,
 CES medication set,Glibenclamide and Metformin,CONCEPT-SET,79,
 CES medication set,Glipizide,CONCEPT-SET,80,
-CES medication set,Glucose,CONCEPT-SET,81,
+CES medication set,PIH:12060,CONCEPT-SET,81,# referenced by PIH code because there are two concepts with name “Glucose” in the system
 CES medication set,Glucose / Lidocaine,CONCEPT-SET,82,
 CES medication set,Human immunoglobulin,CONCEPT-SET,83,
 CES medication set,Hydralazine,CONCEPT-SET,84,
