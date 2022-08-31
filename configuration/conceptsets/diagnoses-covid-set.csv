@@ -9,7 +9,7 @@ COVID-19 diagnósticos,Enfermedad respiratoria aguda debida a COVID-19,CONCEPT-S
 COVID-19 diagnósticos,Exposición a COVID-19,CONCEPT-SET,8,
 COVID-19 diagnósticos,Exposición cercana a COVID-19,CONCEPT-SET,9,
 COVID-19 diagnósticos,Falta de aliento,CONCEPT-SET,10,
-COVID-19 diagnósticos,PIH: FEVER,CONCEPT-SET,11,"Referenced by PIH code because of overlapping concepts, see: https://pihemr.atlassian.net/browse/UHM-6678"
+COVID-19 diagnósticos,Fiebre,CONCEPT-SET,11,
 COVID-19 diagnósticos,Fiebre con escalofríos,CONCEPT-SET,12,
 COVID-19 diagnósticos,Gastroenteritis debido a COVID-19,CONCEPT-SET,13,
 COVID-19 diagnósticos,Historia de COVID-19,CONCEPT-SET,14,
