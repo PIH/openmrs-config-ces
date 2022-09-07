@@ -5,6 +5,11 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
+ <!--
+    This changset never appears to have run because this file was not processed prior to:
+      https://pihemr.atlassian.net/browse/UHM-6709
+    Original ticket about this here:
+      https://pihemr.atlassian.net/browse/UHM-5527
     <changeSet id="20210628-cleanup-encounters-without-visits" author="bistenes">
         <comment>Assign encounters (other than registration) that don't have visits to whatever visit is on the same day, if there is one</comment>
         <sql>
@@ -19,5 +24,6 @@
                 and v.voided = 0;
         </sql>
     </changeSet>
+-->
 
 </databaseChangeLog>
