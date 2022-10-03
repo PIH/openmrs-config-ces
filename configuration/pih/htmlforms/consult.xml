@@ -400,8 +400,8 @@
                 Referido por:
             </label>
             <obs conceptId="PIH:6189" id="referredBy"
-                 answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555,PIH:NURSE,PIH:Nurse aide"
-                 answerLabels="Cita,Paciente ambulatorio,Búsqueda activa de casos,Acompañante,Enfermería,Auxiliar"
+                 answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555,PIH:NURSE,PIH:Nurse aide,PIH:EMERGENCY VISIT,PIH:Mobile clinic"
+                 answerLabels="Cita,Paciente ambulatorio,Búsqueda activa de casos,Acompañante,Enfermería,Auxiliar,Urgencia,Brigada medica"
                  style="radio" answerSeparator=""/>
         </div>
     </section>
