@@ -5,6 +5,15 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
+    <changeSet id="20221020-migrate-adjustment-disorders-diagnosis" author="ddesimone">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+            select count(*) from obs where void_reason = 'migrate to new adjustment disorder diagnosis';
+            </sqlCheck>
+        </preConditions>            
+        <sqlFile endDelimiter=";" path="sql/migrate_adjustment_disorder_diagnosis.sql" relativeToChangelogFile="true" stripComments="true" />
+    </changeSet>
+<!--
     <changeSet id="20210628-cleanup-encounters-without-visits" author="bistenes">
         <comment>Assign encounters (other than registration) that don't have visits to whatever visit is on the same day, if there is one</comment>
         <sql>
@@ -18,6 +27,6 @@
                 and date(v.date_started) = date(e.encounter_datetime)
                 and v.voided = 0;
         </sql>
-    </changeSet>
+    </changeSet>-->
 
 </databaseChangeLog>

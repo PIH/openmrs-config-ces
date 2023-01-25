@@ -78,6 +78,17 @@
             -moz-column-count: 3;
         }
 
+        .four-columns {
+            display: table;
+            height: 100%;
+            width: 100%;
+        }
+
+        .four-columns > div {
+            display: table-cell;
+            width: 25%;
+        }
+
         .simple-form-ui input {
             min-width: 80%
         }
@@ -233,6 +244,10 @@
         #Exit-program-maternal,
         #Exit-program-mental{
             display:none;
+        }
+
+        #imgAgeGestationalTable{
+            text-align: center;
         }
 
     </style>
@@ -449,10 +464,12 @@
             </label>
 
             <!-- The ordering of these corresponds to the Spanish alphebetization -->
-            <enrollInProgram programId="Asthma" showCheckbox="true" toggle="asthma"/>
+            <enrollInProgram programId="Asma" showCheckbox="true" toggle="asthma"/>
             <uimessage code="pihcore.ncd.asthma"/>
             <br />
-            <enrollInProgram programId="Malnutrition" showCheckbox="true" toggle="malnutrition"/>
+            <!-- Malnutrition -->
+            <enrollInProgram programId="61e38de2-44f2-470e-99da-3e97e93d388f"
+                             showCheckbox="true" toggle="malnutrition"/>
             <uimessage code="pihcore.ncd.malnutrition"/>
             <br />
             <span id="diabetes-enroll">
@@ -460,18 +477,21 @@
             </span>
             <uimessage code="pihcore.ncd.diabetes"/>
             <br />
-            <enrollInProgram programId="Epilepsy" showCheckbox="true" toggle="epilepsy"/>
+            <enrollInProgram programId="Epilepsia" showCheckbox="true" toggle="epilepsy"/>
             <uimessage code="pihcore.ncd.epilepsy"/>
             <br />
             <span id="htn-enroll" >
-                <enrollInProgram programId="Hypertension" showCheckbox="true" toggle="ProgramHEARTS"/>
+                <!-- Hypertension -->
+                <enrollInProgram programId="6959057e-9a5c-40ba-a878-292ba4fc35bc"
+                                 showCheckbox="true" toggle="ProgramHEARTS"/>
             </span>
             <uimessage code="pihcore.ncd.htn"/>
             <br />
             <enrollInProgram programId="ANC" showCheckbox="true" toggle="anc"/>
             Cuidado prenatal
             <br />
-            <enrollInProgram programId="Mental Health" showCheckbox="true" toggle="mental"/>
+            <!-- Mental Health -->
+            <enrollInProgram programId="Salud Mental" showCheckbox="true" toggle="mental"/>
             <uimessage code="pihcore.ncd.mental"/>
         </div>
 
@@ -1098,7 +1118,7 @@
         <!-- HIV & Syphalis tests -->
         <div class="question-container">
             <label>
-                <uimessage code="pihcore.mch.hivTest"/>
+                Prueba de VIH
             </label>
             <div class="two-columns">
                 <div class="small-text">
@@ -1129,11 +1149,31 @@
                          style="radio" answerSeparator="" />
                 </div>
             </div>
+            
         </div>
 
         <div class="question-container">
             <label>
-                <uimessage code="pihcore.lab.hemoglobin"/>
+                Hepatitis B
+            </label>
+            <div class="two-columns">
+                <div class="small-text">
+                    <lookup expression="fn.latestObs('PIH:HEPATITIS B TEST - QUALITATIVE').obsDatetime" />
+                    <lookup complexExpression="#if($fn.latestObs('PIH:HEPATITIS B TEST - QUALITATIVE')) &#8194; &#8227; &#8194; #end" />
+                    <lookup expression="fn.latestObs('PIH:HEPATITIS B TEST - QUALITATIVE').valueCoded.name" />
+                </div>
+                <div>
+                    <obs conceptId="PIH:HEPATITIS B TEST - QUALITATIVE"
+                         answerConceptIds="CIEL:703,CIEL:664"
+                         style="radio" answerSeparator="" />
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="question-container">
+            <label>
+                Hemoglobina(Hgb)
             </label>
             <div class="two-columns">
                 <div class="small-text">
@@ -1484,6 +1524,67 @@
         </div>
     </section>
 
+     <!-- Rapid test -->
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Pruebas rapidas">
+        <div class="section-container">
+            <div class="four-columns">
+                <div>
+                    <label>Prueba de VIH</label>
+                    <br/>
+                    <obs conceptId="CIEL:163722"
+                         answerConceptIds="CIEL:703,CIEL:664"
+                         style="radio" answerSeparator="" />
+                </div>
+                <div>
+                    <label>Prueba de sífilis</label>
+                    <br/>
+                    <obs conceptId="CIEL:165303"
+                         answerConceptIds="CIEL:703,CIEL:664"
+                         style="radio" answerSeparator="" />
+                </div>
+                <div>
+                    <label>Prueba de hepatitis B</label>
+                    <br/>
+                    <obs conceptId="PIH:HEPATITIS B TEST - QUALITATIVE"
+                         answerConceptIds="CIEL:703,CIEL:664"
+                         style="radio" answerSeparator="" />
+                </div>
+                <div>
+                    <label>Prueba de clamidia</label>
+                    
+                </div>
+            </div>
+            <br/><br/>
+            <div class="four-columns">
+                <div>
+                    <label>Prueba de Gonorrea</label>
+                    <br/>
+                    <obs conceptId="PIH:12334"
+                         answerConceptIds="CIEL:703,CIEL:664"
+                         style="radio" answerSeparator="" />
+                </div>
+                <div>
+                    <label>Prueba de hemoglobina</label>
+                    <br/>
+                    <obs class="small" conceptId="CIEL:21" showUnits="true" />
+                </div>
+                <div>
+                    <label>Tipo de sangre</label>
+                    <br/>
+                    <obs conceptId="PIH:BLOOD TYPING"
+                         answerConceptIds="CIEL:690,CIEL:692,CIEL:694,CIEL:696,CIEL:699,CIEL:701,CIEL:1230,CIEL:1231,PIH:unknown"/>
+                </div>
+                <div>
+                    <label>Prueba de hepatitis C</label>
+                    <br/>
+                    <obs conceptId="PIH:HEPATITIS C TEST - QUALITATIVE"
+                         answerConceptIds="CIEL:703,CIEL:664"
+                         style="radio" answerSeparator="" />
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Prevencion de control de infecciones -->
      <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Prevención de control de infecciones">
       <!-- TB -->
@@ -1717,19 +1818,25 @@
             <div class="section-container">
                 <div class="two-columns">
                     <div>
+                        <div class="small-text">
+                            <lookup expression="fn.latestObs('PIH:14068').valueCoded.name"/>
+                        </div>
                         <label>Tipo de ultrasonido</label>
                         <obs id="TypeUltrasound"
-                            conceptId="PIH:14068"
-                            answerConceptIds="PIH:12561,PIH:Musculoskeletal ultrasound,CIEL:164386,PIH:Thyroid,PIH:Vascular system,CIEL:166201,PIH:Scrotum and Testicle (US),PIH:12562,PIH:HEART,PIH:PULMONARY SYSTEM,PIH:Abdomen (US),PIH:Renal ultrasound,PIH:Pelvis (US),CIEL:159618,PIH:US Gyno"
-                            answerLabels="Tejido blando, Musculoesquelético, Ojo, TIroides, Vascular, Mama, Testicular, E-FAST, Corazón, Pulmón, Abdomen, Renal, Pelvis, Obstétrico, Ginecológico">
+                             conceptId="PIH:14068"
+                             answerConceptIds="PIH:12561,PIH:Musculoskeletal ultrasound,CIEL:164386,PIH:Thyroid,PIH:Vascular system,CIEL:166201,PIH:Scrotum and Testicle (US),PIH:12562,PIH:HEART,PIH:PULMONARY SYSTEM,PIH:Abdomen (US),PIH:Renal ultrasound,PIH:Pelvis (US),CIEL:159618,PIH:US Gyno"
+                             answerLabels="Tejido blando, Musculoesquelético, Ojo, TIroides, Vascular, Mama, Testicular, E-FAST, Corazón, Pulmón, Abdomen, Renal, Pelvis, Obstétrico, Ginecológico">
 
-                            <controls>
+                             <controls>
                                 <when value="CIEL:159618" thenDisplay="#ObstetricSection"/>
-                            </controls>
-                    </obs>
+                             </controls>
+                        </obs>
                     </div>
 
                     <div id="ObstetricSection">
+                        <div class="small-text">
+                            <lookup expression="fn.latestObs('CIEL:160665').valueCoded.name"/>
+                        </div>
                         <label>Medida utilizada</label>                   
                         <div class="two-columns">
                                 <div>
@@ -1759,11 +1866,17 @@
                 <div class="section-container">
                     <div class="two-columns">
                         <div>
-                            <label>Longitud céfalo caudal</label>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:Head to toe length').valueNumeric.intValue()"/>
+                            </div>
+                            <label>Longitud céfalo caudal(cm)</label>
                             <obs conceptId="PIH:Head to toe length"/>                         
                         </div>
                         <div>
-                            <label>Medida Saco Gestacional</label>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:Gestational sac diameter').valueNumeric.intValue()"/>
+                            </div>
+                            <label>Medida Saco Gestacional(cm)</label>
                             <obs conceptId="PIH:Gestational sac diameter"/>
                         </div>
                     </div>
@@ -1771,15 +1884,24 @@
 
                     <div class="tres-columns">
                         <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('CIEL:165220').valueNumeric.intValue()"/>
+                            </div>
                             <obs conceptId="CIEL:165220"
-                                labelText="Semanas de gestación por USG"/>                         
+                                 labelText="Semanas de gestación por USG"/>                         
                         </div>
                         <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:ESTIMATED DATE OF CONFINEMENT').obsDatetime"/>
+                            </div>
                             <obs conceptId="PIH:ESTIMATED DATE OF CONFINEMENT"
-                                labelText="Fecha probable de parto por USG"
-                                allowFutureDates="true"/>
+                                 labelText="Fecha probable de parto por USG"
+                                 allowFutureDates="true"/>
                         </div>
                         <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:Estimated fetal weight').valueNumeric.intValue()"/>
+                            </div>
                             <label>Peso fetal estimado en gramos</label>
                             <obs conceptId="PIH:Estimated fetal weight"/>
                         </div>
@@ -1793,15 +1915,24 @@
                 <div class="section-container">
                     <div class="tres-columns">
                         <div>
-                            <label>Diámetro biparietal</label>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:Biparietal diameter').valueNumeric.intValue()"/>
+                            </div>
+                            <label>Diámetro biparietal(cm)</label>
                             <obs conceptId="PIH:Biparietal diameter"/>                         
                         </div>
                         <div>
-                            <label>Perímetro cefálico</label>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:HEAD CIRCUMFERENCE').valueNumeric.intValue()"/>
+                            </div>
+                            <label>Perímetro cefálico(cm)</label>
                             <obs conceptId="PIH:HEAD CIRCUMFERENCE"/>
                         </div>
                         <div>
-                            <label>Circunferencia abdominal</label>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:WAIST CIRCUMFERENCE CM').valueNumeric.intValue()"/>
+                            </div>
+                            <label>Circunferencia abdominal(cm)</label>
                             <obs conceptId="PIH:WAIST CIRCUMFERENCE CM"/>
                         </div>
                     </div>
@@ -1809,11 +1940,17 @@
                     
                     <div class="two-columns">
                         <div>
-                            <label>Longitud de femur</label>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:Femur length').valueNumeric.intValue()"/>
+                            </div>
+                            <label>Longitud de femur(cm)</label>
                             <obs conceptId="PIH:Femur length"/>
                         </div>
                         <div>
-                            <label>ILA</label>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:AFI').valueNumeric.intValue()"/>
+                            </div>
+                            <label>ILA(cm)</label>
                             <obs conceptId="PIH:AFI"/>
                         </div>
                     </div>
@@ -1821,15 +1958,24 @@
 
                     <div class="tres-columns">
                         <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('CIEL:165220').valueNumeric.intValue()"/>
+                            </div>
                             <obs conceptId="CIEL:165220"
                                 labelText="Semanas de gestación por USG"/>                         
                         </div>
                         <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:ESTIMATED DATE OF CONFINEMENT').obsDatetime"/>
+                            </div>
                             <obs conceptId="PIH:ESTIMATED DATE OF CONFINEMENT"
                                 labelText="Fecha probable de parto por USG"
                                 allowFutureDates="true"/>
                         </div>
                         <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:Estimated fetal weight').valueNumeric.intValue()"/>
+                            </div>
                             <label>Peso fetal estimado en gramos</label>
                             <obs conceptId="PIH:Estimated fetal weight"/>
                         </div>
@@ -1841,20 +1987,31 @@
             <br/>
 
             <div class="section-container">
+                <div class="small-text">
+                    <p>
+                        <lookup expression="fn.latestObs('PIH:Ultrasound result (text)').valueText"/>
+                    </p>
+                </div>
                 <label>Comentario ultrasonido(Reporte)</label>
                 <obs conceptId="PIH:Ultrasound result (text)" 
-                    style="textarea" 
-                    rows="6"/>      
-            </div>
-            <br/>
+                     style="textarea" 
+                     rows="6"/>      
+                <br/><br/>
 
-            <div class="section-container">
-                <label>Cambio de diagnóstico</label>
+                <div id="imgAgeGestationalTable">
+                <uiInclude provider="file" image="configuration/pih/images/AgeGestationalTable.png" width="80%" height="50%"/>
+                </div>
+                <br/><br/>
+
+                <div class="small-text">
+                    <lookup expression="fn.latestObs('PIH:Change Dx').valueCoded.name"/>
+                </div>
+                <label>¿Cambio de diagnóstico y/o manejo? (Cambio FUM, obito, gemelar, derrame pleural, fractura, CONFIRMA O DESCARTA AFECCIÓN)</label>
                 <obs id="DxChange"
-                    conceptId="PIH:Change Dx"
-                    answerConceptIds="PIH:YES,PIH:NO"
-                    style="radio" 
-                    answerSeparator="">    
+                     conceptId="PIH:Change Dx"
+                     answerConceptIds="PIH:YES,PIH:NO"
+                     style="radio" 
+                     answerSeparator="">    
                 </obs>
             </div>
 
