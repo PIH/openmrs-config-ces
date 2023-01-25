@@ -1551,6 +1551,10 @@
                 </div>
                 <div>
                     <label>Prueba de clamidia</label>
+                    <br/>
+                    <obs conceptId="PIH:12335"
+                         answerConceptIds="CIEL:703,CIEL:664"
+                         style="radio" answerSeparator="" />
                     
                 </div>
             </div>
@@ -1869,14 +1873,14 @@
                             <div class="small-text">
                                 <lookup expression="fn.latestObs('PIH:Head to toe length').valueNumeric.intValue()"/>
                             </div>
-                            <label>Longitud céfalo caudal(cm)</label>
+                            <label>Longitud céfalo caudal (cm)</label>
                             <obs conceptId="PIH:Head to toe length"/>                         
                         </div>
                         <div>
                             <div class="small-text">
                                 <lookup expression="fn.latestObs('PIH:Gestational sac diameter').valueNumeric.intValue()"/>
                             </div>
-                            <label>Medida Saco Gestacional(cm)</label>
+                            <label>Medida Saco Gestacional (cm)</label>
                             <obs conceptId="PIH:Gestational sac diameter"/>
                         </div>
                     </div>
@@ -1918,21 +1922,21 @@
                             <div class="small-text">
                                 <lookup expression="fn.latestObs('PIH:Biparietal diameter').valueNumeric.intValue()"/>
                             </div>
-                            <label>Diámetro biparietal(cm)</label>
+                            <label>Diámetro biparietal (cm)</label>
                             <obs conceptId="PIH:Biparietal diameter"/>                         
                         </div>
                         <div>
                             <div class="small-text">
                                 <lookup expression="fn.latestObs('PIH:HEAD CIRCUMFERENCE').valueNumeric.intValue()"/>
                             </div>
-                            <label>Perímetro cefálico(cm)</label>
+                            <label>Perímetro cefálico (cm)</label>
                             <obs conceptId="PIH:HEAD CIRCUMFERENCE"/>
                         </div>
                         <div>
                             <div class="small-text">
                                 <lookup expression="fn.latestObs('PIH:WAIST CIRCUMFERENCE CM').valueNumeric.intValue()"/>
                             </div>
-                            <label>Circunferencia abdominal(cm)</label>
+                            <label>Circunferencia abdominal (cm)</label>
                             <obs conceptId="PIH:WAIST CIRCUMFERENCE CM"/>
                         </div>
                     </div>
@@ -1943,14 +1947,14 @@
                             <div class="small-text">
                                 <lookup expression="fn.latestObs('PIH:Femur length').valueNumeric.intValue()"/>
                             </div>
-                            <label>Longitud de femur(cm)</label>
+                            <label>Longitud de femur (cm)</label>
                             <obs conceptId="PIH:Femur length"/>
                         </div>
                         <div>
                             <div class="small-text">
                                 <lookup expression="fn.latestObs('PIH:AFI').valueNumeric.intValue()"/>
                             </div>
-                            <label>ILA(cm)</label>
+                            <label>ILA (cm)</label>
                             <obs conceptId="PIH:AFI"/>
                         </div>
                     </div>
