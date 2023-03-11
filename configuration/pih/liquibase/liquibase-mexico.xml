@@ -13,6 +13,58 @@
         </preConditions>            
         <sqlFile endDelimiter=";" path="sql/migrate_adjustment_disorder_diagnosis.sql" relativeToChangelogFile="true" stripComments="true" />
     </changeSet>
+    <changeSet id="20230208-void-duplicate-empty-encounters" author="dmdesimone">
+	    <preConditions onFail="MARK_RAN">
+			<not><sqlCheck expectedResult="0">
+					select  count(*) 
+					from encounter e
+					where e.voided = 0 
+					and EXISTS -- at least one obs referred to as a previous obs in other encounter 
+						(select 1 from obs o4
+						inner join obs o5 on o5.previous_version = o4.obs_id and o5.encounter_id != o4.encounter_id 
+						where o4.encounter_id = e.encounter_id)
+					and not EXISTS -- there are no obs in the encounter that are NOT referred as a previous obs in another encounter   
+						(select 1 from obs o2 
+						where o2.encounter_id = e.encounter_id 
+						and not EXISTS 
+							(select 1 from obs o3
+							where o3.previous_version = o2.obs_id));
+			</sqlCheck></not>
+        </preConditions>            	
+        <comment>MEX-566 clean up empty duplicates caused by 2019 migration issue </comment>
+			<sql>
+					-- clean up encounters that are:
+					-- non voided
+					-- have no non-voided obs
+					-- ONLY have obs that are referred to as "previous" in another encounter
+					*/
+					
+					drop temporary table if exists encs_to_void;
+					create temporary table encs_to_void
+					(
+					select  e.encounter_id 
+					from encounter e
+					where e.voided = 0 
+					and EXISTS -- at least one obs referred to as a previous obs in other encounter 
+						(select 1 from obs o4
+						inner join obs o5 on o5.previous_version = o4.obs_id and o5.encounter_id != o4.encounter_id 
+						where o4.encounter_id = e.encounter_id)
+					and not EXISTS -- there are no obs in the encounter that are NOT referred as a previous obs in another encounter   
+						(select 1 from obs o2 
+						where o2.encounter_id = e.encounter_id 
+						and not EXISTS 
+							(select 1 from obs o3
+							where o3.previous_version = o2.obs_id))
+					);
+					
+					update encounter e 
+					inner join encs_to_void t on t.encounter_id = e.encounter_id 
+					set e.voided = 1,
+						e.void_reason = 'clean up duplicates from initial load',
+						e.date_voided = now(),
+						e.voided_by = (select user_id from users where system_id = 'admin');
+		    </sql>
+    </changeSet>    
 <!--
     <changeSet id="20210628-cleanup-encounters-without-visits" author="bistenes">
         <comment>Assign encounters (other than registration) that don't have visits to whatever visit is on the same day, if there is one</comment>
