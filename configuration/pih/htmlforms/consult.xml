@@ -497,13 +497,15 @@
 
     </section>
 
-    <script>
-        jq(function() {
-            setUpProgramExitStatusValidation(
-                "<uimessage code="coreapps.formValidation.messages.requiredField"/>"
-            );
-        });
-    </script>
+    <ifMode mode="VIEW" include="false">
+        <script>
+            jq(function() {
+                setUpProgramExitStatusValidation(
+                    "<uimessage code="coreapps.formValidation.messages.requiredField"/>"
+                );
+            });
+        </script>
+    </ifMode>
 
     <!-- Asthma -->
     <section id="asthma" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.asthma">
@@ -757,11 +759,14 @@
         
     </section>
 
-    <script>
-        jq(function() {
-            setUpCholesterolSection();
-        });
-    </script>
+    <ifMode mode="VIEW" include="false">
+        <script>
+            jq(function() {
+                setUpCholesterolSection();
+            });
+        </script>
+    </ifMode>
+
     <section id="cholesterol" headerCode="Hipertensión" sectionTag="fieldset" headerTag="legend" headerStyle="title">
         <div class="question-container">
             <label><uimessage code="pihcore.lab.total_chol"/></label>
@@ -877,11 +882,14 @@
 
     <!-- Epilepsy -->
     <section id="epilepsy" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.epilepsy">
-        <script>
-            jq(function() {
-                setUpEpilepsySection();
-            });
-        </script>
+
+        <ifMode mode="VIEW" include="false">
+            <script>
+                jq(function() {
+                    setUpEpilepsySection();
+                });
+            </script>
+        </ifMode>
 
         <div class="question-container">
             <p>
@@ -2053,7 +2061,7 @@
                                     <label>
                                         <uimessage code="mirebalais.dispensing.medicationAmount"/>
                                     </label>
-                                    <obs id="amount{0}" conceptId="PIH:9071"/>
+                                    <obs id="amount{0}" class="medication-amount" conceptId="PIH:9071"/>
                                 </p>
                                 <p>
                                     <label>
@@ -2098,9 +2106,70 @@
 
     <!-- Print prescription -->
     <div class="section-button">
-        <button onclick="printPrescription()" type="button">
+        <button id="print-prescription-button" type="button">
             <uimessage code="pihcore.visitNote.printPrescriptions" />
         </button>
+        <script type="text/javascript">
+            jq(function () {
+                jq('#print-prescription-button').click(function() {
+
+                    // Consult Date
+                    let consultDateYmd = $('#encounterDate').find('input[type="hidden"]').val(); // Enter/edit mode
+                    if (!consultDateYmd) {
+                        consultDateYmd = '<lookup complexExpression="$fn.formatDate($encounter.encounterDatetime, 'yyyy-MM-dd')"/>';  // View mode
+                    }
+                    const consultDate = moment(consultDateYmd);
+                    const formattedConsultDate = consultDate.locale('es').format('DD MMM YYYY');
+
+                    // Patient Name
+                    const givenName = jq(".zl-givenName").html().trim();
+                    const familyName = jq(".zl-familyName").html().trim().replace(',', '');
+                    const patientName = givenName + ' ' + familyName;
+
+                    // Patient Age
+                    const birthdate = moment('<lookup complexExpression="$fn.formatDate($patient.birthdate, 'yyyy-MM-dd')"/>');
+                    const age = Math.floor(moment.duration(consultDate.diff(birthdate)).as('years'));
+
+                    // Diagnoses
+                    let diagnoses = jq.map(jq(".diagnosis .matched-name"), (d) => d.textContent).join(", "); // Enter/edit mode
+                    <ifMode mode="VIEW" include="true">
+                    if (!diagnoses) {  // View mode
+                        diagnoses = jq.map(jq("#diagnosis-lookup span"), (d) => {
+                            const diagnosis = d.innerHTML;
+                            const indexOfArrow = diagnosis.indexOf('→');
+                            return (indexOfArrow === -1 ? diagnosis : diagnosis.substring(0, indexOfArrow)).trim();
+                        }).join(", ");
+                    }
+                    </ifMode>
+
+                    // Prescriptions
+                    const prescriptions = [];
+                    jq("span.medication:visible").each(function() {
+                        jq(this).children('fieldset.medication:visible').each(function() {
+                            <ifMode mode="VIEW" include="false">
+                            const drugName = jq(this).find('.medication-name').children('input:first-child').val(); // Enter/edit mode
+                            </ifMode>
+                            <ifMode mode="VIEW" include="true">
+                            const drugName = jq(this).find('.medication-name').html();
+                            </ifMode>
+                            if (drugName) {
+                                <ifMode mode="VIEW" include="false">
+                                const amount = jq(this).find('.medication-amount').children('input:first-child').val();
+                                const instructions = jq(this).find('.medication-instructions').children('input:first-child').val();
+                                </ifMode>
+                                <ifMode mode="VIEW" include="true">
+                                const amount = jq(this).find('.medication-amount .value').html();
+                                const instructions = jq(this).find('.medication-instructions .value').html();
+                                </ifMode>
+                                prescriptions.push({"drugName": drugName, "amount": amount, "instructions": instructions});
+                            }
+                        });
+                    });
+
+                    printPrescription(formattedConsultDate, patientName, age, diagnoses, prescriptions);
+                });
+            });
+        </script>
     </div>
     <br/>
     <ifMode mode="VIEW" include="false">

@@ -274,82 +274,107 @@ function setUpPlanSection(
 }
 
 /**
- * This is a very ugly hack. It creates a new document in a new window,
- * populates that document with things from the current form, and prints it.
- *
- * It is very fragile, both with respect to the form and to browser standards.
+ * This prints a prescription using the data passed into it.
+ * This uses a specific PDF template (the template itself is stored in the images folder along with the .odg source file.
+ * This .odg source file can be edited using LibreOffice Draw.
+ * There are 2 external libraries that have been added (see scripts/global).
+ * One is a library that manipulates PDFs.  See: https://pdf-lib.js.org/
+ * The other is a library that supports printing PDFs directly using the generated PDF output.  See:  https://printjs.crabbly.com/
  */
-function printPrescription() {
-  const w = window.open(
-    "",
-    "",
-    "left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0"
-  );
-  const styleNodes = document.getElementsByTagName("style");
-  for (var i = 0; i < styleNodes.length; i++) {
-    const styleNode = styleNodes[i];
-    w.document.write("<style>" + styleNode.innerHTML + "</style>");
+async function printPrescription(formattedConsultDate, patientName, age, diagnoses, prescriptions) {
+
+  // Load in the PDF template
+  const templateUrl = emr.resourceLink('file', 'configuration/pih/images/recetas-template.pdf');
+  const existingPdf = await fetch(templateUrl).then(res => res.arrayBuffer());
+  const pdfDoc = await PDFLib.PDFDocument.load(existingPdf);
+
+  // Add prescription data
+  const form = pdfDoc.getForm();
+  form.getTextField('date').setText(formattedConsultDate);
+  form.getTextField('patientName').setText(patientName);
+  form.getTextField('age').setText('' + age);
+  form.getTextField('diagnosis').setText(diagnoses);
+
+  const pageFont = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+  const pageFontSize = 10;
+  const page = pdfDoc.getPages()[0];
+
+  let rowPosition = 450;
+
+  page.drawText('Nombre del medicamento', {x: 30, y: rowPosition, size: pageFontSize, font: pageFont});
+  page.drawText('Frascos/Cajas', {x: 350, y: rowPosition, size: pageFontSize, font: pageFont});
+  page.drawText('Instrucciones', {x: 450, y: rowPosition, size: pageFontSize, font: pageFont});
+
+  page.drawLine({
+    start: { x: 30, y: 445 },
+    end: { x: 750, y: 445 },
+    thickness: 1,
+    color: PDFLib.rgb(1.0,0.59608, 0.0),
+  })
+
+  prescriptions.forEach(p => {
+    let drugNameLines = splitToLines(p.drugName ?? '', 65);
+    let instructionLines = splitToLines(p.instructions ?? '', 80);
+    let maxlines = drugNameLines.length > instructionLines.length ? drugNameLines.length : instructionLines.length;
+    for (var i=0; i<maxlines; i++) {
+      rowPosition = rowPosition - 20;
+      if (drugNameLines.length > i) {
+        page.drawText(drugNameLines[i], {x: 30, y: rowPosition, size: pageFontSize, font: pageFont});
+      }
+      if (i === 0) {
+        page.drawText(p.amount ?? '', {x: 350, y: rowPosition, size: pageFontSize, font: pageFont});
+      }
+      if (instructionLines.length > i) {
+        page.drawText(instructionLines[i] ?? '', {x: 450, y: rowPosition, size: pageFontSize, font: pageFont});
+      }
+    }
+    page.drawLine({
+      start: { x: 30, y: rowPosition-5 },
+      end: { x: 750, y: rowPosition-5 },
+      thickness: 1,
+      color: PDFLib.rgb(1.0,0.59608, 0.0),
+      opacity: 0.33,
+    })
+  });
+
+  /**
+   * TODO: This does not currently handle situations where the prescription content exceeds the space on the PDF
+   * This code supports 16-17 lines of prescription data.  Most medication orders are expected to take up one line
+   * Most prescriptions have maximum 3-4 medications.
+   * The drug with the longest name takes up 3 lines.  Instructions can take up arbitrary numbers of lines.
+   * If the need arises to support prescriptions with more content that is allowed, we can adapt this code to
+   * clone the first page of the PDF and add as many pages as needed given the expected number of lines of content
+   */
+
+  form.flatten();
+
+  const pdfData = await pdfDoc.saveAsBase64();
+
+  // Print the PDF
+  printJS({printable: pdfData, type: 'pdf', base64: true});  //
+}
+
+/*
+ * This function takes in content (string) and maxLength (int), and splits the content into an array of
+ * lines that are no more than maxLength long, preserving complete words and breaking lines on spaces.
+ */
+function splitToLines(content, maxLength) {
+  let ret = [];
+  let current = '';
+  content.split(' ').forEach(word => {
+    let possible = current + (current === '' ? '' : ' ') + word;
+    if (possible.length > maxLength) {
+      ret.push(current);
+      current = word;
+    }
+    else {
+      current = possible;
+    }
+  });
+  if (current !== '') {
+    ret.push(current);
   }
-  w.document.write("<body>");
-  const dateOptions = { year: "numeric", month: "short", day: "numeric" };
-  const dateString = new Date().toLocaleDateString("es", dateOptions);
-  w.document.write('<div class="date">' + dateString + "</div>");
-  const logos = jq(document.getElementById("logos")).clone();
-  logos.removeClass("hidden");
-  logos.appendTo(w.document.body);
-  w.document.write("<p>");
-  const givenName = jq(
-    document.getElementsByClassName("zl-givenName")[0]
-  ).clone();
-  givenName.text(givenName.text() + " ");
-  w.document.write(givenName.html());
-  const familyName = jq(
-    document.getElementsByClassName("zl-familyName")[0]
-  ).clone();
-  familyName.text(familyName.text().match(/[^,]*/));
-  w.document.write(familyName.html());
-  w.document.write("</p>");
-  w.document.write("<p>");
-  const gender = jq(
-    document.getElementsByClassName("gender-age")[0].children[0]
-  ).clone();
-  gender.text(gender.text().match(/^\w+/) + ", ");
-  w.document.write(gender.html());
-  const age = jq(
-    document.getElementsByClassName("gender-age")[0].children[1]
-  ).clone();
-  age.text(age.text().match(/\d+/));
-  w.document.write(age.html());
-  w.document.write("</p>");
-  w.document.write("<p>");
-  w.document.write("Diagnosticos: ");
-  w.document.write(
-    jq.map(jq(".diagnosis .matched-name"), (d) => d.textContent).join(", ")
-  );
-  w.document.write("</p>");
-  jq(document.getElementById("drug-orders")).clone().appendTo(w.document.body);
-  const medNames = jq(w.document).find(".medication-name");
-  for (let i = 0; i < medNames.length; i++) {
-    const medP = jq(medNames[i]).parent();
-    medP.css("display", "inline");
-  }
-  jq(document.getElementById("clinical-management-plan"))
-    .clone()
-    .appendTo(w.document.body);
-  jq(document.getElementById("contact-info-inline"))
-    .clone()
-    .appendTo(w.document.body);
-  w.document.write("<p>");
-  w.document.write("Próxima cita: ");
-  w.document.write(jq("#apptDate").find(".hasDatepicker").val());
-  w.document.write("</p>");
-  w.document.write("</body>");
-  w.document.close();
-  w.setTimeout(() => {
-    w.focus();
-    w.print();
-    w.close();
-  }, 1000);
+  return ret;
 }
 
 function alertCuestion9PHQ() {
