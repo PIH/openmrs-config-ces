@@ -17,7 +17,7 @@ encounterType:
   CHECK_IN:
     name: "Check-In"
   MEDICATION_DISPENSED:
-    name: "Medication Dispensed"
+    name: "Medication Dispensing"
   VITALS:
     name: "Vital Signs"
   
