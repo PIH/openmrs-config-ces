@@ -1,9 +1,9 @@
-Uuid,Name,Description,Void/Retire,Program concept,Outcomes concept,_order:1000
-${program.asthma.uuid},Asma,Asthma Program,,PIH:Asthma Program,PIH:Generic outcome,
-${program.malnutrition.uuid},Desnutrición,Malnutrition Program,,PIH:MALNUTRITION PROGRAM,PIH:Generic outcome,
-${program.diabetes.uuid},Diabetes,Diabetes Program,,PIH:Diabetes Program,PIH:Generic outcome,
-${program.epilepsy.uuid},Epilepsia,Epilepsy Program,,PIH:Epilepsy program,PIH:Generic outcome,
-${program.hypertension.uuid},Hipertensión,Hypertension Program,,PIH:Hypertension program,PIH:Generic outcome,
-${program.anc.uuid},ANC,Antenatal Care Program,,CIEL:165475,PIH:MCH outcome,
-${program.mentalHealth.uuid},Salud Mental,Mental Health Program,,PIH:Mental Health Program,PIH:Mental Health outcome,
-${program.hearts.uuid},HEARTS,Programa HEARTS,,PIH:HEARTS Program,PIH:Generic outcome,
+Uuid,Name,Description,Void/Retire,Program concept,Outcomes concept
+${program.asthma.uuid},Asma,Asthma Program,,PIH:Asthma Program,PIH:Generic outcome
+${program.malnutrition.uuid},Desnutrición,Malnutrition Program,,PIH:MALNUTRITION PROGRAM,PIH:Generic outcome
+${program.diabetes.uuid},Diabetes,Diabetes Program,,PIH:Diabetes Program,PIH:Generic outcome
+${program.epilepsy.uuid},Epilepsia,Epilepsy Program,,PIH:Epilepsy program,PIH:Generic outcome
+${program.hypertension.uuid},Hipertensión,Hypertension Program,,PIH:Hypertension program,PIH:Generic outcome
+${program.anc.uuid},ANC,Antenatal Care Program,,CIEL:165475,PIH:MCH outcome
+${program.mentalHealth.uuid},Salud Mental,Mental Health Program,,PIH:Mental Health Program,PIH:Mental Health outcome
+${program.hearts.uuid},HEARTS,Programa HEARTS,,PIH:HEARTS Program,PIH:Generic outcome
