@@ -1,4 +1,4 @@
--- set  @startDate = '2000-01-01';
+-- set  @startDate = '2025-06-01';
 -- set  @endDate = '2025-12-31';
 
 set SESSION group_concat_max_len = 1000000;
@@ -6,17 +6,19 @@ set SESSION group_concat_max_len = 1000000;
 set @locale = global_property_value('default_locale', 'en');
 
 set @historiaClinicaEnc = encounter_type('0d16a7c9-07fb-43f6-8984-dd7787f26a5a');
+set @vitalsEnc = encounter_type('4fb47712-34a6-40d2-8ed3-e153abbd25b7');
 
 drop temporary table if exists temp_hc;
 create temporary table temp_hc
 (
 encounter_id int(11),
 patient_id int(11),
+visit_id int(11),
+encounter_datetime datetime,
 location_id int(11),
 location_name varchar(255),
 full_facility_name text,
 lastname varchar(255),
--- maternal name??? -- ----------------
 firstname varchar(255),
 birthdate date,
 age int,
@@ -32,21 +34,61 @@ occupation varchar(255),
 hygiene varchar(255),
 vaccine varchar(255),
 other_non_path_history varchar(255),
-pathological_history text,	-- <<<	need input							
+daily_cigs float,
+years_smoking float,
+history_alcohol varchar(255),
+years_alcohol float,
+number_transfusions float,
+date_transfusion date,
+type_transfusion varchar(255),
+number_surgeries float,
+date_surgery date,
+type_surgery varchar(255),
+reason_surgery varchar(255),
+number_hospitalizations float,
+date_hospitalization date,
+reason_hospitalization varchar(255),
+other_pathological_history text,
+pathological_history text,
+age_first_menstrual_period float,
+age_first_sexual_activity float,
+blood_type varchar(255),
+menstrual_cycle_details text,
+gravida float,
+parity float,
+cesarian float,
+abortions_before_20_weeks float,
+abortions_after_20_weeks float,
+date_previous_pregnancy date,
+obstetric_notes text,
+number_children float,
+lmp_date date,
+has_had_menopause varchar(255),
+age_of_menopause float,
+sti_notes text,
+family_planning_notes text,
+fp_method varchar(255),
+pap_smear varchar(255),
+breast_exam varchar(255),
 gyn_history	text,									
 main_symptom text,																
 evolution_symptoms text,										
 digestive text,										
 respiratory	 text,									
-genitourinary text,										
+genital text,
+genitourinary text,
+urinary text,
 cardiovascular text,										
 nervous_system	text,	 								
 endocrine	text,									
-locomotor text,			
+locomotor text,		
+vitals_encounter_id int(11),
 temp float,
-bp_systolic int,
-bp_diastolic int,
-bp text,	
+bp_systolic float,
+bp_diastolic float,
+bp text,
+weight float,
+height float,
 hr float,
 rr float,
 otros_exam text,										
@@ -60,8 +102,8 @@ entry_date date,
 provider  text
 );
 
-insert into temp_hc (encounter_id, patient_id, location_id)
-select encounter_id, patient_id, location_id 
+insert into temp_hc (encounter_id, patient_id, location_id, encounter_datetime, entry_date, visit_id)
+select encounter_id, patient_id, location_id, encounter_datetime, date(date_created), visit_id 
 FROM encounter e 
 where  e.voided = 0 
 AND e.encounter_type in (@historiaClinicaEnc)
@@ -73,6 +115,9 @@ create index temp_hc_pi on temp_hc(patient_id);
 
 update temp_hc
 set location_name = location_name(location_id);
+
+update temp_hc 
+set provider = provider(encounter_id);
 
 -- patient level columns
 drop temporary table if exists temp_patients;
@@ -125,7 +170,7 @@ set t.firstname = p.firstname,
 -- obs level columns
 DROP TEMPORARY TABLE IF EXISTS temp_obs;
 create temporary table temp_obs 
-select o.obs_id, o.obs_datetime, o.date_created, o.obs_group_id , o.encounter_id, o.person_id, o.concept_id, o.value_coded, o.value_text, o.value_coded_name_id , o.voided
+select o.obs_id, o.obs_datetime, o.date_created, o.obs_group_id , o.encounter_id, o.person_id, o.concept_id, o.value_numeric, o.value_coded, o.value_datetime, o.value_text, o.value_coded_name_id , o.voided
 from obs o
 inner join temp_hc t on t.encounter_id = o.encounter_id 
 where o.voided = 0;
@@ -134,7 +179,7 @@ create index temp_obs_concept_id on temp_obs(concept_id);
 
 set @familyHistory = concept_from_mapping('PIH','10144');
 update temp_hc 
-set family_history = obs_value_text_from_temp_using_concept_id(encounter_id, @familyHistory);
+set family_history = replace(obs_value_coded_list_from_temp_using_concept_id(encounter_id, @familyHistory, @locale),' | ',', ');
 
 -- non path history
 set @feeding = concept_from_mapping('PIH','14171');
@@ -171,52 +216,367 @@ if(hygiene is null, '', concat(hygiene, ', ')),
 if(vaccine is null, '', concat(vaccine, ', ')),
 if(other_non_path_history is null, '', concat(other_non_path_history, ', '))));
 
+set @daily_cigs = concept_from_mapping('PIH','12586');
+update temp_hc 
+set daily_cigs = obs_value_numeric_from_temp_using_concept_id(encounter_id, @daily_cigs);
+
+set @history_alcohol = concept_from_mapping('PIH','1552');
+update temp_hc 
+set history_alcohol = obs_value_coded_list_from_temp_using_concept_id(encounter_id, @history_alcohol, @locale);
+
+set @years_smoking = concept_from_mapping('PIH','12998');
+update temp_hc 
+set years_smoking = obs_value_numeric_from_temp_using_concept_id(encounter_id, @years_smoking);
+
+set @years_alcohol = concept_from_mapping('PIH','2241');
+update temp_hc 
+set years_alcohol = obs_value_numeric_from_temp_using_concept_id(encounter_id, @years_alcohol);
+
+set @number_transfusions = concept_from_mapping('PIH','13748');
+update temp_hc 
+set number_transfusions = obs_value_numeric_from_temp_using_concept_id(encounter_id, @number_transfusions);
+
+set @date_transfusion = concept_from_mapping('PIH','11064');
+update temp_hc 
+set date_transfusion = obs_value_datetime_from_temp_using_concept_id(encounter_id, @date_transfusion);
+
+set @type_transfusion = concept_from_mapping('PIH','7864');
+update temp_hc 
+set type_transfusion = obs_value_coded_list_from_temp_using_concept_id(encounter_id, @type_transfusion, @locale);
+
+set @number_surgeries = concept_from_mapping('PIH','13768');
+update temp_hc 
+set number_surgeries = obs_value_numeric_from_temp_using_concept_id(encounter_id, @number_surgeries);
+
+set @date_surgery = concept_from_mapping('PIH','13769');
+update temp_hc 
+set date_surgery = obs_value_datetime_from_temp_using_concept_id(encounter_id, @date_surgery);
+
+set @type_surgery = concept_from_mapping('PIH','13770');
+update temp_hc 
+set type_surgery = obs_value_text_from_temp_using_concept_id(encounter_id, @type_surgery);
+
+set @reason_surgery = concept_from_mapping('PIH','13771');
+update temp_hc 
+set reason_surgery = obs_value_text_from_temp_using_concept_id(encounter_id, @reason_surgery);
+
+set @number_hospitalizations = concept_from_mapping('PIH','12594');
+update temp_hc 
+set number_hospitalizations = obs_value_numeric_from_temp_using_concept_id(encounter_id, @number_hospitalizations);
+
+set @date_hospitalization = concept_from_mapping('PIH','12240');
+update temp_hc 
+set date_hospitalization = obs_value_datetime_from_temp_using_concept_id(encounter_id, @date_hospitalization);
+
+set @reason_hospitalization = concept_from_mapping('PIH','11065');
+update temp_hc 
+set reason_hospitalization = obs_value_text_from_temp_using_concept_id(encounter_id, @reason_hospitalization);
+
+set @other_pathological_history = concept_from_mapping('PIH','13752');
+update temp_hc 
+set other_pathological_history = obs_value_text_from_temp_using_concept_id(encounter_id, @other_pathological_history);
+
+update temp_hc
+set pathological_history = 
+CONCAT(
+if(daily_cigs is null, '', concat('Número de cigarros por día: ',daily_cigs, '. ')),
+if(years_smoking is null, '', concat('Tiempo fumando en años: ', years_smoking, '. ')),
+if(history_alcohol is null, '', concat('Ingiere bebidas alcohólicas: ', history_alcohol, '. ')),
+if(years_alcohol is null, '', concat('Tiempo tomando bebidas alcoholicas en años: ',years_alcohol, '. ')),
+if(number_transfusions is null, '', concat('Número de transfusiones hasta el día de hoy: ',number_transfusions, '. ')),
+if(date_transfusion is null, '', concat('Fecha de transfusión: ', date_transfusion, '. ')),
+if(type_transfusion is null, '', concat('Tipo de transfusión: ', type_transfusion, '. ')),
+if(number_surgeries is null, '', concat('Número de cirugías hasta el día de hoy: ', number_surgeries, '. ')),
+if(date_surgery is null, '', concat('Fecha de cirugía: ', date_surgery, '. ')),
+if(type_surgery is null, '', concat('Tipo de cirugía: ', type_surgery, '. ')),
+if(reason_surgery is null, '', concat('Motivo: ', reason_surgery, '. ')),
+if(number_hospitalizations is null, '', concat('Número de hospitalizaciones hasta el día de hoy: ', number_hospitalizations, '. ')),
+if(date_hospitalization is null, '', concat('Fecha de hospitalización: ', date_hospitalization, '. ')),
+if(reason_hospitalization is null, '', concat('Motivo: ', reason_hospitalization, '. ')),
+if(other_pathological_history is null, '', concat('Otros antecedentes patológicos: ', other_pathological_history, '. '))
+);
+
+-- obgyn section
+set @age_first_menstrual_period = concept_from_mapping('PIH','13121');
+update temp_hc 
+set age_first_menstrual_period = obs_value_numeric_from_temp_using_concept_id(encounter_id, @age_first_menstrual_period);
+
+set @age_first_sexual_activity = concept_from_mapping('PIH','13250');
+update temp_hc 
+set age_first_sexual_activity = obs_value_numeric_from_temp_using_concept_id(encounter_id, @age_first_sexual_activity);
+
+set @blood_type = concept_from_mapping('PIH','300');
+update temp_hc 
+set blood_type = obs_value_coded_list_from_temp_using_concept_id(encounter_id, @blood_type, @locale);
+
+set @menstrual_cycle_details = concept_from_mapping('PIH','14176');
+update temp_hc 
+set menstrual_cycle_details = obs_value_text_from_temp_using_concept_id(encounter_id, @menstrual_cycle_details);
+
+set @gravida = concept_from_mapping('PIH','5624');
+update temp_hc 
+set gravida = obs_value_numeric_from_temp_using_concept_id(encounter_id, @gravida);
+
+set @parity = concept_from_mapping('PIH','1053');
+update temp_hc 
+set parity = obs_value_numeric_from_temp_using_concept_id(encounter_id, @parity);
+
+set @cesarian = concept_from_mapping('PIH','7011');
+update temp_hc 
+set cesarian = obs_value_numeric_from_temp_using_concept_id(encounter_id, @cesarian);
+
+set @abortions_before_20_weeks = concept_from_mapping('PIH','13733');
+update temp_hc 
+set abortions_before_20_weeks = obs_value_numeric_from_temp_using_concept_id(encounter_id, @abortions_before_20_weeks);
+
+set @abortions_after_20_weeks = concept_from_mapping('PIH','13734');
+update temp_hc 
+set abortions_after_20_weeks = obs_value_numeric_from_temp_using_concept_id(encounter_id, @abortions_after_20_weeks);
+
+set @date_previous_pregnancy = concept_from_mapping('PIH','13124');
+update temp_hc 
+set date_previous_pregnancy = obs_value_datetime_from_temp_using_concept_id(encounter_id, @date_previous_pregnancy);
+
+set @obstetric_notes = concept_from_mapping('PIH','6760');
+update temp_hc 
+set obstetric_notes = obs_value_text_from_temp_using_concept_id(encounter_id, @obstetric_notes);
+
+set @number_children = concept_from_mapping('PIH','11117');
+update temp_hc 
+set number_children = obs_value_numeric_from_temp_using_concept_id(encounter_id, @number_children);
+
+set @lmp_date = concept_from_mapping('PIH','968');
+update temp_hc 
+set lmp_date = obs_value_datetime_from_temp_using_concept_id(encounter_id, @lmp_date);
+
+set @has_had_menopause = concept_from_mapping('PIH','14188');
+update temp_hc 
+set has_had_menopause = obs_value_coded_list_from_temp_using_concept_id(encounter_id, @has_had_menopause, @locale);
+
+set @age_of_menopause = concept_from_mapping('PIH','14189');
+update temp_hc 
+set age_of_menopause = obs_value_numeric_from_temp_using_concept_id(encounter_id, @age_of_menopause);
+
+set @sti_notes = concept_from_mapping('PIH','1374');
+update temp_hc 
+set sti_notes = obs_value_text_from_temp_using_concept_id(encounter_id, @sti_notes);
+
+set @family_planning_notes = concept_from_mapping('PIH','5281');
+update temp_hc 
+set family_planning_notes = obs_value_text_from_temp_using_concept_id(encounter_id, @family_planning_notes);
+
+set @fp_method = concept_from_mapping('PIH','374');
+update temp_hc 
+set fp_method = obs_value_coded_list_from_temp_using_concept_id(encounter_id, @fp_method, @locale);
+
+set @pap_smear = concept_from_mapping('PIH','11319');
+update temp_hc 
+set pap_smear = obs_value_coded_list_from_temp_using_concept_id(encounter_id, @pap_smear, @locale);
+
+set @breast_exam = concept_from_mapping('PIH','14180');
+update temp_hc 
+set breast_exam = obs_value_coded_list_from_temp_using_concept_id(encounter_id, @breast_exam, @locale);
+
+update temp_hc
+set gyn_history = 
+CONCAT(
+if(age_first_menstrual_period is null, '', concat('Edad de menarca: ', age_first_menstrual_period, '. ')),
+if(age_first_sexual_activity is null, '', concat('Edad que inicio su vida sexual activa: ', age_first_sexual_activity, '. ')),
+if(blood_type is null, '', concat('Tipo de sangre: ', blood_type, '. ')),
+if(menstrual_cycle_details is null, '', concat('Ciclo menstrual: ', menstrual_cycle_details, '. ')),
+if(gravida is null, '', concat('Gravida (G): ', gravida, '. ')),
+if(parity is null, '', concat('Parity (P): ', parity, '. ')),
+if(cesarian is null, '', concat('Cesarian (C): ', cesarian, '. ')),
+if(abortions_before_20_weeks is null, '', concat('Perdidas menores de 20 SDG: ', abortions_before_20_weeks, '. ')),
+if(abortions_after_20_weeks is null, '', concat('Perdidas mayores de 20 SDG: ', abortions_after_20_weeks, '. ')),
+if(date_previous_pregnancy is null, '', concat('Fecha de último evento obstétrico: ', date_previous_pregnancy, '. ')),
+if(obstetric_notes is null, '', concat('Notas : ', obstetric_notes, '. ')),
+if(number_children is null, '', concat('Número de hijos: ', number_children, '. ')),
+if(lmp_date is null, '', concat('FUM: ', lmp_date, '. ')),
+if(has_had_menopause is null, '', concat('Ha pasado por la menopausia: ', has_had_menopause, '. ')),
+if(age_of_menopause is null, '', concat('Edad que tuvo menopasia: ', age_of_menopause, '. ')),
+if(sti_notes is null, '', concat('Enfermedades de transmisión sexual: ', sti_notes, '. ')),
+if(family_planning_notes is null, '', concat('Método de planificación familiar usados: ', family_planning_notes, '. ')),
+if(fp_method is null, '', concat('Método de planificación familiar usado actualmente: ', fp_method, '. ')),
+if(pap_smear is null, '', concat('Se ha hecho examen de papanicolaou: ', pap_smear, '. ')),
+if(breast_exam is null, '', concat('Se ha hecho exploración de mama: ', breast_exam, '. '))
+);
+
+set @main_symptom = concept_from_mapping('PIH','10137');
+update temp_hc 
+set main_symptom = obs_value_text_from_temp_using_concept_id(encounter_id, @main_symptom);
+
+set @evolution_symptoms = concept_from_mapping('PIH','10898');
+update temp_hc 
+set evolution_symptoms = obs_value_coded_list_from_temp_using_concept_id(encounter_id, @evolution_symptoms, @locale);
+
+
+set @digestive = concept_from_mapping('PIH','13757');
+update temp_hc 
+set digestive = obs_value_text_from_temp_using_concept_id(encounter_id, @digestive);
+
+set @respiratory = concept_from_mapping('PIH','13758');
+update temp_hc 
+set respiratory = obs_value_text_from_temp_using_concept_id(encounter_id, @respiratory);
+
+set @genital = concept_from_mapping('PIH','13760');
+update temp_hc 
+set genital = obs_value_text_from_temp_using_concept_id(encounter_id, @genital);
+
+set @urinary = concept_from_mapping('PIH','13759');
+update temp_hc 
+set urinary = obs_value_text_from_temp_using_concept_id(encounter_id, @urinary);
+
+update temp_hc
+set genitourinary = 
+CONCAT(
+if(genital is null, '', concat('Aparato genital: ', genital, '. ')),
+if(urinary is null, '', concat('Aparato urinario: ', urinary, '. ')));
+
+set @cardiovascular = concept_from_mapping('PIH','13761');
+update temp_hc 
+set cardiovascular = obs_value_text_from_temp_using_concept_id(encounter_id, @cardiovascular);
+
+set @nervous_system = concept_from_mapping('PIH','13762');
+update temp_hc 
+set nervous_system = obs_value_text_from_temp_using_concept_id(encounter_id, @nervous_system);
+
+set @endocrine = concept_from_mapping('PIH','13764');
+update temp_hc 
+set endocrine = obs_value_text_from_temp_using_concept_id(encounter_id, @endocrine);
+
+set @locomotor = concept_from_mapping('PIH','13763');
+update temp_hc 
+set locomotor = obs_value_text_from_temp_using_concept_id(encounter_id, @locomotor);
+
+
+set @head = concept_from_mapping('PIH','10466');
+update temp_hc 
+set head = obs_value_text_from_temp_using_concept_id(encounter_id, @head);
+
+set @neck = concept_from_mapping('PIH','12900');
+update temp_hc 
+set neck = obs_value_text_from_temp_using_concept_id(encounter_id, @neck);
+
+set @chest = concept_from_mapping('PIH','10471');
+update temp_hc 
+set chest = obs_value_text_from_temp_using_concept_id(encounter_id, @chest);
+
+set @abdomen = concept_from_mapping('PIH','10469');
+update temp_hc 
+set abdomen = obs_value_text_from_temp_using_concept_id(encounter_id, @abdomen);
+
+set @extremities = concept_from_mapping('PIH','13754');
+update temp_hc 
+set extremities = obs_value_text_from_temp_using_concept_id(encounter_id, @extremities);
+
+set @otros_exam = concept_from_mapping('PIH','10468');
+update temp_hc 
+set otros_exam = obs_value_text_from_temp_using_concept_id(encounter_id, @otros_exam);
+
+set @diagnoses = concept_from_mapping('PIH','3064');
+update temp_hc 
+set diagnoses = replace(obs_value_coded_list_from_temp_using_concept_id(encounter_id, @diagnoses, @locale),' | ',', ');
+
+drop temporary table if exists temp_vitals_visits;
+create temporary table temp_vitals_visits
+select distinct visit_id from temp_hc;
+
+drop temporary table if exists temp_vitals_encounters;
+create temporary table temp_vitals_encounters
+select e.encounter_id, e.visit_id, e.encounter_datetime 
+from encounter e 
+inner join temp_vitals_visits v on v.visit_id = e.visit_id
+where e.voided = 0
+and e.encounter_type = @vitalsEnc;
+
+update temp_hc t
+inner join encounter e on e.encounter_id = 
+(select v.encounter_id FROM temp_vitals_encounters v
+where v.visit_id = t.visit_id 
+order by v.encounter_datetime desc, v.encounter_id desc limit 1)
+set t.vitals_encounter_id = e.encounter_id;
+
+create index temp_hc_vei on temp_hc(vitals_encounter_id);
+
+DROP TEMPORARY TABLE IF EXISTS temp_obs;
+create temporary table temp_obs 
+select o.obs_id, o.obs_datetime, o.date_created, o.obs_group_id , o.encounter_id, o.person_id, o.concept_id, o.value_numeric, o.value_coded, o.value_datetime, o.value_text, o.value_coded_name_id , o.voided
+from obs o
+inner join temp_hc t on t.vitals_encounter_id = o.encounter_id 
+where o.voided = 0;
+
+set @temp = concept_from_mapping('PIH','5088');
+update temp_hc 
+set temp = obs_value_numeric_from_temp_using_concept_id(vitals_encounter_id, @temp);
+
+set @bp_systolic = concept_from_mapping('PIH','5085');
+update temp_hc 
+set bp_systolic = obs_value_numeric_from_temp_using_concept_id(vitals_encounter_id, @bp_systolic);
+
+set @bp_diastolic = concept_from_mapping('PIH','5086');
+update temp_hc 
+set bp_diastolic = obs_value_numeric_from_temp_using_concept_id(vitals_encounter_id, @bp_diastolic);
+
+update temp_hc
+set bp = 
+CONCAT(
+if(bp_systolic is null, '', concat(bp_systolic, '/', bp_diastolic)));
+
+set @weight = concept_from_mapping('PIH','5089');
+update temp_hc 
+set weight = obs_value_numeric_from_temp_using_concept_id(vitals_encounter_id, @weight);
+
+set @height = concept_from_mapping('PIH','5090');
+update temp_hc 
+set height = obs_value_numeric_from_temp_using_concept_id(vitals_encounter_id, @height);
+
+set @hr = concept_from_mapping('PIH','5087');
+update temp_hc 
+set hr = obs_value_numeric_from_temp_using_concept_id(vitals_encounter_id, @hr);
+
+set @rr = concept_from_mapping('PIH','5242');
+update temp_hc 
+set rr = obs_value_numeric_from_temp_using_concept_id(vitals_encounter_id, @rr);
+
 select
 encounter_id,
-patient_id,
-location_id,
-location_name,
-full_facility_name,
-lastname,
-firstname,
-birthdate,
-age,
-gender,
-address,
-localidad,
-telephone,
-family_history,
-non_pathological_history,
-feeding,
-housing,
-occupation,
-hygiene,
-vaccine,
-other_non_path_history,
-pathological_history,
-gyn_history,
-main_symptom,
-evolution_symptoms,
-digestive,
-respiratory,
-genitourinary,
-cardiovascular,
-nervous_system,
-endocrine,
-locomotor,
-temp,
-bp_systolic,
-bp_diastolic,
-bp,
-hr,
-rr,
-otros_exam,
-head,
-neck,
-chest,
-abdomen,
-extremities,
-diagnoses,
-entry_date,
+full_facility_name, 
+location_name, 
+lastname, 
+firstname, 
+birthdate, 
+age, 
+gender, 
+address, 
+localidad, 
+telephone, 
+family_history, 
+non_pathological_history, 
+pathological_history, 
+gyn_history, 
+main_symptom, 
+evolution_symptoms, 
+digestive, 
+respiratory, 
+genitourinary, 
+cardiovascular, 
+nervous_system, 
+endocrine, 
+locomotor, 
+temp, 
+bp, 
+weight, 
+height, 
+hr, 
+rr, 
+otros_exam, 
+head, 
+neck, 
+chest, 
+abdomen, 
+extremities, 
+diagnoses, 
+entry_date, 
 provider
 from temp_hc;
