@@ -99,7 +99,14 @@ abdomen text,
 extremities text,									
 diagnoses  text,										
 entry_date date,								
-provider  text
+provider  text,
+latest_pap_smear_date date,
+pap_smear_obs_group_id int(11),
+pap_smear_result varchar(255),
+pap_smear_comments text,
+latest_breast_exam_date date,
+breast_exam_obs_group_id int(11),
+breast_exam_comments text
 );
 
 insert into temp_hc (encounter_id, patient_id, location_id, encounter_datetime, entry_date, visit_id)
@@ -115,6 +122,32 @@ create index temp_hc_pi on temp_hc(patient_id);
 
 update temp_hc
 set location_name = location_name(location_id);
+
+update temp_hc 
+set full_facility_name =
+CASE location_name
+	when 'Laguna del Cofre' then 'Unidad de Salud (US) Laguna del Cofre'
+	when 'Letrero' then 'Unidad de Salud (US) El Letrero'
+	when 'Salvador' then 'Casa de Salud Salvador Urbina'
+	when 'Soledad' then 'Casa de Salud La Soledad'
+	when 'Plan Alta' then 'Casa de Salud Plan de la Libertad'
+	when 'Plan Baja' then 'Casa de Salud Plan de la Libertad'
+	when 'Matazano' then 'Casa de salud El Matasanos'
+	when 'Reforma' then 'Unidad de salud Reforma'
+	when 'Capitan' then 'Unidad Médica Rural Capitán Luis A. Vidal'
+	when 'Honduras' then 'Casa de Salud Honduras'
+	when 'Monterrey' then 'Monterrey'
+	when 'Plan de la Libertad' then 'Plan de la Libertad'
+	when 'Jaltenango' then 'Unidad de salud Jaltenango de la Paz'
+	when 'Surgery' then 'Unidad de salud Jaltenango de la Paz'
+	when 'Hospital' then 'Unidad de salud Jaltenango de la Paz'
+	when 'CES Oficina' then 'Unidad de salud Jaltenango de la Paz'
+	when 'CER' then 'Unidad de salud Jaltenango de la Paz'
+	when 'Casa Materna' then 'Unidad de salud Jaltenango de la Paz'
+	when 'Patient Home' then 'Unidad de salud Jaltenango de la Paz'
+	when 'Pediatría' then 'Unidad de salud Jaltenango de la Paz'
+END;
+
 
 update temp_hc 
 set provider = provider(encounter_id);
@@ -175,7 +208,9 @@ from obs o
 inner join temp_hc t on t.encounter_id = o.encounter_id 
 where o.voided = 0;
 
-create index temp_obs_concept_id on temp_obs(concept_id);
+create index temp_obs_encounter_id on temp_obs(encounter_id);
+create index temp_obs_c1 on temp_obs(encounter_id, concept_id);
+create index temp_obs_c2 on temp_obs(obs_group_id, concept_id);
 
 set @familyHistory = concept_from_mapping('PIH','10144');
 update temp_hc 
@@ -377,6 +412,73 @@ set @breast_exam = concept_from_mapping('PIH','14180');
 update temp_hc 
 set breast_exam = obs_value_coded_list_from_temp_using_concept_id(encounter_id, @breast_exam, @locale);
 
+-- note pap smear and breast exam information cannot be populated until MEX-655 is fixed
+/*
+-- pap smear 
+set @pap_smear = concept_from_mapping('PIH','885');
+drop temporary table if exists temp_pap_smear_groups;
+create temporary table temp_pap_smear_groups
+SELECT distinct encounter_id, obs_group_id
+FROM temp_obs 
+where concept_id = @pap_smear;
+
+create index temp_pap_smear_groups_gi on temp_pap_smear_groups(obs_group_id); 
+
+set @proc_datetime = concept_from_mapping('PIH','10485');
+update temp_hc t 
+set t.latest_pap_smear_date =
+	(select max(value_datetime) 
+	from temp_obs o
+	inner join temp_pap_smear_groups g on g.obs_group_id = o.obs_group_id
+	where o.encounter_id = t.encounter_id
+	and o.concept_id = @proc_datetime);
+
+update temp_hc t
+set pap_smear_obs_group_id = 
+	(select max(o.obs_group_id) from temp_obs o
+	where o.encounter_id = t.encounter_id
+	and o.concept_id = @proc_datetime
+	and o.value_datetime = latest_pap_smear_date);
+
+update temp_hc t
+set pap_smear_result = obs_from_group_id_value_coded_list_from_temp(pap_smear_obs_group_id, 'PIH','885', @locale);
+
+update temp_hc t
+set pap_smear_comments = obs_from_group_id_value_text_from_temp(pap_smear_obs_group_id, 'PIH','10483');
+
+-- breast exam
+set @breast_exam = concept_from_mapping('PIH','885');
+drop temporary table if exists temp_pap_smear_groups;
+create temporary table temp_pap_smear_groups
+SELECT distinct encounter_id, obs_group_id
+FROM temp_obs 
+where concept_id = @pap_smear;
+
+create index temp_pap_smear_groups_gi on temp_pap_smear_groups(obs_group_id); 
+
+set @proc_datetime = concept_from_mapping('PIH','10485');
+update temp_hc t 
+set t.latest_pap_smear_date =
+	(select max(value_datetime) 
+	from temp_obs o
+	inner join temp_pap_smear_groups g on g.obs_group_id = o.obs_group_id
+	where o.encounter_id = t.encounter_id
+	and o.concept_id = @proc_datetime);
+
+update temp_hc t
+set pap_smear_obs_group_id = 
+	(select max(o.obs_group_id) from temp_obs o
+	where o.encounter_id = t.encounter_id
+	and o.concept_id = @proc_datetime
+	and o.value_datetime = latest_pap_smear_date);
+
+update temp_hc t
+set pap_smear_result = obs_from_group_id_value_coded_list_from_temp(pap_smear_obs_group_id, 'PIH','885', @locale);
+
+update temp_hc t
+set pap_smear_comments = obs_from_group_id_value_text_from_temp(pap_smear_obs_group_id, 'PIH','10483');
+*/
+
 update temp_hc
 set gyn_history = 
 CONCAT(
@@ -478,6 +580,8 @@ set @diagnoses = concept_from_mapping('PIH','3064');
 update temp_hc 
 set diagnoses = replace(obs_value_coded_list_from_temp_using_concept_id(encounter_id, @diagnoses, @locale),' | ',', ');
 
+-- columns from vitals
+
 drop temporary table if exists temp_vitals_visits;
 create temporary table temp_vitals_visits
 select distinct visit_id from temp_hc;
@@ -578,5 +682,11 @@ abdomen,
 extremities, 
 diagnoses, 
 entry_date, 
-provider
+provider,
+latest_pap_smear_date,
+pap_smear_result,
+pap_smear_comments,
+latest_breast_exam_date,
+breast_exam_obs_group_id,
+breast_exam_comments
 from temp_hc;
