@@ -1103,66 +1103,29 @@
                         </th>
                     </tr> 
 
-                    <tr>
-                        <obsgroup groupingConceptId="CIEL:160714">
-                            <td>
-                                <obs conceptId="CIEL:160715"/>
-                            </td>
-                            <td>
-                                <obs conceptId="CIEL:885"
-                                    answerConceptIds="PIH:HPV negative without cervical lesion,PIH:Positive HPV without cervical lesion,CIEL:158242,CIEL:158243,CIEL:145808,CIEL:145805,CIEL:155209,CIEL:141291"
-                                    answerLabels="VPH Negativo, sin lesión cervical, VPH Positivo, sin lesión cervical, Células escamosas atípicas de significado indeterminado, Células escamosas atípicas que no pueden excluir una lesión intraepitelial escamosa de alto grado, Lesiones intraepiteliales escamosas de bajo grado, Lesiones intraepiteliales escamosas de alto grado, Células glandulares atípicas, Adenocarcinoma endocervical in situ"/>
-                            </td>
-                            <td>
-                                <obs conceptId="CIEL:160716"
-                                    style="textarea" 
-                                    rows="3"/> 
-                            </td>
-                        </obsgroup>
-                    </tr>
-
-                    <tr>
-                        <obsgroup groupingConceptId="CIEL:160714">
-                            <td>
-                                <obs conceptId="CIEL:160715"/>
-                            </td>
-                            <td>
-                                <obs conceptId="CIEL:885"
-                                    answerConceptIds="PIH:HPV negative without cervical lesion,PIH:Positive HPV without cervical lesion,CIEL:158242,CIEL:158243,CIEL:145808,CIEL:145805,CIEL:155209,CIEL:141291"
-                                    answerLabels="VPH Negativo, sin lesión cervical, VPH Positivo, sin lesión cervical, Células escamosas atípicas de significado indeterminado, Células escamosas atípicas que no pueden excluir una lesión intraepitelial escamosa de alto grado, Lesiones intraepiteliales escamosas de bajo grado, Lesiones intraepiteliales escamosas de alto grado, Células glandulares atípicas, Adenocarcinoma endocervical in situ"/>
-                            </td>
-                            <td>
-                                <obs conceptId="CIEL:160716"
-                                    style="textarea" 
-                                    rows="3"/> 
-                            </td>
-                        </obsgroup>
-                    </tr> 
-
-                    <tr>
-                        <obsgroup groupingConceptId="CIEL:160714">
-                            <td>
-                                <obs conceptId="CIEL:160715"/>
-                            </td>
-                            <td>
-                                <obs conceptId="CIEL:885"
-                                    answerConceptIds="PIH:HPV negative without cervical lesion,PIH:Positive HPV without cervical lesion,CIEL:158242,CIEL:158243,CIEL:145808,CIEL:145805,CIEL:155209,CIEL:141291"
-                                    answerLabels="VPH Negativo, sin lesión cervical, VPH Positivo, sin lesión cervical, Células escamosas atípicas de significado indeterminado, Células escamosas atípicas que no pueden excluir una lesión intraepitelial escamosa de alto grado, Lesiones intraepiteliales escamosas de bajo grado, Lesiones intraepiteliales escamosas de alto grado, Células glandulares atípicas, Adenocarcinoma endocervical in situ"/>
-                            </td>
-                            <td>
-                                <obs conceptId="CIEL:160716"
-                                    style="textarea" 
-                                    rows="3"/> 
-                            </td>
-                        </obsgroup>
-                    </tr>   
-
+                    <repeat with="['0'], ['1'], ['2']">
+                        <tr id="pap-set-{0}">
+                            <obsgroup groupingConceptId="CIEL:160714"
+                                      hiddenConceptId="CIEL:1651" hiddenAnswerConceptId="PIH:PAPANICOLAOU SMEAR">
+                                <td>
+                                    <obs conceptId="CIEL:160715"/>
+                                </td>
+                                <td>
+                                    <obs conceptId="CIEL:885"
+                                         answerConceptIds="PIH:HPV negative without cervical lesion,PIH:Positive HPV without cervical lesion,CIEL:158242,CIEL:158243,CIEL:145808,CIEL:145805,CIEL:155209,CIEL:141291"
+                                         answerLabels="VPH Negativo, sin lesión cervical, VPH Positivo, sin lesión cervical, Células escamosas atípicas de significado indeterminado, Células escamosas atípicas que no pueden excluir una lesión intraepitelial escamosa de alto grado, Lesiones intraepiteliales escamosas de bajo grado, Lesiones intraepiteliales escamosas de alto grado, Células glandulares atípicas, Adenocarcinoma endocervical in situ"/>
+                                </td>
+                                <td>
+                                    <obs conceptId="CIEL:160716"
+                                         style="textarea" rows="3"/>
+                                </td>
+                            </obsgroup>
+                        </tr>
+                    </repeat>
                 </table>
-            
             </div>
 
-            <!-- mama-->
-
+            <!-- mama (breast exam)-->
             <div class="margin-bottom">
 
                 <obs id="TestExamMama"
@@ -1178,7 +1141,6 @@
             </div>
 
             <div class="section-container margin-bottom" id="DataofTestmama">
-
                 <table>
                     <tr>
                         <th>
@@ -1192,47 +1154,23 @@
                                 Comentario
                             </label>
                         </th>
-                    </tr> 
-
-                    <tr>
-                        <obsgroup groupingConceptId="CIEL:160714">
-                            <td>
-                                <obs conceptId="CIEL:160715"/>
-                            </td>
-                            <td>
-                                <obs conceptId="CIEL:160716"
-                                    style="textarea" 
-                                    rows="3"/> 
-                            </td>
-                        </obsgroup>
                     </tr>
 
-                    <tr>
-                        <obsgroup groupingConceptId="CIEL:160714">
-                            <td>
-                                <obs conceptId="CIEL:160715"/>
-                            </td>
-                            <td>
-                                <obs conceptId="CIEL:160716"
-                                    style="textarea" 
-                                    rows="3"/> 
-                            </td>
-                        </obsgroup>
-                    </tr> 
-
-                    <tr>
-                        <obsgroup groupingConceptId="CIEL:160714">
-                            <td>
-                                <obs conceptId="CIEL:160715"/>
-                            </td>
-                            <td>
-                                <obs conceptId="CIEL:160716"
-                                    style="textarea" 
-                                    rows="3"/> 
-                            </td>
-                        </obsgroup>
-                    </tr>   
-
+                    <repeat with="['0'], ['1'], ['2']">
+                        <tr id="breast-exam-set-{0}">
+                            <obsgroup groupingConceptId="CIEL:160714"
+                                      hiddenConceptId="CIEL:1651" hiddenAnswerConceptId="PIH:20864">
+                                <td>
+                                    <obs conceptId="CIEL:160715"/>
+                                </td>
+                                <td>
+                                    <obs conceptId="CIEL:160716"
+                                        style="textarea"
+                                        rows="3"/>
+                                </td>
+                            </obsgroup>
+                        </tr>
+                    </repeat>
                 </table>
             
             </div>
