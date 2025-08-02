@@ -1,5 +1,5 @@
--- set  @startDate = '2025-06-01';
--- set  @endDate = '2025-12-31';
+--  set  @startDate = '2025-06-01';
+--  set  @endDate = '2025-12-31';
 
 set SESSION group_concat_max_len = 1000000;
 
@@ -412,15 +412,13 @@ set @breast_exam = concept_from_mapping('PIH','14180');
 update temp_hc 
 set breast_exam = obs_value_coded_list_from_temp_using_concept_id(encounter_id, @breast_exam, @locale);
 
--- note pap smear and breast exam information cannot be populated until MEX-655 is fixed
-/*
 -- pap smear 
 set @pap_smear = concept_from_mapping('PIH','885');
 drop temporary table if exists temp_pap_smear_groups;
 create temporary table temp_pap_smear_groups
 SELECT distinct encounter_id, obs_group_id
 FROM temp_obs 
-where concept_id = @pap_smear;
+where value_coded = @pap_smear;
 
 create index temp_pap_smear_groups_gi on temp_pap_smear_groups(obs_group_id); 
 
@@ -447,37 +445,33 @@ update temp_hc t
 set pap_smear_comments = obs_from_group_id_value_text_from_temp(pap_smear_obs_group_id, 'PIH','10483');
 
 -- breast exam
-set @breast_exam = concept_from_mapping('PIH','885');
-drop temporary table if exists temp_pap_smear_groups;
-create temporary table temp_pap_smear_groups
+set @breast_exam = concept_from_mapping('PIH','20864');
+drop temporary table if exists temp_breast_exam_groups;
+create temporary table temp_breast_exam_groups
 SELECT distinct encounter_id, obs_group_id
 FROM temp_obs 
-where concept_id = @pap_smear;
+where value_coded = @breast_exam;
 
-create index temp_pap_smear_groups_gi on temp_pap_smear_groups(obs_group_id); 
+create index temp_breast_exam_groups_gi on temp_breast_exam_groups(obs_group_id); 
 
 set @proc_datetime = concept_from_mapping('PIH','10485');
 update temp_hc t 
-set t.latest_pap_smear_date =
+set t.latest_breast_exam_date =
 	(select max(value_datetime) 
 	from temp_obs o
-	inner join temp_pap_smear_groups g on g.obs_group_id = o.obs_group_id
+	inner join temp_breast_exam_groups g on g.obs_group_id = o.obs_group_id
 	where o.encounter_id = t.encounter_id
 	and o.concept_id = @proc_datetime);
 
 update temp_hc t
-set pap_smear_obs_group_id = 
+set breast_exam_obs_group_id = 
 	(select max(o.obs_group_id) from temp_obs o
 	where o.encounter_id = t.encounter_id
 	and o.concept_id = @proc_datetime
-	and o.value_datetime = latest_pap_smear_date);
+	and o.value_datetime = latest_breast_exam_date);
 
 update temp_hc t
-set pap_smear_result = obs_from_group_id_value_coded_list_from_temp(pap_smear_obs_group_id, 'PIH','885', @locale);
-
-update temp_hc t
-set pap_smear_comments = obs_from_group_id_value_text_from_temp(pap_smear_obs_group_id, 'PIH','10483');
-*/
+set breast_exam_comments = obs_from_group_id_value_text_from_temp(breast_exam_obs_group_id, 'PIH','10483');
 
 update temp_hc
 set gyn_history = 
