@@ -495,7 +495,12 @@ if(sti_notes is null, '', concat('Enfermedades de transmisión sexual: ', sti_no
 if(family_planning_notes is null, '', concat('Método de planificación familiar usados: ', family_planning_notes, '. ')),
 if(fp_method is null, '', concat('Método de planificación familiar usado actualmente: ', fp_method, '. ')),
 if(pap_smear is null, '', concat('Se ha hecho examen de papanicolaou: ', pap_smear, '. ')),
-if(breast_exam is null, '', concat('Se ha hecho exploración de mama: ', breast_exam, '. '))
+if(latest_pap_smear_date is null, '', concat('última fecha de la prueba de papanicolaou: ', latest_pap_smear_date, '. ')),
+if(pap_smear_result is null, '', concat('último resultado de la prueba de papanicolaou: ', pap_smear_result, '. ')),
+if(pap_smear_comments is null, '', concat('comentarios sobre la prueba de Papanicolaou: ', pap_smear_comments, '. ')),
+if(breast_exam is null, '', concat('Se ha hecho exploración de mama: ', breast_exam, '. ')),
+if(latest_breast_exam_date is null, '', concat('última fecha del examen de mama: ', latest_breast_exam_date, '. ')),
+if(breast_exam_comments is null, '', concat('comentarios sobre el examen de mama: ', breast_exam_comments, '. '))
 );
 
 set @main_symptom = concept_from_mapping('PIH','10137');
