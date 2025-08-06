@@ -1,9 +1,11 @@
--- set  @patientId = 2350;
+-- set @startDate = '2023-03-20';
+-- set @endDate = '2023-09-24';
 
 set SESSION group_concat_max_len = 1000000;
 
 set @locale = global_property_value('default_locale', 'es');
 
+SET @mexConsultEnc = encounter_type('aa61d509-6e76-4036-a65d-7813c0c3b752');
 set @insuranceConcept = concept_from_mapping('PIH', 'Mexico Insurance Coded');
 set @seguroPopularConcept = concept_from_mapping('PIH', 'Seguro Popular');
 
@@ -30,7 +32,16 @@ create temporary table temp_hoja_frontal
     curp varchar(100)
 );
 
-insert into temp_hoja_frontal (patient_id) values (@patientId);
+-- Include all patients with a consulta in the given date range
+insert into temp_hoja_frontal (patient_id)
+select distinct(e.patient_id)
+from encounter e
+where e.voided = 0
+  and e.encounter_type in (@mexConsultEnc)
+  and date(e.encounter_datetime) >= @startDate
+  and date(e.encounter_datetime) <= @endDate
+;
+
 update temp_hoja_frontal set lastname = trim(person_family_name(patient_id));
 update temp_hoja_frontal set paternal_lastname = trim(substring_index(lastname, ' ', 1));
 update temp_hoja_frontal set maternal_lastname = trim(substring(lastname, length(paternal_lastname) + 1)) where lastname != paternal_lastname;
