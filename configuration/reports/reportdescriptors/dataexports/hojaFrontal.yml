@@ -1,0 +1,25 @@
+key: "hojaFrontal"
+uuid: "abf3fa9a-6d64-11f0-ac4b-36a9bbfc3f4e"
+name: "Hoja Frontal"
+description: "Hoja Frontal"
+parameters:
+  - key: "startDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.startDate"
+  - key: "endDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.endDate"
+datasets:
+  - key: "hojaFrontal"
+    type: "sql"
+    config: "sql/hojaFrontal.sql"
+designs:
+  - type: "excel"
+    template: "templates/hojaFrontal.xls"
+    properties:
+      repeatingSections: "sheet:1,dataset:hojaFrontal"
+config:
+  category: "dataExport"
+  order: 13
+  components:
+    - "dataExports"
