@@ -2123,14 +2123,14 @@
         </section>
 
         <section id="drug-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-                 headerCode="pihcore.ncd.meds">
+                 headerCode="pihcore.medsAndSupplies">
             <input id="patientAllergies" type="hidden" value=""/>
             <div class="section-container">
                 <repeat with="['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10'],['11'],['12']">
                     <span id="medication-{0}" class="medication">
                         <obsgroup groupingConceptId="PIH:14822" showIfEmpty="false">
                             <h3>
-                                <uimessage code="mirebalais.dispensing.medication"/>
+                                <uimessage code="pihcore.medsAndSupplies"/>
                                 {0} 
                             </h3>
                             <fieldset class="medication">
