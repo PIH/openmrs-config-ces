@@ -1,7 +1,7 @@
-key: "hojaFrontal"
+key: "hojaFrontalSinglePatient"
 uuid: "8be6802f-74a6-11f0-96a7-2ed2f846759c"
-name: "Hoja Frontal Single Patient"
-description: "Hoja Frontal for a single patient"
+name: "Hoja Frontal"
+description: "Hoja Frontal"
 parameters:
   - key: "patientId"
     type: "java.lang.Integer"
@@ -15,8 +15,4 @@ designs:
     template: "templates/hojaFrontal.xls"
     properties:
       repeatingSections: "sheet:1,dataset:hojaFrontal"
-config:
-  category: "dataExport"
-  order: 13
-  components:
-    - "dataExports"
+
