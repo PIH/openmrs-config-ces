@@ -1,5 +1,6 @@
 -- set @startDate = '2023-03-20';
 -- set @endDate = '2023-09-24';
+-- set @patientId = 2337;
 
 set SESSION group_concat_max_len = 1000000;
 
@@ -32,14 +33,16 @@ create temporary table temp_hoja_frontal
     curp varchar(100)
 );
 
--- Include all patients with a consulta in the given date range
+-- Include either the specific patient given, or all patients with a consult encounter in the given date range
 insert into temp_hoja_frontal (patient_id)
 select distinct(e.patient_id)
 from encounter e
 where e.voided = 0
   and e.encounter_type in (@mexConsultEnc)
-  and date(e.encounter_datetime) >= @startDate
-  and date(e.encounter_datetime) <= @endDate
+  and (
+    (@patientId is not null and e.patient_id = @patientId) or
+    (@patientId is null and date (e.encounter_datetime) >= @startDate and date (e.encounter_datetime) <= @endDate)
+  )
 ;
 
 update temp_hoja_frontal set lastname = trim(person_family_name(patient_id));
