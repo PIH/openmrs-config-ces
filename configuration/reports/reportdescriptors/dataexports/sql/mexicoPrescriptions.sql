@@ -10,6 +10,7 @@ set @codedDiagnosis = concept_from_mapping('PIH', 'DIAGNOSIS');
 set @nonCodedDiagnosis = concept_from_mapping('PIH', '7416');
 set @diagnosisOrder = concept_from_mapping('PIH', 'Diagnosis order');
 set @primary = concept_from_mapping('PIH', 'primary');
+set @otherNonCoded = concept_from_mapping('PIH', 'OTHER');
 
 -- We only want to include prescriptions that contain at least one non-OTC drug, so we first build the table of those
 
@@ -67,6 +68,7 @@ create temporary table temp_encounters
     birthdate date,
     age int,
     diagnoses text,
+    allergies text,
     has_qualifying_prescription boolean
 );
 
@@ -82,6 +84,7 @@ where e.voided = 0
 order by e.encounter_datetime, e.encounter_id
 ;
 create index temp_encounters_enc_idx on temp_encounters(encounter_id);
+create index temp_encounters_pat_idx on temp_encounters(patient_id);
 
 -- Retrieve diagnoses for each encounter
 drop temporary table if exists temp_obs;
@@ -120,7 +123,7 @@ create temporary table temp_diagnoses (
 create index temp_diagnoses_enc_idx on temp_obs(encounter_id);
 
 insert into temp_diagnoses (encounter_id, obs_group_id, diagnosis)
-select encounter_id, obs_group_id, concept_name(value_coded, 'es') from temp_obs where concept_id = @codedDiagnosis;
+select encounter_id, obs_group_id, concept_name(value_coded, @locale) from temp_obs where concept_id = @codedDiagnosis;
 
 insert into temp_diagnoses (encounter_id, obs_group_id, diagnosis)
 select encounter_id, obs_group_id, value_text from temp_obs where concept_id = @nonCodedDiagnosis;
@@ -135,5 +138,22 @@ where o.concept_id = @diagnosisOrder and o.value_coded = @primary;
 update temp_encounters e
 inner join (select encounter_id, group_concat(diagnosis order by sort_order separator ', ') as diagnoses from temp_diagnoses group by encounter_id) d on e.encounter_id = d.encounter_id
 set e.diagnoses = d.diagnoses;
+
+# Populate allergies
+drop temporary table if exists temp_allergies;
+create temporary table temp_allergies (
+    patient_id int,
+    allergy varchar(255)
+);
+insert into temp_allergies (patient_id, allergy)
+select a.patient_id, if (a.coded_allergen = @otherNonCoded, a.non_coded_allergen, concept_name(a.coded_allergen, @locale))
+from allergy a
+inner join temp_encounters e on a.patient_id = e.patient_id
+group by a.patient_id, concept_name(a.coded_allergen, @locale)
+;
+
+update temp_encounters e
+inner join (select patient_id, group_concat(allergy separator ', ') as allergies from temp_allergies group by patient_id) d on e.patient_id = d.patient_id
+set e.allergies = d.allergies;
 
 select * from temp_encounters where has_qualifying_prescription = true;
