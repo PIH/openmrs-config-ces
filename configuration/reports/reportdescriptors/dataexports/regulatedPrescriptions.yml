@@ -1,0 +1,22 @@
+key: "regulatedPrescriptions"
+uuid: "3e894650-9410-11f0-9afc-eebafbc61b97"
+name: "Recetas reguladas"
+description: ""
+parameters:
+  - key: "startDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.startDate"
+  - key: "endDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.endDate"
+datasets:
+  - key: "recetas"
+    type: "sql"
+    config: "sql/regulatedPrescriptions.sql"
+designs:
+  - type: "excel"
+config:
+  category: "dataExport"
+  order: 15
+  components:
+    - "dataExports"
