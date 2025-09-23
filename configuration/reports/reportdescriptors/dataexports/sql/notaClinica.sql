@@ -36,7 +36,8 @@ create temporary table temp_encounters
     heart_rate                 int,
     respiratory_rate           int,
     temp_c                     double,
-    glucose_mg_dl              double
+    glucose_mg_dl              double,
+    subjective                 text
 );
 
 -- Include all encounters in the given date range and/or limited by patient
@@ -80,6 +81,7 @@ update temp_encounters set registration_location_name = encounter_location_name(
 update temp_encounters set insurance_policy_number = obs_value_text(registration_encounter_id, 'PIH', 'Insurance policy number');
 
 -- Load vitals encounter from same visit as consult
+
 update temp_encounters te set te.vitals_encounter_id = (
     select e.encounter_id
     from encounter e
@@ -110,5 +112,19 @@ update temp_encounters set heart_rate = obs_value_numeric_from_temp(vitals_encou
 update temp_encounters set respiratory_rate = obs_value_numeric_from_temp(vitals_encounter_id, 'PIH', 'RESPIRATORY RATE');
 update temp_encounters set temp_c = obs_value_numeric_from_temp(vitals_encounter_id, 'PIH', 'TEMPERATURE (C)');
 update temp_encounters set glucose_mg_dl = obs_value_numeric_from_temp(vitals_encounter_id, 'PIH', 'SERUM GLUCOSE');
+
+-- Load observations from consult encounter
+
+drop temporary table if exists temp_obs;
+create temporary table temp_obs
+select o.obs_id, o.obs_datetime, o.date_created, o.obs_group_id, o.encounter_id, o.person_id, o.concept_id, o.value_numeric, o.value_coded, o.value_datetime, o.value_text, o.value_coded_name_id, o.voided
+from obs o inner join temp_encounters t on t.encounter_id = o.encounter_id
+where o.voided = 0;
+
+create index temp_obs_encounter_idx on temp_obs(encounter_id);
+create index temp_obs_concept_idx on temp_obs(encounter_id, concept_id);
+
+update temp_encounters set subjective = obs_value_text_from_temp(encounter_id, 'CIEL', '1390');
+update temp_encounters set subjective = if(subjective is null, null, concat('S: ', subjective));
 
 select * from temp_encounters;
