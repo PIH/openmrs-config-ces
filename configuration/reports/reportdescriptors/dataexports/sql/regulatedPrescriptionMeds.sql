@@ -98,6 +98,7 @@ create temporary table temp_meds (
 insert into temp_meds (encounter_id, obs_group_id)
 select o.encounter_id, o.obs_id
 from temp_obs o
+inner join temp_encounters e on o.encounter_id = e.encounter_id
 where o.concept_id = @medicationGroup;
 
 create index temp_meds_obs_group_idx on temp_obs(obs_group_id);
@@ -107,13 +108,13 @@ update temp_meds m set m.duration = (select value_numeric from temp_obs where ob
 update temp_meds m set m.duration_units = (select concept_name(value_coded, @locale) from temp_obs where obs_group_id = m.obs_group_id and concept_id = @durationUnits);
 update temp_meds m set m.instructions = (select value_text from temp_obs where obs_group_id = m.obs_group_id and concept_id = @medicationInstructions);
 update temp_meds m set m.dose_1 = (select value_numeric from temp_obs where obs_group_id = m.obs_group_id and concept_id = @dose1);
-update temp_meds m set m.dose_1_units = (select concept_name(value_coded, @locale) from temp_obs where obs_group_id = m.obs_group_id and concept_id = @doseUnit1);
+update temp_meds m set m.dose_1_units = (select concept_short_name(value_coded, @locale) from temp_obs where obs_group_id = m.obs_group_id and concept_id = @doseUnit1);
 update temp_meds m set m.dose_1_morning = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing1 and value_coded = @morning);
 update temp_meds m set m.dose_1_noon = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing1 and value_coded = @noon);
 update temp_meds m set m.dose_1_afternoon = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing1 and value_coded = @afternoon);
 update temp_meds m set m.dose_1_evening = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing1 and value_coded = @evening);
 update temp_meds m set m.dose_2 = (select value_numeric from temp_obs where obs_group_id = m.obs_group_id and concept_id = @dose2);
-update temp_meds m set m.dose_2_units = (select concept_name(value_coded, @locale) from temp_obs where obs_group_id = m.obs_group_id and concept_id = @doseUnit2);
+update temp_meds m set m.dose_2_units = (select concept_short_name(value_coded, @locale) from temp_obs where obs_group_id = m.obs_group_id and concept_id = @doseUnit2);
 update temp_meds m set m.dose_2_morning = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing2 and value_coded = @morning);
 update temp_meds m set m.dose_2_noon = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing2 and value_coded = @noon);
 update temp_meds m set m.dose_2_afternoon = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing2 and value_coded = @afternoon);

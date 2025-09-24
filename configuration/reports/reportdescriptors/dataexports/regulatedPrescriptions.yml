@@ -17,7 +17,9 @@ datasets:
     type: "sql"
     config: "sql/regulatedPrescriptionMeds.sql"
 designs:
-  - type: "excel"
+  - type: "org.openmrs.module.pihcore.reporting.renderer.MexicoRegulatedPrescriptionsReportRenderer"
+    name: "PDF"
+    template: "../../../pih/images/recetas-template.pdf"
 config:
   category: "dataExport"
   order: 15

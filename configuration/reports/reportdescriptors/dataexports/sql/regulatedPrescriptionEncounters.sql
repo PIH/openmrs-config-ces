@@ -1,5 +1,5 @@
--- set @startDate = '2025-01-01';
--- set @endDate = '2025-12-31';
+set @startDate = '2025-01-01';
+set @endDate = '2025-12-31';
 -- set @patientId = 2337;
 
 set SESSION group_concat_max_len = 1000000;
