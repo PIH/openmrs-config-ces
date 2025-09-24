@@ -31,6 +31,7 @@ create temporary table temp_encounters
     encounter_id int,
     patient_id int,
     encounter_date date,
+    prescriber varchar(255),
     patient_name varchar(255),
     birthdate date,
     age int,
@@ -78,6 +79,7 @@ delete from temp_encounters where has_qualifying_prescription = 0;
 
 -- Populate demographics
 
+update temp_encounters set prescriber = provider(encounter_id);
 update temp_encounters set patient_name = trim(person_name(patient_id));
 update temp_encounters set birthdate = birthdate(patient_id);
 update temp_encounters set age = timestampdiff(YEAR, birthdate, encounter_date);
