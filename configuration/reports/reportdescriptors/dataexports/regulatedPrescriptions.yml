@@ -1,7 +1,7 @@
 key: "regulatedPrescriptions"
 uuid: "3e894650-9410-11f0-9afc-eebafbc61b97"
-name: "Recetas reguladas"
-description: ""
+name: "Prescripciones de medicamentos controlados"
+description: "Reporte de medicamentos controlados para verificar cumplimiento con normativas."
 parameters:
   - key: "startDate"
     type: "java.util.Date"
@@ -10,9 +10,12 @@ parameters:
     type: "java.util.Date"
     label: "reporting.parameter.endDate"
 datasets:
-  - key: "recetas"
+  - key: "encounters"
     type: "sql"
-    config: "sql/regulatedPrescriptions.sql"
+    config: "sql/regulatedPrescriptionEncounters.sql"
+  - key: "prescriptions"
+    type: "sql"
+    config: "sql/regulatedPrescriptionMeds.sql"
 designs:
   - type: "excel"
 config:
