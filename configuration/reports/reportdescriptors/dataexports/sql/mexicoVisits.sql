@@ -198,9 +198,9 @@ update temp_encounters set cholesterol_line = concat('Colesterol: ', cholesterol
 update temp_encounters set cholesterol_line = concat(if(cholesterol_line is null, '', concat(cholesterol_line, ', ')), concat('HDL: ', hdl)) where hdl is not null;
 update temp_encounters set cholesterol_line = concat(if(cholesterol_line is null, '', concat(cholesterol_line, ', ')), concat('LDL: ', ldl)) where ldl is not null;
 update temp_encounters set test_results = physical_exam_line where physical_exam_line is not null;
-update temp_encounters set test_results = concat(if(test_results is null, '', '\r\n'), ultrasound_line) where ultrasound_line is not null;
-update temp_encounters set test_results = concat(if(test_results is null, '', '\r\n'), glucose_line) where glucose_line is not null;
-update temp_encounters set test_results = concat(if(test_results is null, '', '\r\n'), cholesterol_line) where cholesterol_line is not null;
+update temp_encounters set test_results = concat(if(test_results is null, '', '\n'), ultrasound_line) where ultrasound_line is not null;
+update temp_encounters set test_results = concat(if(test_results is null, '', '\n'), glucose_line) where glucose_line is not null;
+update temp_encounters set test_results = concat(if(test_results is null, '', '\n'), cholesterol_line) where cholesterol_line is not null;
 
 set @diagnosisConcept = concept_from_mapping('PIH','DIAGNOSIS');
 update temp_encounters e
@@ -214,7 +214,7 @@ set e.diagnoses = o.dx
 ;
 update temp_encounters set plan = obs_value_text_from_temp(encounter_id, 'PIH',10534);
 update temp_encounters set diagnoses_and_plan = concat('Diagnóstico: ', diagnoses) where diagnoses is not null;
-update temp_encounters set diagnoses_and_plan = concat(if(diagnoses_and_plan is null, '', concat(diagnoses_and_plan, '\r\n')), concat('Indicaciones Médicas: ', plan)) where plan is not null;
+update temp_encounters set diagnoses_and_plan = concat(if(diagnoses_and_plan is null, '', concat(diagnoses_and_plan, '\n')), concat('Indicaciones Médicas: ', plan)) where plan is not null;
 
 set @medicationGroup = concept_from_mapping('PIH', '14822');
 set @medication = concept_from_mapping('PIH', 'MEDICATION ORDERS');
