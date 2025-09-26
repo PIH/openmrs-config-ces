@@ -1,5 +1,5 @@
--- set @startDate = '2025-01-01';
--- set @endDate = '2025-09-30';
+set @startDate = '2025-01-01';
+set @endDate = '2025-09-30';
 SET SESSION group_concat_max_len = 1000000;
 set @locale =   global_property_value('default_locale', 'es');
 
@@ -25,6 +25,7 @@ create temporary table temp_encounters
     gender_display             varchar(10),
     registration_encounter_id  int,
     registration_location_name varchar(255),
+    procedencia                varchar(255),
     insurance_policy_number    varchar(255),
     vitals_encounter_id        int,
     weight_kg                  double,
@@ -121,6 +122,20 @@ create index temp_encounters_reg_enc_idx on temp_encounters(registration_encount
 
 update temp_encounters set registration_location_name = encounter_location_name(registration_encounter_id);
 update temp_encounters set insurance_policy_number = obs_value_text(registration_encounter_id, 'PIH', 'Insurance policy number');
+
+update temp_encounters set procedencia =
+CASE registration_location_name
+   when 'Honduras' then 'Casa de Salud Honduras'
+   when 'Laguna del Cofre' then 'CSR Laguna del Cofre'
+   when 'Capitan' then 'Unidad Médica Rural Capitán Luis A. Vidal'
+   when 'Letrero' then 'CSR El Letrero'
+   when 'CSR El Letrero' then 'Casa de Salud Salvador Urbina'
+   when 'Soledad' then 'Casa de Salud La Soledad'
+   when 'Matazano ' then 'ESI El Matasanos'
+   when 'Plan Alta' then 'Casa de Salud Plan de la Libertad'
+   when 'Plan Baja' then 'Casa de Salud Plan de la Libertad'
+   when 'Reforma' then 'CSR Reforma'
+END;
 
 -- Populate data from the most recent vitals encounter within the same visit as each consult
 
