@@ -1,318 +1,302 @@
--- set @startDate = '2023-03-20';
--- set @endDate = '2023-09-24';
+-- set @startDate = '2025-01-01';
+-- set @endDate = '2025-09-30';
 SET SESSION group_concat_max_len = 1000000;
+set @locale =   global_property_value('default_locale', 'es');
 
-set @locale =   global_property_value('default_locale', 'en');
-
-SET @mexConsultEnc = encounter_type('aa61d509-6e76-4036-a65d-7813c0c3b752');
-SET @vitEnc = encounter_type('4fb47712-34a6-40d2-8ed3-e153abbd25b7');
-set @dx = concept_from_mapping('PIH','3064');	
-set @med_name = concept_from_mapping('PIH','1282');
-set @med_qty = concept_from_mapping('PIH','9071');
-set @med_inxs = concept_from_mapping('PIH','9072');
-
-drop temporary table if exists temp_mexico_consults;
-create temporary table temp_mexico_consults
+drop temporary table if exists temp_encounters;
+create temporary table temp_encounters
 (
-consult_id			int not null AUTO_INCREMENT,
-emr_id              varchar(50),
-patient_id          int,          
-visit_id            int(11), 
-first_name			varchar(255),
-last_name			varchar(255),
-first_last_name     varchar(511), 
-age                 int,          
-birthdate           date,         
-gender              char(1),      
-encounter_id        int,          
-encounter_datetime  datetime,     
-encounter_location  varchar(255), 
-vitals_encounter_id int(11),
-provider            varchar(255), 
-temp                double,       
-sbp                 int,       
-dbp                 int,       
-weight              double,       
-height              double,       
-o2					double,
-rr                  double,       
-hr                  double,       
-wc                  double,       
-bmi                 double,       
-hdl                 double,       
-ldl                 double,       
-cholesterol         double,       
-glucose             double,       
-hiv_rapid           varchar(255), 
-syphilis_rapid      varchar(255), 
-hep_b               varchar(255), 
-chlamydia_ag        varchar(255), 
-gonorrhea_pcr       varchar(255), 
-hemoglobin          double,       
-blood_group         varchar(255), 
-hep_c               varchar(255), 
-ultrasound_type     varchar(255), 
-ultrasound_notes    text,         
-subjective          text,         
-pe_comment          text,         
-analysis            text,         
-clinical_note       text,         
-test_results        text,         
-plan                text,         
-diagnoses           varchar(1000),
-rapid_tests         text,         
-treatment           text,
-PRIMARY KEY (consult_id)
+    consult_id                 int auto_increment primary key not null,
+    encounter_id               int,
+    patient_id                 int,
+    visit_id                   int,
+    encounter_datetime         datetime,
+    encounter_date             date,
+    location_id                int,
+    encounter_location         varchar(255),
+    unidad_medica              varchar(255),
+    provider                   varchar(255),
+    patient_name               varchar(255),
+    age_years                  int,
+    age_months                 int,
+    age_days                   int,
+    birthdate                  date,
+    gender                     char(1),
+    gender_display             varchar(10),
+    registration_encounter_id  int,
+    registration_location_name varchar(255),
+    insurance_policy_number    varchar(255),
+    vitals_encounter_id        int,
+    weight_kg                  double,
+    height_cm                  double,
+    height_m                   double,
+    bmi                        double,
+    systolic                   int,
+    diastolic                  int,
+    heart_rate                 int,
+    respiratory_rate           int,
+    temp_c                     double,
+    glucose_mg_dl              double,
+    subjective                 text,
+    analysis                   text,
+    physical_exam              text,
+    physical_exam_line         text,
+    ultrasound_type            varchar(1000),
+    ultrasound_notes           text,
+    ultrasound_line            text,
+    glucose_fasting            varchar(255),
+    hba1c                      varchar(255),
+    proteinuria                varchar(255),
+    glucose_line               text,
+    cholesterol                double,
+    hdl                        double,
+    ldl                        double,
+    cholesterol_line           text,
+    test_results               text,
+    diagnoses                  text,
+    plan                       text,
+    diagnoses_and_plan         text,
+    treatment                  text
 );
 
--- insert all consult notes in the timeframe
-insert into temp_mexico_consults (patient_id, visit_id, encounter_id, encounter_datetime,encounter_location)
-select patient_id, visit_id, encounter_id, encounter_datetime, encounter_location_name(location_id) 
-FROM encounter e 
-where  e.voided = 0 
-AND e.encounter_type in (@mexConsultEnc)
-AND date(e.encounter_datetime) >= @startDate
-AND date(e.encounter_datetime) <= @endDate
+-- Load all consult encounters during the report time period
+
+SET @consultEncounterType = encounter_type('aa61d509-6e76-4036-a65d-7813c0c3b752');
+
+insert into temp_encounters (patient_id, visit_id, encounter_id, encounter_datetime, location_id)
+select e.patient_id, e.visit_id, e.encounter_id, e.encounter_datetime, e.location_id
+from encounter e
+inner join patient p on e.patient_id = p.patient_id
+where e.voided = 0  and p.voided = 0
+and e.encounter_type in (@consultEncounterType)
+and date(e.encounter_datetime) >= @startDate
+and date(e.encounter_datetime) <= @endDate
+order by encounter_datetime
 ;
+CREATE INDEX temp_encounters_e on temp_encounters(encounter_id);
+create index temp_encounters_v on temp_encounters(visit_id);
 
-CREATE INDEX temp_mexico_consults_e on temp_mexico_consults(encounter_id);
+-- Populate base demographic and encounter data
 
--- create temporary table of vital signs encounters in that timeframe
-drop temporary table if exists temp_vitals_encs;
-create temporary table temp_vitals_encs
-select encounter_id, patient_id, encounter_datetime
-FROM encounter e 
-where  e.voided = 0 
-AND e.encounter_type in (@vitEnc)
-AND date(e.encounter_datetime) >= @startDate
-AND date(e.encounter_datetime) <= @endDate
+update temp_encounters set encounter_date = date(encounter_datetime);
+update temp_encounters set encounter_location = encounter_location_name(location_id);
+update temp_encounters set provider = provider(encounter_id);
+update temp_encounters set patient_name = trim(person_name(patient_id));
+update temp_encounters set birthdate = birthdate(patient_id);
+update temp_encounters set age_years = age_in_full_years_on_date(patient_id, encounter_date);
+update temp_encounters set age_months = age_in_months_since_last_full_year_on_date(patient_id, encounter_date);
+update temp_encounters set age_days = age_in_days_since_last_full_month_on_date(patient_id, encounter_date);
+update temp_encounters set gender = gender(patient_id);
+update temp_encounters set gender_display = if(gender = 'M', 'MASCULINO', if(gender = 'F', 'FEMININO', null));
+
+update temp_encounters set unidad_medica =
+CASE encounter_location
+   when 'Honduras' then 'Casa de Salud Honduras'
+   when 'Laguna del Cofre' then 'CSR Laguna del Cofre'
+   when 'Capitan' then 'Unidad Médica Rural Capitán Luis A. Vidal'
+   when 'Letrero' then 'CSR El Letrero'
+   when 'CSR El Letrero' then 'Casa de Salud Salvador Urbina'
+   when 'Soledad' then 'Casa de Salud La Soledad'
+   when 'Matazano ' then 'ESI El Matasanos'
+   when 'Plan Alta' then 'Casa de Salud Plan de la Libertad'
+   when 'Plan Baja' then 'Casa de Salud Plan de la Libertad'
+   when 'Reforma' then 'CSR Reforma'
+END;
+
+-- Populate data from the patient's most recent registration encounter
+
+set @registrationEncounterType = encounter_type('873f968a-73a8-4f9c-ac78-9f4778b751b6');
+
+update temp_encounters te set te.registration_encounter_id = (
+    select e.encounter_id
+    from encounter e
+    where e.patient_id = te.patient_id
+      and e.encounter_type = @registrationEncounterType
+      and e.voided = 0
+    order by encounter_date desc
+    limit 1
+);
+
+create index temp_encounters_reg_enc_idx on temp_encounters(registration_encounter_id);
+
+update temp_encounters set registration_location_name = encounter_location_name(registration_encounter_id);
+update temp_encounters set insurance_policy_number = obs_value_text(registration_encounter_id, 'PIH', 'Insurance policy number');
+
+-- Populate data from the most recent vitals encounter within the same visit as each consult
+
+SET @vitalsEncounterType = encounter_type('4fb47712-34a6-40d2-8ed3-e153abbd25b7');
+
+update temp_encounters te set te.vitals_encounter_id = (
+    select e.encounter_id
+    from encounter e
+    where e.visit_id = te.visit_id
+      and e.encounter_type = @vitalsEncounterType
+      and e.voided = 0
+    order by e.encounter_datetime desc
+    limit 1
+);
+
+create index temp_encounters_ve on temp_encounters(vitals_encounter_id);
+
+drop temporary table if exists temp_obs;
+create temporary table temp_obs
+select o.obs_id, o.obs_datetime, o.date_created, o.obs_group_id, o.encounter_id, o.person_id, o.concept_id,
+       o.value_numeric, o.value_coded, o.value_drug, o.value_datetime, o.value_text, o.value_coded_name_id, o.comments, o.voided
+from obs o inner join temp_encounters t on t.vitals_encounter_id = o.encounter_id
+where o.voided = 0;
+
+create index temp_obs_encounter_idx on temp_obs(encounter_id);
+create index temp_obs_concept_idx on temp_obs(encounter_id, concept_id);
+
+update temp_encounters set weight_kg = obs_value_numeric_from_temp(vitals_encounter_id, 'PIH', 'WEIGHT (KG)');
+update temp_encounters set height_cm = obs_value_numeric_from_temp(vitals_encounter_id, 'PIH', 'HEIGHT (CM)');
+update temp_encounters set height_m = if(height_cm is null, null, height_cm / 100);
+update temp_encounters set bmi = if(weight_kg is null or height_m is null, null, round(weight_kg / (height_m * height_m), 1));
+update temp_encounters set systolic = obs_value_numeric_from_temp(vitals_encounter_id, 'PIH', 'SYSTOLIC BLOOD PRESSURE');
+update temp_encounters set diastolic = obs_value_numeric_from_temp(vitals_encounter_id, 'PIH', 'DIASTOLIC BLOOD PRESSURE');
+update temp_encounters set heart_rate = obs_value_numeric_from_temp(vitals_encounter_id, 'PIH', 'PULSE');
+update temp_encounters set respiratory_rate = obs_value_numeric_from_temp(vitals_encounter_id, 'PIH', 'RESPIRATORY RATE');
+update temp_encounters set temp_c = obs_value_numeric_from_temp(vitals_encounter_id, 'PIH', 'TEMPERATURE (C)');
+update temp_encounters set glucose_mg_dl = obs_value_numeric_from_temp(vitals_encounter_id, 'PIH', 'SERUM GLUCOSE');
+
+-- Load observations from consult encounter
+
+drop temporary table if exists temp_obs;
+create temporary table temp_obs
+select o.obs_id, o.obs_datetime, o.date_created, o.obs_group_id, o.encounter_id, o.person_id, o.concept_id,
+       o.value_numeric, o.value_coded, o.value_drug, o.value_datetime, o.value_text, o.value_coded_name_id, o.comments, o.voided
+from obs o inner join temp_encounters t on t.encounter_id = o.encounter_id
+where o.voided = 0;
+
+create index temp_obs_encounter_idx on temp_obs(encounter_id);
+create index temp_obs_concept_idx on temp_obs(encounter_id, concept_id);
+
+update temp_encounters set subjective = obs_value_text_from_temp(encounter_id, 'PIH', 'PRESENTING HISTORY');
+update temp_encounters set subjective = if(subjective is null, null, concat('S: ', subjective));
+
+update temp_encounters set analysis = obs_value_text_from_temp(encounter_id, 'PIH','CLINICAL IMPRESSION COMMENTS');
+
+update temp_encounters set physical_exam = obs_value_text_from_temp(encounter_id, 'PIH', 'PHYSICAL EXAMINATION');
+update temp_encounters set physical_exam_line = concat('Exploración Física: ', physical_exam) where physical_exam is not null;
+update temp_encounters set ultrasound_type = obs_value_coded_list_from_temp(encounter_id, 'PIH','14068',@locale);
+update temp_encounters set ultrasound_notes = obs_value_text_from_temp(encounter_id, 'PIH','7018');
+update temp_encounters set ultrasound_line = concat(if(ultrasound_line is null, '', concat(ultrasound_line, ', ')), ultrasound_type) where ultrasound_type is not null;
+update temp_encounters set ultrasound_line = concat(if(ultrasound_line is null, '', concat(ultrasound_line, ', ')), ultrasound_notes) where ultrasound_notes is not null;
+update temp_encounters set ultrasound_line = concat('Ultrasonido: ', ultrasound_line) where ultrasound_line is not null;
+update temp_encounters set glucose_mg_dl = obs_value_numeric_from_temp(encounter_id, 'PIH','SERUM GLUCOSE') where glucose_mg_dl is null;
+update temp_encounters set glucose_fasting = obs_value_coded_list_from_temp(encounter_id, 'PIH','Fasting for blood glucose test', @locale);
+update temp_encounters set hba1c = obs_value_numeric_from_temp(encounter_id, 'PIH','HbA1c');
+update temp_encounters set proteinuria = obs_value_numeric_from_temp(encounter_id, 'PIH','URINARY ALBUMIN');
+update temp_encounters set glucose_line = concat('Glucosa: ', glucose_mg_dl) where glucose_mg_dl is not null;
+update temp_encounters set glucose_line = concat(if(glucose_line is null, '', concat(glucose_line, ', ')), concat('Ayuno: ', glucose_fasting)) where glucose_fasting is not null;
+update temp_encounters set glucose_line = concat(if(glucose_line is null, '', concat(glucose_line, ', ')), concat('Hba1c: ', hba1c)) where hba1c is not null;
+update temp_encounters set glucose_line = concat(if(glucose_line is null, '', concat(glucose_line, ', ')), concat('Proteinuria: ', proteinuria)) where proteinuria is not null;
+update temp_encounters set cholesterol = obs_value_numeric_from_temp(encounter_id, 'PIH','1006');
+update temp_encounters set hdl = obs_value_numeric_from_temp(encounter_id, 'PIH','1007');
+update temp_encounters set ldl = obs_value_numeric_from_temp(encounter_id, 'PIH','1008');
+update temp_encounters set cholesterol_line = concat('Colesterol: ', cholesterol) where cholesterol is not null;
+update temp_encounters set cholesterol_line = concat(if(cholesterol_line is null, '', concat(cholesterol_line, ', ')), concat('HDL: ', hdl)) where hdl is not null;
+update temp_encounters set cholesterol_line = concat(if(cholesterol_line is null, '', concat(cholesterol_line, ', ')), concat('LDL: ', ldl)) where ldl is not null;
+update temp_encounters set test_results = physical_exam_line where physical_exam_line is not null;
+update temp_encounters set test_results = concat(if(test_results is null, '', '\n'), ultrasound_line) where ultrasound_line is not null;
+update temp_encounters set test_results = concat(if(test_results is null, '', '\n'), glucose_line) where glucose_line is not null;
+update temp_encounters set test_results = concat(if(test_results is null, '', '\n'), cholesterol_line) where cholesterol_line is not null;
+
+set @diagnosisConcept = concept_from_mapping('PIH','DIAGNOSIS');
+update temp_encounters e
+inner join (
+    select encounter_id, group_concat(concat(concept_name(value_coded,@locale), ' ', retrieveICD10(value_coded)) separator ', ') as dx
+    from temp_obs
+    where concept_id = @diagnosisConcept
+    group by encounter_id
+) o on e.encounter_id = o.encounter_id
+set e.diagnoses = o.dx
 ;
+update temp_encounters set plan = obs_value_text_from_temp(encounter_id, 'PIH',10534);
+update temp_encounters set diagnoses_and_plan = concat('Diagnóstico: ', diagnoses) where diagnoses is not null;
+update temp_encounters set diagnoses_and_plan = concat(if(diagnoses_and_plan is null, '', concat(diagnoses_and_plan, '\n')), concat('Indicaciones Médicas: ', plan)) where plan is not null;
 
--- update vital signs encounter_id if they occurred on same day as consult (latest on that day)
-update temp_mexico_consults t
-inner join encounter e on e.encounter_id =
-	(select e2.encounter_id from temp_vitals_encs e2
-	where e2.patient_id = t.patient_id
-	and date(e2.encounter_datetime) = date(t.encounter_datetime)
-	order by e2.encounter_datetime desc limit 1)
-set t.vitals_encounter_id = e.encounter_id;
-
-update temp_mexico_consults t
-set emr_id = patient_identifier(patient_id,'506add39-794f-11e8-9bcd-74e5f916c5ec');
-
-update temp_mexico_consults t
-inner join person p on t.patient_id = p.person_id 
-set t.birthdate = p.birthdate,
-	t.gender = p.gender;
-
-update temp_mexico_consults t
-set first_name = person_given_name(patient_id);
-
-update temp_mexico_consults t
-set last_name = person_family_name(patient_id);
-
-update temp_mexico_consults t
-set first_last_name = concat(first_name, ' ', last_name);
-
-update temp_mexico_consults t
-set provider = provider(encounter_id);
-
-update temp_mexico_consults t
-set temp = obs_value_numeric(vitals_encounter_id, 'PIH','5088');
-
-update temp_mexico_consults t
-set hr = obs_value_numeric(vitals_encounter_id, 'PIH','5087');
-
-update temp_mexico_consults t
-set sbp = obs_value_numeric(vitals_encounter_id, 'PIH','5085');
-
-update temp_mexico_consults t
-set dbp = obs_value_numeric(vitals_encounter_id, 'PIH','5086');
-
-update temp_mexico_consults t
-set rr = obs_value_numeric(vitals_encounter_id, 'PIH','5242'); 
-
-update temp_mexico_consults t
-set weight = obs_value_numeric(vitals_encounter_id, 'PIH','5089');
-
-update temp_mexico_consults t
-set height = obs_value_numeric(vitals_encounter_id, 'PIH','5090');
-
-update temp_mexico_consults t
-set o2 = obs_value_numeric(vitals_encounter_id, 'PIH','5092');
-
-update temp_mexico_consults t
-set wc = obs_value_numeric(encounter_id, 'PIH','10542');
-
-update temp_mexico_consults t
-set ultrasound_type = obs_value_coded_list(encounter_id, 'PIH','14068',@locale);
-
-update temp_mexico_consults t
-set ultrasound_notes = obs_value_text(encounter_id, 'PIH','7018');
-
-update temp_mexico_consults t
-set hdl = obs_value_numeric(encounter_id, 'PIH','1007');
-
-update temp_mexico_consults t
-set ldl = obs_value_numeric(encounter_id, 'PIH','1008');
-
-update temp_mexico_consults t
-set cholesterol = obs_value_numeric(encounter_id, 'PIH','1006');
-
-update temp_mexico_consults t
-set glucose = COALESCE(obs_value_numeric(vitals_encounter_id, 'PIH','887'), obs_value_numeric(encounter_id, 'PIH','887'));
-
-update temp_mexico_consults t
-set hdl = obs_value_numeric(encounter_id, 'PIH','1007');
-
-update temp_mexico_consults t
-set hiv_rapid = obs_value_coded_list(encounter_id, 'PIH','1040',@locale);
-
-update temp_mexico_consults t
-set syphilis_rapid = obs_value_coded_list(encounter_id, 'PIH','12265',@locale);
-
-update temp_mexico_consults t
-set hep_b = obs_value_coded_list(encounter_id, 'PIH','7451',@locale);
-
-update temp_mexico_consults t
-set chlamydia_ag = obs_value_coded_list(encounter_id, 'PIH','12335',@locale);
-
-update temp_mexico_consults t
-set gonorrhea_pcr = obs_value_coded_list(encounter_id, 'PIH','12334',@locale);
-
-update temp_mexico_consults t
-set blood_group = obs_value_coded_list(encounter_id, 'PIH','300',@locale);
-
-update temp_mexico_consults t
-set hep_c = obs_value_coded_list(encounter_id, 'PIH','7452',@locale);
-
-update temp_mexico_consults t
-set hemoglobin = obs_value_numeric(encounter_id, 'PIH','21');
-
-update temp_mexico_consults t
-set subjective = obs_value_text(encounter_id, 'PIH',974);
-
-update temp_mexico_consults t
-set pe_comment  = obs_value_text(encounter_id, 'PIH',1336);
-
-update temp_mexico_consults t
-set analysis = obs_value_text(encounter_id, 'PIH',1364);
-
-update temp_mexico_consults t
-set analysis = obs_value_text(encounter_id, 'PIH',1364);
-
-update temp_mexico_consults t
-set plan = obs_value_text(encounter_id, 'PIH',10534);
-
-drop temporary table if exists temp_dxs;
-create temporary table temp_dxs
-select t.encounter_id, group_concat( CONCAT(concept_name(o.value_coded,@locale),' ',retrieveICD10(o.value_coded))) "dxs"
-from temp_mexico_consults t
-inner join obs o on o.encounter_id = t.encounter_id and o.voided = 0 and o.concept_id = @dx
- group by t.encounter_id
-;
-
-update temp_mexico_consults t 
-inner join temp_dxs td on td.encounter_id = t.encounter_id
-set diagnoses = td.dxs;
+set @medicationGroup = concept_from_mapping('PIH', '14822');
+set @medication = concept_from_mapping('PIH', 'MEDICATION ORDERS');
+set @duration = concept_from_mapping('PIH', '9075');
+set @durationUnits = concept_from_mapping('PIH', 'TIME UNITS');
+set @medicationInstructions = concept_from_mapping('PIH', '9072');
+set @dose1 = concept_from_mapping('PIH', '9073');
+set @doseUnit1 = concept_from_mapping('PIH', 'Dosing units coded');
+set @timing1 = concept_from_mapping('PIH', 'Part of the day');
+set @dose2 = concept_from_mapping('PIH', '14824');
+set @doseUnit2 = concept_from_mapping('PIH', '14825');
+set @timing2 = concept_from_mapping('PIH', '14823');
+set @morning = concept_from_mapping('PIH', 'IN THE MORNING');
+set @noon = concept_from_mapping('PIH', '3425');
+set @afternoon = concept_from_mapping('PIH', 'In the afternoon');
+set @evening = concept_from_mapping('PIH', 'IN THE EVENING');
 
 drop temporary table if exists temp_meds;
-create temporary table temp_meds
-select t.encounter_id, 
-INSERT(
-	group_concat('\n', 
-		drugName(om.value_drug)) 
-		,1,1,'')"meds_info"
-from temp_mexico_consults t
-inner join obs om on om.encounter_id = t.encounter_id and om.voided = 0 and om.concept_id = @med_name
-left outer join obs oq on oq.encounter_id = t.encounter_id and oq.voided = 0 and oq.obs_group_id  = om.obs_group_id and oq.concept_id = @med_qty
- group by t.encounter_id
-;
+create temporary table temp_meds (
+    encounter_id int,
+    obs_group_id int,
+    name varchar(255),
+    duration double,
+    duration_units varchar(255),
+    instructions text,
+    dose_1 double,
+    dose_1_units varchar(255),
+    dose_1_morning varchar(255),
+    dose_1_noon varchar(255),
+    dose_1_afternoon varchar(255),
+    dose_1_evening varchar(255),
+    dose_2 double,
+    dose_2_units varchar(255),
+    dose_2_morning varchar(255),
+    dose_2_noon varchar(255),
+    dose_2_afternoon varchar(255),
+    dose_2_evening varchar(255),
+    dose_1_text varchar(1000),
+    dose_2_text varchar(1000),
+    display_text text
+);
 
-update temp_mexico_consults t 
-inner join temp_meds tm on tm.encounter_id = t.encounter_id
-set treatment = tm.meds_info;
+# Populate meds
+insert into temp_meds (encounter_id, obs_group_id) select encounter_id, obs_id from temp_obs where concept_id = @medicationGroup;
+create index temp_meds_encounter_idx on temp_obs(encounter_id);
+create index temp_meds_obs_group_idx on temp_obs(obs_group_id);
 
-update temp_mexico_consults t
-set test_results = 
-	CONCAT( 
-		if(hdl is not null, CONCAT('HDL: ',hdl,'  '),''),
-		if(ldl is not null, CONCAT('LDL: ',ldl,'  '),''),
-		if(cholesterol is not null, CONCAT('Colesterol total: ',cholesterol,'  '),''),
-		if(glucose is not null, CONCAT('Glucosa: ',glucose,'  '),''),
- 		if(ultrasound_type is not null, CONCAT('Tipo de ultrasonido: ',ultrasound_type,'  '),''),
- 		if(ultrasound_notes is not null, CONCAT('Comentario ultrasonido: ',ultrasound_notes,'  '),'')		
-	);
+update temp_meds m set m.name = (select drugName(value_drug) from temp_obs where obs_group_id = m.obs_group_id and concept_id = @medication);
+update temp_meds m set m.duration = (select value_numeric from temp_obs where obs_group_id = m.obs_group_id and concept_id = @duration);
+update temp_meds m set m.duration_units = (select concept_name(value_coded, @locale) from temp_obs where obs_group_id = m.obs_group_id and concept_id = @durationUnits);
+update temp_meds m set m.instructions = (select value_text from temp_obs where obs_group_id = m.obs_group_id and concept_id = @medicationInstructions);
+update temp_meds m set m.dose_1 = (select value_numeric from temp_obs where obs_group_id = m.obs_group_id and concept_id = @dose1);
+update temp_meds m set m.dose_1_units = (select concept_short_name(value_coded, @locale) from temp_obs where obs_group_id = m.obs_group_id and concept_id = @doseUnit1);
+update temp_meds m set m.dose_1_morning = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing1 and value_coded = @morning);
+update temp_meds m set m.dose_1_noon = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing1 and value_coded = @noon);
+update temp_meds m set m.dose_1_afternoon = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing1 and value_coded = @afternoon);
+update temp_meds m set m.dose_1_evening = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing1 and value_coded = @evening);
+update temp_meds m set m.dose_2 = (select value_numeric from temp_obs where obs_group_id = m.obs_group_id and concept_id = @dose2);
+update temp_meds m set m.dose_2_units = (select concept_short_name(value_coded, @locale) from temp_obs where obs_group_id = m.obs_group_id and concept_id = @doseUnit2);
+update temp_meds m set m.dose_2_morning = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing2 and value_coded = @morning);
+update temp_meds m set m.dose_2_noon = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing2 and value_coded = @noon);
+update temp_meds m set m.dose_2_afternoon = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing2 and value_coded = @afternoon);
+update temp_meds m set m.dose_2_evening = (select comments from temp_obs where obs_group_id = m.obs_group_id and concept_id = @timing2 and value_coded = @evening);
+update temp_meds set dose_1_text = concat('Dosis 1: ', dose_1, if(dose_1_units is null, '', concat(' ', dose_1_units))) where dose_1 is not null;
+update temp_meds set dose_1_text = concat(dose_1_text, ', Mañana: ', dose_1_morning) where dose_1_morning is not null;
+update temp_meds set dose_1_text = concat(dose_1_text, ', Medio dia: ', dose_1_noon) where dose_1_noon is not null;
+update temp_meds set dose_1_text = concat(dose_1_text, ', Tarde: ', dose_1_afternoon) where dose_1_afternoon is not null;
+update temp_meds set dose_1_text = concat(dose_1_text, ', Noche: ', dose_1_evening) where dose_1_evening is not null;
+update temp_meds set dose_2_text = concat('Dosis 2: ', dose_2, if(dose_2_units is null, '', concat(' ', dose_2_units))) where dose_2 is not null;
+update temp_meds set dose_2_text = concat(dose_2_text, ', Mañana: ', dose_2_morning) where dose_2_morning is not null;
+update temp_meds set dose_2_text = concat(dose_2_text, ', Medio dia: ', dose_2_noon) where dose_2_noon is not null;
+update temp_meds set dose_2_text = concat(dose_2_text, ', Tarde: ', dose_2_afternoon) where dose_2_afternoon is not null;
+update temp_meds set dose_2_text = concat(dose_2_text, ', Noche: ', dose_2_evening) where dose_2_evening is not null;
+update temp_meds set display_text = concat(name, ': ', dose_1_text, if(dose_2_text is null, '', concat(', ', dose_2_text)));
 
-update temp_mexico_consults t
-set clinical_note = 
-	CONCAT(
-		'Acude ',
-		first_last_name, ', ',
-		gender, ' de ',
-		IF(TIMESTAMPDIFF(MONTH, birthdate, encounter_datetime) < 12, TIMESTAMPDIFF(MONTH, birthdate, encounter_datetime),TIMESTAMPDIFF(YEAR, birthdate, encounter_datetime)),
-		IF(TIMESTAMPDIFF(MONTH, birthdate, encounter_datetime) < 12, ' meses por ', ' años.  '),
-		if(subjective is not null, CONCAT(subjective,'. '), ''),
-  		if(pe_comment is not null, CONCAT(pe_comment,'. '), ''),
-		if(analysis is not null, CONCAT(analysis,'. '), ''),
-		if(plan is not null, CONCAT(plan,'. '), ''),
-		if(temp is not null, CONCAT('TEMP: ',temp,' '),''),
-		if(sbp is not null or dbp is not null, CONCAT('T/A: ',sbp,'/',dbp,' '),''),
-		if(rr is not null, CONCAT('FR: ',rr,' '),''),
-		if(hr is not null, CONCAT('FC: ',hr,' '),'')		
-		);
-		
-update temp_mexico_consults t
-set rapid_tests = 
-INSERT (
-	CONCAT(
-		if(hiv_rapid is not null,CONCAT(',VIH: ',hiv_rapid),''),
-		if(syphilis_rapid is not null,CONCAT(', Sífilis: ',syphilis_rapid),''),
-		if(hep_b is not null,CONCAT(',Hepatitis B: ',hep_b),''),
-		if(chlamydia_ag is not null,CONCAT(',Clamidia: ',chlamydia_ag),''),
-		if(gonorrhea_pcr is not null,CONCAT(',Gonorrea: ',gonorrhea_pcr),''),
-		if(blood_group is not null,CONCAT(',Tipo de sangre: ',blood_group),''),
-		if(hep_c is not null,CONCAT(',Hepatitis C: ',hep_c),''),
-		if(hemoglobin is not null,CONCAT(',Hemoglobina: ',hemoglobin),'')		
-		)
-	,1,1,'');
-	
+update temp_encounters e
+    inner join (
+        select encounter_id, group_concat(display_text separator ', ') as treatment
+        from temp_meds
+        group by encounter_id
+    ) o on e.encounter_id = o.encounter_id
+set e.treatment = o.treatment;
+
 -- final output of all columns needed
-select 
-	emr_id,
-	CONCAT(LEFT(first_name,1),LEFT(last_name,1),'-',consult_id) "consult_id",
-	encounter_id,
-	first_last_name,
-	CASE encounter_location
-		when 'Honduras' then 'Casa de Salud Honduras'
-		when 'Laguna del Cofre' then 'CSR Laguna del Cofre'
-		when 'Capitan' then 'Unidad Médica Rural Capitán Luis A. Vidal'
-		when 'Letrero' then 'CSR El Letrero'
-		when 'CSR El Letrero' then 'Casa de Salud Salvador Urbina'
-		when 'Soledad' then 'Casa de Salud La Soledad'		
-		when 'Matazano ' then 'ESI El Matasanos'		
-		when 'Plan Alta' then 'Casa de Salud Plan de la Libertad'		
-		when 'Plan Baja' then 'Casa de Salud Plan de la Libertad'			
-		when 'Reforma' then 'CSR Reforma'		
-	END "clinic",
-	birthdate,
-	gender,
-	TIMESTAMPDIFF(YEAR, birthdate, now()) "age",
-	date(encounter_datetime) "date",
-	TIME_FORMAT(encounter_datetime,'%H:%i') "time",
-	temp,
-	concat(sbp,'/',dbp) bp,
-	weight,
-	height,
-	o2,
-	rr,
-	hr,
-	wc,
-	ROUND(weight / ((height / 100) * (height / 100)),1) "bmi",
-	test_results,
-	clinical_note,
-	diagnoses,
-	rapid_tests,
-	treatment,
-	provider
-from temp_mexico_consults;
+select * from temp_encounters;
