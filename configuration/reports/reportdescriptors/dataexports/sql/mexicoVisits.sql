@@ -6,7 +6,8 @@ set @locale =   global_property_value('default_locale', 'es');
 drop temporary table if exists temp_encounters;
 create temporary table temp_encounters
 (
-    encounter_id               int primary key,
+    consult_id                 int auto_increment primary key not null,
+    encounter_id               int,
     patient_id                 int,
     visit_id                   int,
     encounter_datetime         datetime,
@@ -64,12 +65,13 @@ SET @consultEncounterType = encounter_type('aa61d509-6e76-4036-a65d-7813c0c3b752
 
 insert into temp_encounters (patient_id, visit_id, encounter_id, encounter_datetime, location_id)
 select e.patient_id, e.visit_id, e.encounter_id, e.encounter_datetime, e.location_id
-FROM encounter e
+from encounter e
 inner join patient p on e.patient_id = p.patient_id
 where e.voided = 0  and p.voided = 0
-AND e.encounter_type in (@consultEncounterType)
-AND date(e.encounter_datetime) >= @startDate
-AND date(e.encounter_datetime) <= @endDate
+and e.encounter_type in (@consultEncounterType)
+and date(e.encounter_datetime) >= @startDate
+and date(e.encounter_datetime) <= @endDate
+order by encounter_datetime
 ;
 CREATE INDEX temp_encounters_e on temp_encounters(encounter_id);
 create index temp_encounters_v on temp_encounters(visit_id);
