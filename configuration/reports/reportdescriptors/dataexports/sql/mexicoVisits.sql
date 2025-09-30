@@ -92,16 +92,22 @@ update temp_encounters set gender_display = if(gender = 'M', 'MASCULINO', if(gen
 
 update temp_encounters set unidad_medica =
 CASE encounter_location
-   when 'Honduras' then 'Casa de Salud Honduras'
-   when 'Laguna del Cofre' then 'CSR Laguna del Cofre'
-   when 'Capitan' then 'Unidad Médica Rural Capitán Luis A. Vidal'
-   when 'Letrero' then 'CSR El Letrero'
-   when 'CSR El Letrero' then 'Casa de Salud Salvador Urbina'
-   when 'Soledad' then 'Casa de Salud La Soledad'
-   when 'Matazano ' then 'ESI El Matasanos'
-   when 'Plan Alta' then 'Casa de Salud Plan de la Libertad'
-   when 'Plan Baja' then 'Casa de Salud Plan de la Libertad'
-   when 'Reforma' then 'CSR Reforma'
+    when 'Honduras' then 'Casa de Salud Honduras'
+    when 'Laguna del Cofre' then 'Unidad de Salud (US) Laguna del Cofre'
+    when 'Capitan' then 'Unidad Médica Rural Capitán Luis A. Vidal'
+    when 'Letrero' then 'Unidad de Salud (US) El Letrero'
+    when 'Soledad' then 'Casa de Salud La Soledad'
+    when 'Matazano ' then 'Casa de salud El Matasanos'
+    when 'Plan Alta' then 'Casa de Salud Plan de la Libertad'
+    when 'Plan Baja' then 'Casa de Salud Plan de la Libertad'
+    when 'Reforma' then 'Unidad de salud Reforma'
+    when 'Salvador' then 'Urbina Casa de Salud Salvador Urbina'
+    when 'Casa Materna' then 'Unidad de salud Jaltenango de la Paz'
+    when 'CER' then 'Unidad de salud Jaltenango de la Paz'
+    when 'CES Oficina' then 'Unidad de salud Jaltenango de la Paz'
+    when 'Hospital' then 'Unidad de salud Jaltenango de la Paz'
+    when 'Pediatria' then 'Unidad de salud Jaltenango de la Paz'
+    else encounter_location
 END;
 
 -- Populate data from the patient's most recent registration encounter
@@ -125,16 +131,22 @@ update temp_encounters set insurance_policy_number = obs_value_text(registration
 
 update temp_encounters set procedencia =
 CASE registration_location_name
-   when 'Honduras' then 'Casa de Salud Honduras'
-   when 'Laguna del Cofre' then 'CSR Laguna del Cofre'
-   when 'Capitan' then 'Unidad Médica Rural Capitán Luis A. Vidal'
-   when 'Letrero' then 'CSR El Letrero'
-   when 'CSR El Letrero' then 'Casa de Salud Salvador Urbina'
-   when 'Soledad' then 'Casa de Salud La Soledad'
-   when 'Matazano ' then 'ESI El Matasanos'
-   when 'Plan Alta' then 'Casa de Salud Plan de la Libertad'
-   when 'Plan Baja' then 'Casa de Salud Plan de la Libertad'
-   when 'Reforma' then 'CSR Reforma'
+    when 'Honduras' then 'Casa de Salud Honduras'
+    when 'Laguna del Cofre' then 'Unidad de Salud (US) Laguna del Cofre'
+    when 'Capitan' then 'Unidad Médica Rural Capitán Luis A. Vidal'
+    when 'Letrero' then 'Unidad de Salud (US) El Letrero'
+    when 'Soledad' then 'Casa de Salud La Soledad'
+    when 'Matazano ' then 'Casa de salud El Matasanos'
+    when 'Plan Alta' then 'Casa de Salud Plan de la Libertad'
+    when 'Plan Baja' then 'Casa de Salud Plan de la Libertad'
+    when 'Reforma' then 'Unidad de salud Reforma'
+    when 'Salvador' then 'Urbina Casa de Salud Salvador Urbina'
+    when 'Casa Materna' then 'Unidad de salud Jaltenango de la Paz'
+    when 'CER' then 'Unidad de salud Jaltenango de la Paz'
+    when 'CES Oficina' then 'Unidad de salud Jaltenango de la Paz'
+    when 'Hospital' then 'Unidad de salud Jaltenango de la Paz'
+    when 'Pediatria' then 'Unidad de salud Jaltenango de la Paz'
+    else encounter_location
 END;
 
 -- Populate data from the most recent vitals encounter within the same visit as each consult
@@ -213,9 +225,9 @@ update temp_encounters set cholesterol_line = concat('Colesterol: ', cholesterol
 update temp_encounters set cholesterol_line = concat(if(cholesterol_line is null, '', concat(cholesterol_line, ', ')), concat('HDL: ', hdl)) where hdl is not null;
 update temp_encounters set cholesterol_line = concat(if(cholesterol_line is null, '', concat(cholesterol_line, ', ')), concat('LDL: ', ldl)) where ldl is not null;
 update temp_encounters set test_results = physical_exam_line where physical_exam_line is not null;
-update temp_encounters set test_results = concat(if(test_results is null, '', '\n'), ultrasound_line) where ultrasound_line is not null;
-update temp_encounters set test_results = concat(if(test_results is null, '', '\n'), glucose_line) where glucose_line is not null;
-update temp_encounters set test_results = concat(if(test_results is null, '', '\n'), cholesterol_line) where cholesterol_line is not null;
+update temp_encounters set test_results = concat(if(test_results is null, '', concat(test_results, '\n')), ultrasound_line) where ultrasound_line is not null;
+update temp_encounters set test_results = concat(if(test_results is null, '', concat(test_results, '\n')), glucose_line) where glucose_line is not null;
+update temp_encounters set test_results = concat(if(test_results is null, '', concat(test_results, '\n')), cholesterol_line) where cholesterol_line is not null;
 
 set @diagnosisConcept = concept_from_mapping('PIH','DIAGNOSIS');
 update temp_encounters e
