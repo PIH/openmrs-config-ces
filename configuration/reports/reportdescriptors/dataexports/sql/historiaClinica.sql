@@ -15,7 +15,7 @@ create temporary table temp_hc
 encounter_id int(11),
 patient_id int(11),
 visit_id int(11),
-encounter_datetime datetime,
+encounter_date date,
 sheet_name varchar(100),
 location_id int(11),
 location_name varchar(255),
@@ -111,8 +111,8 @@ breast_exam_obs_group_id int(11),
 breast_exam_comments text
 );
 
-insert into temp_hc (encounter_id, patient_id, location_id, encounter_datetime, entry_date, visit_id)
-select encounter_id, patient_id, location_id, encounter_datetime, date(date_created), visit_id 
+insert into temp_hc (encounter_id, patient_id, location_id, encounter_date, entry_date, visit_id)
+select encounter_id, patient_id, location_id, date(encounter_datetime), date(date_created), visit_id
 FROM encounter e 
 where  e.voided = 0 
 AND e.encounter_type in (@historiaClinicaEnc)
@@ -648,11 +648,11 @@ set rr = obs_value_numeric_from_temp_using_concept_id(vitals_encounter_id, @rr);
 
 -- sheet name
 update temp_hc set sheet_name = if(@patientId is null, concat(lastname, '-'), '');
-update temp_hc set sheet_name = concat(sheet_name, date_format(encounter_datetime, '%Y-%m-%d'), ' ', encounter_id);
+update temp_hc set sheet_name = concat(sheet_name, date_format(encounter_date, '%Y-%m-%d'), ' ', encounter_id);
 
 select
 encounter_id,
-encounter_datetime,
+encounter_date,
 sheet_name,
 full_facility_name, 
 location_name, 
