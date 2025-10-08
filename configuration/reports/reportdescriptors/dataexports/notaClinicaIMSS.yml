@@ -1,7 +1,7 @@
-key: "mexicoVisits"
+key: "notaClinicaIMSS"
 uuid: "b1d80ad0-f9a2-46c6-a89f-0050d7d724cb"
-name: "mirebalaisreports.mexicoVisits.name"
-description: "mirebalaisreports.mexicoVisits.description"
+name: "Nota Clínica IMSS"
+description: "Nota Clínica con formato IMSS-Bienestar"
 parameters:
   - key: "startDate"
     type: "java.util.Date"
@@ -10,14 +10,14 @@ parameters:
     type: "java.util.Date"
     label: "reporting.parameter.endDate"
 datasets:
-  - key: "mexicoVisits"
+  - key: "notaClinicaIMSS"
     type: "sql"
-    config: "sql/mexicoVisits.sql"
+    config: "sql/notaClinicaIMSS.sql"
 designs:
   - type: "excel"
-    template: "templates/mexicoVisits.xls"
+    template: "templates/notaClinicaIMSS.xls"
     properties:
-      "repeatingSections": "sheet:1,dataset:mexicoVisits"
+      "repeatingSections": "sheet:1,dataset:notaClinicaIMSS"
 config:
   category: "dataExport"
   order: 9
