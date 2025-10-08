@@ -12,10 +12,13 @@ create temporary table temp_encounters
     visit_id                   int,
     encounter_datetime         datetime,
     encounter_date             date,
+    encounter_time             varchar(10),
     location_id                int,
     encounter_location         varchar(255),
     unidad_medica              varchar(255),
     provider                   varchar(255),
+    first_name                 varchar(100),
+    last_name                  varchar(100),
     patient_name               varchar(255),
     age_years                  int,
     age_months                 int,
@@ -38,6 +41,8 @@ create temporary table temp_encounters
     respiratory_rate           int,
     temp_c                     double,
     glucose_mg_dl              double,
+    chief_complaint            text,
+    waist_cm                   double,
     subjective                 text,
     analysis                   text,
     physical_exam              text,
@@ -57,7 +62,9 @@ create temporary table temp_encounters
     diagnoses                  text,
     plan                       text,
     diagnoses_and_plan         text,
-    treatment                  text
+    rapid_test_results         text,
+    treatment                  text,
+    sheet_name                 varchar(100)
 );
 
 -- Load all consult encounters during the report time period
@@ -80,8 +87,11 @@ create index temp_encounters_v on temp_encounters(visit_id);
 -- Populate base demographic and encounter data
 
 update temp_encounters set encounter_date = date(encounter_datetime);
+update temp_encounters set encounter_time = date_format(encounter_datetime, '%H:%i');
 update temp_encounters set encounter_location = encounter_location_name(location_id);
 update temp_encounters set provider = provider(encounter_id);
+update temp_encounters set first_name = trim(person_given_name(patient_id));
+update temp_encounters set last_name = trim(person_family_name(patient_id));
 update temp_encounters set patient_name = trim(person_name(patient_id));
 update temp_encounters set birthdate = birthdate(patient_id);
 update temp_encounters set age_years = age_in_full_years_on_date(patient_id, encounter_date);
@@ -185,6 +195,7 @@ update temp_encounters set heart_rate = obs_value_numeric_from_temp(vitals_encou
 update temp_encounters set respiratory_rate = obs_value_numeric_from_temp(vitals_encounter_id, 'PIH', 'RESPIRATORY RATE');
 update temp_encounters set temp_c = obs_value_numeric_from_temp(vitals_encounter_id, 'PIH', 'TEMPERATURE (C)');
 update temp_encounters set glucose_mg_dl = obs_value_numeric_from_temp(vitals_encounter_id, 'PIH', 'SERUM GLUCOSE');
+update temp_encounters set chief_complaint = obs_value_text_from_temp(vitals_encounter_id, 'CIEL', '160531');
 
 -- Load observations from consult encounter
 
@@ -197,6 +208,8 @@ where o.voided = 0;
 
 create index temp_obs_encounter_idx on temp_obs(encounter_id);
 create index temp_obs_concept_idx on temp_obs(encounter_id, concept_id);
+
+update temp_encounters set waist_cm = obs_value_numeric_from_temp(encounter_id, 'PIH', 'WAIST CIRCUMFERENCE CM');
 
 update temp_encounters set subjective = obs_value_text_from_temp(encounter_id, 'PIH', 'PRESENTING HISTORY');
 update temp_encounters set subjective = if(subjective is null, null, concat('S: ', subjective));
@@ -243,6 +256,60 @@ update temp_encounters set plan = obs_value_text_from_temp(encounter_id, 'PIH',1
 update temp_encounters set diagnoses_and_plan = concat('Diagnóstico: ', diagnoses) where diagnoses is not null;
 update temp_encounters set diagnoses_and_plan = concat(if(diagnoses_and_plan is null, '', concat(diagnoses_and_plan, '\n')), concat('Indicaciones Médicas: ', plan)) where plan is not null;
 
+-- Rapid test results
+
+set @hivTest = concept_from_mapping('CIEL', '163722');
+set @sifilisTest = concept_from_mapping('CIEL', '165303');
+set @hepBTest = concept_from_mapping('PIH', 'HEPATITIS B TEST - QUALITATIVE');
+set @clamidiaTest = concept_from_mapping('PIH', '12335');
+set @gonorreaTest = concept_from_mapping('PIH', '12334');
+set @hemoglobinTest = concept_from_mapping('CIEL', '21');
+set @bloodTest = concept_from_mapping('PIH', 'BLOOD TYPING');
+set @hepCTest = concept_from_mapping('PIH', 'HEPATITIS C TEST - QUALITATIVE');
+set @tbTest = concept_from_mapping('PIH', 'Is TB suspected');
+set @covidTest = concept_from_mapping('PIH', 'Is COVID suspected');
+set @positive = concept_from_mapping('CIEL', '703');
+set @negative = concept_from_mapping('CIEL', '664');
+set @yes = concept_from_mapping('CIEL', '1065');
+
+drop temporary table if exists temp_rapid_tests;
+create temporary table temp_rapid_tests (
+    encounter_id int,
+    concept_id int,
+    value_coded int,
+    test_name varchar(255),
+    test_value varchar(255),
+    display_name varchar(1000)
+);
+create index temp_rapid_tests_encounter_idx on temp_rapid_tests(encounter_id);
+insert into temp_rapid_tests (encounter_id, concept_id, value_coded)
+select encounter_id, concept_id, value_coded from temp_obs where concept_id in (
+    @hivTest, @sifilisTest, @hepBTest, @clamidiaTest, @gonorreaTest, @hemoglobinTest, @bloodTest, @hepCTest, @tbTest, @covidTest
+);
+update temp_rapid_tests set test_name = 'Prueba de VIH' where concept_id = @hivTest;
+update temp_rapid_tests set test_name = 'Prueba de sífilis' where concept_id = @sifilisTest;
+update temp_rapid_tests set test_name = 'Prueba de hepatitis B' where concept_id = @hepBTest;
+update temp_rapid_tests set test_name = 'Prueba de clamidia' where concept_id = @clamidiaTest;
+update temp_rapid_tests set test_name = 'Prueba de Gonorrea' where concept_id = @gonorreaTest;
+update temp_rapid_tests set test_name = 'Prueba de hemoglobina' where concept_id = @hemoglobinTest;
+update temp_rapid_tests set test_name = 'Tipo de sangre' where concept_id = @bloodTest;
+update temp_rapid_tests set test_name = 'Prueba de hepatitis C' where concept_id = @hepCTest;
+update temp_rapid_tests set test_name = 'Sospecha de tuberculosis' where concept_id = @tbTest;
+update temp_rapid_tests set test_name = 'Sospecha de Covid-19' where concept_id = @covidTest;
+update temp_rapid_tests set display_name = concat(test_name, ' positivo') where value_coded = @positive;
+update temp_rapid_tests set display_name = concat(test_name, ' negativo') where value_coded = @negative;
+update temp_rapid_tests set display_name = concat(test_name, ': ', concept_name(value_coded, @locale)) where concept_id = @bloodTest;
+update temp_rapid_tests set display_name = test_name where concept_id in (@tbTest, @covidTest) and value_coded = @yes;
+delete from temp_rapid_tests where display_name is null;
+
+update temp_encounters e
+inner join (
+    select encounter_id, group_concat(display_name separator ' ') as results from temp_rapid_tests group by encounter_id
+) t on e.encounter_id = t.encounter_id
+set e.rapid_test_results = (t.results);
+
+-- Medications
+
 set @medicationGroup = concept_from_mapping('PIH', '14822');
 set @medication = concept_from_mapping('PIH', 'MEDICATION ORDERS');
 set @duration = concept_from_mapping('PIH', '9075');
@@ -286,8 +353,8 @@ create temporary table temp_meds (
 
 # Populate meds
 insert into temp_meds (encounter_id, obs_group_id) select encounter_id, obs_id from temp_obs where concept_id = @medicationGroup;
-create index temp_meds_encounter_idx on temp_obs(encounter_id);
-create index temp_meds_obs_group_idx on temp_obs(obs_group_id);
+create index temp_meds_encounter_idx on temp_meds(encounter_id);
+create index temp_meds_obs_group_idx on temp_meds(obs_group_id);
 
 update temp_meds m set m.name = (select drugName(value_drug) from temp_obs where obs_group_id = m.obs_group_id and concept_id = @medication);
 update temp_meds m set m.duration = (select value_numeric from temp_obs where obs_group_id = m.obs_group_id and concept_id = @duration);
@@ -324,6 +391,9 @@ update temp_encounters e
         group by encounter_id
     ) o on e.encounter_id = o.encounter_id
 set e.treatment = o.treatment;
+
+-- sheet name
+update temp_encounters set sheet_name = concat(last_name, '-', date_format(encounter_date, '%Y-%m-%d'), ' ', encounter_id);
 
 -- final output of all columns needed
 select * from temp_encounters;
