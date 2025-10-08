@@ -2455,7 +2455,7 @@
                                         let timingDoses = [];
                                         // for each dose look for timing of day checkboxes
                                         <ifMode mode="VIEW" include="false">
-                                            jq(this).find('.inline-timing').children('input[type=checkbox]:checked').each( function() {
+                                            jq(this).find('.inline-timing input:checkbox:checked').each( function() {
                                                 const timing = jq(this).val();
                                                 const timingDose = jq(this).parent().children('input[type=text]').val();
                                                 const label = jq(this).parent().children('label').text();
