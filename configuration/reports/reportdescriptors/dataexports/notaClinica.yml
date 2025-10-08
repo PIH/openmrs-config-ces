@@ -1,7 +1,7 @@
 key: "notaClinicaIMSS"
 uuid: "b1d80ad0-f9a2-46c6-a89f-0050d7d724cb"
-name: "Nota Clínica IMSS"
-description: "Nota Clínica con formato IMSS-Bienestar"
+name: "Nota Clínica"
+description: "Nota Clínica"
 parameters:
   - key: "startDate"
     type: "java.util.Date"
@@ -10,14 +10,20 @@ parameters:
     type: "java.util.Date"
     label: "reporting.parameter.endDate"
 datasets:
-  - key: "notaClinicaIMSS"
+  - key: "notaClinica"
     type: "sql"
-    config: "sql/notaClinicaIMSS.sql"
+    config: "sql/notaClinica.sql"
 designs:
-  - type: "excel"
+  - name: "IMSS-Bienestar"
+    type: "excel"
     template: "templates/notaClinicaIMSS.xls"
     properties:
-      "repeatingSections": "sheet:1,dataset:notaClinicaIMSS"
+      "repeatingSections": "sheet:1,dataset:notaClinica"
+  - name: "Juris X"
+    type: "excel"
+    template: "templates/notaClinicaJurisX.xls"
+    properties:
+      "repeatingSections": "sheet:1,dataset:notaClinica"
 config:
   category: "dataExport"
   order: 9
