@@ -1,5 +1,6 @@
---  set  @startDate = '2025-06-01';
---  set  @endDate = '2025-12-31';
+-- set @startDate = '2025-06-01';
+-- set @endDate = '2025-12-31';
+-- set @patientId = 2337;
 
 set SESSION group_concat_max_len = 1000000;
 
@@ -14,7 +15,8 @@ create temporary table temp_hc
 encounter_id int(11),
 patient_id int(11),
 visit_id int(11),
-encounter_datetime datetime,
+encounter_date date,
+sheet_name varchar(100),
 location_id int(11),
 location_name varchar(255),
 full_facility_name text,
@@ -109,13 +111,15 @@ breast_exam_obs_group_id int(11),
 breast_exam_comments text
 );
 
-insert into temp_hc (encounter_id, patient_id, location_id, encounter_datetime, entry_date, visit_id)
-select encounter_id, patient_id, location_id, encounter_datetime, date(date_created), visit_id 
+insert into temp_hc (encounter_id, patient_id, location_id, encounter_date, entry_date, visit_id)
+select encounter_id, patient_id, location_id, date(encounter_datetime), date(date_created), visit_id
 FROM encounter e 
 where  e.voided = 0 
 AND e.encounter_type in (@historiaClinicaEnc)
-AND date(e.encounter_datetime) >= @startDate
-AND date(e.encounter_datetime) <= @endDate;
+AND (
+    (@patientId is not null and e.patient_id = @patientId) or
+    (@patientId is null and date(e.encounter_datetime) >= @startDate and date(e.encounter_datetime) <= @endDate)
+);
 
 create index temp_hc_ei on temp_hc(encounter_id);
 create index temp_hc_pi on temp_hc(patient_id);
@@ -642,8 +646,14 @@ set @rr = concept_from_mapping('PIH','5242');
 update temp_hc 
 set rr = obs_value_numeric_from_temp_using_concept_id(vitals_encounter_id, @rr);
 
+-- sheet name
+update temp_hc set sheet_name = if(@patientId is null, concat(lastname, '-'), '');
+update temp_hc set sheet_name = concat(sheet_name, date_format(encounter_date, '%Y-%m-%d'), ' ', encounter_id);
+
 select
 encounter_id,
+encounter_date,
+sheet_name,
 full_facility_name, 
 location_name, 
 lastname, 
