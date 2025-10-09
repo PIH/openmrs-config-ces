@@ -21,9 +21,16 @@ designs:
       "repeatingSections": "sheet:1,dataset:notaClinica"
   - name: "Juris X"
     type: "excel"
-    template: "templates/notaClinicaJurisX.xls"
+    template: "templates/notaClinicaJuris.xls"
     properties:
       "repeatingSections": "sheet:1,dataset:notaClinica"
+      "districtName": "X MOTOZINTLA"
+  - name: "Juris IV"
+    type: "excel"
+    template: "templates/notaClinicaJuris.xls"
+    properties:
+      "repeatingSections": "sheet:1,dataset:notaClinica"
+      "districtName": "IV VILLAFLORES"
 config:
   category: "dataExport"
   order: 9
