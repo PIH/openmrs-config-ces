@@ -1,0 +1,19 @@
+[
+  {
+    "id": "mexicoConsultEncounterTemplate",
+    "extensionPointId": "org.openmrs.referenceapplication.encounterTemplate",
+    "type": "fragment",
+    "order": 0,
+    "extensionParams": {
+      "templateId": "mexicoConsultEncounterTemplate",
+      "templateFragmentProviderName": "pihcore",
+      "templateFragmentId": "patientdashboard/encountertemplate/mexicoConsultEncounterTemplate",
+      "supportedEncounterTypes": {
+        "aa61d509-6e76-4036-a65d-7813c0c3b752": {
+          "icon": "fas fa-fw fa-stethoscope",
+          "editable": true
+        }
+      }
+    }
+  }
+]

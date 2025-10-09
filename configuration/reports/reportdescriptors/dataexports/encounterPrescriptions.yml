@@ -1,0 +1,23 @@
+key: "encounterPrescriptions"
+uuid: "7421b11a-a542-11f0-bc4f-8231810d9091"
+name: "Prescripciones"
+parameters:
+  - key: "encounterId"
+    type: "java.lang.Integer"
+    label: "Encounter ID"
+datasets:
+  - key: "encounters"
+    type: "sql"
+    config: "sql/regulatedPrescriptionEncounters.sql"
+  - key: "prescriptions"
+    type: "sql"
+    config: "sql/regulatedPrescriptionMeds.sql"
+designs:
+  - type: "org.openmrs.module.pihcore.reporting.renderer.MexicoRegulatedPrescriptionsReportRenderer"
+    name: "PDF"
+    template: "../../../pih/images/recetas-template.pdf"
+config:
+  category: "dataExport"
+  order: 15
+  components:
+    - "dataExports"
