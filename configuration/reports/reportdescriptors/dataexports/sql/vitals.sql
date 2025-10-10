@@ -86,7 +86,7 @@ update temp_vitals set heart_rate = obs_value_numeric_from_temp(encounter_id, 'P
 update temp_vitals set resp_rate = obs_value_numeric_from_temp(encounter_id, 'PIH', 'RESPIRATORY RATE');
 update temp_vitals set phq_2 = obs_value_numeric_from_temp(encounter_id, 'PIH', 'PHQ-2');
 update temp_vitals set gad_2 = obs_value_numeric_from_temp(encounter_id, 'PIH', 'GAD-2');
-update temp_vitals set chief_complaint = obs_value_text(encounter_id, 'CIEL', '160531');
+update temp_vitals set chief_complaint = obs_value_text_from_temp(encounter_id, 'CIEL', '160531');
 
 alter table temp_vitals drop column creator;
 select * from temp_vitals;
