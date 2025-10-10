@@ -12,22 +12,22 @@ set @vitalsEnc = encounter_type('4fb47712-34a6-40d2-8ed3-e153abbd25b7');
 drop temporary table if exists temp_hc;
 create temporary table temp_hc
 (
-encounter_id int(11),
-patient_id int(11),
-visit_id int(11),
+encounter_id int,
+patient_id int,
+visit_id int,
 encounter_date date,
-sheet_name varchar(100),
-location_id int(11),
-location_name varchar(255),
+sheet_name text,
+location_id int,
+location_name text,
 full_facility_name text,
-lastname varchar(255),
-firstname varchar(255),
+lastname text,
+firstname text,
 birthdate date,
 age int,
-gender varchar(255),
-address varchar(255),
-localidad varchar(255),
-telephone varchar(255),
+gender text,
+address text,
+localidad text,
+telephone text,
 family_history text, 
 non_pathological_history text, 	
 feeding text,
@@ -38,14 +38,14 @@ vaccine text,
 other_non_path_history text,
 daily_cigs float,
 years_smoking float,
-history_alcohol varchar(255),
+history_alcohol text,
 years_alcohol float,
 number_transfusions float,
 date_transfusion date,
-type_transfusion varchar(255),
+type_transfusion text,
 number_surgeries float,
 date_surgery date,
-type_surgery varchar(255),
+type_surgery text,
 reason_surgery text,
 number_hospitalizations float,
 date_hospitalization date,
@@ -54,7 +54,7 @@ other_pathological_history text,
 pathological_history text,
 age_first_menstrual_period float,
 age_first_sexual_activity float,
-blood_type varchar(255),
+blood_type text,
 menstrual_cycle_details text,
 gravida float,
 parity float,
@@ -65,13 +65,13 @@ date_previous_pregnancy date,
 obstetric_notes text,
 number_children float,
 lmp_date date,
-has_had_menopause varchar(255),
+has_had_menopause text,
 age_of_menopause float,
 sti_notes text,
 family_planning_notes text,
-fp_method varchar(255),
-pap_smear varchar(255),
-breast_exam varchar(255),
+fp_method text,
+pap_smear text,
+breast_exam text,
 gyn_history	text,									
 main_symptom text,																
 evolution_symptoms text,										
@@ -84,7 +84,7 @@ cardiovascular text,
 nervous_system	text,	 								
 endocrine	text,									
 locomotor text,		
-vitals_encounter_id int(11),
+vitals_encounter_id int,
 temp float,
 bp_systolic float,
 bp_diastolic float,
@@ -103,11 +103,11 @@ diagnoses  text,
 entry_date date,								
 provider  text,
 latest_pap_smear_date date,
-pap_smear_obs_group_id int(11),
+pap_smear_obs_group_id int,
 pap_smear_result varchar(255),
 pap_smear_comments text,
 latest_breast_exam_date date,
-breast_exam_obs_group_id int(11),
+breast_exam_obs_group_id int,
 breast_exam_comments text
 );
 
@@ -159,7 +159,7 @@ set provider = provider(encounter_id);
 -- patient level columns
 drop temporary table if exists temp_patients;
 create temporary table temp_patients
-(patient_id int(11),
+(patient_id int,
 firstname varchar(255),
 lastname varchar(255),
 birthdate date,
@@ -255,6 +255,13 @@ if(hygiene is null, '', concat(hygiene, ', ')),
 if(vaccine is null, '', concat(vaccine, ', ')),
 if(other_non_path_history is null, '', concat(other_non_path_history, ', '))));
 
+alter table temp_hc drop column feeding;
+alter table temp_hc drop column housing;
+alter table temp_hc drop column occupation;
+alter table temp_hc drop column hygiene;
+alter table temp_hc drop column vaccine;
+alter table temp_hc drop column other_non_path_history;
+
 set @daily_cigs = concept_from_mapping('PIH','12586');
 update temp_hc 
 set daily_cigs = obs_value_numeric_from_temp_using_concept_id(encounter_id, @daily_cigs);
@@ -334,6 +341,22 @@ if(date_hospitalization is null, '', concat('Fecha de hospitalización: ', date_
 if(reason_hospitalization is null, '', concat('Motivo: ', reason_hospitalization, '. ')),
 if(other_pathological_history is null, '', concat('Otros antecedentes patológicos: ', other_pathological_history, '. '))
 );
+
+alter table temp_hc drop column daily_cigs;
+alter table temp_hc drop column years_smoking;
+alter table temp_hc drop column history_alcohol;
+alter table temp_hc drop column years_alcohol;
+alter table temp_hc drop column number_transfusions;
+alter table temp_hc drop column date_transfusion;
+alter table temp_hc drop column type_transfusion;
+alter table temp_hc drop column number_surgeries;
+alter table temp_hc drop column date_surgery;
+alter table temp_hc drop column type_surgery;
+alter table temp_hc drop column reason_surgery;
+alter table temp_hc drop column number_hospitalizations;
+alter table temp_hc drop column date_hospitalization;
+alter table temp_hc drop column reason_hospitalization;
+alter table temp_hc drop column other_pathological_history;
 
 -- obgyn section
 set @age_first_menstrual_period = concept_from_mapping('PIH','13121');
@@ -506,6 +529,25 @@ if(breast_exam is null, '', concat('Se ha hecho exploración de mama: ', breast_
 if(latest_breast_exam_date is null, '', concat('última fecha del examen de mama: ', latest_breast_exam_date, '. ')),
 if(breast_exam_comments is null, '', concat('comentarios sobre el examen de mama: ', breast_exam_comments, '. '))
 );
+
+alter table temp_hc drop column age_first_menstrual_period;
+alter table temp_hc drop column age_first_sexual_activity;
+alter table temp_hc drop column blood_type;
+alter table temp_hc drop column menstrual_cycle_details;
+alter table temp_hc drop column gravida;
+alter table temp_hc drop column parity;
+alter table temp_hc drop column cesarian;
+alter table temp_hc drop column abortions_before_20_weeks;
+alter table temp_hc drop column abortions_after_20_weeks;
+alter table temp_hc drop column date_previous_pregnancy;
+alter table temp_hc drop column obstetric_notes;
+alter table temp_hc drop column number_children;
+alter table temp_hc drop column lmp_date;
+alter table temp_hc drop column has_had_menopause;
+alter table temp_hc drop column age_of_menopause;
+alter table temp_hc drop column sti_notes;
+alter table temp_hc drop column family_planning_notes;
+alter table temp_hc drop column fp_method;
 
 set @main_symptom = concept_from_mapping('PIH','10137');
 update temp_hc 
