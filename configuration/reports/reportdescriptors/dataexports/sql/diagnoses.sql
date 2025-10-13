@@ -24,7 +24,7 @@ CREATE TEMPORARY TABLE temp_diagnoses
     diagnosis                   VARCHAR(1000),
     diagnosis_icd10_code        VARCHAR(255),
     diagnosis_order             VARCHAR(255),
-    first_time                  BOOLEAN
+    first_time                  VARCHAR(255)
  );
 create index temp_diagnoses_obs_idx on temp_diagnoses(obs_id);
 create index temp_diagnoses_obs_group_idx on temp_diagnoses(obs_group_id);
@@ -36,6 +36,7 @@ set @nonCodedDiagnosis = concept_from_mapping('PIH', 'Diagnosis or problem, non-
 set @diagnosisOrder = concept_from_mapping('PIH', 'Diagnosis order');
 set @diagnosisCertainty = concept_from_mapping('PIH', 'CLINICAL IMPRESSION DIAGNOSIS CONFIRMED');
 set @confirmed = concept_from_mapping('PIH', 'CONFIRMED');
+set @yes = concept_name(concept_from_mapping('PIH', 'YES'), @locale);
 
 insert into temp_diagnoses
     (obs_id, obs_group_id, patient_id, encounter_id, encounter_datetime, date_created, creator, value_coded, value_text)
@@ -75,7 +76,7 @@ update temp_diagnoses set diagnosis = value_text where value_text is not null;
 update temp_diagnoses set diagnosis = concept_name(value_coded, @locale) where value_coded is not null;
 update temp_diagnoses set diagnosis_icd10_code = retrieveICD10(value_coded) where value_coded is not null;
 update temp_diagnoses d set d.diagnosis_order = (select concept_name(value_coded, @locale) from temp_obs o where o.obs_group_id = d.obs_group_id and o.concept_id = @diagnosisOrder limit 1);
-update temp_diagnoses d set d.first_time = (select if(value_coded = @confirmed, true, false) from temp_obs o where o.obs_group_id = d.obs_group_id and o.concept_id = @diagnosisCertainty limit 1);
+update temp_diagnoses d set d.first_time = (select if(value_coded = @confirmed, @yes, null) from temp_obs o where o.obs_group_id = d.obs_group_id and o.concept_id = @diagnosisCertainty limit 1);
 
 alter table temp_diagnoses drop column obs_id;
 alter table temp_diagnoses drop column obs_group_id;

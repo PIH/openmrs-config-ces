@@ -25,7 +25,7 @@ CREATE TEMPORARY TABLE temp_vitals
     systolic_bp	     			DOUBLE,
     diastolic_bp	 			DOUBLE,
     o2_sat						DOUBLE,
-    glucose_fasting             BOOLEAN,
+    glucose_fasting             VARCHAR(255),
     glucose_mg_dl               DOUBLE,
     temp_c						DOUBLE,
     heart_rate					DOUBLE,
@@ -79,7 +79,7 @@ update temp_vitals set head_circumference = obs_value_numeric_from_temp(encounte
 update temp_vitals set systolic_bp = obs_value_numeric_from_temp(encounter_id, 'PIH', 'SYSTOLIC BLOOD PRESSURE');
 update temp_vitals set diastolic_bp = obs_value_numeric_from_temp(encounter_id, 'PIH', 'DIASTOLIC BLOOD PRESSURE');
 update temp_vitals set o2_sat = obs_value_numeric_from_temp(encounter_id, 'PIH', 'BLOOD OXYGEN SATURATION');
-update temp_vitals set glucose_fasting = obs_value_coded_as_boolean_from_temp(encounter_id, 'PIH', 'Fasting for blood glucose test');
+update temp_vitals set glucose_fasting = obs_value_coded_list_from_temp(encounter_id, 'PIH', 'Fasting for blood glucose test', @locale);
 update temp_vitals set glucose_mg_dl = obs_value_numeric_from_temp(encounter_id, 'PIH', 'SERUM GLUCOSE');
 update temp_vitals set temp_c = obs_value_numeric_from_temp(encounter_id, 'PIH', 'TEMPERATURE (C)');
 update temp_vitals set heart_rate = obs_value_numeric_from_temp(encounter_id, 'PIH', 'PULSE');
