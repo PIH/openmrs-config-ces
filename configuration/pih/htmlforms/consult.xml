@@ -332,6 +332,8 @@
                   jq("#patientAllergies").val(allergies);
               }
             });
+
+
         });
     </script>
 
@@ -466,10 +468,22 @@
 
     <section id="encounter-location" sectionTag="fieldset" headerTag="legend" headerStyle="title">
         <div class="section-container">
-            <label>
-                <uimessage code="pihcore.locationRequired"/>
-            </label>
-            <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
+            <div class="two-columns">
+                <div>
+                    <label>
+                        <uimessage code="pihcore.locationRequired"/>
+                    </label>
+                    <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
+                </div>
+                <div>
+                    <label>
+                        <uimessage code="emr.patientDashBoard.provider" />:
+                    </label>
+                    <span id="encounterProvider">
+                        <lookup complexExpression="#if($encounter) #foreach ($encProv in $encounter.activeEncounterProviders) $ui.format($encProv.provider.person) #end #else $ui.format($user.person) #end" />
+                    </span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -2401,6 +2415,7 @@
                     }
                     const consultDate = moment(consultDateYmd);
                     const formattedConsultDate = consultDate.locale('es').format('DD MMM YYYY');
+                    const provider = $('#encounterProvider').text().trim();
 
                     // Patient Name
                     const givenName = jq(".zl-givenName").html().trim();
@@ -2467,7 +2482,7 @@
                                         </ifMode>
                                         <ifMode mode="VIEW" include="true">
                                             const substringToRemove = '[X] ';
-                                            jq(this).find('.inline-timing').children('span.value:first-child').each(function() {
+                                            jq(this).find('.inline-timing input:checkbox:checked').each(function() {
                                                 const label = jq(this).text().replace(substringToRemove, '');
                                                 const timingDose = jq(this).next(".value").text();
                                                 timingDoses.push( {
@@ -2499,7 +2514,7 @@
                         });
                     });
 
-                    printPrescription(formattedConsultDate, patientName, age, diagnoses, prescriptions, patientAllergies);
+                    printPrescription(formattedConsultDate, patientName, age, diagnoses, prescriptions, patientAllergies, provider);
                 });
             });
         </script>
