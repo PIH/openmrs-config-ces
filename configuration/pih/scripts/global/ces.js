@@ -281,7 +281,7 @@ function setUpPlanSection(
  * One is a library that manipulates PDFs.  See: https://pdf-lib.js.org/
  * The other is a library that supports printing PDFs directly using the generated PDF output.  See:  https://printjs.crabbly.com/
  */
-async function printPrescription(formattedConsultDate, patientName, age, diagnoses, prescriptions, allergies) {
+async function printPrescription(formattedConsultDate, patientName, age, diagnoses, prescriptions, allergies, provider) {
 
   // Load in the PDF template
   const templateUrl = emr.resourceLink('file', 'configuration/pih/images/recetas-template.pdf');
@@ -320,6 +320,13 @@ async function printPrescription(formattedConsultDate, patientName, age, diagnos
   //   color: PDFLib.rgb(1.0,0.59608, 0.0),
   // })
 
+  page.drawText(provider ? provider : '', {
+    x: 285,
+    y: 95,
+    size: pageFontSize,
+    font: pageFont
+  });
+
   prescriptions.forEach( p => {
     let drugNameLines = splitToLines(p.drugName ?? '', 35);
     let instructionLines = splitToLines(p.instructions ?? '', 35);
@@ -337,6 +344,12 @@ async function printPrescription(formattedConsultDate, patientName, age, diagnos
       // reset the row position
       rowPosition = 420;
       doseRowPosition = rowPosition;
+      page.drawText( provider ? provider : '', {
+        x: 285,
+        y: 95,
+        size: pageFontSize,
+        font: pageFont
+      });
     }
 
     for ( var i = 0; i < maxlines; i++ ) {
