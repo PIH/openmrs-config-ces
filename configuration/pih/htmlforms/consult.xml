@@ -333,7 +333,6 @@
               }
             });
 
-            var encounterProviders = '<lookup expression="encounter.getActiveEncounterProviders()" />';
 
         });
     </script>
@@ -469,16 +468,22 @@
 
     <section id="encounter-location" sectionTag="fieldset" headerTag="legend" headerStyle="title">
         <div class="section-container">
-            <label>
-                <uimessage code="pihcore.locationRequired"/>
-            </label>
-            <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
-            <label>
-                <uimessage code="emr.patientDashBoard.provider" />:
-            </label>
-            <span id="encounterProvider">
-                <lookup complexExpression="#if($encounter) $ui.format($encounter.provider) #else $ui.format($user.person) #end" />
-            </span>
+            <div class="two-columns">
+                <div>
+                    <label>
+                        <uimessage code="pihcore.locationRequired"/>
+                    </label>
+                    <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
+                </div>
+                <div>
+                    <label>
+                        <uimessage code="emr.patientDashBoard.provider" />:
+                    </label>
+                    <span id="encounterProvider">
+                        <lookup complexExpression="#if($encounter) #foreach ($encProv in $encounter.activeEncounterProviders) $ui.format($encProv.provider.person) #end #else $ui.format($user.person) #end" />
+                    </span>
+                </div>
+            </div>
         </div>
     </section>
 
