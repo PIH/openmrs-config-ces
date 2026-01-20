@@ -11,7 +11,7 @@
     <properties>
         <pihemrContentGroupId>org.pih.openmrs</pihemrContentGroupId>
         <pihemrContentArtifactId>pihemr-content</pihemrContentArtifactId>
-        <pihemrContentVersion>1.0.0-SNAPSHOT</pihemrContentVersion>
+        <pihemrContentVersion>1.1.0-SNAPSHOT</pihemrContentVersion>
 
         <parentBuildDir>${project.build.directory}/parent</parentBuildDir>
         <childBuildDir>${project.build.directory}/child</childBuildDir>
