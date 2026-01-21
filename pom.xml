@@ -39,7 +39,7 @@
     </modules>
 
     <properties>
-        <pihemrConfigVersion>1.2.0</pihemrConfigVersion>
+        <pihemrConfigVersion>1.3.0-SNAPSHOT</pihemrConfigVersion>
     </properties>
 
     <build>
