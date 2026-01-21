@@ -1,4 +1,4 @@
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.pih.openmrs</groupId>
@@ -6,7 +6,7 @@
     <name>CES OpenMRS Configuration</name>
     <description>Top-Level configuration for CES OpenMRS distro</description>
     <url>https://github.com/PIH/openmrs-config-ces</url>
-    <version>1.43.0-SNAPSHOT</version>
+    <version>1.43.0</version>
     <packaging>pom</packaging>
 
     <organization>
@@ -31,7 +31,8 @@
         <connection>scm:git:https://github.com/PIH/openmrs-config-ces.git</connection>
         <developerConnection>scm:git:https://github.com/PIH/openmrs-config-ces.git</developerConnection>
         <url>https://github.com/PIH/openmrs-config-ces</url>
-    </scm>
+      <tag>1.43.0</tag>
+  </scm>
 
     <modules>
         <module>content</module>
