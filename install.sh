@@ -28,4 +28,4 @@ else
   echo "Unable to find PIH-EMR config, skipping building it"
 fi
 
-mvn clean compile -DserverId=$1
+mvn clean compile -pl '!content' -DserverId=$1
