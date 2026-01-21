@@ -27,3 +27,11 @@ jobs:
       env:
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+
+    - name: Deploy to ces-ci
+      uses: fjogeleit/http-request-action@v1
+      with:
+        url: 'https://bamboo-ci.pih-emr.org/rest/api/latest/queue/OMRS-DEPLOYCESCI'
+        method: 'POST'
+        bearerToken: ${{ secrets.PIH_BAMBOO_API_KEY }}
+        customHeaders: '{"Accept": "application/json"}'
