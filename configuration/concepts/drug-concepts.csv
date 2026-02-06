@@ -5,7 +5,7 @@ uuid,Void/Retire,Fully specified name:en,Short name:en,Fully specified name:es,D
 103303AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Acetaminophen / tramadol,,,,Drug,N/A,,13299,103303,,,352362,,,,
 cca2c5b2-251a-4f94-93ce-6b54a31115a5,,Alcaftadine,,Alcaftadina,,Drug,N/A,Alcaftadine,12252,,,,,,,,
 70468AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Alcohols,,,general term for alcohols,Drug,N/A,,12138,70468,,,455,,,53041004,
-70496AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Alendronate,,,,Drug,N/A,,12202,70496,,,46041,,,,
+70496AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,TRUE,Alendronate,,,,Drug,N/A,,12202,,,,46041,,,,
 103349AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Allantoin / Coal tar,,,,Drug,N/A,,12191,103349,,,,,,423731008,
 70878AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Allopurinol,,,,Drug,N/A,Allopurinol,7649,70878,,,519,,,25246002,
 70995AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Aluminum magnesium silicate,,,,Drug,N/A,,12176,70995,,,17614,,,391748004,
