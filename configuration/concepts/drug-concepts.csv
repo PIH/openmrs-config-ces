@@ -59,7 +59,7 @@ f2886dad-a0c8-4d60-a2d2-dfb2e274e14d,,Dexlansoprazole,,Dexlansoprazol,"Dexlansop
 75020AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Diphenidol,,,,Drug,N/A,,12121,75020,,,23370,,,63779001,
 75047AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Dipyrone,,Metamizol,,Drug,N/A,,12154,75047,,,3523,,,22165008,
 73ae0790-32b2-4732-a07e-643c67f3ef82,,Disposable menstrual product,,,,Misc,N/A,Disposable menstrual products,13289,166368,,,,,,303620002,
-104546AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Dorzolamide / Timolol,,,,Drug,N/A,,12130,104546,,,,662263,,330733003,
+104546AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Dorzolamide / Timolol,,,,Drug,N/A,,12130,104546,,,662263,,,330733003,
 75224AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Doxycycline hyclate,,,,Drug,N/A,,12098,75224,,,23663,,,71417000,
 75744AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Epinephrine,,,,Drug,N/A,,12123,75744,346,,3992,,,65502005,387362001
 3ccf0b34-26fe-102b-80cb-0017a47871b2,,Erythromycin,,,"A broad-spectrum antibiotic C37H67NO13 produced by a bacterium of the genus Streptomyces (S. erythreus), resembling penicillin in antibacterial activity, and effective also against amebas, treponemata, and pinworms.",Drug,N/A,ERYTHROMYCIN,272,75842,,,4053,,,30427009,
@@ -113,7 +113,7 @@ b350056d-50f7-459a-b223-216f71fe30ff,,L-ornithine-L-aspartate,,L-ornitina y L-as
 79054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Lorazepam,,,,Drug,N/A,,12139,79054,,,6470,,,19225000,
 98042566-aedc-442d-96b3-d055d3dd7d81,,Losartan,,,Losartan is used to treat high blood pressure (hypertension).,Drug,N/A,Losartan,6769,79074,2265,,52175,,,96309000,
 79082AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,LOTEPREDNOL,,,,Drug,N/A,,13297,79082,,,237027,,,108857005,
-6e203f4e-03ad-4c9e-b160-234ee092cc02,,Magaldrate / Dimethicone,,,,Drug,N/A,Magaldrate and Dimethicone,13286,166367,,,,,29151;324072,,
+6e203f4e-03ad-4c9e-b160-234ee092cc02,,Magaldrate / Dimethicone,,,,Drug,N/A,Magaldrate and Dimethicone,13286,166367,,,29151;324072,,,,
 79224AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Magnesium,,,,Drug,N/A,,12151,79224,,,6574,,,72717003,
 79251AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Magnesium valproate,,,,Drug,N/A,,12201,79251,,,134422,,,,
 79494AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,Medroxyprogesterone,,,,Drug,N/A,,12165,79494,,,6691,,,36621009,
