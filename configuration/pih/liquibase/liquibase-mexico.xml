@@ -66,7 +66,7 @@
 		    </sql>
     </changeSet>
 	<changeSet id="20231004-clean-up-bad-characters" author="mgoodrich">
-		<comment>MEX-602: Cannot print prescription (clean up bad characters)</comment>
+        <comment>MEX-602: Cannot print prescription (clean up bad characters)</comment>
 		<sql>
 			update drug set name = CONVERT(name USING latin1) where name != CONVERT(name USING latin1);
 		</sql>
@@ -87,4 +87,8 @@
             </sql>
         </changeSet>-->
 
+    <changeSet id="20260225-clean-up-inconsistent-mappings" author="mgoodrich">
+        <comment>MEX-668: Inconsistent mappings on the CES-CI server</comment>
+        <sqlFile endDelimiter=";" path="sql/clean_up_inconsistent_mappings.sql" relativeToChangelogFile="true" stripComments="true" />
+    </changeSet>
 </databaseChangeLog>
