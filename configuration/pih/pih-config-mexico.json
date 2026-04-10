@@ -30,16 +30,6 @@
     "visitManagement",
     "vitals"
   ],
-  "authenticationConfig": {
-    "scheme": "2fa",
-    "schemes": {
-      "2fa": {
-        "config": {
-          "secondaryOptions": "secret,totp"
-        }
-      }
-    }
-  },
   "scheduleBackupReports": "false",
   "dashboardUrl": "/coreapps/clinicianfacing/patient.page?patientId={{patientId}}&app=pih.app.clinicianDashboard",
   "visitsPageUrl": "/coreapps/patientdashboard/patientDashboard.page?patientId={{patient.uuid}}#visits",
