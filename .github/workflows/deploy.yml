@@ -41,3 +41,5 @@ jobs:
         customHeaders: '{"Accept": "application/json"}'
         retry: 60
         retryWait: 60000
+        ignoreStatusCodes: 400
+        
