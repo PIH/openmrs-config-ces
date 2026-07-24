@@ -69,10 +69,10 @@ The Diagnoses are groups into 4 Diagnoses sets:
 * COVID-19 diagnosis set
 
 Each set has a CSV file that defines all the concepts in the set, found in this directory:
-https://github.com/PIH/openmrs-config-ces/tree/master/configuration/concepts
+https://github.com/PIH/openmrs-config-ces/tree/master/content/configuration/concepts
 
 And then a separate file that explicitly sets up the set membership:
-https://github.com/PIH/openmrs-config-ces/tree/master/configuration/concepts
+https://github.com/PIH/openmrs-config-ces/tree/master/content/configuration/concepts
 
 To add a new concept/diagnosis:
 * Search the Concept server (concepts.pih-emr.org) to determine if the concept currently exists in PIH EMR dictionary
@@ -116,11 +116,11 @@ TODO: we may want to remove the other mapping columns we aren't using (AMPATH, e
 Drugs are added via the following three files:
 
 * The csv file that defines the *concepts* that drugs refer to: 
-  * https://github.com/PIH/openmrs-config-ces/blob/master/configuration/concepts/drug-concepts.csv
+  * https://github.com/PIH/openmrs-config-ces/blob/master/content/configuration/concepts/drug-concepts.csv
 * The csv file that groups these concepts into a single set:
-  * https://github.com/PIH/openmrs-config-ces/blob/master/configuration/conceptsets/drug-concept-set.csv 
+  * https://github.com/PIH/openmrs-config-ces/blob/master/content/configuration/conceptsets/drug-concept-set.csv 
 * The csv file that defines the actual drug formularies:
-  * https://github.com/PIH/openmrs-config-ces/blob/master/configuration/drugs/drugs.csv
+  * https://github.com/PIH/openmrs-config-ces/blob/master/content/configuration/drugs/drugs.csv
 
 To add new drug, first determine if the drug *concept* already exists in thd drug-concept.csv file.  If not, add the drug as follows:
 * Search the Concept server (concepts.pih-emr.org) to determine if the drug concept currently exists in PIH EMR dictionary
