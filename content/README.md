@@ -6,7 +6,7 @@ This content package is merged with the shared [PIH EMR content](https://github.
 
 ## Configuration Structure
 
-Configuration files live under `configuration/backend_configuration/` and are loaded by the OpenMRS Initializer module at startup.
+Configuration files live under `configuration/` and are loaded by the OpenMRS Initializer module at startup.
 
 | Directory | Purpose |
 |---|---|
