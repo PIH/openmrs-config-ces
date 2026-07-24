@@ -1,0 +1,15 @@
+{
+  "welcomeMessage": "EMR de Compañeros en Salud - Letrero",
+  "browserWarning": "Por favor utiliza <b>Google Chrome</b> como navagador",
+
+  "site": "LETRERO",
+
+  "primaryIdentifierPrefix": "LET",
+  "providerIdentifierPrefix": "LET",
+
+  "locationTags": {
+    "Login Location": [
+      "Letrero"
+    ]
+  }
+}

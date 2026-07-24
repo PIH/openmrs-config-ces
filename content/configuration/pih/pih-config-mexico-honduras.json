@@ -1,0 +1,15 @@
+{
+  "welcomeMessage": "EMR de Compañeros en Salud - Honduras",
+  "browserWarning": "Por favor utiliza <b>Google Chrome</b> como navagador",
+
+  "site": "HONDURAS",
+
+  "primaryIdentifierPrefix": "HON",
+  "providerIdentifierPrefix": "HON",
+
+  "locationTags": {
+    "Login Location": [
+      "Honduras"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+key: "mexicoCesMeds"
+uuid: "f03e1621-8801-47c9-a845-3839ba44fa03"
+name: "mirebalaisreports.mexicoCesMeds.name"
+description: "mirebalaisreports.mexicoCesMeds.description"
+parameters:
+  - key: "startDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.startDate"
+  - key: "endDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.endDate"
+datasets:
+  - key: "mexicoCesMeds"
+    type: "sql"
+    config: "sql/mexicoCesMeds.sql"
+designs:
+  - type: "csv"
+    properties:
+      "characterEncoding": "ISO-8859-1"
+      "blacklistRegex": "[^\\p{InBasicLatin}\\p{L}]"
+      "dateFormat": "dd-MMM-yyyy HH:mm:ss"
+config:
+  category: "dataExport"
+  order: 13
+  components:
+    - "dataExports"

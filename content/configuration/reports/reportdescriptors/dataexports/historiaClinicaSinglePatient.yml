@@ -1,0 +1,18 @@
+key: "historiaClinicaSinglePatient"
+uuid: "004edb19-a3ac-11f0-9112-b688702e33e5"
+name: "Historia Clínica"
+description: "Historia Clínica"
+parameters:
+  - key: "patientId"
+    type: "java.lang.Integer"
+    label: "PID"
+datasets:
+  - key: "historiaClinica"
+    type: "sql"
+    config: "sql/historiaClinica.sql"
+designs:
+  - type: "excel"
+    template: "templates/historiaClinica.xls"
+    properties:
+      repeatingSections: "sheet:1,dataset:historiaClinica"
+

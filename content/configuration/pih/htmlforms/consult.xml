@@ -1,0 +1,2533 @@
+<!--
+  ~ The contents of this file are subject to the OpenMRS Public License
+  ~ Version 1.0 (the "License"); you may not use this file except in
+  ~ compliance with the License. You may obtain a copy of the License at
+  ~ http//license.openmrs.org
+  ~
+  ~ Software distributed under the License is distributed on an "AS IS"
+  ~ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+  ~ License for the specific language governing rights and limitations
+  ~ under the License.
+  ~
+  ~ Copyright (C) OpenMRS, LLC.  All Rights Reserved.
+  -->
+
+
+
+<htmlform formName="Consult"
+          formUuid="DC5C050E-4A90-471C-AAD7-D80A0F9A26E6"
+          formEncounterType="aa61d509-6e76-4036-a65d-7813c0c3b752"
+          formVersion="2.0">
+
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ExitPatientFromSelectedProgramsAction"/>
+    <uiInclude provider="uicommons" javascript="moment-with-locales.min.js"/>
+    <macros>
+        <macro key="milliGram" value="CIEL:161553"/>
+        <macro key="milliLiter" value="CIEL:162263"/>
+        <macro key="capsule" value="CIEl:1608"/>
+        <macro key="tablet" value="CIEL:1513"/>
+        <macro key="puff" value="CIEL:162372"/>
+        <macro key="inTheMorning" value="PIH:IN THE MORNING"/>
+        <macro key="atNoon" value="PIH:3425"/>
+        <macro key="inTheAfternoon" value="PIH:In the afternoon"/>
+        <macro key="inTheEvening" value="PIH:IN THE EVENING"/>
+    </macros>
+    <style type="text/css">
+
+        #who-when-where {
+            margin-bottom: 6px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #who-when-where p {
+            display: inline-block;
+            padding-right: 20px;
+        }
+
+        #where > input[type=text] {
+            display: inline-block;
+        }
+
+        .field-error {
+            color: #ffc0b5;
+            font-size: 1.1em;
+            display: block;
+        }
+
+        .legalValue {
+            background-color: white !important;
+        }
+
+        .two-columns, .three-columns {
+            display: table;
+            height: 100%;
+            width: 100%;
+        }
+
+        .two-columns > div {
+            display: table-cell;
+            width: 50%;
+        }
+
+        .tres-columns {
+            display: table;
+            height: 100%;
+            width: 100%;
+        }
+
+        .tres-columns > div {
+            display: table-cell;
+        }
+
+        .font-size-16{
+            font-size: 16px;
+        }
+
+        .three-columns > div {
+            display: table-cell;
+            width: 33%;
+        }
+
+        .four-columns {
+            display: table;
+            height: 100%;
+            width: 100%;
+        }
+
+        .four-columns > div {
+            display: table-cell;
+            width: 25%;
+        }
+
+        .simple-form-ui input {
+            min-width: 80%
+        }
+
+        form fieldset {
+            min-width: 90%;
+            display: block;
+        }
+
+        .encounter-summary-container #calculated-ratio {
+            font-size: 1em;
+            font-weight: normal;
+        }
+
+        #encounterDate input {
+            min-width: 15%
+        }
+
+        div.inline-radio > * {
+            display: inline;
+            float: none !important;
+            min-width: initial;
+        }
+
+        .light-font {
+            font-family: "OpenSansLight",sans-serif;
+        }
+
+        .small {
+            max-width: 10em;
+            display: block;
+            margin-bottom: 1em;
+        }
+
+        .small input {
+            min-width: 4em;
+            width: 4em;
+            display: inline;
+            margin-right: 0.5em;
+        }
+
+        .medium {
+            max-width: 16em;
+            display: block;
+            margin-bottom: 1em;
+        }
+
+        .medium input {
+            min-width: 8em;
+            width: 8em;
+            display: inline;
+            margin-right: 0.5em;
+        }
+
+        .small-text {
+            color: #555555;
+            font-size: 90%;
+            display: block;
+        }
+
+        .section-container {
+            background: #F2F2F2;
+            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+            padding: 10px 5px 10px 15px;
+            line-height: 1.5em; /*add this for vertical spacing between elements*/
+        }
+
+        .section-container input[type="checkbox"] {
+            margin: 0px 5px; /*changed values to vertical, horizontal*/
+            top:5px; /*added to offset the checkbox position to line up*/
+        }
+
+        .section-container label { /*new definition to override labels inside section-containers*/
+            margin: 0px;
+        }
+
+        .question-container {
+            background: #F2F2F2;
+            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+            padding: 5px 5px 10px 15px;
+            margin: 5px 0;
+            line-height: 1.5em; /*add this for vertical spacing between elements*/
+        }
+
+        .question-container label {
+            margin-top: 5px;
+        }
+
+       .section {
+         width: 95%;
+        }
+
+        legend {
+          width: auto;
+          font-size: 16px;
+        }
+
+        textarea {
+            width: 95%;
+        }
+
+        /* Grey out disabled checkboxes */
+        input[type=checkbox][disabled] {
+            filter: invert(15%);
+        }
+
+        .section-button {
+            margin: 10px 0 0 24px;
+        }
+
+        #diagnosis-lookup {
+            display: inline-block;
+            width: 50%;
+            vertical-align: top;
+        }
+
+        #encounter-diagnoses-target {
+            display: inline-block;
+            width: 40%;
+            vertical-align: top;
+        }
+
+        #encounter-diagnoses-app {
+            margin-bottom: 20px;
+        }
+
+        .ui-helper-hidden-accessible{
+            display: none;
+        }
+
+        .ui-autocomplete-input{
+            width: 90%;
+        }
+
+        .medication-instructions input {
+            width: 85%;
+        }
+
+        .medication-dose {
+            border-style: groove;
+            border-color: #ffffff;
+            padding-top: 20px;
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+
+        .inline-timing > span {
+            white-space: nowrap;
+        }
+        .inline-timing > span > * {
+            display: inline-block;
+        }
+
+        .inline-timing > span > input[type="text"] {
+            min-width: 40px;
+            margin-left: 40px;
+        }
+
+        .inline-timing > span > label {
+            width: 80px;
+            margin-left: 10px;
+        }
+
+        #Alert{
+            color: red;
+        }
+
+        .centered-header{
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        #Exit-program-asthma, 
+        #Exit-program-diabetes, 
+        #Exit-program-hypertension, 
+        #Exit-program-epilepsy, 
+        #Exit-program-maternal,
+        #Exit-program-mental{
+            display:none;
+        }
+
+        #imgAgeGestationalTable{
+            text-align: center;
+        }
+
+        .side-by-side label {
+            display: inline-block;
+        }
+
+        .list-inline label, .list-inline input[type="radio"], .list-inline span,
+        .list-inline-wide label, .list-inline-wide input[type="radio"], .list-inline-wide span,
+        .list-inline-extra-wide label, .list-inline-extra-wide input[type="radio"], .list-inline-extra-wide span {
+            display: inline-block;
+            float: none;
+        }
+
+        .list-inline label:first-child {
+            width: 220px;
+        }
+
+        .list-inline-wide label:first-child {
+            width: 320px;
+        }
+
+        .list-inline-extra-wide label:first-child {
+            width: 420px;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        jq(document).ready(function() {
+            const contextPath = window.location.href.split('/')[3];
+            const apiBaseUrl =  "/" + contextPath + "/ws/rest/v1";
+            const patientUuid = '<lookup expression="patient.uuid"/>';
+            let allergies = '';
+
+            jq.getJSON(apiBaseUrl + "/patient/" + patientUuid + "/allergy", {
+              v: 'custom:(display)'
+            },
+            function( data ){
+              if (data &amp;&amp; data.results &amp;&amp; data.results.length > 0 ) {
+                  for ( let a = 0; a  &lt; data.results.length; ++a ) {
+                    if ( a === 0 ) {
+                      allergies = data.results[a].display;
+                    } else {
+                      allergies = allergies + ", " + data.results[a].display;
+                    }
+                  }
+                  jq("#patientAllergies").val(allergies);
+              }
+            });
+
+
+        });
+    </script>
+
+    <ifMode mode="VIEW" include="false">
+        <script type="text/javascript">
+
+            htmlForm.getBeforeValidation().push(function() {
+
+                var valid = true;
+
+                // validate medication section
+                jq('fieldset.medication').each(function() {
+
+                    // clear out any existing error messages
+                    jq(this).find('.field-error').first().html('');
+
+                    // The value should be in the format of Drug:DRUG_ID
+                    var medication = jq(this).find('.medication-name input[type=hidden]').val();
+                    var containerNumber = jq(this).find('.container-number input').val();
+                    var dose = false;
+                    var doseUnits = jq(this).find('.dose-unit select').val();
+                    var frequency = false;
+                    var duration = jq(this).find('.duration input').val();
+                    var durationUnits = jq(this).find('.duration-unit select').val();
+                    var instructions = jq(this).find('.medication-instructions input').val();
+
+                    jq(this).find('.dose input').each(function(index) {
+                        dose = jq(this).val();
+                        if (dose) {
+                          return false;
+                        }
+                    });
+
+                    jq(this).find('.frequency input[type=checkbox]').each(function(index) {
+                        frequency = this.checked;
+                        if (frequency) {
+                          //just to break the each() loop
+                          return false;
+                        }
+                    });
+
+                    if (!medication &amp;&amp; (containerNumber || dose || doseUnits || frequency || duration || durationUnits || instructions)) {
+                        valid = false;
+                        jq(this).find('.field-error').first().append("<uimessage code="pihcore.visitNote.plan.medications.error.noMedication"/>. ").show();
+                    }
+
+                    if (dose &amp;&amp; !doseUnits) {
+                        valid = false;
+                        jq(this).find('.field-error').first().append("<uimessage code="pihcore.visitNote.plan.medications.error.noDoseUnits"/>. ").show();
+                    }
+
+                    if (!dose &amp;&amp; doseUnits) {
+                        valid = false;
+                        jq(this).find('.field-error').first().append("<uimessage code="pihcore.visitNote.plan.medications.error.noDose"/>. ").show();
+                    }
+
+                    if (duration &amp;&amp; !durationUnits) {
+                        valid = false;
+                        jq(this).find('.field-error').first().append("<uimessage code="pihcore.visitNote.plan.medications.error.noDurationUnits"/>. ").show();
+                    }
+
+                    if (!duration &amp;&amp; durationUnits) {
+                        valid = false;
+                        jq(this).find('.field-error').first().append("<uimessage code="pihcore.visitNote.plan.medications.error.noDuration"/>. ").show();
+                    }
+                    if ( !valid ) {
+                        jq(document).scrollTop(jq(this).find('.field-error').offset().top - 100);
+                        return valid;
+                    }
+                });
+
+                return valid;
+            });
+
+            jq(function() {
+
+                var hasValue = function(element) {
+                    return jq(element).find('.medication-name input').val();
+                };
+
+                var hideOtherMeds = function() {
+                    jq('#medication-2').hide();
+                    jq('#medication-3').hide();
+                    jq('#medication-4').hide();
+                    jq('#medication-5').hide();
+                    jq('#medication-6').hide();
+                    jq('#medication-7').hide();
+                    jq('#medication-8').hide();
+                };
+
+                if (!hasValue('#medication-2') &amp;&amp; !hasValue('#medication-3') &amp;&amp; !hasValue('#medication-4')
+                    &amp;&amp; !hasValue('#medication-5') &amp;&amp; !hasValue('#medication-6') &amp;&amp;
+                    !hasValue('#medication-7')
+                    &amp;&amp; !hasValue('#medication-8')) {
+                        hideOtherMeds();
+                        jq('#show-more-medications-button').show();
+                }
+
+                jq('#show-more-medications-button').click(function() {
+                    jq('.medication').show();
+                    jq('#show-more-medications-button').hide();
+                    jq('#show-less-medications-button').show();
+                });
+
+                jq('#show-less-medications-button').click(function() {
+                    hideOtherMeds();
+                    jq('#show-less-medications-button').hide();
+                    jq('#show-more-medications-button').show();
+                });
+            })
+        </script>
+    </ifMode>
+
+    <div class="print-form-datestamps" style="display:none">
+        <p><uimessage code="created_on"/>:
+            <lookup complexExpression="$form.dateCreated"/>
+        </p>
+        <p><uimessage code="last_updated_on"/>:
+            <lookup complexExpression="$form.dateChanged"/>
+        </p>
+        <p><uimessage code="printed_on"/>:
+            <lookup complexExpression="$formGeneratedDatetime"/>
+        </p>
+    </div>
+
+    <div class="hidden" id="encounter-details">
+        <encounterDate default="now"/>
+        <encounterProviderAndRole default="currentUser" encounterRole="4f10ad1a-ec49-48df-98c7-1391c6ac7f05"
+                                          required="true"/>
+
+    </div>
+
+    <section id="encounter-location" sectionTag="fieldset" headerTag="legend" headerStyle="title">
+        <div class="section-container">
+            <div class="two-columns">
+                <div>
+                    <label>
+                        <uimessage code="pihcore.locationRequired"/>
+                    </label>
+                    <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
+                </div>
+                <div>
+                    <label>
+                        <uimessage code="emr.patientDashBoard.provider" />:
+                    </label>
+                    <span id="encounterProvider">
+                        <lookup complexExpression="#if($encounter) #foreach ($encProv in $encounter.activeEncounterProviders) $ui.format($encProv.provider.person) #end #else $ui.format($user.person) #end" />
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vitals" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.vitals.label">
+        <div class="section-container">
+            <table>
+                <thead>
+                    <tr>
+                        <td style="font-weight:bold">
+                            <uimessage code="pihcore.vitals.latest.measurement.label"/>
+                        </td>
+                        <td style="font-weight:bold">
+                            <uimessage code="zl.date"/>
+                        </td>
+                        <td style="font-weight:bold">
+                            <uimessage code="pihcore.vitals.latest.results.label"/>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <uimessage code="mirebalais.vitals.weight.title"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:WEIGHT (KG)').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:WEIGHT (KG)').valueNumeric.intValue()"/>
+                            <span class="light-font">
+                                <lookup complexExpression="#if($fn.latestObs('PIH:WEIGHT (KG)')) kg #end" />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mirebalais.vitals.height.title"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:HEIGHT (CM)').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:HEIGHT (CM)').valueNumeric.intValue()"/>
+                            <span class="light-font">
+                                <lookup complexExpression="#if($fn.latestObs('PIH:HEIGHT (CM)')) cm #end" />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mirebalais.vitals.bloodPressure.title" />
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:SYSTOLIC BLOOD PRESSURE').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:SYSTOLIC BLOOD PRESSURE').valueNumeric.intValue()"/>
+                            <lookup complexExpression="#if($fn.latestObs('PIH:SYSTOLIC BLOOD PRESSURE')) / #end" />
+                            <lookup expression="fn.latestObs('PIH:DIASTOLIC BLOOD PRESSURE').valueNumeric.intValue()"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mirebalais.vitals.o2sat.title"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:BLOOD OXYGEN SATURATION').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:BLOOD OXYGEN SATURATION').valueNumeric.intValue()"/>
+                            <span class="light-font">
+                                <lookup complexExpression="#if($fn.latestObs('PIH:BLOOD OXYGEN SATURATION')) % #end" />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="pihcore.lab.glucose"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:SERUM GLUCOSE').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:SERUM GLUCOSE').valueNumeric.intValue()"/>
+                            <span class="light-font">
+                                <lookup complexExpression="#if($fn.latestObs('PIH:Fasting for blood glucose test')) #if($fn.latestObs('PIH:Fasting for blood glucose test').valueCoded.name != 'No') (en ayuno) #else (sin ayuno) #end #end" />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mirebalais.vitals.temperature.title"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:TEMPERATURE (C)').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:TEMPERATURE (C)').valueNumeric"/>
+                            <span class="light-font">
+                                <lookup complexExpression="#if($fn.latestObs('PIH:TEMPERATURE (C)')) °C #end" />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mirebalais.vitals.heartRate.title"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:PULSE').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:PULSE').valueNumeric.intValue()"/>
+                            <span class="light-font">
+                                <lookup complexExpression="#if($fn.latestObs('PIH:PULSE')) ppm #end" />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mirebalais.vitals.respiratoryRate.title"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:RESPIRATORY RATE').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('PIH:RESPIRATORY RATE').valueNumeric.intValue()"/>
+                            <span class="light-font">
+                                <lookup complexExpression="#if($fn.latestObs('PIH:RESPIRATORY RATE')) rpm #end" />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mirebalais.vitals.complaint.title"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('CIEL:160531').obsDatetime"/>
+                        </td>
+                        <td>
+                            <lookup expression="fn.latestObs('CIEL:160531').valueText"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="hidden" id="logos" style="width=100%">
+        <!-- These should appear in printed notes and prescriptions -->
+        <img src="/openmrs/ms/uiframework/resource/file/configuration/pih/images/ces-logo.png" style="width: 20%; margin: 3% 5%;"/>
+        <img src="/openmrs/ms/uiframework/resource/file/configuration/pih/images/ssa-fed-logo.jpg" style="width: 20%; margin: 0 5%;" />
+        <img src="/openmrs/ms/uiframework/resource/file/configuration/pih/images/ssa-logo.png" style="width: 20%; margin: 0 5%;"/>
+    </div>
+
+    <script>
+        jq(function() {
+            setupProgramExit();
+        });
+    </script>
+
+    <section id="context" sectionTag="fieldset" headerTag="legend" headerStyle="title">
+        <div class="section-container">
+            <label>
+                Referido por:
+            </label>
+            <obs conceptId="PIH:6189" id="referredBy"
+                 answerConceptIds="PIH:12611,PIH:12612,PIH:12613,CIEL:1555,PIH:NURSE,PIH:Nurse aide,PIH:EMERGENCY VISIT,PIH:Mobile clinic"
+                 answerLabels="Cita,Paciente ambulatorio,Búsqueda activa de casos,Acompañante,Enfermería,Auxiliar,Urgencia,Brigada medica"
+                 style="radio" answerSeparator=""/>
+        </div>
+    </section>
+
+    <!-- Subjective -->
+    <ifMode mode="VIEW" include="false">
+        <h1>
+            <uimessage code="pihcore.subjective.title"/>
+        </h1>
+    </ifMode>
+    <section id="subjective" sectionTag="fieldset" headerTag="legend" headerStyle="title">
+        <div class="section-container">
+            <div class="two-columns">
+                <div class="small-text">
+                    <p>
+                        <uimessage code="pihcore.subjective.title"/>
+                        <lookup expression="fn.latestObs('CIEL:1390').obsDatetime" />
+                    </p>
+                    <p>
+                        <lookup expression="fn.latestObs('CIEL:1390').valueText" />
+                    </p>
+                    <br/>
+                    <p>
+                        <uimessage code="pihcore.lab.lab_tests.title"/>
+                        <lookup expression="fn.latestObs('PIH:11762').obsDatetime" />
+                    </p>
+                    <p>
+                        <lookup expression="fn.latestObs('PIH:11762').valueText" />
+                    </p>
+                </div>
+                <div>
+                    <obs conceptId="CIEL:1390" style="textarea" rows="6" id="presenting-history"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="objective" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.info">
+        <div class="section-container">
+            <label>
+                <uimessage code="pihcore.ncd.category"/>
+            </label>
+            <label class="half-size-text">
+                <uimessage code="pihcore.ncd.category.instructions"/>
+            </label>
+
+            <!-- The ordering of these corresponds to the Spanish alphebetization -->
+            <enrollInProgram programId="Asma" showCheckbox="true" toggle="asthma"/>
+            <uimessage code="pihcore.ncd.asthma"/>
+            <br />
+            <!-- Malnutrition -->
+            <enrollInProgram programId="61e38de2-44f2-470e-99da-3e97e93d388f"
+                             showCheckbox="true" toggle="malnutrition"/>
+            <uimessage code="pihcore.ncd.malnutrition"/>
+            <br />
+            <span id="diabetes-enroll">
+                <enrollInProgram programId="Diabetes" showCheckbox="true"/>
+            </span>
+            <uimessage code="pihcore.ncd.diabetes"/>
+            <br />
+            <enrollInProgram programId="Epilepsia" showCheckbox="true" toggle="epilepsy"/>
+            <uimessage code="pihcore.ncd.epilepsy"/>
+            <br />
+            <span id="htn-enroll" >
+                <!-- Hypertension -->
+                <enrollInProgram programId="6959057e-9a5c-40ba-a878-292ba4fc35bc"
+                                 showCheckbox="true" toggle="ProgramHEARTS"/>
+            </span>
+            <uimessage code="pihcore.ncd.htn"/>
+            <br />
+            <enrollInProgram programId="ANC" showCheckbox="true" toggle="anc"/>
+            Cuidado prenatal
+            <br />
+            <!-- Mental Health -->
+            <enrollInProgram programId="Salud Mental" showCheckbox="true" toggle="mental"/>
+            <uimessage code="pihcore.ncd.mental"/>
+        </div>
+
+    </section>
+
+    <ifMode mode="VIEW" include="false">
+        <script>
+            jq(function() {
+                setUpProgramExitStatusValidation(
+                    "<uimessage code="coreapps.formValidation.messages.requiredField"/>"
+                );
+            });
+        </script>
+    </ifMode>
+
+    <!-- Asthma -->
+    <section id="asthma" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.asthma">
+        <div class="question-container">
+            <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) > 4">
+                <label>
+                    <uimessage code="pihcore.daytime_symptoms"/>
+                </label>
+                <div class="two-columns">
+                    <div>
+                        <lookup expression="fn.latestObs('PIH:Daytime asthma symptoms more than twice per week').obsDatetime" />
+                        <lookup complexExpression="#if($fn.latestObs('PIH:Daytime asthma symptoms more than twice per week')) &#8194; &#8227; &#8194; #end" />
+                        <lookup expression="fn.latestObs('PIH:Daytime asthma symptoms more than twice per week').valueCoded.name" />
+                    </div>
+                    <div>
+                        <obs conceptId="PIH:Daytime asthma symptoms more than twice per week"
+                             answerConceptIds="PIH:YES,PIH:NO"
+                             style="radio" answerSeparator="" />
+                    </div>
+                </div>
+            </includeIf>
+            <excludeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) > 4">
+                <label>
+                    <uimessage code="pihcore.daytime_symptoms_once"/>
+                </label>
+                <div class="two-columns">
+                    <div>
+                        <lookup expression="fn.latestObs('PIH:Daytime asthma symptoms for more than a few minutes more than once a week').obsDatetime" />
+                        <lookup complexExpression="#if($fn.latestObs('PIH:Daytime asthma symptoms for more than a few minutes more than once a week')) &#8194; &#8227; &#8194; #end" />
+                        <lookup expression="fn.latestObs('PIH:Daytime asthma symptoms for more than a few minutes more than once a week').valueCoded.name" />
+                    </div>
+                    <div>
+                        <obs conceptId="PIH:Daytime asthma symptoms for more than a few minutes more than once a week"
+                             answerConceptIds="PIH:YES,PIH:NO"
+                             style="radio" answerSeparator="" />
+                    </div>
+                </div>
+            </excludeIf>
+        </div>
+
+        <div class="question-container">
+            <label>
+                <uimessage code="pihcore.nighttime_symptoms"/>
+            </label>
+            <div class="two-columns">
+                <div class="small-text">-</div>
+                <div class="checkboxRadio">
+                    <obsgroup groupingConceptId="PIH:FUNCTIONAL REVIEW OF SYMPTOMS CONSTRUCT">
+                        <span class="two-columns">
+                            <obs conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT" answerConceptId="CIEL:148273"
+                                labelText="" conceptLabels="Sí,No" style="radio" answerSeparator="" />
+                        </span>
+                    </obsgroup>
+                </div>
+            </div>
+        </div>
+        <div class="question-container">
+            <label><uimessage code="pihcore.meds_2x_wk"/></label>
+            <div class="two-columns">
+                <div>
+                    <lookup expression="fn.latestObs('PIH:Medications more than twice per week').obsDatetime" />
+                    <lookup complexExpression="#if($fn.latestObs('PIH:Medications more than twice per week')) &#8194; &#8227; &#8194; #end" />
+                    <lookup expression="fn.latestObs('PIH:Medications more than twice per week').valueCoded.name" />
+                </div>
+                <div>
+                    <obs conceptId="PIH:Medications more that twice per week"
+                         answerConceptIds="PIH:YES,PIH:NO"
+                         style="radio" answerSeparator="" />
+                </div>
+            </div>
+        </div>
+        <div class="question-container">
+            <label><uimessage code="pihcore.limitation_of_activity"/></label>
+            <div class="two-columns">
+                <div>
+                    <lookup expression="fn.latestObs('PIH:Limitation of ability to perform main daily activities coded').obsDatetime" />
+                    <lookup complexExpression="#if($fn.latestObs('PIH:Limitation of ability to perform main daily activities coded')) &#8194; &#8227; &#8194; #end" />
+                    <lookup expression="fn.latestObs('PIH:Limitation of ability to perform main daily activities coded').valueCoded.name" />
+                </div>
+                <div>
+                    <obs conceptId="PIH:Limitation of ability to perform main daily activities coded"
+                         answerConceptIds="PIH:YES,PIH:NO"
+                         style="radio" answerSeparator=""/>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="question-container two-columns">
+
+            <div>
+                <label>Estatus del paciente</label>
+                <select name="asthma" class="StatusPatient">
+                    <option value="">Continuar con tratamiento</option>
+                    <option value="ExitProgramAsthma">Salir del programa</option>
+                </select>
+            </div>
+
+            <div id="Exit-program-asthma">
+                <obsgroup groupingConceptId="PIH:Exit from program construct"
+                          hiddenConceptId="PIH:Service or program"
+                          hiddenAnswerConceptId="PIH:Asthma Program">
+
+                    <div id="asthma-exit-status">
+                        <obs id="asthma-exit" 
+                             conceptId="PIH:Program outcome"
+                             answerConceptIds="PIH:TREATMENT COMPLETE, PIH:PATIENT TRANSFERRED OUT, PIH: TREATMENT NEVER STARTED - PATIENT REFUSED"
+                             answerLabels="Tratamiento completado, Paciente tranferido, Tratamiento rechazado por el paciente"
+                             labelText="Estatus (requerido)"/>
+                    </div>
+                </obsgroup>
+            </div>
+        </div>
+    </section>
+
+    <!-- Malnutrition -->
+    <section id="malnutrition" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.ncd.malnutrition">
+        <div class="question-container">
+            <obsgroup groupingConceptId="PIH:Exit from program construct">
+                <obs id="malnutrition-exit-checkbox"
+                     conceptId="PIH:Service or program"
+                     answerConceptId="PIH:MALNUTRITION PROGRAM"
+                     labelText="Dar de baja de la programa Desnutrición"
+                     answerLabel=""
+                     toggle="malnutrition-exit-status-div"/>
+                <div id="malnutrition-exit-status-div">
+                    <obs id="malnutrition-exit-status" conceptId="PIH:Program outcome" labelText="Estatus (requerido)"/>
+                </div>
+            </obsgroup>
+        </div>
+    </section>
+
+    <!-- Diabetes -->
+    <section id="diabetes" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.ncd.diabetes">
+        <div class="question-container">
+            <label><uimessage code="pihcore.lab.glucose"/></label>
+            <div class="two-columns">
+                <div class="small-text">
+                    <p>
+                        <lookup expression="fn.latestObs('PIH:SERUM GLUCOSE').obsDatetime" />
+                        <lookup complexExpression="#if($fn.latestObs('PIH:SERUM GLUCOSE')) &#8194; &#8227; &#8194; #end" />
+                        <lookup expression="fn.latestObs('PIH:SERUM GLUCOSE').valueNumeric" />
+                    </p>
+                    <p>
+                        <uimessage code="pihcore.lab.isFastingGlucose.title"/>:
+                        <lookup expression="fn.latestObs('PIH:Fasting for blood glucose test').valueCoded.name" />
+                    </p>
+                </div>
+                <div>
+                    <obs id="glucose" class="small" conceptId="PIH:SERUM GLUCOSE" showUnits="true"/>
+                    <label><uimessage code="pihcore.lab.isFastingGlucose.title"/></label>
+                    <div class="inline-radio">
+                        <obs id="fasting-for-glucose" conceptId="PIH:Fasting for blood glucose test"
+                             answerConceptIds="PIH:YES,PIH:NO"
+                             style="radio" answerSeparator="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <repeat>
+            <template>
+                <div class="question-container">
+                    <label><uimessage code="{message}"/></label>
+                    <div class="two-columns">
+                        <div class="small-text">
+                            <lookup expression="fn.latestObs('{concept}').obsDatetime" />
+                            <lookup complexExpression="#if($fn.latestObs('{concept}')) &#8194; &#8227; &#8194; #end" />
+                            <lookup expression="fn.latestObs('{concept}').valueNumeric" />
+                        </div>
+                        <div>
+                            <obs class="small" conceptId="{concept}" showUnits="{showUnits}"/>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <render message="pihcore.lab.hba1c" concept="PIH:HbA1c" showUnits="true"/>
+            <render message="pihcore.lab.urinary_albumin" concept="PIH:URINARY ALBUMIN" showUnits="false" />
+            <render message="pihcore.ncd.vitals.waist_cm" concept="CIEL:163080" showUnits="true" />
+        </repeat>
+        <div class="question-container">
+            <label><uimessage code="pihcore.ncd.diabetes.foot_findings"/></label>
+            <div class="two-columns">
+                <div class="small-text">
+                    <lookup expression="fn.latestObs('PIH:FOOT EXAM FINDINGS').obsDatetime" />
+                    <lookup complexExpression="#if($fn.latestObs('PIH:FOOT EXAM FINDINGS')) &#8194; &#8227; &#8194; #end" />
+                    <lookup expression="fn.latestObs('PIH:FOOT EXAM FINDINGS').valueCoded.name" />
+                </div>
+                <div>
+                    <obs conceptId="PIH:FOOT EXAM FINDINGS"
+                         answerConceptIds="PIH:NOT DONE,PIH:NORMAL,PIH:FUNGAL INFECTION,PIH:KERATODERMA,PIH:FOOT ULCER" />
+               </div>
+            </div>
+        </div>
+        <repeat>
+            <template>
+                <div class="question-container">
+                    <label><uimessage code="{message}"/></label>
+                    <div class="two-columns">
+                        <div class="small-text">
+                            <lookup expression="fn.latestObs('{concept}').obsDatetime" />
+                            <lookup complexExpression="#if($fn.latestObs('{concept}')) &#8194; &#8227; &#8194; #end" />
+                            <lookup expression="fn.latestObs('{concept}').valueCoded.name" />
+                        </div>
+                        <div class="{obsDivClass}">
+                            <obs conceptId="{concept}" style="radio" answerConceptIds="{answerConceptIds}"
+                                 answerSeparator="{answerSeparator}"/>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <render message="pihcore.ncd.diabetes.hypoglycemia_symptoms" concept="PIH:Hypoglycemia symptoms"
+                    answerConceptIds="PIH:YES,PIH:NO"
+                    obsDivClass="inline-radio" answerSeparator="&#8195;&#8195;"
+            />
+            <render message="pihcore.ncd.hx_alcohol_use" concept="PIH:HISTORY OF ALCOHOL USE"
+                    answerConceptIds="PIH:IN THE PAST,PIH:CURRENTLY,PIH:NEVER,PIH:unknown"
+                    obsDivClass="" answerSeparator=""
+            />
+            <render message="pihcore.ncd.hx_tobacco_use" concept="PIH:HISTORY OF TOBACCO USE"
+                    answerConceptIds="PIH:IN THE PAST,PIH:CURRENTLY,PIH:NEVER,PIH:unknown"
+                    obsDivClass="" answerSeparator=""
+            />
+        </repeat>
+        <hr/>
+        <div class="question-container two-columns">
+
+            <div>
+                <label>Estatus del paciente</label>
+                <select name="diabetes" class="StatusPatient">
+                    <option value="">Continuar con tratamiento</option>
+                    <option value="ExitProgramDiabetes">Salir del programa</option>
+                </select>
+            </div>
+
+            <div id="Exit-program-diabetes">
+                <obsgroup groupingConceptId="PIH:Exit from program construct"
+                          hiddenConceptId="PIH:Service or program"
+                          hiddenAnswerConceptId="PIH:Diabetes Program">
+                          
+                    <div id="diabetes-exit-status">
+                        <obs id="diabetes-exit" 
+                             conceptId="PIH:Program outcome"
+                             answerConceptIds="PIH:TREATMENT COMPLETE, PIH:PATIENT TRANSFERRED OUT, PIH: TREATMENT NEVER STARTED - PATIENT REFUSED"
+                             answerLabels="Tratamiento completado, Paciente tranferido, Tratamiento rechazado por el paciente"
+                             labelText="Estatus (requerido)"/>
+                    </div>
+                </obsgroup>
+            </div>
+        </div>
+        
+    </section>
+
+    <ifMode mode="VIEW" include="false">
+        <script>
+            jq(function() {
+                setUpCholesterolSection();
+            });
+        </script>
+    </ifMode>
+
+    <section id="cholesterol" headerCode="Hipertensión" sectionTag="fieldset" headerTag="legend" headerStyle="title">
+        <div class="question-container">
+            <label><uimessage code="pihcore.lab.total_chol"/></label>
+            <div class="two-columns">
+                <div class="small-text">
+                    <lookup expression="fn.latestObs('PIH:TOTAL CHOLESTEROL').obsDatetime" />
+                    <lookup complexExpression="#if($fn.latestObs('PIH:TOTAL CHOLESTEROL')) &#8194; &#8227; &#8194; #end" />
+                    <lookup expression="fn.latestObs('PIH:TOTAL CHOLESTEROL').valueNumeric" />
+                </div>
+                <div>
+                    <obs id="chol" conceptId="PIH:TOTAL CHOLESTEROL" showUnits="true" class="small"/>
+                </div>
+            </div>
+        </div>
+        <div class="question-container">
+            <label><uimessage code="pihcore.lab.hdl"/></label>
+            <div class="two-columns">
+                <div class="small-text">
+                    <lookup expression="fn.latestObs('PIH:HIGH-DENSITY LIPOPROTEIN CHOLESTEROL').obsDatetime" />
+                    <lookup complexExpression="#if($fn.latestObs('PIH:HIGH-DENSITY LIPOPROTEIN CHOLESTEROL')) &#8194; &#8227; &#8194; #end" />
+                    <lookup expression="fn.latestObs('PIH:HIGH-DENSITY LIPOPROTEIN CHOLESTEROL').valueNumeric" />
+                </div>
+                <div>
+                    <obs id="ldl" conceptId="PIH:HIGH-DENSITY LIPOPROTEIN CHOLESTEROL" showUnits="true" class="small"/>
+                </div>
+            </div>
+        </div>
+        <div class="question-container">
+            <label><uimessage code="pihcore.lab.ldl"/></label>
+            <div class="two-columns">
+                <div class="small-text">
+                    <lookup expression="fn.latestObs('PIH:LOW-DENSITY LIPOPROTEIN CHOLESTEROL').obsDatetime" />
+                    <lookup complexExpression="#if($fn.latestObs('PIH:LOW-DENSITY LIPOPROTEIN CHOLESTEROL')) &#8194; &#8227; &#8194; #end" />
+                    <lookup expression="fn.latestObs('PIH:LOW-DENSITY LIPOPROTEIN CHOLESTEROL').valueNumeric" />
+                </div>
+                <div>
+                    <obs id="hdl" conceptId="PIH:LOW-DENSITY LIPOPROTEIN CHOLESTEROL" showUnits="true" class="small"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program HEARTS -->
+    <section id="ProgramHEARTS" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerLabel="Programa HEARTS">
+        <div class="question-container">
+            <div class="two-columns">
+                <div class="small-text">
+
+                    <p>HEARTS:</p>
+                    <enrollInProgram programId="HEARTS"
+                                     showCheckbox="true"
+                                     toggle="FieldsHEARTS"/>
+
+                </div>
+
+                <div class="FieldsHEARTS">
+
+                        <div class="small-text">
+                            <p>Cambio de tratamiento por algoritmo:</p>
+                            <obs
+                                conceptId="PIH: 13705"
+                                answerConceptIds="CIEL:1065, CIEL:1066"
+                                style="radio"
+                                answerSeparator="">
+                            </obs>
+
+                        </div>
+
+                        <div class="small-text">
+                            <p>Riesgo cardiovascular:</p>
+
+                            <lookup expression="fn.latestObs('PIH:13703').valueNumeric"/>
+                            <obs id="ldl"
+                                 conceptId="PIH:13703"
+                                 showUnits="false"
+                                 class="small"/>
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+
+        <hr/>
+        <div class="question-container two-columns">
+
+            <div>
+                <label>Estatus del paciente</label>
+                <select name="hypertension" class="StatusPatient">
+                    <option value="">Continuar con tratamiento</option>
+                    <option value="ExitProgramHypertension">Salir del programa</option>
+                </select>
+            </div>
+
+            <div id="Exit-program-hypertension">
+                <obsgroup groupingConceptId="PIH:Exit from program construct"
+                          hiddenConceptId="PIH:Service or program"
+                          hiddenAnswerConceptId="PIH:Hypertension Program">
+                    
+                    <div id="hypertension-exit-status">
+                        <obs id="hypertension-exit" 
+                             conceptId="PIH:Program outcome"
+                             answerConceptIds="PIH:TREATMENT COMPLETE, PIH:PATIENT TRANSFERRED OUT, PIH: TREATMENT NEVER STARTED - PATIENT REFUSED"
+                             answerLabels="Tratamiento completado, Paciente tranferido, Tratamiento rechazado por el paciente"
+                             labelText="Estatus (requerido)"/>
+                    </div>
+                </obsgroup>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- Epilepsy -->
+    <section id="epilepsy" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.epilepsy">
+
+        <ifMode mode="VIEW" include="false">
+            <script>
+                jq(function() {
+                    setUpEpilepsySection();
+                });
+            </script>
+        </ifMode>
+
+        <div class="question-container">
+            <p>
+                <uimessage code="pihcore.ncd.epilepsy.seizure_num_baseline"/>
+                <span id="epi-baseline-last-obs" class="value">
+                    <lookup expression="fn.latestObs('PIH:Number of seizures in one month before medications').valueNumeric" />
+                </span>
+            </p>
+            <div>
+                <button id="change-epi-baseline-button" type="button">
+                    <uimessage code="pihcore.ncd.epilepsy.change_baseline" />
+                </button>
+            </div>
+            <div id="epi-baseline-input">
+                <obs id="epi-baseline" class="small" conceptId="PIH:Number of seizures in one month before medications"/>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <label><uimessage code="pihcore.ncd.epilepsy.seizure_num_1mo"/></label>
+            <div class="two-columns">
+                <div class="small-text">
+                    <lookup expression="fn.latestObs('PIH:Number of seizures in the past month').obsDatetime" />
+                    <lookup complexExpression="#if($fn.latestObs('PIH:Number of seizures in the past month')) &#8194; &#8227; &#8194; #end" />
+                    <lookup expression="fn.latestObs('PIH:Number of seizures in the past month').valueNumeric" />
+                </div>
+                <div>
+                    <obs id="seizure-num" class="small" conceptId="PIH:Number of seizures in the past month"/>
+                </div>
+            </div>
+        </div>
+        <div id="seizure-percent-reduction-container" class="question-container">
+            <p>
+                <span id="seizure-percent-reduction" class="value" />
+                <uimessage code="pihcore.ncd.epilepsy.percent_reduction"/>
+            </p>
+        </div>
+        <hr/>
+        <div class="question-container two-columns">
+
+            <div>
+                <label>Estatus del paciente</label>
+                <select name="epilepsy" class="StatusPatient">
+                    <option value="">Continuar con tratamiento</option>
+                    <option value="ExitProgramEpilepsy">Salir del programa</option>
+                </select>
+            </div>
+
+            <div id="Exit-program-epilepsy">
+                <obsgroup groupingConceptId="PIH:Exit from program construct"
+                          hiddenConceptId="PIH:Service or program"
+                          hiddenAnswerConceptId="PIH:Epilepsy program">
+
+                    <div id="epilepsy-exit-status">
+                        <obs id="epilepsy-exit" 
+                             conceptId="PIH:Program outcome"
+                             answerConceptIds="PIH:TREATMENT COMPLETE, PIH:PATIENT TRANSFERRED OUT, PIH: TREATMENT NEVER STARTED - PATIENT REFUSED"
+                             answerLabels="Tratamiento completado, Paciente tranferido, Tratamiento rechazado por el paciente"
+                             labelText="Estatus (requerido)"/>
+                    </div>
+                </obsgroup>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Maternal -->
+    <section id="anc" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Cuidado prenatal">
+
+        <ifMode mode="VIEW" include="false" >
+            <script type="text/javascript">
+                jq(function () {
+                    setUpMaternalSection(
+                        '<lookup expression="encounter.getEncounterDatetime().getTime()"/>',
+                        'Semanas'
+                    );
+                });
+            </script>
+        </ifMode>
+
+        <div class="question-container">
+         
+                <div class="tres-columns">
+                    <div class="small-text">
+                        <p class="font-size-16">Embarazo planeado:</p>
+                        
+                            <obs id="pregnancyPlanned"
+                                conceptId="CIEL:1426"
+                                answerConceptIds="CIEL:1065, CIEL:1066"
+                                style="radio"
+                                answerSeparator="">
+
+                                <controls>
+                                    <when value="CIEL:1066" thenDisplay="#OptionsPregnancyPlanned"/>
+                                </controls>
+                            </obs>
+                    </div>
+                    <div class="small-text" id="OptionsPregnancyPlanned">
+
+                            <p class="font-size-16">Causa de embarazo no planeado:</p>
+                            <obs conceptId="CIEL:160693" 
+                                 answerConceptId="CIEL:1065" 
+                                 answerLabel="Fallo del metodo anticonceptivo" 
+                                 style="checkbox"/>
+
+                            <obs conceptId="CIEL:123160" 
+                                 answerConceptId="CIEL:1065" 
+                                 answerLabel="Violencia sexual" 
+                                 style="checkbox"/>
+
+                    </div>
+                    
+                    <div class="small-text">
+                        <p class="font-size-16">Embarazo deseado:</p>
+                    
+                        <obs conceptId="CIEL: 122933"
+                            answerConceptIds="CIEL:1065, CIEL:1066"
+                            style="radio"
+                            answerSeparator="">
+                        </obs>
+                    </div>
+                </div>
+        </div>      
+
+        <!-- Last menstrual period (LMP or DDR) -->
+        <div class="question-container">
+
+            <div id="lmp-existing" class="small-text">
+                    <lookup expression="fn.latestObs('CIEL:1427').valueDate"/>
+            </div>
+            <div class="tres-columns">
+                
+                <div class="medium">
+                    <label>
+                        <uimessage code="pihcore.pregnancy.lastPeriod"/>
+                    </label>
+                        <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
+                </div>
+
+                 <div id="calculated-edd-and-gestational" class="hidden">
+                    <div id="calculated-gestational-age-wrapper">
+                        <span id="calculated-gestational-age-label">
+                            Calculo de edad gestacional:
+                        </span>
+                        <span id='calculated-gestational-age-value' class="value"></span>
+                    </div>
+                    <div id="calculated-edd-wrapper">
+                        <span id="calculated-edd-label">
+                            Calculo de fecha estimada:
+                        </span>
+                        <span id='calculated-edd' class="value"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- G, P, C, A -->
+        <div class="question-container">                  
+            
+            <div class="tres-columns">
+                
+                <div class="small">
+                    <lookup class="small-text" expression="fn.latestObs('CIEL:5624').valueNumeric"/>
+                    <label class="font-size-16">
+                        <uimessage code="pihcore.mch.grava"/>
+                    </label>
+                    <obs conceptId="CIEL:5624" id="gravidaInput"/>
+                </div>
+
+                 <div class="small">
+                    <lookup class="small-text" expression="fn.latestObs('CIEL:1053').valueNumeric"/>
+                     <label class="font-size-16">
+                        <uimessage code="pihcore.mch.para"/>
+                    </label>
+                    <obs conceptId="CIEL:1053" />
+                </div>
+
+                <div class="small">
+                    <lookup class="small-text" expression="fn.latestObs('CIEL:160081').valueNumeric"/>
+                     <label class="font-size-16">
+                        <uimessage code="pihcore.mch.cesarian"/>
+                    </label>
+                    <obs conceptId="CIEL:160081" />
+                </div>
+
+            </div>
+        </div>
+
+        <div class="question-container">
+         
+                <div class="two-columns"> 
+
+                    <div class="small-text">
+                            <p class="font-size-16">Perdida menores de 20 SDG: </p>
+                            <lookup expression="fn.latestObs('PIH:13733').valueNumeric"/>
+                            <obs id="ldl" 
+                                 conceptId="PIH:13733" 
+                                 showUnits="false" 
+                                 class="small"/>
+
+                    </div>
+
+                    <div class="small-text">
+                            <p class="font-size-16">Perdida mayores de 20 SDG: </p>
+                            <lookup expression="fn.latestObs('PIH:13734').valueNumeric"/>
+                            <obs id="ldl" 
+                                 conceptId="PIH:13734" 
+                                 showUnits="false" 
+                                 class="small"/>
+
+                    </div>
+                   
+                </div>
+        </div>
+
+        <div class="question-container">
+            <label><uimessage code="pihcore.lab.urinary_albumin"/></label>
+            <div class="two-columns">
+                <div class="small-text">
+                    <lookup expression="fn.latestObs('PIH:URINARY ALBUMIN').obsDatetime" />
+                    <lookup complexExpression="#if($fn.latestObs('PIH:URINARY ALBUMIN')) &#8194; &#8227; &#8194; #end" />
+                    <lookup expression="fn.latestObs('PIH:URINARY ALBUMIN').valueNumeric" />
+                </div>
+                <div>
+                    <obs class="small" conceptId="PIH:URINARY ALBUMIN" />
+                </div>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <label>
+                <uimessage code="pihcore.lab.blood_type"/>
+            </label>
+            <div class="two-columns">
+                <div class="small-text">
+                    <lookup expression="fn.latestObs('PIH:BLOOD TYPING').valueCoded.name"/>
+                </div>
+                <div>
+                    <div class="inline-radio" >
+                        <obs conceptId="PIH:BLOOD TYPING"
+                             answerConceptIds="CIEL:690,CIEL:692,CIEL:694,CIEL:696,CIEL:699,CIEL:701,CIEL:1230,CIEL:1231,PIH:unknown"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <label>
+                <uimessage code="pihcore.mch.dtpGiven"/>
+            </label>
+            <div class="two-columns">
+                <div class="small-text">
+                    <!-- See https://issues.openmrs.org/browse/RC-35 -->
+                    <lookup complexExpression="#foreach($obs in $fn.allObs('CIEL:984')) $obs.valueCoded.getShortNames() — $obs.obsDatetime #end"/>
+                </div>
+                <div>
+                    <obs conceptId="CIEL:984" answerConceptId="CIEL:781" answerCode="Sí"/>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="question-container">
+            <label>
+                <uimessage code="pihcore.lab.glucoseTolerance"/>
+            </label>
+            <div class="two-columns">
+                <div class="small-text">
+                    <!-- See https://issues.openmrs.org/browse/RC-35 -->
+                    <lookup complexExpression="#foreach($obs in $fn.allObs('PIH:12051')) $obs.valueCoded.name — $obs.obsDatetime #end"/>
+                </div>
+                <div>
+                    <obs conceptId="PIH:12051"
+                         answerConceptIds="CIEL:1228,CIEL:1229"
+                         answerCodes="pihcore.reactive,pihcore.nonreactive"
+                         style="radio" answerSeparator="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <label><uimessage code="pihcore.mch.birthPlan"/></label>
+            <div class="two-columns">
+                <div class="small-text">
+                    <lookup expression="fn.latestObs('PIH:BIRTH PLAN').valueText" />
+                </div>
+                <div>
+                    <obs conceptId="PIH:BIRTH PLAN" style="textarea" rows="4"/>
+                </div>
+            </div>
+        </div>
+
+        <hr/>
+        <div class="question-container two-columns">
+
+            <div>
+                <label>Estatus del paciente</label>
+                <select name="maternal" class="StatusPatient">
+                    <option value="">Continuar con tratamiento</option>
+                    <option value="ExitProgramMaternal">Salir del programa</option>
+                </select>
+            </div>
+
+            <div id="Exit-program-maternal">
+                <obsgroup groupingConceptId="PIH:Exit from program construct"
+                          hiddenConceptId="PIH:Service or program"
+                          hiddenAnswerConceptId="CIEL:159937">
+
+                    <div id="maternal-exit-status">
+                        <obs id="maternal-exit" 
+                             conceptId="PIH:Program outcome"
+                             answerConceptIds="PIH:TREATMENT COMPLETE, PIH:PATIENT TRANSFERRED OUT, PIH: TREATMENT NEVER STARTED - PATIENT REFUSED"
+                             answerLabels="Tratamiento completado, Paciente tranferido, Tratamiento rechazado por el paciente"
+                             labelText="Estatus (requerido)"/>
+                    </div>
+                </obsgroup>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Mental -->
+    <script>
+        jq(function() {
+            alertCuestion9PHQ();
+            setupGAD();
+            setupPHQ();
+        });
+    </script>
+    <section id="mental" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.mental">
+        <div class="question-container" id="CuestionsPHQ9">
+            <h2 class="centered-header">Cuestionario PHQ-9</h2>
+            <div class="two-columns">
+                <div>
+                    <obs id="cuestion1"
+                         conceptId="PIH:Little interest or pleasure in doing things"
+                         labelText="¿Ha sentido poco interés en hacer las cosas (hacer su oficio, ir al cafetal)?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+
+                <div>
+                    <obs id="cuestion2"
+                         conceptId="PIH:Feeling down depressed or hopeless"
+                         labelText="¿Se ha sentido triste, desesperado(a) o decaído(a)?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+            </div>
+            <br/>
+
+            <div class="two-columns">
+                <div>
+                    <obs id="cuestion3"
+                         conceptId="PIH:Trouble falling or staying asleep or sleeping too much"
+                         labelText="¿Le ha costado trabajo dormirse(que le agarre sueño)? ¿o que duerma demasiado?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+
+                <div>
+                    <obs id="cuestion4"
+                         conceptId="PIH:Feeling tired or having little energy"
+                         labelText="¿Se ha sentido cansado(a) o con poca energía?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+            </div>
+            <br/>
+
+            <div class="two-columns">
+
+                <div>
+                    <obs id="cuestion5"
+                         conceptId="PIH:Little appetite or eating less"
+                         labelText="¿Ha tenido menos hambre o ha sentido que come menos? ¿o ha sentido que le dé más hambre o que come más de lo normal?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+                <div>
+                    <obs id="cuestion6"
+                         conceptId="PIH:Feels like they have failed someone"
+                         labelText="¿Ha sentido que le ha fallado a alguien o que le haya quedado mal a alguien o que se haya sentido culpable?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+            </div>
+            <br/>
+
+            <div class="two-columns">
+
+                <div>
+                    <obs id="cuestion7"
+                         conceptId="PIH:Distracted easily"
+                         labelText="¿Se distrae fácilmente al ver la televisión/platicar con alguien/hacer el oficio/estar en cafetal por estar pensando mucho?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+
+                <div>
+                    <obs id="cuestion8"
+                         conceptId="PIH:Feels slower than normal"
+                         labelText="¿Se ha sentido más lento(a) de lo normal o que se tarda más en hacer su oficio? ¿o que esté tan intranquilo(a) que no se pueda dejar de mover?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+            </div>
+            <br/>
+
+            <div class="tres-columns">
+
+                <div>
+                    <obs id="cuestion9"
+                         conceptId="PIH:Has thought about ending their life"
+                         labelText="Muchas veces, cuando hay muchos problemas y la vida es difícil es común llegar a pensar que sería mejor estar muerto(a). En las últimas dos semanas, ¿ha llegado a pensar en quitarse la vida o en desaparecer?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+
+                <div>
+
+                    <obs id="ResultPHQ9"   
+                         conceptId="PIH:11586"
+                         labelText="Puntuaje PHQ-9"/>
+
+                </div>
+
+            </div>
+            <br/>
+
+            <div>
+                <label id="Alert"></label>
+            </div>
+
+        </div>
+
+        <div class="question-container" id="CuestionsGAD7">
+            <h2 class="centered-header">Cuestionario GAD-7</h2>
+            <div class="two-columns">
+                <div>
+                    <obs conceptId="PIH:Feeling nervous"
+                         labelText="¿Se siente nervioso, intranquilo/a o con los nervios de punta?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+
+                <div>
+                    <obs conceptId="PIH:Not able to stop worrying"
+                         labelText="No poder dejar de preocuparse o no poder controlar la preocupación"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+            </div>
+            <br/>
+
+            <div class="two-columns">
+                <div>
+                    <obs conceptId="PIH:Worrying too much about different things"
+                         labelText="¿Se preocupa demasiado por diferentes cosas?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+
+                <div>
+                    <obs conceptId="PIH:Difficulty relaxing"
+                         labelText="¿Tiene dificultad para relajarse?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+            </div>
+            <br/>
+
+            <div class="two-columns">
+                <div>
+                    <obs conceptId="PIH:Being so restless that it is difficult to sit quietly"
+                         labelText="¿Se siente tan inquieto/a que es difcil permanecer sentado/a tranquilamente?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+
+                <div>
+                    <obs conceptId="PIH:Getting upset or irritable easily"
+                         labelText="¿Se molesta o se pone irritable fácilmente?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+            </div>
+            <br/>
+
+            <div class="two-columns">
+                <div>
+                    <obs conceptId="PIH:Feeling scared as if something terrible could happen"
+                         labelText="¿Siente miedo como si algo terrible pudiera pasar?"
+                         answerConceptIds="PIH:NEVER,PIH:SOME DAYS,PIH:More than half the days,PIH:1100"
+                         answerLabels="Nunca,Pocos días,Más de la mitad de los días,Casi todos los días"/>
+                </div>
+                <div>
+
+                    <obs id="ResultGAD7"   
+                         conceptId="PIH:11733"
+                         labelText="Puntuaje GAD-7"/>
+                    
+                </div>
+            </div>
+        </div>
+
+        <hr/>
+        <div class="question-container two-columns">
+
+            <div>
+                <label>Estatus del paciente</label>
+                <select name="mental" class="StatusPatient">
+                    <option value="">Continuar con tratamiento</option>
+                    <option value="ExitProgramMental">Salir del programa</option>
+                </select>
+            </div>
+
+            <div id="Exit-program-mental">
+                <obsgroup groupingConceptId="PIH:Exit from program construct"
+                          hiddenConceptId="PIH:Service or program"
+                          hiddenAnswerConceptId="PIH:Mental Health Program">
+
+                    <div id="mental-exit-status">
+                        <obs id="mental-exit" 
+                             conceptId="PIH:Program outcome"
+                             answerConceptIds="PIH:TREATMENT COMPLETE, PIH:PATIENT TRANSFERRED OUT, PIH: TREATMENT NEVER STARTED - PATIENT REFUSED"
+                             answerLabels="Tratamiento completado, Paciente tranferido, Tratamiento rechazado por el paciente"
+                             labelText="Estatus (requerido)"/>
+                    </div>
+                </obsgroup>
+            </div>
+        </div>
+
+    </section>
+
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.exam.title" >
+        <div class="section-container">
+            <div class="two-columns">
+                <div class="small-text">
+                    <p>
+                        <lookup expression="fn.latestObs('CIEL:1391').obsDatetime" />
+                    </p>
+                    <p>
+                        <lookup expression="fn.latestObs('CIEL:1391').valueText" />
+                    </p>
+                </div>
+                <div>
+                    <obs conceptId="CIEL:1391" style="textarea" rows="5"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Rapid test -->
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Pruebas rapidas">
+        <div class="section-container">
+            <div class="four-columns">
+                <div>
+                    <label>Prueba de VIH</label>
+                    <br/>
+                    <obs conceptId="CIEL:163722"
+                         answerConceptIds="CIEL:703,CIEL:664"
+                         style="radio" answerSeparator="" />
+                </div>
+                <div>
+                    <label>Prueba de sífilis</label>
+                    <br/>
+                    <obs conceptId="CIEL:165303"
+                         answerConceptIds="CIEL:703,CIEL:664"
+                         style="radio" answerSeparator="" />
+                </div>
+                <div>
+                    <label>Prueba de hepatitis B</label>
+                    <br/>
+                    <obs conceptId="PIH:HEPATITIS B TEST - QUALITATIVE"
+                         answerConceptIds="CIEL:703,CIEL:664"
+                         style="radio" answerSeparator="" />
+                </div>
+                <div>
+                    <label>Prueba de clamidia</label>
+                    <br/>
+                    <obs conceptId="PIH:12335"
+                         answerConceptIds="CIEL:703,CIEL:664"
+                         style="radio" answerSeparator="" />
+                    
+                </div>
+            </div>
+            <br/><br/>
+            <div class="four-columns">
+                <div>
+                    <label>Prueba de Gonorrea</label>
+                    <br/>
+                    <obs conceptId="PIH:12334"
+                         answerConceptIds="CIEL:703,CIEL:664"
+                         style="radio" answerSeparator="" />
+                </div>
+                <div>
+                    <label>Prueba de hemoglobina</label>
+                    <br/>
+                    <obs class="small" conceptId="CIEL:21" showUnits="true" />
+                </div>
+                <div>
+                    <label>Tipo de sangre</label>
+                    <br/>
+                    <obs conceptId="PIH:BLOOD TYPING"
+                         answerConceptIds="CIEL:690,CIEL:692,CIEL:694,CIEL:696,CIEL:699,CIEL:701,CIEL:1230,CIEL:1231,PIH:unknown"/>
+                </div>
+                <div>
+                    <label>Prueba de hepatitis C</label>
+                    <br/>
+                    <obs conceptId="PIH:HEPATITIS C TEST - QUALITATIVE"
+                         answerConceptIds="CIEL:703,CIEL:664"
+                         style="radio" answerSeparator="" />
+                </div>
+            </div>
+            <br/><br/>
+            <div class="two-columns">
+                <div class="small-text">
+                    <p>Sospecha de tuberculosis:</p>
+                    <obs id="SuspectedTB"
+                         conceptId="PIH:Is TB suspected"
+                         answerConceptIds="CIEL:1065, CIEL:1066"
+                         style="radio"
+                         answerSeparator="">
+
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#OptionsTB"/>
+                        </controls>
+                    </obs>
+                </div>
+                <div id="OptionsTB">
+                    <p>Resultado de prueba:</p>
+                    <obs conceptId="PIH:Tuberculosis culture result"
+                         answerConceptIds="PIH:NOT DONE,PIH:NEGATIVE,PIH:POSITIVE"
+                         style="radio"
+                         answerSeparator=""/>
+                    <br/>
+
+                    <obs conceptId="PIH:Suspected TB free-text notes"
+                         style="textarea"
+                         labelText="Observaciones:"
+                         rows="5"/>
+                </div>
+            </div>
+        </div>
+        <!-- COVID -->
+        <div class="section-container">
+            <div class="tres-columns">
+                <div class="small-text">
+
+                    <p>Sospecha de Covid-19:</p>
+                    <obs id="SuspectedCOVID-19"
+                         conceptId="PIH:Is COVID suspected"
+                         answerConceptIds="CIEL:1065, CIEL:1066"
+                         style="radio"
+                         answerSeparator="">
+
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#TipoPruebaCovid"/>
+                        </controls>
+                    </obs>
+
+                </div>
+
+                <div id="TipoPruebaCovid">
+
+                    <p>Tipo de prueba:</p>
+                    <obs id="whattype"
+                         conceptId="PIH:Type of COVID test"
+                         answerConceptIds="CIEL:165840,CIEL:165853,CIEL:165852"
+                         answerLabels="PCR,Anticuerpos,Antigeno"
+                         style="radio"
+                         answerSeparator="">
+
+                        <controls>
+                            <when value="CIEL:165840" thenDisplay="#OptionsPCR"/>
+                            <when value="CIEL:165853" thenDisplay="#OptionsAnticuerpos"/>
+                            <when value="CIEL:165852" thenDisplay="#OptionsAntigeno"/>
+                        </controls>
+                    </obs>
+                    <br/>
+
+                    <obs conceptId="PIH:Suspected TB free-text notes"
+                         style="textarea"
+                         labelText="Observaciones:"
+                         rows="5"/>
+                    <br/>
+
+                </div>
+
+                <div id="OptionsPCR">
+
+                    <p>Resultado PCR:</p>
+                    <obs conceptId="CIEL:165840"
+                         answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE"
+                         style="radio"
+                         answerSeparator=""/>
+                </div>
+
+                <div id="OptionsAnticuerpos">
+
+                    <p>Resultado anticuerpos:</p>
+                    <obs conceptId="CIEL:165853"
+                         answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE"
+                         style="radio"
+                         answerSeparator=""/>
+                </div>
+
+                <div id="OptionsAntigeno">
+
+                    <p>Resultado antigeno:</p>
+                    <obs conceptId="CIEL:165852"
+                         answerConceptIds="PIH:POSITIVE,PIH:NEGATIVE"
+                         style="radio"
+                         answerSeparator=""/>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Analysis -->
+    <ifMode mode="VIEW" include="false">
+        <h1>
+            <uimessage code="pihcore.visitNote.analysis"/>
+        </h1>
+    </ifMode>
+
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title">
+        <div class="section-container">
+            <div class="two-columns">
+                <div class="small-text">
+                    <p>
+                        <lookup expression="fn.latestObs('PIH:CLINICAL IMPRESSION COMMENTS').obsDatetime" />
+                    </p>
+                    <p>
+                        <lookup expression="fn.latestObs('PIH:CLINICAL IMPRESSION COMMENTS').valueText" />
+                    </p>
+                </div>
+                <div>
+                    <obs conceptId="PIH:CLINICAL IMPRESSION COMMENTS" style="textarea" rows="5"/>
+                </div>
+            </div>
+        </div>
+        <div class="question-container">
+            <div id="diagnosis-lookup">
+                <encounterDiagnosesByObs selectedDiagnosesTarget="#encounter-diagnoses-target"/>
+            </div>
+            <div id="encounter-diagnoses-target">
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan -->
+    <div id="section-plan">
+        <ifMode mode="VIEW" include="false">
+            <script type="text/javascript">
+                jq(function() {
+                    setUpPlanSection(
+                        '<uimessage code="pihcore.visitNote.plan.medications.error.noMedication"/>',
+                        '<uimessage code="pihcore.visitNote.plan.medications.error.noDoseUnits"/>',
+                        '<uimessage code="pihcore.visitNote.plan.medications.error.noDose"/>',
+                        '<uimessage code="pihcore.visitNote.plan.medications.error.noDurationUnits"/>',
+                        '<uimessage code="pihcore.visitNote.plan.medications.error.noDuration"/>'
+                    );
+                    setUpExpandableSection('medication');
+                });
+            </script>
+        </ifMode>
+
+        <ifMode mode="VIEW" include="false">
+            <h1>
+                <uimessage code="pihcore.visitNote.plan"/>
+            </h1>
+        </ifMode>
+
+        <section id="clinical-management-plan" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.consult.clinicalManagementPlan">
+            <div class="section-container">
+                <div class="two-columns">
+                    <div class="small-text">
+                        <p>
+                            <lookup expression="fn.latestObs('CIEL:162749').obsDatetime" />
+                        </p>
+                        <p>
+                            <lookup expression="fn.latestObs('CIEL:162749').valueText" />
+                        </p>
+                    </div>
+                    <div>
+                        <obs conceptId="CIEL:162749" style="textarea" rows="5" id="clinical-management-plan"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <ifMode mode="VIEW" include="false">
+            <h1>
+                Ultrasonido
+            </h1>
+        </ifMode>
+    
+        <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="">
+            <div class="section-container">
+                <div class="two-columns">
+                    <div>
+                        <div class="small-text">
+                            <lookup expression="fn.latestObs('PIH:14068').valueCoded.name"/>
+                        </div>
+                        <label>Tipo de ultrasonido</label>
+                        <obs id="TypeUltrasound"
+                             conceptId="PIH:14068"
+                             answerConceptIds="PIH:12561,PIH:Musculoskeletal ultrasound,CIEL:164386,PIH:Thyroid,PIH:Vascular system,CIEL:166201,PIH:Scrotum and Testicle (US),PIH:12562,PIH:HEART,PIH:PULMONARY SYSTEM,PIH:Abdomen (US),PIH:Renal ultrasound,PIH:Pelvis (US),CIEL:159618,PIH:US Gyno"
+                             answerLabels="Tejido blando, Musculoesquelético, Ojo, TIroides, Vascular, Mama, Testicular, E-FAST, Corazón, Pulmón, Abdomen, Renal, Pelvis, Obstétrico, Ginecológico">
+
+                             <controls>
+                                <when value="CIEL:159618" thenDisplay="#ObstetricSection"/>
+                             </controls>
+                        </obs>
+                    </div>
+
+                    <div id="ObstetricSection">
+                        <div class="small-text">
+                            <lookup expression="fn.latestObs('CIEL:160665').valueCoded.name"/>
+                        </div>
+                        <label>Medida utilizada</label>                   
+                        <div class="two-columns">
+                                <div>
+                                    <obs id="StagePregnancy"
+                                        conceptId="CIEL:160665"
+                                        answerConceptIds="CIEL:164939, CIEL:164940"
+                                        answerLabels="Primer trimestre, Segundo y tercer trimestre"
+                                        style="radio"
+                                        answerSeparator="">
+
+                                        <controls>
+                                            <when value="CIEL:164939" thenDisplay="#OptionsFirstTrimester"/>
+                                        </controls>
+
+                                        <controls>
+                                            <when value="CIEL:164940" thenDisplay="#OptionsSecondTrimester"/>
+                                        </controls>
+                                    </obs>
+                                </div>
+                        </div>
+                    </div>                
+                </div>
+            </div>
+            <br/>
+
+            <div id="OptionsFirstTrimester">
+                <div class="section-container">
+                    <div class="two-columns">
+                        <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:Head to toe length').valueNumeric.intValue()"/>
+                            </div>
+                            <label>Longitud céfalo caudal (cm)</label>
+                            <obs conceptId="PIH:Head to toe length"/>                         
+                        </div>
+                        <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:Gestational sac diameter').valueNumeric.intValue()"/>
+                            </div>
+                            <label>Medida Saco Gestacional (cm)</label>
+                            <obs conceptId="PIH:Gestational sac diameter"/>
+                        </div>
+                    </div>
+                    <br/>
+
+                    <div class="tres-columns">
+                        <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('CIEL:165220').valueNumeric.intValue()"/>
+                            </div>
+                            <obs conceptId="CIEL:165220"
+                                 labelText="Semanas de gestación por USG"/>                         
+                        </div>
+                        <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:ESTIMATED DATE OF CONFINEMENT').obsDatetime"/>
+                            </div>
+                            <obs conceptId="PIH:ESTIMATED DATE OF CONFINEMENT"
+                                 labelText="Fecha probable de parto por USG"
+                                 allowFutureDates="true"/>
+                        </div>
+                        <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:Estimated fetal weight').valueNumeric.intValue()"/>
+                            </div>
+                            <label>Peso fetal estimado en gramos</label>
+                            <obs conceptId="PIH:Estimated fetal weight"/>
+                        </div>
+                    </div>
+
+                </div>
+                <br/>           
+            </div>
+
+            <div id="OptionsSecondTrimester">
+                <div class="section-container">
+                    <div class="tres-columns">
+                        <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:Biparietal diameter').valueNumeric.intValue()"/>
+                            </div>
+                            <label>Diámetro biparietal (cm)</label>
+                            <obs conceptId="PIH:Biparietal diameter"/>                         
+                        </div>
+                        <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:HEAD CIRCUMFERENCE').valueNumeric.intValue()"/>
+                            </div>
+                            <label>Perímetro cefálico (cm)</label>
+                            <obs conceptId="PIH:HEAD CIRCUMFERENCE"/>
+                        </div>
+                        <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:WAIST CIRCUMFERENCE CM').valueNumeric.intValue()"/>
+                            </div>
+                            <label>Circunferencia abdominal (cm)</label>
+                            <obs conceptId="PIH:WAIST CIRCUMFERENCE CM"/>
+                        </div>
+                    </div>
+                    <br/>
+                    
+                    <div class="two-columns">
+                        <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:Femur length').valueNumeric.intValue()"/>
+                            </div>
+                            <label>Longitud de femur (cm)</label>
+                            <obs conceptId="PIH:Femur length"/>
+                        </div>
+                        <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:AFI').valueNumeric.intValue()"/>
+                            </div>
+                            <label>ILA (cm)</label>
+                            <obs conceptId="PIH:AFI"/>
+                        </div>
+                    </div>
+                    <br/>
+
+                    <div class="tres-columns">
+                        <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('CIEL:165220').valueNumeric.intValue()"/>
+                            </div>
+                            <obs conceptId="CIEL:165220"
+                                labelText="Semanas de gestación por USG"/>                         
+                        </div>
+                        <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:ESTIMATED DATE OF CONFINEMENT').obsDatetime"/>
+                            </div>
+                            <obs conceptId="PIH:ESTIMATED DATE OF CONFINEMENT"
+                                labelText="Fecha probable de parto por USG"
+                                allowFutureDates="true"/>
+                        </div>
+                        <div>
+                            <div class="small-text">
+                                <lookup expression="fn.latestObs('PIH:Estimated fetal weight').valueNumeric.intValue()"/>
+                            </div>
+                            <label>Peso fetal estimado en gramos</label>
+                            <obs conceptId="PIH:Estimated fetal weight"/>
+                        </div>
+                    </div>
+                    <br/>
+
+                </div>
+            </div>
+            <br/>
+
+            <div class="section-container">
+                <div class="small-text">
+                    <p>
+                        <lookup expression="fn.latestObs('PIH:Ultrasound result (text)').valueText"/>
+                    </p>
+                </div>
+                <label>Comentario ultrasonido(Reporte)</label>
+                <obs conceptId="PIH:Ultrasound result (text)" 
+                     style="textarea" 
+                     rows="6"/>      
+                <br/><br/>
+
+                <div id="imgAgeGestationalTable">
+                <uiInclude provider="file" image="configuration/pih/images/AgeGestationalTable.png" width="80%" height="50%"/>
+                </div>
+                <br/><br/>
+
+                <div class="small-text">
+                    <lookup expression="fn.latestObs('PIH:Change Dx').valueCoded.name"/>
+                </div>
+                <label>¿Cambio de diagnóstico y/o manejo? (Cambio FUM, obito, gemelar, derrame pleural, fractura, CONFIRMA O DESCARTA AFECCIÓN)</label>
+                <obs id="DxChange"
+                     conceptId="PIH:Change Dx"
+                     answerConceptIds="PIH:YES,PIH:NO"
+                     style="radio" 
+                     answerSeparator="">    
+                </obs>
+            </div>
+
+        </section>
+
+        <section id="test-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.lab.lab_tests.title">
+            <div class="section-container">
+                <p>
+                    <obs conceptId="PIH:11762" style="textarea" rows="5" id="test-orders"/>
+                </p>
+            </div>
+        </section>
+
+        <section id="drug-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.medsAndSupplies">
+            <input id="patientAllergies" type="hidden" value=""/>
+            <div class="section-container">
+                <repeat with="['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10'],['11'],['12']">
+                    <span id="medication-{0}" class="medication">
+                        <obsgroup groupingConceptId="PIH:14822" showIfEmpty="false">
+                            <h3>
+                                <uimessage code="pihcore.medsAndSupplies"/>
+                                {0} 
+                            </h3>
+                            <fieldset class="medication">
+                                <p class="field-error" style="display:none"></p>
+
+                                <p>
+                                    <label>
+                                        <uimessage code="mirebalais.dispensing.medicationName"/>
+                                    </label>
+                                    <obs id="name{0}" class="medication-name" conceptId="CIEL:1282"
+                                         answerDrugs="true" includeRetiredDrugs="false"/>
+                                </p>
+
+                                <p class="side-by-side">
+                                    <div class="medium">
+                                        <obs id="container{0}" class="container-number" conceptId="PIH:15173"
+                                             labelCode="mirebalais.dispensing.numberContainers"/>
+                                    </div>
+                                </p>
+
+                                <div class="section-container">
+                                    <div class="medication-dose">
+                                        <label>
+                                            <uimessage code="mirebalais.dispensing.medicationDose"/> 1
+                                        </label>
+                                        <div class="two-columns" style="width:40%">
+                                            <div class="small-text">
+                                                <p class="inline">
+                                                    <span style="white-space: nowrap">
+                                                            <obs id="amount{0}-1" class="medication-amount dose" conceptId="PIH:9073"/>&amp;nbsp;&amp;nbsp;
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="small-text">
+                                                <p class="inline">
+                                                    <span style="white-space: nowrap">
+                                                            <obs
+                                                                    id="dosingUnit-1"
+                                                                    class="medication-dose-unit dose-unit"
+                                                                    conceptId="PIH:Dosing units coded"
+                                                                    answerConceptIds="$puff,$milliGram,$milliLiter,$capsule,$tablet"
+                                                                    answerCodes="soplo,mg,mL,capsula,tableta"
+                                                            />
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="two-columns" style="width:40%">
+                                            <div class="small-text">
+                                                <p class="inline">
+                                                    <span style="white-space: nowrap">
+                                                        <label><uimessage code="ces.dispensing.frequency"/></label>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="small-text">
+                                                <p class="inline">
+                                                    <span style="white-space: nowrap">
+                                                        <label><uimessage code="ces.dispensing.timing.dosing"/></label>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <p class="inline-timing">
+                                            <obs conceptId="PIH:Part of the day"
+                                                 style="checkbox"
+                                                 class="frequency"
+                                                 answerConceptId="$inTheMorning"
+                                                 answerLabel="Mañana"
+                                                 showCommentField="true"
+                                                 commentFieldLabel=""/>
+                                        </p>
+                                        <p class="inline-timing">
+                                            <obs conceptId="PIH:Part of the day"
+                                                 style="checkbox"
+                                                 class="frequency"
+                                                 answerConceptId="$atNoon"
+                                                 answerLabel="Medio dia"
+                                                 showCommentField="true"
+                                                 commentFieldLabel=""/>
+                                        </p>
+                                        <p class="inline-timing">
+                                            <obs conceptId="PIH:Part of the day"
+                                                 style="checkbox"
+                                                 class="frequency"
+                                                 answerConceptId="$inTheAfternoon"
+                                                 answerLabel="Tarde"
+                                                 showCommentField="true"
+                                                 commentFieldLabel=""/>
+                                        </p>
+                                        <p class="inline-timing">
+                                            <obs conceptId="PIH:Part of the day"
+                                                 style="checkbox"
+                                                 class="frequency"
+                                                 answerConceptId="$inTheEvening"
+                                                 answerLabel="Noche"
+                                                 showCommentField="true"
+                                                 commentFieldLabel=""/>
+                                        </p>
+                                    </div>
+                                    <!-- Using dummy concept to show Dose 2 -->
+                                    <obs id="ask-deux" conceptId="PIH:14678" style="checkbox"
+                                         answerConceptId="PIH:YES" answerCode="pihcore.addDoseTwo">
+                                        <when value="PIH:YES" thenDisplay="#dose-deux"/>
+                                    </obs>
+
+                                    <div id="dose-deux" class="medication-dose">
+                                        <label>
+                                            <uimessage code="mirebalais.dispensing.medicationDose"/>  2
+                                        </label>
+                                        <div class="two-columns" style="width:40%">
+                                            <div class="small-text">
+                                                <p class="inline">
+                                                    <span style="white-space: nowrap">
+                                                        <obs id="amount{0}-2" class="medication-amount dose" conceptId="PIH:14824"/>&amp;nbsp;&amp;nbsp;
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="small-text">
+                                                <p class="inline">
+                                                    <span style="white-space: nowrap">
+                                                        <obs
+                                                                id="dosingUnit-2"
+                                                                class="medication-dose-unit dose-unit"
+                                                                conceptId="PIH:14825"
+                                                                answerConceptIds="$puff,$milliGram,$milliLiter,$capsule,$tablet"
+                                                                answerCodes="soplo,mg,mL,capsula,tableta"
+                                                        />
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="two-columns" style="width:40%">
+                                            <div class="small-text">
+                                                <p class="inline">
+                                                    <span style="white-space: nowrap">
+                                                        <label><uimessage code="ces.dispensing.frequency"/></label>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="small-text">
+                                                <p class="inline">
+                                                    <span style="white-space: nowrap">
+                                                        <label><uimessage code="ces.dispensing.timing.dosing"/></label>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <p class="inline-timing">
+                                            <obs conceptId="PIH:14823"
+                                                 style="checkbox"
+                                                 class="frequency"
+                                                 answerConceptId="$inTheMorning"
+                                                 answerLabel="Mañana"
+                                                 showCommentField="true"
+                                                 commentFieldLabel=""/>
+                                        </p>
+                                        <p class="inline-timing">
+                                            <obs conceptId="PIH:14823"
+                                                 style="checkbox"
+                                                 class="frequency"
+                                                 answerConceptId="$atNoon"
+                                                 answerLabel="Medio dia"
+                                                 showCommentField="true"
+                                                 commentFieldLabel=""/>
+                                        </p>
+                                        <p class="inline-timing">
+                                            <obs conceptId="PIH:14823"
+                                                 style="checkbox"
+                                                 class="frequency"
+                                                 answerConceptId="$inTheAfternoon"
+                                                 answerLabel="Tarde"
+                                                 showCommentField="true"
+                                                 commentFieldLabel=""/>
+                                        </p>
+                                        <p class="inline-timing">
+                                            <obs conceptId="PIH:14823"
+                                                 style="checkbox"
+                                                 class="frequency"
+                                                 answerConceptId="$inTheEvening"
+                                                 answerLabel="Noche"
+                                                 showCommentField="true"
+                                                 commentFieldLabel=""/>
+                                        </p>
+                                    </div>
+                                    <p>
+
+                                    </p>
+                                    <div class="two-columns">
+                                        <div class="list-inline">
+                                            <label>
+                                                <uimessage code="mirebalais.dispensing.medicationDuration"/>
+                                            </label>
+                                            <!-- ToDo: Remove per MEX-610
+                                            <obs id="no-duration{0}" class="no-medication-duration"
+                                                 style="radio" conceptId="PIH:15174"
+                                                 answerConceptIds="CIEL:1065,CIEL:1066"
+                                                 answerCodes="emr.yes,mirebalais.dispensing.noDuration">
+                                                <controls>
+                                                    <when value="CIEL:1065" thenDisplay="#duration-details{0}" />
+                                                </controls>
+                                            </obs>
+                                            -->
+                                        </div>
+                                        <div id="duration-details{0}" class="list-inline">
+                                            <obs id="duration{0}" class="medication-duration duration" conceptId="PIH:9075"/>
+                                            <!-- ToDo: replace uuid with PIH:20022 -->
+                                            <obs id="durationUnits{0}" class="medication-units duration-unit"
+                                                 conceptId="PIH:TIME UNITS"
+                                                 answerConceptIds="PIH:Minutes,PIH:Hours,PIH:Days,PIH:Weeks,PIH:Months,PIH:YEARS,CIEL:162582,d1b0ef4a-dafd-4c06-ba87-daa4e47086dd"/>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        <label>
+                                            <uimessage code="mirebalais.dispensing.medicationInstructions"/>
+                                        </label>
+                                        <obs id="instructions{0}" class="medication-instructions" conceptId="PIH:9072"/>
+                                    </p>
+                                </div>
+                            </fieldset>
+                        </obsgroup>
+                    </span>
+                </repeat>
+
+                <button id="show-less-medication" type="button">
+                    -
+                </button>
+                <button id="show-more-medication" type="button">
+                    +
+                </button>
+            </div>
+
+        </section>
+
+        <section id="disposition-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="coreapps.consult.disposition">
+
+            <div class="section-container">
+
+                <p id="return-date">
+                    <label>
+                        <uimessage code="pihcore.visitNote.plan.approximateReturnVisitDate"/>
+                    </label>
+                    <span class="medium">
+                        <obs conceptId="PIH:RETURN VISIT DATE" allowFutureDates="true" allowPastDates="false" id="apptDate"/>
+                    </span>
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>  <!-- section-plan -->
+
+    <!-- Print prescription -->
+    <div class="section-button">
+        <button id="print-prescription-button" type="button">
+            <uimessage code="pihcore.visitNote.printPrescriptions" />
+        </button>
+        <script type="text/javascript">
+            jq(function () {
+                jq('#print-prescription-button').click(function() {
+
+                    // Consult Date
+                    let consultDateYmd = $('#encounterDate').find('input[type="hidden"]').val(); // Enter/edit mode
+                    if (!consultDateYmd) {
+                        consultDateYmd = '<lookup complexExpression="$fn.formatDate($encounter.encounterDatetime, 'yyyy-MM-dd')"/>';  // View mode
+                    }
+                    const consultDate = moment(consultDateYmd);
+                    const formattedConsultDate = consultDate.locale('es').format('DD MMM YYYY');
+                    const provider = $('#encounterProvider').text().trim();
+
+                    // Patient Name
+                    const givenName = jq(".zl-givenName").html().trim();
+                    const familyName = jq(".zl-familyName").html().trim().replace(',', '');
+                    const patientName = givenName + ' ' + familyName;
+                    const patientAllergies = jq("#patientAllergies").val();
+                    
+                    // Patient Age
+                    const birthdate = moment('<lookup complexExpression="$fn.formatDate($patient.birthdate, 'yyyy-MM-dd')"/>');
+                    const age = Math.floor(moment.duration(consultDate.diff(birthdate)).as('years'));
+
+                    // Diagnoses
+                    let diagnoses = jq.map(jq(".diagnosis .matched-name"), (d) => d.textContent).join(", "); // Enter/edit mode
+                    <ifMode mode="VIEW" include="true">
+                    if (!diagnoses) {  // View mode
+                        diagnoses = jq.map(jq("#diagnosis-lookup span"), (d) => {
+                            let diagnosis = d.innerHTML;
+                            const indexOfArrow = diagnosis.indexOf('→');
+                            diagnosis = (indexOfArrow === -1 ? diagnosis : diagnosis.substring(0, indexOfArrow)).trim();
+                            diagnosis = diagnosis.replace('(Presunto)', '').replace('(1a vez)', '').trim();
+                            return diagnosis;
+                        }).join(", ");
+                    }
+                    </ifMode>
+
+                    // Prescriptions
+                    const prescriptions = [];
+                    jq("span.medication:visible").each(function() {
+                        jq(this).children('fieldset.medication:visible').each(function() {
+                            <ifMode mode="VIEW" include="false">
+                                const drugName = jq(this).find('.medication-name').children('input:first-child').val(); // Enter/edit mode
+                            </ifMode>
+                            <ifMode mode="VIEW" include="true">
+                                const drugName = jq(this).find('.medication-name').html();
+                            </ifMode>
+                            let medsDoses = [];
+                            if (drugName) {
+                                <ifMode mode="VIEW" include="false">
+                                    const duration = jq(this).find('.medication-duration').children('input:first-child').val();
+                                    const durationUnits = jq(this).find('.medication-units option:selected').html();
+                                    const instructions = jq(this).find('.medication-instructions').children('input:first-child').val();
+                                </ifMode>
+                                    jq(this).find('.medication-dose').each( function() {
+                                        <ifMode mode="VIEW" include="false">
+                                            const doseAmount = jq(this).find('.medication-amount').children('input:first-child').val();
+                                            const doseUnits = jq(this).find('.medication-dose-unit option:selected').html();
+                                        </ifMode>
+                                        <ifMode mode="VIEW" include="true">
+                                            const doseAmount = jq(this).find('.medication-amount').children('span:first-child').html();
+                                            const doseUnits = jq(this).find('.medication-dose-unit').children('span:first-child').html();
+                                        </ifMode>
+                                        let timingDoses = [];
+                                        // for each dose look for timing of day checkboxes
+                                        <ifMode mode="VIEW" include="false">
+                                            jq(this).find('.inline-timing input:checkbox:checked').each( function() {
+                                                const timing = jq(this).val();
+                                                const timingDose = jq(this).parent().children('input[type=text]').val();
+                                                const label = jq(this).parent().children('label').text();
+                                                timingDoses.push( {
+                                                    "label": label.toLowerCase(),
+                                                    "dose" : timingDose
+                                                });
+                                            });
+                                        </ifMode>
+                                        <ifMode mode="VIEW" include="true">
+                                            const substringToRemove = '[X] ';
+                                            jq(this).find('.inline-timing input:checkbox:checked').each(function() {
+                                                const label = jq(this).text().replace(substringToRemove, '');
+                                                const timingDose = jq(this).next(".value").text();
+                                                timingDoses.push( {
+                                                    "label": label.toLowerCase(),
+                                                    "dose" : timingDose
+                                                });
+                                            });
+                                        </ifMode>
+                                        medsDoses.push({
+                                            "doseAmount": doseAmount,
+                                            "doseUnits": doseUnits,
+                                            "timingDoses": timingDoses
+                                        });
+                                    });
+
+                                <ifMode mode="VIEW" include="true">
+                                    const duration = jq(this).find('.medication-duration').children('span:first-child').html();
+                                    const durationUnits = jq(this).find('.medication-units').children('span:first-child').html();
+                                    const instructions = jq(this).find('.medication-instructions .value').html();
+                                </ifMode>
+                                prescriptions.push({
+                                    "drugName": drugName,
+                                    "medsDoses": medsDoses,
+                                    "duration": duration,
+                                    "durationUnits": durationUnits,
+                                    "instructions": instructions
+                                });
+                            }
+                        });
+                    });
+
+                    printPrescription(formattedConsultDate, patientName, age, diagnoses, prescriptions, patientAllergies, provider);
+                });
+            });
+        </script>
+    </div>
+    <br/>
+
+    <ifMode mode="VIEW" include="false">
+        <div id="buttons">
+            <submit submitClass="confirm right" submitCode="mirebalais.save"/>
+            <button type="button" class="cancel">
+                <uimessage code="emr.cancel"/>
+            </button>
+        </div>
+    </ifMode>
+
+</htmlform>

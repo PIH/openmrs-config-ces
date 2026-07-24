@@ -1,0 +1,25 @@
+key: "historiaClinica"
+uuid: "00cc2a0e-d358-495d-8a45-68105cacc775"
+name: "Historia Clínica"
+description: "Historia Clínica"
+parameters:
+  - key: "startDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.startDate"
+  - key: "endDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.endDate"
+datasets:
+  - key: "historiaClinica"
+    type: "sql"
+    config: "sql/historiaClinica.sql"
+designs:
+  - type: "excel"
+    template: "templates/historiaClinica.xls"
+    properties:
+      repeatingSections: "sheet:1,dataset:historiaClinica"
+config:
+  category: "dataExport"
+  order: 12
+  components:
+    - "dataExports"

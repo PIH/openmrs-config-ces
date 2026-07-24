@@ -1,0 +1,48 @@
+{
+  
+  "welcomeMessage": "EMR de Compañeros en Salud - Demo",
+
+  "site": "CES_CLOUD",
+
+  "primaryIdentifierPrefix": "DEM",
+  "providerIdentifierPrefix": "CES",
+
+  "components": [
+    "allergies",
+    "ancProgram",
+    "asthmaProgram",
+    "bmiOnClinicianDashboard",
+    "chwApp",
+    "clinicianDashboard",
+    "dataExports",
+    "diabetesProgram",
+    "epilepsyProgram",
+    "hypertensionProgram",
+    "malnutritionProgram",
+    "mentalHealthProgram",
+    "markPatientDead",
+    "myAccount",
+    "overviewReports",
+    "patientDocuments",
+    "patientRegistration",
+    "primaryCare",
+    "programs",
+    "providerRelationships",
+    "relationships",
+    "spaPreview",
+    "systemAdministration",
+    "todaysVisits",
+    "visitManagement",
+    "vitals"
+  ],
+  
+  "locationTags": {
+    "Login Location": [
+      "Hospital",
+      "CES Oficina",
+      "Casa Materna",
+      "CER",
+      "Pediatría"
+    ]
+  }
+}
