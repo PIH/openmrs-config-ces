@@ -58,7 +58,6 @@ openmrs-docker mexico-demo logs
 openmrs-docker mexico-demo destroy
 ```
 
-
 ### Configuring Concepts for Chiapas
 
 We currently used two different approaches to install concepts on the Mexico server.  For Diagnoses and Drugs, we are 
