@@ -6,7 +6,14 @@ This content package is merged with the shared [PIH EMR content](https://github.
 
 ## Configuration Structure
 
-Configuration files live under `configuration/` and are loaded by the OpenMRS Initializer module at startup.
+Configuration files live under `configuration/`, split into two subdirectories:
+
+| Directory | Purpose |
+|---|---|
+| `configuration/frontend_configuration/` | OpenMRS frontend (O3/SPA) configuration and customization |
+| `configuration/backend_configuration/` | Everything loaded by the OpenMRS Initializer module at startup |
+
+`backend_configuration/` contains:
 
 | Directory | Purpose |
 |---|---|
@@ -17,7 +24,6 @@ Configuration files live under `configuration/` and are loaded by the OpenMRS In
 | `conceptsets/` | Concept set memberships and groupings |
 | `drugs/` | Drug formulary definitions |
 | `encountertypes/` | Encounter type definitions for CES workflows |
-| `frontend/` | OpenMRS frontend configuration and customization |
 | `globalproperties/` | OpenMRS global property overrides |
 | `locations/` | Facility and location definitions for Chiapas clinics |
 | `messageproperties/` | Message and notification properties |
