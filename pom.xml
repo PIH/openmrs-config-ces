@@ -39,7 +39,7 @@
     </modules>
 
     <properties>
-        <pihemrConfigVersion>1.10.0-SNAPSHOT</pihemrConfigVersion>
+        <pihemrConfigVersion>1.12.0-SNAPSHOT</pihemrConfigVersion>
     </properties>
 
     <build>
@@ -61,7 +61,7 @@
                 <plugin>
                     <groupId>org.sonatype.central</groupId>
                     <artifactId>central-publishing-maven-plugin</artifactId>
-                    <version>0.7.0</version>
+                    <version>0.11.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
