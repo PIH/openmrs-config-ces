@@ -1,0 +1,19 @@
+name: Build seeded images
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  ces-ci:
+    if: github.repository_owner == 'PIH'
+    concurrency:
+      group: build-seeded-images-ces-ci-${{ github.ref }}
+      cancel-in-progress: true
+    uses: PIH/openmrs-contrib-distro-tools/.github/workflows/build-seeded-image.yml@main
+    with:
+      image_name: partnersinhealth/ces-emr
+      site: ces-ci
+      pih_config: mexico,mexico-ces-ci
+    secrets: inherit

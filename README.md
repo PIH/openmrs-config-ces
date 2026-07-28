@@ -1,57 +1,62 @@
-openmrs-config-ces
-==============================
+# PIH CES EMR Distribution
 
-### Prerequistes
+This repository defines the OpenMRS distribution for PIH CES (Chiapas, Mexico). It packages together the [PIH EMR](https://github.com/PIH/openmrs-distro-pihemr) parent distribution,
+CES-specific content, and the PIH EMR frontend into a single deployable artifact.
+For more background on OpenMRS distributions, see the [OpenMRS wiki](https://wiki.openmrs.org/display/docs/OpenMRS+Distributions).
 
-Some utility scripts, "install.sh" and "watch.sh", have been written to ease having to manually run mvn install
-and watch commands on both this project and the "openmrs-config-pihemr" project.
+## Repository Structure
 
-However, these scripts depend on finding your "openmrs-config-pihemr" relative to this project, so they should both be 
-checked out into the same directory, and the "openmrs-config-pihemr" directory should be named "openmrs-config-pihemr"
-or "config-pihemr".
+| Directory | Description |
+|---|---|
+| [`content/`](content/README.md) | CES-specific OpenMRS content package (Initializer configuration files) |
+| [`distro/`](distro/README.md) | Distribution definition — resolves all component versions into `openmrs-distro.properties` |
 
-Example directory structure:
+## Components
 
-openmrs-config-pihemr
-openmrs-config-ces
+| Component | Artifact |
+|---|---|
+| PIH EMR parent distro | `org.openmrs.distro:pihemr` |
+| PIH EMR shared content | `org.pih.openmrs:pihemr-content` |
+| CES content | `org.pih.openmrs:ces-content` |
+| PIH EMR frontend | `org.pih.openmrs:openmrs-frontend-pihemr` |
 
-or
+Component versions are defined in `distro/pom.xml` and resolved into `distro/openmrs-distro.properties` at build time.
 
-config-pihemr
-config-ces
+## Supported Configuration Profiles
 
-### Steps to deploy new changes to your local development server
+| Site | PIH Config |
+|---|---|
+| `ces-ci` | `mexico,mexico-ces-ci` |
 
-Run "./install.sh [serverId]" where [serverId] is the name of the SDK server you are deploying to.  This will first build 
-the config-pihemr project, then build the config-ces project, (pulling in any changes to config-pihemr),
-and finally deploying the changes to the server specified by [serverId].
+## Developer Guide
 
-#### To enable watching, you run the following:
+Local development runs through the shared
+[`openmrs-contrib-distro-tools`](https://github.com/PIH/openmrs-contrib-distro-tools) CLI
+(`openmrs-docker`/`openmrs-sdk`), installed once per machine rather than embedded in this repo.
+Follow that repo's [Install](https://github.com/PIH/openmrs-contrib-distro-tools#install) section first — the commands below assume `openmrs-docker`/`openmrs-sdk` are already on your `PATH`.
 
-"./watch.sh [serverId]" where [serverId] is the name of the SDK server you are deploying too.  This will watch
-*both* the config-pihemr and config-ces projects for changes and redeploy when there are changes.  It runs
-indefinitely, so you will need to cancel it with a "Ctrl-C".
+### Docker (`openmrs-docker`)
 
+An example environment file, `ces-ci.env`, is provided in the repo root to get started quickly.
+Because this file is found in the distribution repository, it is assumed that this is checked out on your machine, and
+that `openmrs-docker` commands are running from the root of the distribution repository — it sets `DISTRO_SOURCE_DIR`
+to this location. If you're using it as an example for running elsewhere, you may need to change or remove that.
 
-### General usage
+```bash
+source ces-ci.env
+openmrs-docker create ces-ci
+openmrs-docker ces-ci initialize # Optional, but speeds up initial startup
+openmrs-docker ces-ci start
+openmrs-docker ces-ci wait  # Tails logs until OpenMRS is ready, then exits
+```
 
-`mvn clean compile` - Will generate your configurations into "target/openmrs-packager-config/configuration"
-`mvn clean package` - Will compile as above, and generate a zip package at "target/${artifactId}-${version}.zip"
+Once created, day-to-day commands only need the instance name:
 
-In order to facilitate deploying configurations easily into an OpenMRS SDK server, one can add an additional parameter
-to either of the above commands to specify that the compiled configuration should also be copied to an existing 
-OpenMRS SDK server:
-
-`mvn clean compile -DserverId=ces` - Will compile as above, and copy the resulting configuration to `~/openmrs/ces/configuration`
-
-If the configuration package you are building will be depended upon by another configuration package, you must "install" it
-in order for the other package to be able to pick it up.
-
-`mvn clean install` - Will compile and package as above, and install as an available dependency on your system
-
-For more details regarding the available commands please see:
-https://github.com/openmrs/openmrs-contrib-packager-maven-plugin 
-
+```bash
+openmrs-docker ces-ci stop
+openmrs-docker ces-ci logs
+openmrs-docker ces-ci destroy
+```
 
 ### Configuring Concepts for Chiapas
 
@@ -69,10 +74,10 @@ The Diagnoses are groups into 4 Diagnoses sets:
 * COVID-19 diagnosis set
 
 Each set has a CSV file that defines all the concepts in the set, found in this directory:
-https://github.com/PIH/openmrs-config-ces/tree/master/configuration/concepts
+https://github.com/PIH/openmrs-config-ces/tree/master/content/configuration/backend_configuration/concepts
 
 And then a separate file that explicitly sets up the set membership:
-https://github.com/PIH/openmrs-config-ces/tree/master/configuration/concepts
+https://github.com/PIH/openmrs-config-ces/tree/master/content/configuration/backend_configuration/concepts
 
 To add a new concept/diagnosis:
 * Search the Concept server (concepts.pih-emr.org) to determine if the concept currently exists in PIH EMR dictionary
@@ -116,11 +121,11 @@ TODO: we may want to remove the other mapping columns we aren't using (AMPATH, e
 Drugs are added via the following three files:
 
 * The csv file that defines the *concepts* that drugs refer to: 
-  * https://github.com/PIH/openmrs-config-ces/blob/master/configuration/concepts/drug-concepts.csv
+  * https://github.com/PIH/openmrs-config-ces/blob/master/content/configuration/backend_configuration/concepts/drug-concepts.csv
 * The csv file that groups these concepts into a single set:
-  * https://github.com/PIH/openmrs-config-ces/blob/master/configuration/conceptsets/drug-concept-set.csv 
+  * https://github.com/PIH/openmrs-config-ces/blob/master/content/configuration/backend_configuration/conceptsets/drug-concept-set.csv 
 * The csv file that defines the actual drug formularies:
-  * https://github.com/PIH/openmrs-config-ces/blob/master/configuration/drugs/drugs.csv
+  * https://github.com/PIH/openmrs-config-ces/blob/master/content/configuration/backend_configuration/drugs/drugs.csv
 
 To add new drug, first determine if the drug *concept* already exists in thd drug-concept.csv file.  If not, add the drug as follows:
 * Search the Concept server (concepts.pih-emr.org) to determine if the drug concept currently exists in PIH EMR dictionary
