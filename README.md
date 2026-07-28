@@ -26,7 +26,7 @@ Component versions are defined in `distro/pom.xml` and resolved into `distro/ope
 
 | Site | PIH Config |
 |---|---|
-| `mexico-demo` | `mexico,mexico-demo` |
+| `ces-ci` | `mexico,mexico-ces-ci` |
 
 ## Developer Guide
 
@@ -37,25 +37,25 @@ Follow that repo's [Install](https://github.com/PIH/openmrs-contrib-distro-tools
 
 ### Docker (`openmrs-docker`)
 
-An example environment file, `mexico-demo.env`, is provided in the repo root to get started quickly.
+An example environment file, `ces-ci.env`, is provided in the repo root to get started quickly.
 Because this file is found in the distribution repository, it is assumed that this is checked out on your machine, and
 that `openmrs-docker` commands are running from the root of the distribution repository — it sets `DISTRO_SOURCE_DIR`
 to this location. If you're using it as an example for running elsewhere, you may need to change or remove that.
 
 ```bash
-source mexico-demo.env
-openmrs-docker create mexico-demo
-openmrs-docker mexico-demo initialize # Optional, but speeds up initial startup
-openmrs-docker mexico-demo start
-openmrs-docker mexico-demo wait  # Tails logs until OpenMRS is ready, then exits
+source ces-ci.env
+openmrs-docker create ces-ci
+openmrs-docker ces-ci initialize # Optional, but speeds up initial startup
+openmrs-docker ces-ci start
+openmrs-docker ces-ci wait  # Tails logs until OpenMRS is ready, then exits
 ```
 
 Once created, day-to-day commands only need the instance name:
 
 ```bash
-openmrs-docker mexico-demo stop
-openmrs-docker mexico-demo logs
-openmrs-docker mexico-demo destroy
+openmrs-docker ces-ci stop
+openmrs-docker ces-ci logs
+openmrs-docker ces-ci destroy
 ```
 
 ### Configuring Concepts for Chiapas
