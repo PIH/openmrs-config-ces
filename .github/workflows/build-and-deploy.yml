@@ -18,7 +18,7 @@ jobs:
       maven_profiles: distro-zip
     secrets: inherit
 
-  deploy-to-ces-ci:
+  deploy:
     if: github.repository_owner == 'PIH'
     needs: build-and-publish
     runs-on: ubuntu-latest
@@ -31,6 +31,15 @@ jobs:
         with:
           url: 'https://bamboo-ci.pih-emr.org/rest/api/latest/queue/OMRS-DEPLOYCESCI'
           method: 'POST'
+          bearerToken: ${{ secrets.PIH_BAMBOO_API_KEY }}
+          customHeaders: '{"Accept": "application/json"}'
+          retry: 60
+          retryWait: 60000
+          ignoreStatusCodes: 400
+      - name: Deploy to App Cluster
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://bamboo-ci.pih-emr.org/rest/api/latest/queue/OMRS-DEPLOYAPPCLSTR01'
           bearerToken: ${{ secrets.PIH_BAMBOO_API_KEY }}
           customHeaders: '{"Accept": "application/json"}'
           retry: 60
