@@ -22,7 +22,7 @@
         <contentType>zip</contentType>
         <frontendGroup>org.pih.openmrs</frontendGroup>
         <frontendArtifact>openmrs-frontend-pihemr</frontendArtifact>
-        <frontendVersion>1.40.0-SNAPSHOT</frontendVersion>
+        <frontendVersion>1.41.0-SNAPSHOT</frontendVersion>
         <frontendType>zip</frontendType>
         <parentGroup>org.openmrs.distro</parentGroup>
         <parentArtifact>pihemr</parentArtifact>
