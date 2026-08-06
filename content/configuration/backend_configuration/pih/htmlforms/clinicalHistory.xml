@@ -19,125 +19,12 @@
           formEncounterType="0d16a7c9-07fb-43f6-8984-dd7787f26a5a"
           formVersion="1.0">
 
-    <style type="text/css">
-
-        .field-error {
-            color: #ffc0b5;
-            font-size: 1.1em;
-            display: block;
-        }
-
-        .two-columns {
-            display: table;
-            height: 100%;
-            width: 100%;
-        }
-
-        .two-columns > div {
-            display: table-cell;
-            width: 50%;
-        }
-
-        .three-columns {
-            display: table;
-            height: 100%;
-            width: 100%;
-        }
-
-        .font-size-10 {
-            font-size: 10px;
-        }
-
-        .three-columns > div {
-            display: table-cell;
-            width: 33%;
-        }
-
-        .four-columns {
-            display: table;
-            height: 100%;
-            width: 100%;
-        }
-
-        .four-columns > div {
-            display: table-cell;
-            width: 25%;
-        }
-
-        .centered-header{
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 30px;
-        }
-
-        .margin-bottom{
-            margin-bottom: 45px;
-        }
-
+    <style>
         form fieldset {
             min-width: 90%;
             display: block;
             border: 1px solid rgba(52, 58, 64, 0.5);
         }
-
-        div.inline-radio > * {
-            display: inline;
-            float: none !important;
-            min-width: initial;
-        }
-
-        .light-font {
-            font-family: "OpenSansLight",sans-serif;
-        }
-
-        .section-container input[type="checkbox"] {
-            margin: 0px 5px; /*changed values to vertical, horizontal*/
-            top:5px; /*added to offset the checkbox position to line up*/
-        }
-
-        .section-container label { /*new definition to override labels inside section-containers*/
-            margin: 0px;
-        }
-
-       .section {
-         width: 95%;
-         margin-bottom: 30px;
-        }
-
-        legend {
-          width: auto;
-          font-size: 16px;
-        }
-
-        textarea {
-            width: 95%;
-        }
-
-        /* Grey out disabled checkboxes */
-        input[type=checkbox][disabled] {
-            filter: invert(15%);
-        }
-
-        #diagnosis-lookup {
-            display: inline-block;
-            width: 50%;
-            vertical-align: top;
-        }
-
-        #encounter-diagnoses-target {
-            display: inline-block;
-            width: 40%;
-            vertical-align: top;
-        }
-
-        .hidden {
-            display:none;
-        }
-        
-        form select{
-            width: 30px;
-        }
-
     </style>
 
     <div class="print-form-datestamps" style="display:none">
@@ -157,7 +44,6 @@
         <encounterProviderAndRole default="currentUser" 
                                   encounterRole="4f10ad1a-ec49-48df-98c7-1391c6ac7f05"
                                   required="true"/>
-
     </div>
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title">

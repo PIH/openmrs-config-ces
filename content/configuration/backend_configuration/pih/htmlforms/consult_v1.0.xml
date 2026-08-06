@@ -22,237 +22,6 @@
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ExitPatientFromSelectedProgramsAction"/>
     <uiInclude provider="uicommons" javascript="moment-with-locales.min.js"/>
 
-    <style type="text/css">
-
-        #who-when-where {
-            margin-bottom: 6px;
-            border-bottom: 1px solid #ccc;
-        }
-
-        #who-when-where p {
-            display: inline-block;
-            padding-right: 20px;
-        }
-
-        #where > input[type=text] {
-            display: inline-block;
-        }
-
-        .field-error {
-            color: #ffc0b5;
-            font-size: 1.1em;
-            display: block;
-        }
-
-        .legalValue {
-            background-color: white !important;
-        }
-
-        .two-columns {
-            display: table;
-            height: 100%;
-            width: 100%;
-        }
-
-        .two-columns > div {
-            display: table-cell;
-            width: 50%;
-        }
-
-        .tres-columns {
-            display: table;
-            height: 100%;
-            width: 100%;
-        }
-
-        .tres-columns > div {
-            display: table-cell;
-        }
-
-        .font-size-16{
-            font-size: 16px;
-        }
-
-        .three-columns {
-            column-count: 3;
-            -webkit-column-count: 3;
-            -moz-column-count: 3;
-        }
-
-        .four-columns {
-            display: table;
-            height: 100%;
-            width: 100%;
-        }
-
-        .four-columns > div {
-            display: table-cell;
-            width: 25%;
-        }
-
-        .simple-form-ui input {
-            min-width: 80%
-        }
-
-        form fieldset {
-            min-width: 90%;
-            display: block;
-        }
-
-        .encounter-summary-container #calculated-ratio {
-            font-size: 1em;
-            font-weight: normal;
-        }
-
-        #encounterDate input {
-            min-width: 15%
-        }
-
-        div.inline-radio > * {
-            display: inline;
-            float: none !important;
-            min-width: initial;
-        }
-
-        .light-font {
-            font-family: "OpenSansLight",sans-serif;
-        }
-
-        .small {
-            max-width: 10em;
-            display: block;
-            margin-bottom: 1em;
-        }
-
-        .small input {
-            min-width: 4em;
-            width: 4em;
-            display: inline;
-            margin-right: 0.5em;
-        }
-
-        .medium {
-            max-width: 16em;
-            display: block;
-            margin-bottom: 1em;
-        }
-
-        .medium input {
-            min-width: 8em;
-            width: 8em;
-            display: inline;
-            margin-right: 0.5em;
-        }
-
-        .small-text {
-            color: #555555;
-            font-size: 90%;
-            display: block;
-        }
-
-        .section-container {
-            background: #F2F2F2;
-            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
-            padding: 10px 5px 10px 15px;
-            line-height: 1.5em; /*add this for vertical spacing between elements*/
-        }
-
-        .section-container input[type="checkbox"] {
-            margin: 0px 5px; /*changed values to vertical, horizontal*/
-            top:5px; /*added to offset the checkbox position to line up*/
-        }
-
-        .section-container label { /*new definition to override labels inside section-containers*/
-            margin: 0px;
-        }
-
-        .question-container {
-            background: #F2F2F2;
-            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
-            padding: 5px 5px 10px 15px;
-            margin: 5px 0;
-            line-height: 1.5em; /*add this for vertical spacing between elements*/
-        }
-
-        .question-container label {
-            margin-top: 5px;
-        }
-
-       .section {
-         width: 95%;
-        }
-
-        legend {
-          width: auto;
-          font-size: 16px;
-        }
-
-        textarea {
-            width: 95%;
-        }
-
-        /* Grey out disabled checkboxes */
-        input[type=checkbox][disabled] {
-            filter: invert(15%);
-        }
-
-        .section-button {
-            margin: 10px 0 0 24px;
-        }
-
-        #diagnosis-lookup {
-            display: inline-block;
-            width: 50%;
-            vertical-align: top;
-        }
-
-        #encounter-diagnoses-target {
-            display: inline-block;
-            width: 40%;
-            vertical-align: top;
-        }
-
-        #encounter-diagnoses-app {
-            margin-bottom: 20px;
-        }
-
-        .ui-helper-hidden-accessible{
-            display: none;
-        }
-
-        .ui-autocomplete-input{
-            width: 90%;
-        }
-
-        .medication-instructions input {
-            width: 85%;
-        }
-
-        #Alert{
-            color: red;
-        }
-
-        .centered-header{
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 30px;
-        }
-
-        #Exit-program-asthma, 
-        #Exit-program-diabetes, 
-        #Exit-program-hypertension, 
-        #Exit-program-epilepsy, 
-        #Exit-program-maternal,
-        #Exit-program-mental{
-            display:none;
-        }
-
-        #imgAgeGestationalTable{
-            text-align: center;
-        }
-
-    </style>
-
     <div class="print-form-datestamps" style="display:none">
         <p><uimessage code="created_on"/>:
             <lookup complexExpression="$form.dateCreated"/>
@@ -973,7 +742,7 @@
 
         <div class="question-container">
          
-                <div class="tres-columns">
+                <div class="three-columns">
                     <div class="small-text">
                         <p class="font-size-16">Embarazo planeado:</p>
                         
@@ -1021,7 +790,7 @@
             <div id="lmp-existing" class="small-text">
                     <lookup expression="fn.latestObs('CIEL:1427').valueDate"/>
             </div>
-            <div class="tres-columns">
+            <div class="three-columns">
                 
                 <div class="medium">
                     <label>
@@ -1049,7 +818,7 @@
         <!-- G, P, C, A -->
         <div class="question-container">                  
             
-            <div class="tres-columns">
+            <div class="three-columns">
                 
                 <div class="small">
                     <lookup class="small-text" expression="fn.latestObs('CIEL:5624').valueNumeric"/>
@@ -1389,7 +1158,7 @@
             </div>
             <br/>
 
-            <div class="tres-columns">
+            <div class="three-columns">
 
                 <div>
                     <obs id="cuestion9"
@@ -1673,7 +1442,7 @@
 
         <!-- COVID -->
         <div class="section-container">
-            <div class="tres-columns">
+            <div class="three-columns">
                 <div class="small-text">
 
                     <p>Sospecha de Covid-19:</p>
@@ -1895,7 +1664,7 @@
                     </div>
                     <br/>
 
-                    <div class="tres-columns">
+                    <div class="three-columns">
                         <div>
                             <div class="small-text">
                                 <lookup expression="fn.latestObs('CIEL:165220').valueNumeric.intValue()"/>
@@ -1926,7 +1695,7 @@
 
             <div id="OptionsSecondTrimester">
                 <div class="section-container">
-                    <div class="tres-columns">
+                    <div class="three-columns">
                         <div>
                             <div class="small-text">
                                 <lookup expression="fn.latestObs('PIH:Biparietal diameter').valueNumeric.intValue()"/>
@@ -1969,7 +1738,7 @@
                     </div>
                     <br/>
 
-                    <div class="tres-columns">
+                    <div class="three-columns">
                         <div>
                             <div class="small-text">
                                 <lookup expression="fn.latestObs('CIEL:165220').valueNumeric.intValue()"/>

@@ -1,0 +1,189 @@
+.simple-form-ui input {
+    min-width: 80%
+}
+
+.field-error {
+    color: #ffc0b5;
+    font-size: 1.1em;
+    display: block;
+}
+
+.font-size-10 {
+    font-size: 10px;
+}
+
+.font-size-16{
+    font-size: 16px;
+}
+
+form fieldset {
+    min-width: 90%;
+    display: block;
+}
+
+.centered-header{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.margin-bottom{
+    margin-bottom: 45px;
+}
+
+div.inline-radio > * {
+    display: inline;
+    float: none !important;
+    min-width: initial;
+}
+
+.section {
+    width: 95%;
+    margin-bottom: 30px;
+}
+
+legend {
+    width: auto;
+    font-size: 16px;
+}
+
+textarea {
+    width: 95%;
+}
+
+/* Grey out disabled checkboxes */
+input[type=checkbox][disabled] {
+    filter: invert(15%);
+}
+
+#diagnosis-lookup {
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+}
+
+#encounter-diagnoses-target {
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+}
+
+.hidden {
+    display:none;
+}
+
+form select{
+    width: 30px;
+}
+
+.legalValue {
+    background-color: white !important;
+}
+
+.small {
+    max-width: 10em;
+    display: block;
+    margin-bottom: 1em;
+}
+
+.small input {
+    min-width: 4em;
+    width: 4em;
+    display: inline;
+    margin-right: 0.5em;
+}
+
+.medium {
+    max-width: 16em;
+    display: block;
+    margin-bottom: 1em;
+}
+
+.medium input {
+    min-width: 8em;
+    width: 8em;
+    display: inline;
+    margin-right: 0.5em;
+}
+
+.small-text {
+    color: #555555;
+    font-size: 90%;
+    display: block;
+}
+
+.question-container {
+    background: #F2F2F2;
+    box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+    padding: 5px 5px 10px 15px;
+    margin: 5px 0;
+    line-height: 1.5em; /*add this for vertical spacing between elements*/
+}
+
+.question-container label {
+    margin-top: 5px;
+}
+
+.section-button {
+    margin: 10px 0 0 24px;
+}
+
+.ui-helper-hidden-accessible{
+    display: none;
+}
+
+.ui-autocomplete-input{
+    width: 90%;
+}
+
+.medication-instructions input {
+    width: 85%;
+}
+
+.medication-dose {
+    border-style: groove;
+    border-color: #ffffff;
+    padding-top: 20px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.inline-timing > span {
+    white-space: nowrap;
+}
+.inline-timing > span > * {
+    display: inline-block;
+}
+
+.inline-timing > span > input[type="text"] {
+    min-width: 40px;
+    margin-left: 40px;
+}
+
+.inline-timing > span > label {
+    width: 80px;
+    margin-left: 10px;
+}
+
+#Alert{
+    color: red;
+}
+
+.centered-header{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+#Exit-program-asthma,
+#Exit-program-diabetes,
+#Exit-program-hypertension,
+#Exit-program-epilepsy,
+#Exit-program-maternal,
+#Exit-program-mental{
+    display:none;
+}
+
+#imgAgeGestationalTable{
+    text-align: center;
+}
