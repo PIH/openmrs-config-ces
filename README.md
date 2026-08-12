@@ -122,7 +122,7 @@ CI is handled by GitHub Actions. On every push to `master`, the [Build and deplo
 2. Builds and pushes a multi-platform Docker image (amd64 + arm64) to Docker Hub at [`partnersinhealth/ces-emr`](https://hub.docker.com/r/partnersinhealth/ces-emr), tagged with both `latest` and the Maven project version.
 3. Fires the existing Bamboo `ces-ci` and App Cluster deploy triggers.
 
-A separate [Build seeded images](.github/workflows/build-seeded-images.yml) workflow runs nightly and publishes pre-initialized seed images to Docker Hub for `ces-ci` (`partnersinhealth/ces-emr-seed-ces-ci`).
+A separate [Build seeded images](.github/workflows/build-seeded-images.yml) workflow runs nightly and publishes a pre-initialized seed image to Docker Hub for Mexico (`partnersinhealth/ces-emr-seed-mexico`).
 
 A separate [Update Versions](.github/workflows/update-versions.yml) workflow runs hourly and automatically commits any available snapshot dependency updates to `master`.
 
