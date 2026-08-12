@@ -14,6 +14,5 @@ jobs:
     uses: PIH/openmrs-contrib-distro-tools/.github/workflows/build-seeded-image.yml@main
     with:
       image_name: partnersinhealth/ces-emr
-      site: mexico
       pih_config: mexico
     secrets: inherit
