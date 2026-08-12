@@ -6,14 +6,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  ces-ci:
+  mexico:
     if: github.repository_owner == 'PIH'
     concurrency:
-      group: build-seeded-images-ces-ci-${{ github.ref }}
+      group: build-seeded-images-mexico-${{ github.ref }}
       cancel-in-progress: true
     uses: PIH/openmrs-contrib-distro-tools/.github/workflows/build-seeded-image.yml@main
     with:
       image_name: partnersinhealth/ces-emr
-      site: ces-ci
-      pih_config: mexico,mexico-ces-ci
+      site: mexico
+      pih_config: mexico
     secrets: inherit
