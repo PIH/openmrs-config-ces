@@ -6,7 +6,7 @@
     <name>PIH CES EMR</name>
     <description>PIH CES EMR</description>
     <url>https://github.com/PIH/openmrs-config-ces</url>
-    <version>1.44.0-SNAPSHOT</version>
+    <version>1.45.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <organization>
