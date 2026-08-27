@@ -4,11 +4,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  mexico:
+  ces-ci:
     if: github.repository_owner == 'PIH'
     uses: PIH/openmrs-contrib-distro-tools/.github/workflows/execute-pihemr-smoke-tests.yml@main
     with:
       image_name: partnersinhealth/ces-emr
-      pih_config: mexico
+      instance_name: ces-ci
+      pih_config: mexico,mexico-ces-ci
+      seed_image_name: partnersinhealth/ces-emr-seed-mexico
       suite: mexico
     secrets: inherit
