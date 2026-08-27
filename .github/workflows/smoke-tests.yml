@@ -1,0 +1,14 @@
+name: Smoke tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  mexico:
+    if: github.repository_owner == 'PIH'
+    uses: PIH/openmrs-contrib-distro-tools/.github/workflows/smoke-test.yml@main
+    with:
+      image_name: partnersinhealth/ces-emr
+      pih_config: mexico
+      suite: mexico
+    secrets: inherit
