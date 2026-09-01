@@ -27,24 +27,25 @@ jobs:
     uses: ./.github/workflows/smoke-tests.yml
     secrets: inherit
 
-  deploy:
+  deploy-to-ces-ci:
+    if: github.repository_owner == 'PIH'
+    needs: build-and-publish
+    concurrency:
+      group: deploy-to-ces-ci-${{ github.ref }}
+      cancel-in-progress: true
+    uses: PIH/openmrs-contrib-distro-tools/.github/workflows/deploy-via-runner.yml@main
+    with:
+      runner-label: ces-ci
+    secrets: inherit
+
+  deploy-to-app-cluster:
     if: github.repository_owner == 'PIH'
     needs: build-and-publish
     runs-on: ubuntu-latest
     concurrency:
-      group: deploy-to-ces-ci-${{ github.ref }}
+      group: deploy-to-app-cluster-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - name: Deploy to ces-ci
-        uses: fjogeleit/http-request-action@v1
-        with:
-          url: 'https://bamboo-ci.pih-emr.org/rest/api/latest/queue/OMRS-DEPLOYCESCI'
-          method: 'POST'
-          bearerToken: ${{ secrets.PIH_BAMBOO_API_KEY }}
-          customHeaders: '{"Accept": "application/json"}'
-          retry: 60
-          retryWait: 60000
-          ignoreStatusCodes: 400
       - name: Deploy to App Cluster
         uses: fjogeleit/http-request-action@v1
         with:
