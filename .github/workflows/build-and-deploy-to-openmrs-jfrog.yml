@@ -43,17 +43,11 @@ jobs:
   deploy-to-app-cluster:
     if: github.repository_owner == 'PIH'
     needs: build-and-publish
-    runs-on: ubuntu-latest
     concurrency:
       group: deploy-to-app-cluster-${{ github.ref }}
       cancel-in-progress: true
-    steps:
-      - name: Deploy to App Cluster
-        uses: fjogeleit/http-request-action@v1
-        with:
-          url: 'https://bamboo-ci.pih-emr.org/rest/api/latest/queue/OMRS-DEPLOYAPPCLSTR01'
-          bearerToken: ${{ secrets.PIH_BAMBOO_API_KEY }}
-          customHeaders: '{"Accept": "application/json"}'
-          retry: 60
-          retryWait: 60000
-          ignoreStatusCodes: 400
+    uses: PIH/openmrs-contrib-distro-tools/.github/workflows/deploy-via-runner.yml@main
+    with:
+      runner-label: appclstr-01
+      notify_ci_dashboard: true
+    secrets: inherit
