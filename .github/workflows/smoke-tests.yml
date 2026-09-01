@@ -14,4 +14,5 @@ jobs:
       pih_config: mexico,mexico-ces-ci
       seed_image_name: partnersinhealth/ces-emr-seed-mexico
       suite: mexico
+      notify_ci_dashboard: true
     secrets: inherit

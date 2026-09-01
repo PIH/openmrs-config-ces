@@ -36,6 +36,8 @@ jobs:
     uses: PIH/openmrs-contrib-distro-tools/.github/workflows/deploy-via-runner.yml@main
     with:
       runner-label: ces-ci
+      notify_ci_dashboard: true
+    secrets: inherit
 
   deploy-to-app-cluster:
     if: github.repository_owner == 'PIH'
